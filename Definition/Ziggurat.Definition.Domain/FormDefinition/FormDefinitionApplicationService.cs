@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ziggurat.Contracts;
-using Ziggurat.Infrastructure;
+using Ziggurat.Definition.Domain.Base;
+using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {

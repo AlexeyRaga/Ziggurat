@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Ziggurat.Contracts;
-using Ziggurat.Infrastructure;
+using Ziggurat.Infrastructure.EventStore;
 
-namespace Ziggurat.Definition.Domain
+namespace Ziggurat.Definition.Domain.Base
 {
     public abstract class ApplicationServiceBase<T>
         where T : IAggregateRoot, new()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Ziggurat.Infrastructure
+namespace Ziggurat.Infrastructure.Evel
 {
     public interface IMessageDispatcher
     {

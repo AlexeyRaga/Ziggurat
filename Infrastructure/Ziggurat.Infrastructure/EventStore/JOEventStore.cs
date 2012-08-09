@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EventStore;
+using Ziggurat.Infrastructure.UserContext;
 
 namespace Ziggurat.Infrastructure.EventStore
 {

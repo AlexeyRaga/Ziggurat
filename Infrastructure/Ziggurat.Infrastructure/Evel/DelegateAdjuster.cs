@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Ziggurat.Infrastructure
+namespace Ziggurat.Infrastructure.Evel
 {
     class DelegateAdjuster
     {

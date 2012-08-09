@@ -105,3 +105,6 @@ UpgradeLog*.XML
 
 #nuget
 [Pp]ackages/
+
+# KDiff
+*.orig

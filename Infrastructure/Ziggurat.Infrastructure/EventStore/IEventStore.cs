@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ziggurat.Infrastructure
+namespace Ziggurat.Infrastructure.EventStore
 {
     public interface IEventStore : IDisposable
     {
