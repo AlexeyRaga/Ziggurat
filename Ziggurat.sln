@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Contracts", "Ziggu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definition", "Definition", "{B153F36F-4A23-4A88-B9F3-985BA9B67411}"
 	ProjectSection(SolutionItems) = preProject
-		Definition\README.txt = Definition\README.txt
+		Definition\README.md = Definition\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Domain", "Definition\Ziggurat.Definition.Domain\Ziggurat.Definition.Domain.csproj", "{033DBA65-B099-4129-B3BE-3C39903329C7}"
