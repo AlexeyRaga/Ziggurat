@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using EventStore;
 using Ziggurat.Infrastructure.UserContext;
