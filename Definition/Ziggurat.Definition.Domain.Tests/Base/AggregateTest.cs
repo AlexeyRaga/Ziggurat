@@ -5,10 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization.Formatters.Binary;
 using Ziggurat.Contracts;
-using Ziggurat.Definition.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ziggurat.Definition.Domain.Base;
 
-namespace Ziggurat.Definition.Domain.Tests
+namespace Ziggurat.Definition.Domain.Tests.Base
 {
     /// <summary>
     /// Aggregate Given-When-Then test base class

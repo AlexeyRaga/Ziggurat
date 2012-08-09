@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ziggurat.Contracts;
+using Ziggurat.Definition.Domain.Base;
 using Ziggurat.Definition.Domain.FormDefinition.Properties;
 
 namespace Ziggurat.Definition.Domain.FormDefinition

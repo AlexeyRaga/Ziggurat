@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Ziggurat.Infrastructure
+namespace Ziggurat.Infrastructure.EventStore
 {
     public sealed class EventStream
     {
