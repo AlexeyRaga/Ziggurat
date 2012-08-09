@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CFDCCA6C-2A11-4D74-82F7-7C21C693453F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Infrastructure", "Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj", "{A561ED17-153B-4BD4-B05E-25DB4C522D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.WebHost", "Infrastructure\Ziggurat.WebHost\Ziggurat.WebHost.csproj", "{F4A6484C-E013-47D9-95DB-6B6E603B1A91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Contracts", "Ziggurat.Contracts\Ziggurat.Contracts.csproj", "{B2ED7CAD-8488-420F-89F1-2B5DC698084E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definition", "Definition", "{B153F36F-4A23-4A88-B9F3-985BA9B67411}"
+	ProjectSection(SolutionItems) = preProject
+		Definition\README.txt = Definition\README.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Domain", "Definition\Ziggurat.Definition.Domain\Ziggurat.Definition.Domain.csproj", "{033DBA65-B099-4129-B3BE-3C39903329C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Domain.Tests", "Definition\Ziggurat.Definition.Domain.Tests\Ziggurat.Definition.Domain.Tests.csproj", "{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EA8FC601-AFA6-4B9D-8092-7C55A75A55A5}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\nuget.exe = .nuget\nuget.exe
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{033DBA65-B099-4129-B3BE-3C39903329C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033DBA65-B099-4129-B3BE-3C39903329C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033DBA65-B099-4129-B3BE-3C39903329C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033DBA65-B099-4129-B3BE-3C39903329C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A561ED17-153B-4BD4-B05E-25DB4C522D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A561ED17-153B-4BD4-B05E-25DB4C522D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A561ED17-153B-4BD4-B05E-25DB4C522D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A561ED17-153B-4BD4-B05E-25DB4C522D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2ED7CAD-8488-420F-89F1-2B5DC698084E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2ED7CAD-8488-420F-89F1-2B5DC698084E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2ED7CAD-8488-420F-89F1-2B5DC698084E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2ED7CAD-8488-420F-89F1-2B5DC698084E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A6484C-E013-47D9-95DB-6B6E603B1A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A6484C-E013-47D9-95DB-6B6E603B1A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A6484C-E013-47D9-95DB-6B6E603B1A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A6484C-E013-47D9-95DB-6B6E603B1A91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{033DBA65-B099-4129-B3BE-3C39903329C7} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
+		{A561ED17-153B-4BD4-B05E-25DB4C522D1E} = {CFDCCA6C-2A11-4D74-82F7-7C21C693453F}
+		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
+		{F4A6484C-E013-47D9-95DB-6B6E603B1A91} = {CFDCCA6C-2A11-4D74-82F7-7C21C693453F}
+	EndGlobalSection
+EndGlobal
