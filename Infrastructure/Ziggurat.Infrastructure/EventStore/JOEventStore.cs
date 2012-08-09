@@ -21,15 +21,14 @@ namespace Ziggurat.Infrastructure.EventStore
             _userContextProvider = userContextProvider;
         }
 
-        public EventStream Load(Guid aggregateIdentity)
+        public EventStream Load(Guid aggregateIdentity, int revision)
         {
-            //TODO: When load, how to handle headers? Should we at all? I think we don't as aggregates don't (shouldn't) care...
-            throw new NotImplementedException();
-        }
+            if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
 
-        public void Append(Guid aggregateIdentity, int revision, IEnumerable<object> events)
-        {
-            Append(aggregateIdentity, revision, new Guid(), events);
+            using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
+            {
+                return new EventStream(stream.StreamRevision, stream.CommittedEvents.Select(x=>x.Body));
+            }
         }
 
         public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<object> events)

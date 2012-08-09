@@ -19,7 +19,7 @@ namespace Ziggurat.Definition.Domain
         //this.Update(myId, ar => ar.DoSomething(parameters));
         protected void Update(Guid aggregateId, Action<T> updateAction)
         {
-            var events = _store.Load(aggregateId);
+            var events = _store.LoadAll(aggregateId);
 
             var aggregate = new T();
             aggregate.ApplyFromHistory(events.Events.Cast<IEvent>());
