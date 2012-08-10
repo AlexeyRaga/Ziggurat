@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ziggurat.Contracts;
 
-namespace Ziggurat.Definition.Domain.Base
+namespace Ziggurat.Definition.Domain
 {
     public interface IAggregateRoot
     {

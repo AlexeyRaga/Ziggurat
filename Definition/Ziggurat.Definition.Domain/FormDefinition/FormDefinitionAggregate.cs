@@ -1,6 +1,6 @@
 ﻿using System;
 using Ziggurat.Contracts;
-using Ziggurat.Definition.Domain.Base;
+using Ziggurat.Definition.Domain;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {

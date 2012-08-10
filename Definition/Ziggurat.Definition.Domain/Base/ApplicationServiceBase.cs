@@ -3,7 +3,7 @@ using System.Linq;
 using Ziggurat.Contracts;
 using Ziggurat.Infrastructure.EventStore;
 
-namespace Ziggurat.Definition.Domain.Base
+namespace Ziggurat.Definition.Domain
 {
     public abstract class ApplicationServiceBase<T>
         where T : IAggregateRoot, new()

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ziggurat.Contracts;
 using Ziggurat.Definition.Domain.Project;
-using Ziggurat.Definition.Domain.Tests.Base;
 
 namespace Ziggurat.Definition.Domain.Tests.Project
 {
