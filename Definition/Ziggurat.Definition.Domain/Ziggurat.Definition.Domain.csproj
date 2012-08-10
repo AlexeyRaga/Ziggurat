@@ -45,6 +45,9 @@
     <Compile Include="FormDefinition\FormDefinitionApplicationService.cs" />
     <Compile Include="FormDefinition\FormDefinitionState.cs" />
     <Compile Include="FormDefinition\Properties\PropertyState.cs" />
+    <Compile Include="Project\ProjectAggregate.cs" />
+    <Compile Include="Project\ProjectApplicationService.cs" />
+    <Compile Include="Project\ProjectState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
