@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Base\AggregateTest.cs" />
     <Compile Include="FormDefinition\When_create_form.cs" />
+    <Compile Include="Project\When_create_project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

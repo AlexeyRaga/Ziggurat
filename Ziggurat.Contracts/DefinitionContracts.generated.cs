@@ -10,6 +10,38 @@ using System.Runtime.Serialization;
 namespace Ziggurat.Contracts
 {
 	[Serializable, DataContract]
+	public sealed partial class CreateProject : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid Id { get; set; }
+		[DataMember(Order = 1 )] public string Name { get; set; }
+		[DataMember(Order = 2 )] public string ShortName { get; set; }
+
+		public CreateProject() { }
+		public CreateProject(Guid id, string name, string shortName)
+		{
+			Id = id;
+			Name = name;
+			ShortName = shortName;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProjectCreated : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid Id { get; set; }
+		[DataMember(Order = 1 )] public string Name { get; set; }
+		[DataMember(Order = 2 )] public string ShortName { get; set; }
+
+		public ProjectCreated() { }
+		public ProjectCreated(Guid id, string name, string shortName)
+		{
+			Id = id;
+			Name = name;
+			ShortName = shortName;
+		}
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid Id { get; set; }

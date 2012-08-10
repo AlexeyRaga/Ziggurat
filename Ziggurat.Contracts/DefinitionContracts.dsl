@@ -1,4 +1,7 @@
-﻿CreateForm? Guid id, string name, string uniqueName
+﻿CreateProject? Guid id, string name, string shortName
+ProjectCreated! Guid id, string name, string shortName
+
+CreateForm? Guid id, string name, string uniqueName
 FormCreated! Guid id, string name, string uniqueName
 
 //does Property really needs to have its own ID? Isn't UniqueId enough?
