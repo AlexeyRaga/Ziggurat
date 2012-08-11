@@ -25,6 +25,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             dynamic propertyState = new ExpandoObject();
             propertyState.Id = evt.PropertyId;
             propertyState.UniqueName = evt.UniqueName;
+            propertyState.Type = evt.Type;
 
             Properties.Add(propertyState);
         }

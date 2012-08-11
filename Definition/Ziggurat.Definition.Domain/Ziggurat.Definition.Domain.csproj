@@ -44,6 +44,9 @@
     <Compile Include="FormDefinition\FormDefinitionAggregate.cs" />
     <Compile Include="FormDefinition\FormDefinitionApplicationService.cs" />
     <Compile Include="FormDefinition\FormDefinitionState.cs" />
+    <Compile Include="FormDefinition\Properties\PropertyBase.cs" />
+    <Compile Include="FormDefinition\Properties\PropertyFactory.cs" />
+    <Compile Include="FormDefinition\Properties\TextBoxProperty.cs" />
     <Compile Include="Project\ProjectAggregate.cs" />
     <Compile Include="Project\ProjectApplicationService.cs" />
     <Compile Include="Project\ProjectState.cs" />
