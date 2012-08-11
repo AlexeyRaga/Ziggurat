@@ -113,4 +113,32 @@ namespace Ziggurat.Contracts
 		}
 	}
 
+	[Serializable, DataContract]
+	public sealed partial class MakePropertyRequired : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public MakePropertyRequired() { }
+		public MakePropertyRequired(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class PropertyMadeRequired : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public PropertyMadeRequired() { }
+		public PropertyMadeRequired(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
 }
