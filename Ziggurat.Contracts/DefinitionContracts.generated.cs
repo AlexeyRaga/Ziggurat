@@ -44,13 +44,15 @@ namespace Ziggurat.Contracts
 	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
-		[DataMember(Order = 0 )] public Guid Id { get; set; }
-		[DataMember(Order = 1 )] public string Name { get; set; }
-		[DataMember(Order = 2 )] public string UniqueName { get; set; }
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 2 )] public string Name { get; set; }
+		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public CreateForm() { }
-		public CreateForm(Guid id, string name, string uniqueName)
+		public CreateForm(Guid projectId, Guid id, string name, string uniqueName)
 		{
+			ProjectId = projectId;
 			Id = id;
 			Name = name;
 			UniqueName = uniqueName;
@@ -60,13 +62,15 @@ namespace Ziggurat.Contracts
 	[Serializable, DataContract]
 	public sealed partial class FormCreated : IEvent
 	{
-		[DataMember(Order = 0 )] public Guid Id { get; set; }
-		[DataMember(Order = 1 )] public string Name { get; set; }
-		[DataMember(Order = 2 )] public string UniqueName { get; set; }
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 2 )] public string Name { get; set; }
+		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public FormCreated() { }
-		public FormCreated(Guid id, string name, string uniqueName)
+		public FormCreated(Guid projectId, Guid id, string name, string uniqueName)
 		{
+			ProjectId = projectId;
 			Id = id;
 			Name = name;
 			UniqueName = uniqueName;

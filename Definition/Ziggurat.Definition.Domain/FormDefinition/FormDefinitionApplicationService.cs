@@ -14,7 +14,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             if (String.IsNullOrWhiteSpace(cmd.Name)) throw new ArgumentException("Name is required");
             if (String.IsNullOrWhiteSpace(cmd.UniqueName)) throw new ArgumentNullException("Unique Name is required");
 
-            Update(cmd.Id, form => form.Create(cmd.Id, cmd.Name, cmd.UniqueName));
+            Update(cmd.Id, form => form.Create(cmd.ProjectId, cmd.Id, cmd.Name, cmd.UniqueName));
         }
     }
 }
