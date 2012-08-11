@@ -5,7 +5,7 @@ using Ziggurat.Contracts;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {
-    public sealed class FormDefinitionState : AggregateState
+    public sealed class FormDefinitionState : State
     {
         public Guid Id { get; set; }
         public IList<ExpandoObject> Properties { get; private set; }

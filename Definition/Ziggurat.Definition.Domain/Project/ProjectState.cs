@@ -7,7 +7,7 @@ using Ziggurat.Contracts;
 
 namespace Ziggurat.Definition.Domain.Project
 {
-    public sealed class ProjectState : AggregateState
+    public sealed class ProjectState : State
     {
         public Guid Id { get; set; }
 

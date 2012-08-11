@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base\AggregateRoot.cs" />
     <Compile Include="Base\ApplicationServiceBase.cs" />
+    <Compile Include="Base\State.cs" />
     <Compile Include="FormDefinition\FormDefinitionAggregate.cs" />
     <Compile Include="FormDefinition\FormDefinitionApplicationService.cs" />
     <Compile Include="FormDefinition\FormDefinitionState.cs" />
