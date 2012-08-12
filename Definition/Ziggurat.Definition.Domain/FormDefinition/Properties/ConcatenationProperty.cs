@@ -5,8 +5,6 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 {
 	public sealed class ConcatenationProperty : PropertyBase
 	{
-		public override PropertyType Type { get { return PropertyType.Concatenation; } }
-
         public ConcatenationProperty(FormDefinitionAggregate definition, Guid id)
             : base(definition, id) { }
 	}

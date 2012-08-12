@@ -5,8 +5,6 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 {
 	public sealed class DateTimeProperty: PropertyBase
 	{
-		public override PropertyType Type { get { return PropertyType.DateTime; } }
-
         public DateTimeProperty(FormDefinitionAggregate definition, Guid id)
             : base(definition, id) { }
 	}
