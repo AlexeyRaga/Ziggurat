@@ -8,9 +8,10 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 {
     public sealed class FormDefinitionAggregate : AggregateRootBase
     {
+        /*-------------------------------- STATE ----------------------------------------*/
         public Guid Id { get; private set; }
-
         private IList<PropertyBase> _properties = new List<PropertyBase>();
+        /*-------------------------------- END STATE-------------------------------------*/
 
         public void Create(Guid projectId, Guid id, string name, string uniqueName)
         {
