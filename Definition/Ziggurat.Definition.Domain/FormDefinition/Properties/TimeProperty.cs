@@ -7,7 +7,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 	{
 		public override PropertyType Type { get { return PropertyType.Time; } }
 
-        public TimeProperty(FormDefinitionAggregate definition, Guid id, string uniqueName)
-            : base(definition, id, uniqueName) { }
+        public TimeProperty(FormDefinitionAggregate definition, Guid id)
+            : base(definition, id) { }
 	}
 }

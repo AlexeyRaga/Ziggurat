@@ -7,7 +7,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 	{
 		public override PropertyType Type { get { return PropertyType.Company; } }
 
-        public CompanyProperty(FormDefinitionAggregate definition, Guid id, string uniqueName)
-            : base(definition, id, uniqueName) { }
+        public CompanyProperty(FormDefinitionAggregate definition, Guid id)
+            : base(definition, id) { }
 	}
 }

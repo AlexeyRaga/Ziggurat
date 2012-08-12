@@ -24,10 +24,10 @@ namespace Ziggurat.Definition.Domain.Tests.FormDefinition
                 new FormCreated(ProjectId, FormId, "Some form", "someForm")
             };
 
-            When = form => form.CreateProperty(propertyId, PropertyType.Textbox, "Subject", "subject");
+            When = form => form.CreateProperty(propertyId, PropertyType.Textbox, "Subject");
 
             Then = new IEvent[] {
-                new PropertyCreated(FormId, propertyId, PropertyType.Textbox, "Subject", "subject")
+                new PropertyCreated(FormId, propertyId, PropertyType.Textbox, "Subject")
             };
         }
 

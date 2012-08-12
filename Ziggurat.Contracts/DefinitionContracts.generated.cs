@@ -84,16 +84,14 @@ namespace Ziggurat.Contracts
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
 		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
 		[DataMember(Order = 3 )] public string Name { get; set; }
-		[DataMember(Order = 4 )] public string UniqueName { get; set; }
 
 		public CreateProperty() { }
-		public CreateProperty(Guid formId, Guid propertyId, PropertyType type, string name, string uniqueName)
+		public CreateProperty(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;
 			Type = type;
 			Name = name;
-			UniqueName = uniqueName;
 		}
 	}
 
@@ -104,16 +102,14 @@ namespace Ziggurat.Contracts
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
 		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
 		[DataMember(Order = 3 )] public string Name { get; set; }
-		[DataMember(Order = 4 )] public string UniqueName { get; set; }
 
 		public PropertyCreated() { }
-		public PropertyCreated(Guid formId, Guid propertyId, PropertyType type, string name, string uniqueName)
+		public PropertyCreated(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;
 			Type = type;
 			Name = name;
-			UniqueName = uniqueName;
 		}
 	}
 

@@ -7,7 +7,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 	{
 		public override PropertyType Type { get { return PropertyType.CumulativeText; } }
 
-        public CumulativeProperty(FormDefinitionAggregate definition, Guid id, string uniqueName)
-            : base(definition, id, uniqueName) { }
+        public CumulativeProperty(FormDefinitionAggregate definition, Guid id)
+            : base(definition, id) { }
 	}
 }

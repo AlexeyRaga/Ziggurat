@@ -10,7 +10,6 @@ namespace Ziggurat.Definition.Domain.FormDefinition
         //do we really care? Isn't it enough to have a derived type like FormPropertyText?
         public abstract PropertyType Type { get; }
 
-        protected string UniqueName { get; set; }
         protected bool IsUnused { get; set; }
         protected bool IsNameHidden { get; set; }
         protected bool IsRequired { get; set; }
@@ -18,11 +17,10 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 
         protected FormDefinitionAggregate Definition { get; private set; }
         
-        protected PropertyBase(FormDefinitionAggregate definition, Guid id, string uniqueName)
+        protected PropertyBase(FormDefinitionAggregate definition, Guid id)
         {
             Definition = definition;
             Id = id;
-            UniqueName = uniqueName;
             IsUnused = true;
         }
  
