@@ -20,18 +20,13 @@ namespace Ziggurat.Definition.Domain
 
         protected void Apply(IEvent evt)
         {
-            OnEventApplied(evt);
-            _changes.Add(evt);
-        }
-
-        protected virtual void OnEventApplied(IEvent evt)
-        {
             State.Mutate(evt);
+            _changes.Add(evt);
         }
 
         public void ApplyFromHistory(IEnumerable<IEvent> events)
         {
-            foreach (var evt in events) OnEventApplied(evt);
+            foreach (var evt in events) State.Mutate(evt);
         }
     }
 }
