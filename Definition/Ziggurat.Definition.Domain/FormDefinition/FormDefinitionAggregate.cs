@@ -2,7 +2,6 @@
 using System.Linq;
 using Ziggurat.Contracts;
 using Ziggurat.Definition.Domain;
-using Ziggurat.Definition.Domain.FormDefinition.Properties;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {
@@ -17,16 +16,6 @@ namespace Ziggurat.Definition.Domain.FormDefinition
         public void CreateProperty(Guid id, PropertyType type, string name, string uniqueName)
         {
             Apply(new PropertyCreated(State.Id, id, type, name, uniqueName));
-        }
-
-        // I don't know if this is a way to go...
-        public PropertyBase GetProperty(Guid id)
-        {
-            var propertyState = State.Properties
-                .Cast<dynamic>()
-                .First(x => x.Id == id);
-
-            return PropertyFactory.BuildPropertyEntity(propertyState.Type, propertyState);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using Ziggurat.Contracts;
-using Ziggurat.Definition.Domain.FormDefinition.Properties;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Definition.Domain.FormDefinition

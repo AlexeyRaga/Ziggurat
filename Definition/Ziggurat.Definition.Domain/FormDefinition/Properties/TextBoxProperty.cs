@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ziggurat.Contracts;
 
-namespace Ziggurat.Definition.Domain.FormDefinition.Properties
+namespace Ziggurat.Definition.Domain.FormDefinition
 {
-    public sealed class TextBoxProperty : PropertyBase
+    public sealed class TextboxProperty : PropertyBase
     {
-        public TextBoxProperty(ExpandoObject state) 
-            : base(state) { }
+        public override PropertyType Type { get { return PropertyType.Textbox; } }
     }
 }

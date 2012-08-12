@@ -7,9 +7,9 @@ using Ziggurat.Contracts;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {
-    internal static class PropertyFactory
+    internal static class FormPropertyFactory
     {
-        public static PropertyBase Create(Guid id, PropertyType type, String uniqueName)
+        public static FormPropertyBase Create(Guid id, PropertyType type, String uniqueName)
         {
             switch (type)
             {

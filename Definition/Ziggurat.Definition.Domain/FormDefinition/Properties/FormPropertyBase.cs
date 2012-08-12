@@ -3,7 +3,7 @@ using Ziggurat.Contracts;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {
-    public abstract class PropertyBase
+    public abstract class FormPropertyBase
     {
         public Guid Id { get; set; }
 
