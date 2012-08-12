@@ -117,4 +117,60 @@ namespace Ziggurat.Contracts
 		}
 	}
 
+	[Serializable, DataContract]
+	public sealed partial class MakePropertyUnused : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public MakePropertyUnused() { }
+		public MakePropertyUnused(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class MakePropertyUsed : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public MakePropertyUsed() { }
+		public MakePropertyUsed(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class PropertyMadeUnused : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public PropertyMadeUnused() { }
+		public PropertyMadeUnused(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class PropertyMadeUsed : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public PropertyMadeUsed() { }
+		public PropertyMadeUsed(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
 }
