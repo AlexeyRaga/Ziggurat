@@ -8,6 +8,8 @@ FormCreated! Guid projectId, Guid id, string name, string uniqueName
 CreateProperty? Guid formId, Guid propertyId, PropertyType type, string name, string uniqueName
 PropertyCreated! Guid formId, Guid propertyId, PropertyType type, string name, string uniqueName
 
+let ! = IPropertyDefinitionEvent
+
 MakePropertyUnused? Guid formId, Guid propertyId
 MakePropertyUsed? Guid formId, Guid propertyId
 

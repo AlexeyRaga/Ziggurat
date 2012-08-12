@@ -9,17 +9,36 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 
         //do we really care? Isn't it enough to have a derived type like FormPropertyText?
         public abstract PropertyType Type { get; }
-        public string UniqueName { get; set; }
 
-        public bool IsUnused { get; set; }
-	    public bool IsNameHidden { get; set; }
+        protected string UniqueName { get; set; }
+        protected bool IsUnused { get; set; }
+        protected bool IsNameHidden { get; set; }
+        protected bool IsRequired { get; set; }
+        protected bool IsReadOnly { get; set; }
 
-	    public bool IsRequired { get; set; }
-	    public bool IsReadOnly { get; set; }
-
-        public void When(PropertyMadeUsed evt) 
+        protected FormDefinitionAggregate Definition { get; private set; }
+        
+        protected PropertyBase(FormDefinitionAggregate definition, Guid id, string uniqueName)
         {
-            IsUnused = false;
+            Definition = definition;
+            Id = id;
+            UniqueName = uniqueName;
+            IsUnused = true;
         }
+ 
+        public void MakeUsed()
+        {
+            if (!IsUnused) return;
+            Definition.Apply(new PropertyMadeUsed(Definition.Id, Id));
+        }
+
+        public void MakeUnused()
+        {
+            if (IsUnused) return;
+            Definition.Apply(new PropertyMadeUnused(Definition.Id, Id));
+        }
+
+        public void When(PropertyMadeUsed evt) { IsUnused = false; }
+        public void When(PropertyMadeUnused evt) { IsUnused = true; }
     }
 }

@@ -146,7 +146,7 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class PropertyMadeUnused : IEvent
+	public sealed partial class PropertyMadeUnused : IPropertyDefinitionEvent
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
@@ -160,7 +160,7 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class PropertyMadeUsed : IEvent
+	public sealed partial class PropertyMadeUsed : IPropertyDefinitionEvent
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }

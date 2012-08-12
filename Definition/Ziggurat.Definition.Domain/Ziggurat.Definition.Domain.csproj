@@ -44,7 +44,6 @@
     <Compile Include="Base\State.cs" />
     <Compile Include="FormDefinition\FormDefinitionAggregate.cs" />
     <Compile Include="FormDefinition\FormDefinitionApplicationService.cs" />
-    <Compile Include="FormDefinition\FormDefinitionState.cs" />
     <Compile Include="FormDefinition\Properties\PropertyBase.cs" />
     <Compile Include="FormDefinition\Properties\CheckboxProperty.cs" />
     <Compile Include="FormDefinition\Properties\CompanyProperty.cs" />

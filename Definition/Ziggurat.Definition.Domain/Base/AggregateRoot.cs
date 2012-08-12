@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Ziggurat.Contracts;
 
@@ -10,23 +11,36 @@ namespace Ziggurat.Definition.Domain
         IEnumerable<IEvent> Changes { get; }
     }
 
-    public abstract class AggregateRootBase<TState> : IAggregateRoot
-        where TState : IState, new()
+    public abstract class AggregateRootBase : IAggregateRoot
     {
-        protected readonly TState State = new TState();
-
         private readonly List<IEvent> _changes = new List<IEvent>();
         public IEnumerable<IEvent> Changes { get { return _changes; } }
 
-        protected void Apply(IEvent evt)
+        public void Apply(IEvent evt)
         {
-            State.Mutate(evt);
+            MutateState(evt);
             _changes.Add(evt);
+        }
+
+        protected virtual void MutateState(IEvent evt)
+        {
+            ((dynamic)this).When((dynamic)evt);
         }
 
         public void ApplyFromHistory(IEnumerable<IEvent> events)
         {
-            foreach (var evt in events) State.Mutate(evt);
+            foreach (var evt in events) MutateState(evt);
+        }
+    }
+
+    public abstract class AggregateRootBase<TState> : AggregateRootBase
+        where TState : IState, new()
+    {
+        protected readonly TState State = new TState();
+
+        protected override void MutateState(IEvent evt)
+        {
+            State.Mutate(evt);
         }
     }
 }
