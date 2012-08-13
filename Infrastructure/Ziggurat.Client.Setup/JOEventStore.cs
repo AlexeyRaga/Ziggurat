@@ -3,8 +3,9 @@ using System.Linq;
 using System.Collections.Generic;
 using EventStore;
 using Ziggurat.Infrastructure.UserContext;
+using Ziggurat.Infrastructure.EventStore;
 
-namespace Ziggurat.Infrastructure.EventStore
+namespace Ziggurat.Client.Setup
 {
     public sealed class JOEventStore : IEventStore
     {
@@ -26,7 +27,7 @@ namespace Ziggurat.Infrastructure.EventStore
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
-                return new EventStream(stream.StreamRevision, ConvertFromEventMessages(stream.CommittedEvents));
+                return new EventStream(stream.StreamRevision, stream.CommittedEvents.ToEnvelopes());
             }
         }
 
@@ -37,7 +38,7 @@ namespace Ziggurat.Infrastructure.EventStore
 
             var userContext = _userContextProvider.GetCurrentContext();
 
-            var evtMessages = ConvertToEventMessages(events);
+            var evtMessages = events.ToEventMessages();
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
@@ -50,17 +51,17 @@ namespace Ziggurat.Infrastructure.EventStore
         {
             _realEventStore.Dispose();
         }
+    }
 
-        private static IEnumerable<Envelope> ConvertFromEventMessages(IEnumerable<EventMessage> messages)
+    public static class EnvelopeExtensions
+    {
+        public static IEnumerable<Envelope> ToEnvelopes(this IEnumerable<EventMessage> messages)
         {
             foreach (var msg in messages)
-            {
-                var envelope = new Envelope(msg.Body, msg.Headers);
-                yield return envelope;
-            }
+                yield return new Envelope(msg.Body, msg.Headers);
         }
 
-        private static IEnumerable<EventMessage> ConvertToEventMessages(IEnumerable<Envelope> events)
+        public static IEnumerable<EventMessage> ToEventMessages(this IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
@@ -78,6 +79,5 @@ namespace Ziggurat.Infrastructure.EventStore
             foreach (var header in evt.Headers)
                 msg.Headers[header.Key] = header.Value;
         }
-
     }
 }

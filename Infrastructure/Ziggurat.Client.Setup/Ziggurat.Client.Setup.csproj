@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="JOEventStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +58,12 @@
     <None Include="App_Readme\EventStore - Architectural Overview.docx" />
     <None Include="App_Readme\EventStore - Transactional Integrity.docx" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
+      <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
+      <Name>Ziggurat.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
