@@ -26,18 +26,18 @@ namespace Ziggurat.Infrastructure.EventStore
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
-                return new EventStream(stream.StreamRevision, stream.CommittedEvents.Select(x=>x.Body));
+                return new EventStream(stream.StreamRevision, ConvertFromEventMessages(stream.CommittedEvents));
             }
         }
 
-        public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<object> events)
+        public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events)
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
             if (events == null) return;
 
             var userContext = _userContextProvider.GetCurrentContext();
 
-            var evtMessages = ConvertToEventMessages(events, userContext);
+            var evtMessages = ConvertToEventMessages(events);
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
@@ -51,30 +51,32 @@ namespace Ziggurat.Infrastructure.EventStore
             _realEventStore.Dispose();
         }
 
-        private static IEnumerable<EventMessage> ConvertToEventMessages(IEnumerable<object> events, IUserContext userContext)
+        private static IEnumerable<Envelope> ConvertFromEventMessages(IEnumerable<EventMessage> messages)
+        {
+            foreach (var msg in messages)
+            {
+                var envelope = new Envelope(msg.Body, msg.Headers);
+                yield return envelope;
+            }
+        }
+
+        private static IEnumerable<EventMessage> ConvertToEventMessages(IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
                 var msg = new EventMessage { Body = evt };
 
                 //populate message headers: extra information for audit and history reasons.
-                FillInGenericHeaders(msg);
-                FillInUserContextHeaders(msg, userContext);
+                FillInEnvelopeSpecificHeaders(msg, evt);
 
                 yield return msg;
             }
         }
 
-        private static void FillInGenericHeaders(EventMessage msg)
+        private static void FillInEnvelopeSpecificHeaders(EventMessage msg, Envelope evt)
         {
-            msg.Headers.Add(EventHeaderKeys.DateCreated, Now.UtcTime);
-        }
-
-        private static void FillInUserContextHeaders(EventMessage msg, IUserContext userContext)
-        {
-            if (userContext == null) return;
-
-            msg.Headers.Add(EventHeaderKeys.MemberId, userContext.MemberId);
+            foreach (var header in evt.Headers)
+                msg.Headers[header.Key] = header.Value;
         }
 
     }

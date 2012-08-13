@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Evel\ConventionalToWhenDispatcher.cs" />
     <Compile Include="Evel\DelegateAdjuster.cs" />
+    <Compile Include="EventStore\Envelope.cs" />
     <Compile Include="EventStore\EventHeaderKeys.cs" />
     <Compile Include="EventStore\EventStream.cs" />
     <Compile Include="EventStore\IEventStore.cs" />
