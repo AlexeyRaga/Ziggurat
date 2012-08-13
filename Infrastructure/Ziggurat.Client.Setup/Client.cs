@@ -12,6 +12,14 @@ namespace Ziggurat.Client.Setup
     {
         private static readonly byte[] EncryptionKey = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf };
 
+        public IEventStore EventStore { get; private set; }
+
+        private static IEventStore BuildEventStore(Action<IEnumerable<Envelope>> eventsDispatcher)
+        {
+            var joEventStore = WireupEventStore(eventsDispatcher);
+            return new JOEventStore(joEventStore);
+        }
+
         private static IStoreEvents WireupEventStore(Action<IEnumerable<Envelope>> eventsDispatcher)
         {
             return Wireup.Init()
@@ -30,12 +38,8 @@ namespace Ziggurat.Client.Setup
 
         public void Dispose()
         {
-            throw new NotImplementedException();
-        }
-
-        private void SetupEventStore()
-        {
-
+            var eventStore = EventStore;
+            if (eventStore != null) eventStore.Dispose();
         }
     }
 }

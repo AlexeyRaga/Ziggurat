@@ -66,8 +66,6 @@
     <Compile Include="Projections\ProjectionSerializationException.cs" />
     <Compile Include="Projections\ProjectionWriterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserContext\IUserContext.cs" />
-    <Compile Include="UserContext\IUserContextProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md" />

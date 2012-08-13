@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using EventStore;
-using Ziggurat.Infrastructure.UserContext;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Client.Setup
@@ -10,15 +9,12 @@ namespace Ziggurat.Client.Setup
     public sealed class JOEventStore : IEventStore
     {
         private readonly IStoreEvents _realEventStore;
-        private readonly IUserContextProvider _userContextProvider;
 
-        public JOEventStore(IStoreEvents realEventStore, IUserContextProvider userContextProvider)
+        public JOEventStore(IStoreEvents realEventStore)
         {
             if (realEventStore == null) throw new ArgumentNullException("realEventStore");
-            if (userContextProvider == null) throw new ArgumentNullException("userContextProvider");
 
             _realEventStore = realEventStore;
-            _userContextProvider = userContextProvider;
         }
 
         public EventStream Load(Guid aggregateIdentity, int revision)
@@ -35,8 +31,6 @@ namespace Ziggurat.Client.Setup
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
             if (events == null) return;
-
-            var userContext = _userContextProvider.GetCurrentContext();
 
             var evtMessages = events.ToEventMessages();
 
