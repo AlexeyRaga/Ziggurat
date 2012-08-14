@@ -52,11 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\EventStore.license.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App_Readme\EventStore - Architectural Overview.docx" />
-    <None Include="App_Readme\EventStore - Transactional Integrity.docx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
