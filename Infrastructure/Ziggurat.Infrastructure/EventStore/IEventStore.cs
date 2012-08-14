@@ -7,12 +7,12 @@ namespace Ziggurat.Infrastructure.EventStore
     {
         EventStream Load(Guid aggregateIdentity, int revision);
 
-        void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<object> events);
+        void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events);
     }
 
     public static class EventStoreExtensions
     {
-        public static void Append(this IEventStore store, Guid aggregateIdentity, int revision, IEnumerable<object> events)
+        public static void Append(this IEventStore store, Guid aggregateIdentity, int revision, IEnumerable<Envelope> events)
         {
             if (store == null) throw new ArgumentNullException("store");
             store.Append(aggregateIdentity, revision, Guid.NewGuid(), events);

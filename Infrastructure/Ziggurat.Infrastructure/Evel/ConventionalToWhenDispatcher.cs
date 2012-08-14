@@ -9,7 +9,7 @@ namespace Ziggurat.Infrastructure.Evel
     {
         void Subscribe(object subscriber);
         void DispatchToOneAndOnlyOne(object message);
-        void DispatchToAll(object message);
+	    void DispatchToAll(object message);
     }
 
     public sealed class ConventionalToWhenDispatcher : IMessageDispatcher

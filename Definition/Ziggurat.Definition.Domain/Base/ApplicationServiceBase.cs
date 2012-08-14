@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Ziggurat.Contracts;
+using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Definition.Domain
@@ -26,7 +27,16 @@ namespace Ziggurat.Definition.Domain
 
             updateAction(aggregate);
 
-            _store.Append(aggregateId, events.Revision, aggregate.Changes);
+            _store.Append(aggregateId, events.Revision, aggregate.Changes.Select(x=>WrapIntoEnvelope(aggregateId, x)));
+        }
+
+        private Envelope WrapIntoEnvelope(Guid aggregateId, IEvent evt)
+        {
+            var envelope = new Envelope(evt, null);
+            envelope.AggregateId = aggregateId;
+            envelope.DateCreated = Now.UtcTime;
+
+            return envelope;
         }
     }
 

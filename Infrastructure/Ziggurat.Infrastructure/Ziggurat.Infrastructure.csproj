@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EventStore">
-      <HintPath>..\..\packages\EventStore.3.0.11326.44\lib\net40\EventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="EventStore.Serialization.Json">
-      <HintPath>..\..\packages\EventStore.Serialization.Json.3.0.11326.44\lib\net40\EventStore.Serialization.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.4.5.8\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -53,10 +47,10 @@
   <ItemGroup>
     <Compile Include="Evel\ConventionalToWhenDispatcher.cs" />
     <Compile Include="Evel\DelegateAdjuster.cs" />
+    <Compile Include="EventStore\Envelope.cs" />
     <Compile Include="EventStore\EventHeaderKeys.cs" />
     <Compile Include="EventStore\EventStream.cs" />
     <Compile Include="EventStore\IEventStore.cs" />
-    <Compile Include="EventStore\JOEventStore.cs" />
     <Compile Include="Now.cs" />
     <Compile Include="Projections\FileSystemProjectionReaderWriter.cs" />
     <Compile Include="Projections\FileSystemProjectionStoreFactory.cs" />
@@ -72,8 +66,6 @@
     <Compile Include="Projections\ProjectionSerializationException.cs" />
     <Compile Include="Projections\ProjectionWriterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserContext\IUserContext.cs" />
-    <Compile Include="UserContext\IUserContextProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md" />

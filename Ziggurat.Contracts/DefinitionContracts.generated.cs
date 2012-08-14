@@ -44,13 +44,15 @@ namespace Ziggurat.Contracts
 	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
-		[DataMember(Order = 0 )] public Guid Id { get; set; }
-		[DataMember(Order = 1 )] public string Name { get; set; }
-		[DataMember(Order = 2 )] public string UniqueName { get; set; }
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 2 )] public string Name { get; set; }
+		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public CreateForm() { }
-		public CreateForm(Guid id, string name, string uniqueName)
+		public CreateForm(Guid projectId, Guid id, string name, string uniqueName)
 		{
+			ProjectId = projectId;
 			Id = id;
 			Name = name;
 			UniqueName = uniqueName;
@@ -60,13 +62,15 @@ namespace Ziggurat.Contracts
 	[Serializable, DataContract]
 	public sealed partial class FormCreated : IEvent
 	{
-		[DataMember(Order = 0 )] public Guid Id { get; set; }
-		[DataMember(Order = 1 )] public string Name { get; set; }
-		[DataMember(Order = 2 )] public string UniqueName { get; set; }
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 2 )] public string Name { get; set; }
+		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public FormCreated() { }
-		public FormCreated(Guid id, string name, string uniqueName)
+		public FormCreated(Guid projectId, Guid id, string name, string uniqueName)
 		{
+			ProjectId = projectId;
 			Id = id;
 			Name = name;
 			UniqueName = uniqueName;
@@ -78,16 +82,16 @@ namespace Ziggurat.Contracts
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
-		[DataMember(Order = 2 )] public string Name { get; set; }
-		[DataMember(Order = 3 )] public string UniqueName { get; set; }
+		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
+		[DataMember(Order = 3 )] public string Name { get; set; }
 
 		public CreateProperty() { }
-		public CreateProperty(Guid formId, Guid propertyId, string name, string uniqueName)
+		public CreateProperty(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;
+			Type = type;
 			Name = name;
-			UniqueName = uniqueName;
 		}
 	}
 
@@ -96,16 +100,72 @@ namespace Ziggurat.Contracts
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
-		[DataMember(Order = 2 )] public string Name { get; set; }
-		[DataMember(Order = 3 )] public string UniqueName { get; set; }
+		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
+		[DataMember(Order = 3 )] public string Name { get; set; }
 
 		public PropertyCreated() { }
-		public PropertyCreated(Guid formId, Guid propertyId, string name, string uniqueName)
+		public PropertyCreated(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;
+			Type = type;
 			Name = name;
-			UniqueName = uniqueName;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class MakePropertyUnused : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public MakePropertyUnused() { }
+		public MakePropertyUnused(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class MakePropertyUsed : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public MakePropertyUsed() { }
+		public MakePropertyUsed(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class PropertyMadeUnused : IPropertyDefinitionEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public PropertyMadeUnused() { }
+		public PropertyMadeUnused(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class PropertyMadeUsed : IPropertyDefinitionEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+
+		public PropertyMadeUsed() { }
+		public PropertyMadeUsed(Guid formId, Guid propertyId)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
 		}
 	}
 

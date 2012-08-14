@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using EventStore;
-using Ziggurat.Infrastructure.UserContext;
+using Ziggurat.Infrastructure.EventStore;
 
-namespace Ziggurat.Infrastructure.EventStore
+namespace Ziggurat.Client.Setup
 {
     public sealed class JOEventStore : IEventStore
     {
         private readonly IStoreEvents _realEventStore;
-        private readonly IUserContextProvider _userContextProvider;
 
-        public JOEventStore(IStoreEvents realEventStore, IUserContextProvider userContextProvider)
+        public JOEventStore(IStoreEvents realEventStore)
         {
             if (realEventStore == null) throw new ArgumentNullException("realEventStore");
-            if (userContextProvider == null) throw new ArgumentNullException("userContextProvider");
 
             _realEventStore = realEventStore;
-            _userContextProvider = userContextProvider;
         }
 
         public EventStream Load(Guid aggregateIdentity, int revision)
@@ -26,18 +22,16 @@ namespace Ziggurat.Infrastructure.EventStore
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
-                return new EventStream(stream.StreamRevision, stream.CommittedEvents.Select(x=>x.Body));
+                return new EventStream(stream.StreamRevision, stream.CommittedEvents.ToEnvelopes());
             }
         }
 
-        public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<object> events)
+        public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events)
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
             if (events == null) return;
 
-            var userContext = _userContextProvider.GetCurrentContext();
-
-            var evtMessages = ConvertToEventMessages(events, userContext);
+            var evtMessages = events.ToEventMessages();
 
             using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
             {
@@ -50,32 +44,33 @@ namespace Ziggurat.Infrastructure.EventStore
         {
             _realEventStore.Dispose();
         }
+    }
 
-        private static IEnumerable<EventMessage> ConvertToEventMessages(IEnumerable<object> events, IUserContext userContext)
+    public static class EnvelopeExtensions
+    {
+        public static IEnumerable<Envelope> ToEnvelopes(this IEnumerable<EventMessage> messages)
+        {
+            foreach (var msg in messages)
+                yield return new Envelope(msg.Body, msg.Headers);
+        }
+
+        public static IEnumerable<EventMessage> ToEventMessages(this IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
                 var msg = new EventMessage { Body = evt };
 
                 //populate message headers: extra information for audit and history reasons.
-                FillInGenericHeaders(msg);
-                FillInUserContextHeaders(msg, userContext);
+                FillInEnvelopeSpecificHeaders(msg, evt);
 
                 yield return msg;
             }
         }
 
-        private static void FillInGenericHeaders(EventMessage msg)
+        private static void FillInEnvelopeSpecificHeaders(EventMessage msg, Envelope evt)
         {
-            msg.Headers.Add(EventHeaderKeys.DateCreated, Now.UtcTime);
+            foreach (var header in evt.Headers)
+                msg.Headers[header.Key] = header.Value;
         }
-
-        private static void FillInUserContextHeaders(EventMessage msg, IUserContext userContext)
-        {
-            if (userContext == null) return;
-
-            msg.Headers.Add(EventHeaderKeys.MemberId, userContext.MemberId);
-        }
-
     }
 }
