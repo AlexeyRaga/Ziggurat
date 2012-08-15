@@ -24,7 +24,7 @@ namespace Ziggurat.Definition.Domain
 
         public static IEnumerable<object> BuildEventProcessors(IBus bus)
         {
-            yield return new ProjectStructure.ProjectStructureDomainService(bus);
+            yield break;
         }
     }
 }
