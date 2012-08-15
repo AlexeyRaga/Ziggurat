@@ -6,7 +6,7 @@ namespace Ziggurat.WebHost
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-	    private Client.Setup.Client _client;
+	    private Client.Setup.SimpleBus _client;
 
         protected void Application_Start()
         {
@@ -16,7 +16,7 @@ namespace Ziggurat.WebHost
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-			_client = Client.Setup.Client.Create();
+			_client = Client.Setup.SimpleBus.Create();
 	        HandlerConfig.RegisterHandlers(_client);
         }
 

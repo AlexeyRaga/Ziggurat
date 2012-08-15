@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="IClientEndpoint.cs" />
+    <Compile Include="SimpleBus.cs" />
+    <Compile Include="IBus.cs" />
     <Compile Include="JOEventStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
