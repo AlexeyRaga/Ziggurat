@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SimpleBus.cs" />
-    <Compile Include="IBus.cs" />
     <Compile Include="JOEventStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

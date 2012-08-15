@@ -1,4 +1,5 @@
 ﻿using Ziggurat.Client.Setup;
+using Ziggurat.Infrastructure;
 
 namespace Ziggurat.WebHost
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EventStore;
 using EventStore.Dispatcher;
+using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 
