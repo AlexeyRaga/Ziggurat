@@ -42,6 +42,34 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class CreateProjectStructure : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+
+		public CreateProjectStructure() { }
+		public CreateProjectStructure(Guid projectId, Guid id)
+		{
+			ProjectId = projectId;
+			Id = id;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProjectStructureCreated : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid Id { get; set; }
+
+		public ProjectStructureCreated() { }
+		public ProjectStructureCreated(Guid projectId, Guid id)
+		{
+			ProjectId = projectId;
+			Id = id;
+		}
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }

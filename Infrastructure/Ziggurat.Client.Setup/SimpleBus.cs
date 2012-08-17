@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using EventStore;
 using EventStore.Dispatcher;
+using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Client.Setup
 {
-    public sealed class Client : IClientEndpoint, IDisposable
+    public sealed class SimpleBus : IBus, IDisposable
     {
         private static readonly byte[] EncryptionKey = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf };
 
@@ -17,9 +18,9 @@ namespace Ziggurat.Client.Setup
 		
 		public IEventStore EventStore { get; private set; }
 
-		public static Client Create()
+		public static SimpleBus Create()
 		{
-			return new Client();
+			return new SimpleBus();
 		}
 
 		public void SubscribeToCommands(object handler)
@@ -32,7 +33,12 @@ namespace Ziggurat.Client.Setup
 			_eventsDispatcher.Subscribe(handler);
 		}
 
-		private Client()
+        public void SendCommand(object command)
+        {
+            _commandDispatcher.DispatchToOneAndOnlyOne(command);
+        }
+
+		private SimpleBus()
 		{
 			var eventStore = BuildEventStore(DispatchEvents);
 			EventStore = eventStore;

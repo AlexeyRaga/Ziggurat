@@ -44,6 +44,26 @@ namespace Ziggurat.Infrastructure.Projections
 			                          });
 		}
 
+        /// <summary>
+        /// Updates the specified view model. A new instance will be created if there is no view model found in the store.
+        /// </summary>
+        public static TView AddOrUpdate<TKey, TView>(this IProjectionWriter<TKey, TView> writer, TKey key, Action<TView> updateFactory)
+            where TView : new()
+        {
+            return writer.AddOrUpdate(key,
+                () =>
+                {
+                    var view = new TView();
+                    updateFactory(view);
+                    return view;
+                },
+                x =>
+                {
+                    updateFactory(x);
+                    return x;
+                });
+        }
+
 		/// <summary>
 		/// Adds a new view model ot throws an exception if there is one already added
 		/// </summary>

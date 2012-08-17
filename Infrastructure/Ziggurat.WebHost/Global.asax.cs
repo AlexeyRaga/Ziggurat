@@ -1,12 +1,13 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Ziggurat.Infrastructure;
 
 namespace Ziggurat.WebHost
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-	    private Client.Setup.Client _client;
+	    private IBus _bus;
 
         protected void Application_Start()
         {
@@ -16,13 +17,13 @@ namespace Ziggurat.WebHost
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-			_client = Client.Setup.Client.Create();
-	        HandlerConfig.RegisterHandlers(_client);
+			_bus = Client.Setup.SimpleBus.Create();
+	        HandlerConfig.RegisterHandlers(_bus);
         }
 
 		protected void Application_End()
 		{
-			_client.Dispose();
+			_bus.Dispose();
 		}
     }
 }
