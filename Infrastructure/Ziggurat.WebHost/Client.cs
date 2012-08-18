@@ -17,6 +17,7 @@ namespace Ziggurat.WebHost
         private static readonly IMessageDispatcher _eventsDispatcher = new ConventionalToWhenDispatcher();
 
         public static ICommandSender CommandSender { get; private set; }
+        public static IViewModelReader ViewModelReader { get; private set; }
 
         static Client()
         {
@@ -25,6 +26,7 @@ namespace Ziggurat.WebHost
                 new JsonProjectionSerializer());
 
             CommandSender = new SimpleCommandSender(_commandDispatcher);
+            ViewModelReader = new SimpleProjectionReader(projectionStore);
         }
 
         private static void DispatchEvents(IEnumerable<Envelope> events)

@@ -7,8 +7,6 @@ namespace Ziggurat.WebHost
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-	    private IBus _bus;
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

@@ -25,9 +25,9 @@ namespace Ziggurat.Definition.Domain
             yield return new ProjectLayout.ProjectLayoutApplicationService(eventStore, new ProjectLayoutLookupService(projectionStore));
         }
 
-        public static IEnumerable<object> BuildEventProcessors(IBus bus)
+        public static IEnumerable<object> BuildEventProcessors(ICommandSender commandSender)
         {
-            yield return new Processes.ProjectCreationProcess(bus);
+            yield return new Processes.ProjectCreationProcess(commandSender);
             yield break;
         }
     }
