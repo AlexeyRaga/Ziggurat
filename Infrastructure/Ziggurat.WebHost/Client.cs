@@ -34,10 +34,5 @@ namespace Ziggurat.WebHost
                 _eventsDispatcher.DispatchToAll(evt.Body);
             }
         }
-
-        static void Shutdown()
-        {
-
-        }
     }
 }
