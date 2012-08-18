@@ -67,7 +67,7 @@
     <Compile Include="FormDefinition\Properties\TextboxProperty.cs" />
     <Compile Include="FormDefinition\Properties\ThreadHistoryProperty.cs" />
     <Compile Include="FormDefinition\Properties\TimeProperty.cs" />
-    <Compile Include="Lookups\ProjectLayoutLoolup.cs" />
+    <Compile Include="Lookups\ProjectLayoutLookup.cs" />
     <Compile Include="Processes\ProjectCreationProcess.cs" />
     <Compile Include="ProjectLayout\ProjectLayoutAggregate.cs" />
     <Compile Include="ProjectLayout\ProjectLayoutApplicationService.cs" />

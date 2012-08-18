@@ -7,7 +7,7 @@ namespace Ziggurat.Infrastructure
         void SendCommand(object command);
     }
 
-	public interface IBus : IDisposable
+	public interface IBus : ICommandSender, IDisposable
 	{
 		void SubscribeToCommands(object handler);
 		void SubscribeToEvents(object handler);
