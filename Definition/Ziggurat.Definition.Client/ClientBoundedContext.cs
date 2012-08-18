@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure.Projections;
 
-namespace Ziggurat.Definition.Web
+namespace Ziggurat.Definition.Client
 {
     public sealed class ClientBoundedContext
     {

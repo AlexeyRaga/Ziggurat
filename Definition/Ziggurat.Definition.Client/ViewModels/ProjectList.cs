@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ziggurat.Contracts;
 using Ziggurat.Infrastructure.Projections;
 
-namespace Ziggurat.Definition.Web.ViewModels
+namespace Ziggurat.Definition.Client.ViewModels
 {
     public sealed class ProjectListItem
     {

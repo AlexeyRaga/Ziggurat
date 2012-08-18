@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ziggurat.Definition.Web")]
+[assembly: AssemblyTitle("Ziggurat.Definition.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ziggurat.Definition.Web")]
+[assembly: AssemblyProduct("Ziggurat.Definition.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b18059ff-68f6-4e3e-b9d1-5437056a0396")]
+[assembly: Guid("b86ebbc9-ecd2-4ed5-8acd-2f9d39117feb")]
 
 // Version information for an assembly consists of the following four values:
 //
