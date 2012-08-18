@@ -18,7 +18,7 @@ namespace Ziggurat.Definition.Domain.Processes
 
         public void When(ProjectCreated evt)
         {
-            _commandSender.SendCommand(new CreateProjectStructure(evt.Id, new Guid()));
+            _commandSender.SendCommand(new CreateProjectLayout(evt.Id, new Guid()));
         }
     }
 }
