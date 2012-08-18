@@ -59,6 +59,8 @@
     <Compile Include="FormDefinition\When_create_form.cs" />
     <Compile Include="FormDefinition\When_create_property.cs" />
     <Compile Include="FormDefinition\When_make_property_unused.cs" />
+    <Compile Include="ProjectLayout\When_add_form_to_project.cs" />
+    <Compile Include="ProjectLayout\When_create_project_layout.cs" />
     <Compile Include="Project\When_create_project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
