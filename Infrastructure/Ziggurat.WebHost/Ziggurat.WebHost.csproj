@@ -127,10 +127,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HandlerConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleCommandSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -207,6 +209,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Definition\Ziggurat.Definition.Client\Ziggurat.Definition.Client.csproj">
+      <Project>{e6217a10-afea-4ee1-9887-2092e3fda201}</Project>
+      <Name>Ziggurat.Definition.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj">
       <Project>{878a7983-395d-4930-a901-df576e64d070}</Project>
       <Name>Ziggurat.Client.Setup</Name>

@@ -16,14 +16,11 @@ namespace Ziggurat.WebHost
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-			_bus = Client.Setup.SimpleBus.Create();
-	        HandlerConfig.RegisterHandlers(_bus);
         }
 
 		protected void Application_End()
 		{
-			_bus.Dispose();
+			
 		}
     }
 }
