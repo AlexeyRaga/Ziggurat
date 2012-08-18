@@ -56,13 +56,13 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class ProjectStructureCreated : IEvent
+	public sealed partial class ProjectLayoutCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
 		[DataMember(Order = 1 )] public Guid Id { get; set; }
 
-		public ProjectStructureCreated() { }
-		public ProjectStructureCreated(Guid projectId, Guid id)
+		public ProjectLayoutCreated() { }
+		public ProjectLayoutCreated(Guid projectId, Guid id)
 		{
 			ProjectId = projectId;
 			Id = id;

@@ -8,17 +8,17 @@ using Ziggurat.Infrastructure.Projections;
 
 namespace Ziggurat.Definition.Domain.Lookups
 {
-    public interface IProjectStructureLookupService
+    public interface IProjectLayoutLookupService
     {
         Guid GetStructureIdByProjectId(Guid projectId);
     }
 
-    public sealed class ProjectStructureLookupService : IProjectStructureLookupService
+    public sealed class ProjectLayoutLookupService : IProjectLayoutLookupService
     {
-        public IProjectionReader<string, ProjectStructureLoolup> _reader;
-        public ProjectStructureLookupService(IProjectionStoreFactory store)
+        public IProjectionReader<string, ProjectLayoutLoolup> _reader;
+        public ProjectLayoutLookupService(IProjectionStoreFactory store)
         {
-            _reader = store.GetReader<string, ProjectStructureLoolup>();
+            _reader = store.GetReader<string, ProjectLayoutLoolup>();
         }
 
         public Guid GetStructureIdByProjectId(Guid projectId)
@@ -28,11 +28,11 @@ namespace Ziggurat.Definition.Domain.Lookups
         }
     }
 
-    public sealed class ProjectStructureLoolup
+    public sealed class ProjectLayoutLoolup
     {
         public IDictionary<Guid, Guid> Structures { get; set; }
 
-        public ProjectStructureLoolup()
+        public ProjectLayoutLoolup()
         {
             Structures = new Dictionary<Guid, Guid>();
         }
@@ -40,13 +40,13 @@ namespace Ziggurat.Definition.Domain.Lookups
 
     public sealed class ProjectStructureLookupProjection
     {
-        private readonly IProjectionWriter<string, ProjectStructureLoolup> _writer;
+        private readonly IProjectionWriter<string, ProjectLayoutLoolup> _writer;
         public ProjectStructureLookupProjection(IProjectionStoreFactory store)
         {
-            _writer = store.GetWriter<string, ProjectStructureLoolup>();
+            _writer = store.GetWriter<string, ProjectLayoutLoolup>();
         }
 
-        public void When(ProjectStructureCreated evt)
+        public void When(ProjectLayoutCreated evt)
         {
             _writer.AddOrUpdate("index", index => index.Structures[evt.ProjectId] = evt.Id);
         }

@@ -7,12 +7,12 @@ using Ziggurat.Contracts;
 using Ziggurat.Definition.Domain.Lookups;
 using Ziggurat.Infrastructure.EventStore;
 
-namespace Ziggurat.Definition.Domain.ProjectStructure
+namespace Ziggurat.Definition.Domain.ProjectLayout
 {
-    public sealed class ProjectStructureApplicationService : ApplicationServiceBase<ProjectStructureAggregate>
+    public sealed class ProjectLayoutApplicationService : ApplicationServiceBase<ProjectLayoutAggregate>
     {
-        private readonly IProjectStructureLookupService _projectStructureLookupService;
-        public ProjectStructureApplicationService(IEventStore eventStore, IProjectStructureLookupService projectStructureLookupService)
+        private readonly IProjectLayoutLookupService _projectStructureLookupService;
+        public ProjectLayoutApplicationService(IEventStore eventStore, IProjectLayoutLookupService projectStructureLookupService)
             : base(eventStore)
         {
             _projectStructureLookupService = projectStructureLookupService;
