@@ -70,6 +70,38 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class AddFormToProject : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+
+		public AddFormToProject() { }
+		public AddFormToProject(Guid projectId, Guid formId)
+		{
+			ProjectId = projectId;
+			FormId = formId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class FormAddedToProject : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 2 )] public Guid FormId { get; set; }
+		[DataMember(Order = 3 )] public string BlockHeaderName { get; set; }
+
+		public FormAddedToProject() { }
+		public FormAddedToProject(Guid projectId, Guid projectLayoutId, Guid formId, string blockHeaderName)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			BlockHeaderName = blockHeaderName;
+		}
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }

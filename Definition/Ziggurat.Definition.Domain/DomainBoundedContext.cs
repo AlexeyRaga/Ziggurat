@@ -13,6 +13,7 @@ namespace Ziggurat.Definition.Domain
     {
         public static IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
         {
+            yield return new Lookups.ProjectStructureLookupProjection(factory);
             yield break;
         }
 
