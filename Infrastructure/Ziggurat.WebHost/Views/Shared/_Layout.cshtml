@@ -12,11 +12,14 @@
 
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
     @Scripts.Render("~/bundles/setup")
+
+    @Styles.Render("~/bundles/bootstrap/css")
 </head>
 <body>
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
