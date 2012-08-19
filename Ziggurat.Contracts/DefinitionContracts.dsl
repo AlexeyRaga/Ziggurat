@@ -1,8 +1,11 @@
 ﻿CreateProject? Guid id, string name, string shortName
 ProjectCreated! Guid id, string name, string shortName
 
-CreateProjectStructure? Guid projectId, Guid id
-ProjectStructureCreated! Guid projectId, Guid id
+CreateProjectLayout? Guid projectId, Guid id
+ProjectLayoutCreated! Guid projectId, Guid id
+
+AddFormToProject? Guid projectId, Guid formId
+FormAddedToProject! Guid projectId, Guid projectLayoutId, Guid formId, string blockHeaderName
 
 CreateForm? Guid projectId, Guid id, string name, string uniqueName
 FormCreated! Guid projectId, Guid id, string name, string uniqueName

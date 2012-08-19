@@ -42,13 +42,13 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class CreateProjectStructure : ICommand
+	public sealed partial class CreateProjectLayout : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
 		[DataMember(Order = 1 )] public Guid Id { get; set; }
 
-		public CreateProjectStructure() { }
-		public CreateProjectStructure(Guid projectId, Guid id)
+		public CreateProjectLayout() { }
+		public CreateProjectLayout(Guid projectId, Guid id)
 		{
 			ProjectId = projectId;
 			Id = id;
@@ -56,16 +56,48 @@ namespace Ziggurat.Contracts
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class ProjectStructureCreated : IEvent
+	public sealed partial class ProjectLayoutCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
 		[DataMember(Order = 1 )] public Guid Id { get; set; }
 
-		public ProjectStructureCreated() { }
-		public ProjectStructureCreated(Guid projectId, Guid id)
+		public ProjectLayoutCreated() { }
+		public ProjectLayoutCreated(Guid projectId, Guid id)
 		{
 			ProjectId = projectId;
 			Id = id;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class AddFormToProject : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+
+		public AddFormToProject() { }
+		public AddFormToProject(Guid projectId, Guid formId)
+		{
+			ProjectId = projectId;
+			FormId = formId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class FormAddedToProject : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 2 )] public Guid FormId { get; set; }
+		[DataMember(Order = 3 )] public string BlockHeaderName { get; set; }
+
+		public FormAddedToProject() { }
+		public FormAddedToProject(Guid projectId, Guid projectLayoutId, Guid formId, string blockHeaderName)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			BlockHeaderName = blockHeaderName;
 		}
 	}
 
