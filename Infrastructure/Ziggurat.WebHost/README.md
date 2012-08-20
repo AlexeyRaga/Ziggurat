@@ -1,9 +1,12 @@
-﻿This project supposed to be a web-frontend host (and only a host).
+﻿Web Host
+========
 
-Ideally it should not contain any frontend related logic, etc., but should provide 
-a hosting infrastructure. 
+This project supposed to be a web-frontend host (and only a host).
 
-All the logic (such as controllers, views, scripts, etc.) should belong to BCs (Bounded Contexts or Business Components).
+The web frontend represents a "read" side of the system and should only be able to consume read-only projections
+data and to send commands.
 
-The web host should only be allowed to "own" some common stuff like theme, common css, 
-web infrastructure/modularity/wireup functionality.
+**Note**: This project should *not* contain any projections (things which react to events and produce/change
+persisted models). This logic should belong to the specific client BCs (see _Ziggurat.Definition.Projections_ and
+_Ziggurat.Definition.Client_ projects).
+ 
