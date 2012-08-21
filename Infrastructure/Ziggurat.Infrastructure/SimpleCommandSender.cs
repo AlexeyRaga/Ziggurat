@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
-using Ziggurat.Client.Setup;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
-using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
 
-namespace Ziggurat.WebHost
+namespace Ziggurat.Infrastructure
 {
     public sealed class SimpleCommandSender : ICommandSender
     {

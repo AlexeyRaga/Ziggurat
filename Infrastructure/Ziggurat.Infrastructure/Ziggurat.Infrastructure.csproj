@@ -67,6 +67,7 @@
     <Compile Include="Projections\ProjectionSerializationException.cs" />
     <Compile Include="Projections\ProjectionWriterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleCommandSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

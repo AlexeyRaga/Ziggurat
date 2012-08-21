@@ -132,7 +132,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleCommandSender.cs" />
     <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
   <ItemGroup>
