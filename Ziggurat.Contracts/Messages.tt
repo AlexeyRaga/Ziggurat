@@ -20,8 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint") #>
-{
 <# manager.EndBlock(); #>
 
 <#
@@ -39,6 +37,10 @@ namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Name
 	    var justName = Path.GetFileNameWithoutExtension(fileName);
 
 		manager.StartNewFile(justName + ".generated.cs");
+#>
+namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint") #>.<#= justName #>
+{
+<#
 
 		var lines = File.ReadAllLines(Host.ResolvePath(fileName));
 
@@ -66,13 +68,15 @@ namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Name
 
 			GenerateContract(name, type, prms);
 		}
-
+#>
+}
+<#
 		manager.EndBlock();
 	}
 
 #>
 <# manager.StartFooter(); #>
-}
+
 <# manager.EndBlock(); #>
 <# manager.Process(true); #>
 

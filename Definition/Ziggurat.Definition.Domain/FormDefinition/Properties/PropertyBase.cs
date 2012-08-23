@@ -1,5 +1,5 @@
 ﻿using System;
-using Ziggurat.Contracts;
+using Ziggurat.Contracts.Definition;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {

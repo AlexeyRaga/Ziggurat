@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ziggurat.Contracts;
 using Ziggurat.Definition.Domain.FormDefinition;
+using Ziggurat.Contracts.Definition;
+using Ziggurat.Contracts;
 
 namespace Ziggurat.Definition.Domain.Tests.FormDefinition
 {

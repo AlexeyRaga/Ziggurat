@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefinitionContracts.generated.cs">
+    <Compile Include="Definition.generated.cs">
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
     <Compile Include="DefinitionInterfaces.cs" />
@@ -54,7 +54,7 @@
     <Compile Include="PropertyType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefinitionContracts.dsl" />
+    <None Include="Definition.dsl" />
     <None Include="Messages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Messages.cs</LastGenOutput>

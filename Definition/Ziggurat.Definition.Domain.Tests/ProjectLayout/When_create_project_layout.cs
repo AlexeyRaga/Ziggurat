@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts;
+using Ziggurat.Contracts.Definition;
 using Ziggurat.Definition.Domain.ProjectLayout;
 
 namespace Ziggurat.Definition.Domain.Tests.ProjectLayout
