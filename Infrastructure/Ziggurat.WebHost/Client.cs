@@ -8,6 +8,8 @@ using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.Queue;
+using Ziggurat.Infrastructure.Queue.FileSystem;
 
 namespace Ziggurat.WebHost
 {
@@ -25,16 +27,10 @@ namespace Ziggurat.WebHost
                 ConfigurationManager.AppSettings["projectionsRootFolder"],
                 new JsonProjectionSerializer());
 
-            CommandSender = new SimpleCommandSender(_commandDispatcher);
-            ViewModelReader = new SimpleProjectionReader(projectionStore);
-        }
+            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
 
-        private static void DispatchEvents(IEnumerable<Envelope> events)
-        {
-            foreach (var evt in events)
-            {
-                _eventsDispatcher.DispatchToAll(evt.Body);
-            }
+            CommandSender = new NamespaceBasedCommandRouter("cmd", queueFactory, new JsonQueueMessageSerializer());
+            ViewModelReader = new SimpleProjectionReader(projectionStore);
         }
     }
 }
