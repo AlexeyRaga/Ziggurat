@@ -41,7 +41,7 @@ The **Definition** functionality is represenred by:
  
   - **Ziggurat.Definition.Domain**. A definition domain BC. Contains the aggregates that are included into this BC (such as _Project_, _ProjectStructure_, _FormDefinition_) as well as domain-specific services and lookups (implemented through projections).
   - **Ziggurat.Definition.Projections**. A definition client BC. This project is responsible for building projections that are needed by the client (e.g. list of projects, project structure or "left nav tree", etc). This projections-building functionality is intentionally separated from the frontend (WebHost). The main reason for this separation is the ability to "stop" the client BC, upgrade it, regenerate projections while the WebHost can continue serving users and displaying data.
-  - **Ziggurat.Definition.Client** Simply a "runner" (a console app or a windows service) for the Definition functionality. It supposed to wire things up. This is the physical process where commands are received, business logic is performed, events are fired, etc.
+  - **Ziggurat.Definition.Service** Simply a "runner" (a console app or a windows service) for the Definition functionality. It supposed to wire things up. This is the physical process where commands are received, business logic is performed, events are fired, etc.
   
- **NOTE**: Both _Ziggurat.Definition.Projections_ and _Ziggurat.Definition.Client_ names are **BAD**. We need to come up with something more meaningful and descriptive.
+ **NOTE**: Both _Ziggurat.Definition.Projections_ name is **BAD**. We need to come up with something more meaningful and descriptive.
   
