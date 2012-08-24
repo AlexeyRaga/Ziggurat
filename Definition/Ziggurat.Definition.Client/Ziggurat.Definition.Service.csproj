@@ -7,8 +7,8 @@
     <ProjectGuid>{E6217A10-AFEA-4EE1-9887-2092E3FDA201}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ziggurat.Definition.Client</RootNamespace>
-    <AssemblyName>Ziggurat.Definition.Client</AssemblyName>
+    <RootNamespace>Ziggurat.Definition.Service</RootNamespace>
+    <AssemblyName>Ziggurat.Definition.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
