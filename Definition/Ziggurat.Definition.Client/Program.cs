@@ -10,6 +10,8 @@ using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.Queue;
+using Ziggurat.Infrastructure.Queue.FileSystem;
 
 namespace Ziggurat.Definition.Client
 {
@@ -27,17 +29,30 @@ namespace Ziggurat.Definition.Client
                     ConfigurationManager.AppSettings["projectionsRootFolder"], 
                     new JsonProjectionSerializer());
 
-            using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
+            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
+            var commandsQueue = queueFactory.CreateReader("cmd-contracts-definition");
+
+            var commandsReceiver = new MessageReceiver(new[] { commandsQueue });
+
+            var commandsDispatcher = new ReceivedMessageDispatcher(
+                CommandDispatcher.DispatchToOneAndOnlyOne,
+                new JsonQueueMessageSerializer(),
+                commandsReceiver);
+
+            using (commandsDispatcher)
             {
-                var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionFactory);
-                var processes = DomainBoundedContext.BuildEventProcessors(commandSender);
-                var projections = ClientBoundedContext.BuildProjections(projectionFactory);
+                using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
+                {
+                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionFactory);
+                    var processes = DomainBoundedContext.BuildEventProcessors(commandSender);
+                    var projections = ClientBoundedContext.BuildProjections(projectionFactory);
 
-                foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
-                foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
-                foreach (var process in processes) EventsDispatcher.Subscribe(process);
+                    foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
+                    foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
+                    foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
-                Console.ReadKey();
+                    Console.ReadKey();
+                }
             }
 
         }
