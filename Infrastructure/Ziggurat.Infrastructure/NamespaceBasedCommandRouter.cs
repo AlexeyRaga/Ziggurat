@@ -40,7 +40,7 @@ namespace Ziggurat.Infrastructure
 
         private string GetQueueNameForMessage(object message)
         {
-            var ns = message.GetType().Namespace;
+            var ns = message.GetType().Namespace.ToLowerInvariant();
             if (ns.Contains(".")) ns = ns.Substring(ns.IndexOf('.') + 1);
 
             return _queueNamePrefix + ns;
