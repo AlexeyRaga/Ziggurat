@@ -22,7 +22,7 @@ namespace Ziggurat.WebHost
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/bundles/setup/css").Include(
-                "~/Content/html5reset*.css"));
+                "~/Content/html5reset*"));
 
             bundles.Add(new StyleBundle("~/bundles/bootstrap/css").Include(
                 "~/Content/bootstrap*",

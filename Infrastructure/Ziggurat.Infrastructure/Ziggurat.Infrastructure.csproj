@@ -52,6 +52,7 @@
     <Compile Include="EventStore\EventStream.cs" />
     <Compile Include="EventStore\IEventStore.cs" />
     <Compile Include="ICommandSender.cs" />
+    <Compile Include="NamespaceBasedCommandRouter.cs" />
     <Compile Include="Now.cs" />
     <Compile Include="Projections\FileSystemProjectionReaderWriter.cs" />
     <Compile Include="Projections\FileSystemProjectionStoreFactory.cs" />

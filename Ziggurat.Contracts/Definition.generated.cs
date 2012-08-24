@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ziggurat.Contracts
+namespace Ziggurat.Contracts.Definition
 {
 	[Serializable, DataContract]
 	public sealed partial class CreateProject : ICommand
@@ -230,3 +230,4 @@ namespace Ziggurat.Contracts
 	}
 
 }
+

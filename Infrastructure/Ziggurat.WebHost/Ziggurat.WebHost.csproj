@@ -243,9 +243,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Definition\Ziggurat.Definition.Client\Ziggurat.Definition.Client.csproj">
+    <ProjectReference Include="..\..\Definition\Ziggurat.Definition.Service\Ziggurat.Definition.Service.csproj">
       <Project>{e6217a10-afea-4ee1-9887-2092e3fda201}</Project>
-      <Name>Ziggurat.Definition.Client</Name>
+      <Name>Ziggurat.Definition.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj">
       <Project>{878a7983-395d-4930-a901-df576e64d070}</Project>

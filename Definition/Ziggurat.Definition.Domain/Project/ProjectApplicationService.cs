@@ -1,5 +1,5 @@
 ﻿using System;
-using Ziggurat.Contracts;
+using Ziggurat.Contracts.Definition;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Definition.Domain.Project

@@ -48,19 +48,13 @@ namespace Ziggurat.Infrastructure.Queue
             System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
             return new string(chars);
         }
-    }
 
-    public sealed class JsonQueueMessageEnvelope
-    {
-        public object Body { get; set; }
-        public JsonQueueMessageEnvelope(object body)
+        private sealed class JsonQueueMessageEnvelope
         {
-            Body = body;
-        }
+            public object Body { get; set; }
+            public JsonQueueMessageEnvelope(object body) { Body = body; }
 
-        public JsonQueueMessageEnvelope()
-        {
-
+            public JsonQueueMessageEnvelope() { }
         }
     }
 }

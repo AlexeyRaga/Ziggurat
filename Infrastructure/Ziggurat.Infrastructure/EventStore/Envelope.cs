@@ -31,9 +31,7 @@ namespace Ziggurat.Infrastructure.EventStore
         public Envelope(object body, IDictionary<string, object> extraHeaders)
         {
             Body = body;
-            Headers = extraHeaders == null 
-                ? new Dictionary<string, object>() 
-                : extraHeaders.ToDictionary(x => x.Key, x => x.Value);
+            Headers = extraHeaders ?? new Dictionary<string, object>();
         }
 
         private T GetValueFromHeaders<T>(string key)

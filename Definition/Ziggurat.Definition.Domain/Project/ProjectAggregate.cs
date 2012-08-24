@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Ziggurat.Contracts;
+using Ziggurat.Contracts.Definition;
 
 namespace Ziggurat.Definition.Domain.Project
 {
