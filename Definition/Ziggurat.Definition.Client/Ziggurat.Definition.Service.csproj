@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Ziggurat.Definition.Client.Program</StartupObject>
+    <StartupObject>Ziggurat.Definition.Service.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

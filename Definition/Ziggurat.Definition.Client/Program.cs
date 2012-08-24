@@ -13,7 +13,7 @@ using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 
-namespace Ziggurat.Definition.Client
+namespace Ziggurat.Definition.Service
 {
     public class Program
     {

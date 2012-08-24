@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ziggurat.Definition.Projections;
 using Ziggurat.Infrastructure.Projections;
 
-namespace Ziggurat.Definition.Client
+namespace Ziggurat.Definition.Service
 {
     public sealed class ClientBoundedContext
     {
