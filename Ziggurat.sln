@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Infrastructure.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Client.Setup", "Infrastructure\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj", "{878A7983-395D-4930-A901-DF576E64D070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Service", "Definition\Ziggurat.Definition.Client\Ziggurat.Definition.Service.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Service", "Definition\Ziggurat.Definition.Service\Ziggurat.Definition.Service.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Projections", "Definition\Ziggurat.Definition.Projections\Ziggurat.Definition.Projections.csproj", "{D4B57488-42AA-4C9D-B67A-D0D2516F2361}"
 EndProject
