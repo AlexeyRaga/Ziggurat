@@ -52,6 +52,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyType.cs" />
+    <Compile Include="Registration.generated.cs">
+      <DependentUpon>Messages.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Definition.dsl" />
@@ -60,6 +63,7 @@
       <LastGenOutput>Messages.cs</LastGenOutput>
     </None>
     <None Include="MultipleOutputHelper.ttinclude" />
+    <None Include="Registration.dsl" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -67,6 +71,7 @@
   <ItemGroup>
     <Content Include="README.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
