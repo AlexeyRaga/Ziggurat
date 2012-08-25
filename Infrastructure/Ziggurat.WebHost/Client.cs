@@ -31,7 +31,7 @@ namespace Ziggurat.WebHost
 
             var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
 
-            CommandSender = new NamespaceBasedCommandRouter("cmd", queueFactory, new JsonQueueMessageSerializer());
+            CommandSender = new NamespaceBasedCommandRouter("cmd", queueFactory, serializer);
             ViewModelReader = new SimpleProjectionReader(projectionStore);
         }
     }

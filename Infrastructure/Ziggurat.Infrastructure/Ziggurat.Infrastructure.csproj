@@ -70,8 +70,7 @@
     <Compile Include="Queue\FileSystem\FileSystemQueueMessage.cs" />
     <Compile Include="Queue\FileSystem\FileSystemQueueReader.cs" />
     <Compile Include="Queue\FileSystem\FileSystemQueueWriter.cs" />
-    <Compile Include="Queue\IQueueMessageSerializer.cs" />
-    <Compile Include="Queue\JsonQueueMessageSerializer.cs" />
+    <Compile Include="Queue\QueueMessageSerializer.cs" />
     <Compile Include="Queue\MessageReceiver.cs" />
     <Compile Include="Queue\MessageSender.cs" />
     <Compile Include="Queue\QueueInterfaces.cs" />

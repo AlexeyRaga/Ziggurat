@@ -39,7 +39,7 @@ namespace Ziggurat.Definition.Service
 
             var commandsDispatcher = new ReceivedMessageDispatcher(
                 CommandDispatcher.DispatchToOneAndOnlyOne,
-                new JsonQueueMessageSerializer(),
+                serializer,
                 commandsReceiver);
 
             using (commandsDispatcher)

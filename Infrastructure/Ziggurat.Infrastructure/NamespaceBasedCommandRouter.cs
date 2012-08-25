@@ -5,25 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure.Queue;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure
 {
     public sealed class NamespaceBasedCommandRouter : ICommandSender
     {
         private readonly IQueueFactory _queueFactory;
-        private readonly IQueueMessageSerializer _serializer;
+        private readonly QueueMessageSerializer _serializer;
         private readonly string _queueNamePrefix;
 
         private readonly ConcurrentDictionary<string, MessageSender> _queues =
             new ConcurrentDictionary<string, MessageSender>();
 
-        public NamespaceBasedCommandRouter(string queueNamePrefix, IQueueFactory queueFactory, IQueueMessageSerializer serializer)
+        public NamespaceBasedCommandRouter(string queueNamePrefix, IQueueFactory queueFactory, ISerializer serializer)
         {
             if (queueFactory == null) throw new ArgumentNullException("queueFactory");
             if (serializer == null) throw new ArgumentNullException("serializer");
 
             _queueFactory = queueFactory;
-            _serializer = serializer;
+            _serializer = new QueueMessageSerializer(serializer);
             _queueNamePrefix = MakePrefix(queueNamePrefix);
         }
 
