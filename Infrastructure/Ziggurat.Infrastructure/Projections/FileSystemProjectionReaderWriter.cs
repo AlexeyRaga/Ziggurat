@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Projections
 {
@@ -7,7 +8,7 @@ namespace Ziggurat.Infrastructure.Projections
 	{
 		public string RootFolder { get; private set; }
 
-		private readonly IProjectionSerializer _serializer;
+		private readonly ISerializer _serializer;
 		private readonly Func<TKey, string> _subfolderFactory;
 
 		/// <summary>
@@ -15,7 +16,7 @@ namespace Ziggurat.Infrastructure.Projections
 		/// </summary>
 		/// <param name="rootFolder">A root folder on disk where everything is persisted.</param>
 		/// <param name="serializer">A serializer to use</param>
-		public FileSystemProjectionReaderWriter(string rootFolder, IProjectionSerializer serializer)
+		public FileSystemProjectionReaderWriter(string rootFolder, ISerializer serializer)
 			: this(rootFolder, null, serializer)
 		{
 		}
@@ -27,7 +28,7 @@ namespace Ziggurat.Infrastructure.Projections
 		/// <param name="subfolderFactory">Optional. A factory function from a key to subfolders tree. 
 		/// For example, one may want to evenly distribute files between N subfolders.</param>
 		/// <param name="serializer">A serializer to use</param>
-		public FileSystemProjectionReaderWriter(string rootFolder, Func<TKey, string> subfolderFactory, IProjectionSerializer serializer)
+		public FileSystemProjectionReaderWriter(string rootFolder, Func<TKey, string> subfolderFactory, ISerializer serializer)
 		{
 			if (String.IsNullOrWhiteSpace(rootFolder)) throw new ArgumentNullException("rootFolder");
 			if (serializer == null) throw new ArgumentNullException("serializer");

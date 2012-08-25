@@ -12,6 +12,7 @@ using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Definition.Service
 {
@@ -24,10 +25,12 @@ namespace Ziggurat.Definition.Service
         {
             var commandSender = new SimpleCommandSender(CommandDispatcher);
 
+            var serializer = new JsonValueSerializer();
+
             var projectionFactory =
                 new FileSystemProjectionStoreFactory(
                     ConfigurationManager.AppSettings["projectionsRootFolder"], 
-                    new JsonProjectionSerializer());
+                    serializer);
 
             var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
             var commandsQueue = queueFactory.CreateReader("cmd-contracts-definition");
@@ -36,7 +39,7 @@ namespace Ziggurat.Definition.Service
 
             var commandsDispatcher = new ReceivedMessageDispatcher(
                 CommandDispatcher.DispatchToOneAndOnlyOne,
-                new JsonQueueMessageSerializer(),
+                serializer,
                 commandsReceiver);
 
             using (commandsDispatcher)

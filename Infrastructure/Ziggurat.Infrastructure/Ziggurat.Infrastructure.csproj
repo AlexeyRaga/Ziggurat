@@ -58,10 +58,8 @@
     <Compile Include="Projections\FileSystemProjectionStoreFactory.cs" />
     <Compile Include="Projections\InMemoryProjectionReaderWriter.cs" />
     <Compile Include="Projections\IProjectionReader.cs" />
-    <Compile Include="Projections\IProjectionSerializer.cs" />
     <Compile Include="Projections\IProjectionStoreFactory.cs" />
     <Compile Include="Projections\IProjectionWriter.cs" />
-    <Compile Include="Projections\JsonProjectionSerializer.cs" />
     <Compile Include="Projections\KeyFactories.cs" />
     <Compile Include="Projections\ProjectionIOException.cs" />
     <Compile Include="Projections\ProjectionReaderExtensions.cs" />
@@ -72,12 +70,15 @@
     <Compile Include="Queue\FileSystem\FileSystemQueueMessage.cs" />
     <Compile Include="Queue\FileSystem\FileSystemQueueReader.cs" />
     <Compile Include="Queue\FileSystem\FileSystemQueueWriter.cs" />
-    <Compile Include="Queue\IQueueMessageSerializer.cs" />
-    <Compile Include="Queue\JsonQueueMessageSerializer.cs" />
+    <Compile Include="Queue\QueueMessageSerializer.cs" />
     <Compile Include="Queue\MessageReceiver.cs" />
     <Compile Include="Queue\MessageSender.cs" />
     <Compile Include="Queue\QueueInterfaces.cs" />
     <Compile Include="Queue\ReceivedMessageDispatcher.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
+    <Compile Include="Serialization\JsonValueSerializer.cs" />
+    <Compile Include="Serialization\SerializationException.cs" />
+    <Compile Include="Serialization\SerializerExtensions.cs" />
     <Compile Include="SimpleCommandSender.cs" />
   </ItemGroup>
   <ItemGroup>

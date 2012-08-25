@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Queue
 {
@@ -11,15 +12,19 @@ namespace Ziggurat.Infrastructure.Queue
     {
         private readonly Action<object> _dispatchTo;
         private readonly IMessageReceiver _receiver;
-        private readonly IQueueMessageSerializer _serializer;
+        private readonly QueueMessageSerializer _serializer;
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
-        public ReceivedMessageDispatcher(Action<object> dispatchTo, IQueueMessageSerializer serializer, IMessageReceiver receiver)
+        public ReceivedMessageDispatcher(Action<object> dispatchTo, ISerializer serializer, IMessageReceiver receiver)
         {
+            if (dispatchTo == null) throw new ArgumentNullException("dispatchTo");
+            if (serializer == null) throw new ArgumentNullException("serializer");
+            if (receiver == null) throw new ArgumentNullException("receiver");
+
             _dispatchTo = dispatchTo;
             _receiver = receiver;
-            _serializer = serializer;
+            _serializer = new QueueMessageSerializer(serializer);
         }
 
         public void Run()
