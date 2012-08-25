@@ -45,6 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecurityAggregate.cs" />
     <Compile Include="Security\SecurityState.cs" />
+    <Compile Include="User\UserAggregate.cs" />
+    <Compile Include="User\UserState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
@@ -56,9 +58,7 @@
       <Name>Ziggurat.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
