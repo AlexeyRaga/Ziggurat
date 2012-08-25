@@ -78,6 +78,10 @@
     <Compile Include="Queue\MessageSender.cs" />
     <Compile Include="Queue\QueueInterfaces.cs" />
     <Compile Include="Queue\ReceivedMessageDispatcher.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
+    <Compile Include="Serialization\JsonValueSerializer.cs" />
+    <Compile Include="Serialization\SerializationException.cs" />
+    <Compile Include="Serialization\SerializerExtensions.cs" />
     <Compile Include="SimpleCommandSender.cs" />
   </ItemGroup>
   <ItemGroup>
