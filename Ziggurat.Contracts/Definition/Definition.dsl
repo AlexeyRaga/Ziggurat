@@ -1,5 +1,5 @@
 ﻿CreateProject? Guid id, string name, string shortName
-ProjectCreated! Guid id, string name, string shortName
+ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
 
 CreateProjectLayout? Guid projectId, Guid id
 ProjectLayoutCreated! Guid projectId, Guid id

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Ziggurat.Contracts;
 using Ziggurat.Contracts.Definition;
+using Ziggurat.Infrastructure;
 
 namespace Ziggurat.Definition.Domain.Project
 {
@@ -17,7 +18,9 @@ namespace Ziggurat.Definition.Domain.Project
 
             EnsureShortName(shortName);
 
-            Apply(new ProjectCreated(id, name, shortName));
+            var projectLayoutId = IdGenerator.GenerateId(DefinitionContract.ProjectLayoutNamespace, id.ToString());
+
+            Apply(new ProjectCreated(id, projectLayoutId, name, shortName));
         }
 
         private void EnsureShortName(string shortName)

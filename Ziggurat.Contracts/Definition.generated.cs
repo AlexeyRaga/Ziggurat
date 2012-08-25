@@ -29,13 +29,15 @@ namespace Ziggurat.Contracts.Definition
 	public sealed partial class ProjectCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid Id { get; set; }
-		[DataMember(Order = 1 )] public string Name { get; set; }
-		[DataMember(Order = 2 )] public string ShortName { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 2 )] public string Name { get; set; }
+		[DataMember(Order = 3 )] public string ShortName { get; set; }
 
 		public ProjectCreated() { }
-		public ProjectCreated(Guid id, string name, string shortName)
+		public ProjectCreated(Guid id, Guid projectLayoutId, string name, string shortName)
 		{
 			Id = id;
+			ProjectLayoutId = projectLayoutId;
 			Name = name;
 			ShortName = shortName;
 		}
