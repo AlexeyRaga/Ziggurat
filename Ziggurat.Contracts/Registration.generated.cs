@@ -26,7 +26,7 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class UserRegistered : IPropertyDefinitionEvent
+	public sealed partial class UserRegistered : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid UserId { get; set; }
 		[DataMember(Order = 1 )] public string Username { get; set; }
