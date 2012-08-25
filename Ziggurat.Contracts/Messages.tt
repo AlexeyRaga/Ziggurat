@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 	symbols["?"] = "ICommand";
 	symbols["!"] = "IEvent";
 
-	var dslFiles = Directory.GetFiles(Path.GetDirectoryName(Host.ResolvePath(Host.TemplateFile)), "*.dsl");
+	var dslFiles = Directory.GetFiles(Path.GetDirectoryName(Host.ResolvePath(Host.TemplateFile)), "*.dsl", System.IO.SearchOption.AllDirectories);
 
 	foreach(var fileName in dslFiles) {
 	    var justName = Path.GetFileNameWithoutExtension(fileName);
