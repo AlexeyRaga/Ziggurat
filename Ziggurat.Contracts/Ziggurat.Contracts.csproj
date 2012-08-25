@@ -44,6 +44,7 @@
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
     <Compile Include="DefinitionInterfaces.cs" />
+    <Compile Include="Definition\DefinitionContract.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Messages.cs">
       <AutoGen>True</AutoGen>
