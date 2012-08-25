@@ -51,14 +51,10 @@
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
-    <Compile Include="PropertyType.cs" />
     <Compile Include="Registration.generated.cs">
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
-=======
     <Compile Include="Definition\PropertyType.cs" />
->>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <None Include="Definition\Definition.dsl" />
