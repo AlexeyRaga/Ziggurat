@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts;
+using Ziggurat.Contracts.Definition;
 
 namespace Ziggurat.Definition.Domain.FormDefinition
 {

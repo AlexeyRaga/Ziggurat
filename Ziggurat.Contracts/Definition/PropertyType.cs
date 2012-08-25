@@ -1,4 +1,4 @@
-﻿namespace Ziggurat.Contracts
+﻿namespace Ziggurat.Contracts.Definition
 {
     public enum PropertyType
     {
