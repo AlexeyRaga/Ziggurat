@@ -58,10 +58,8 @@
     <Compile Include="Projections\FileSystemProjectionStoreFactory.cs" />
     <Compile Include="Projections\InMemoryProjectionReaderWriter.cs" />
     <Compile Include="Projections\IProjectionReader.cs" />
-    <Compile Include="Projections\IProjectionSerializer.cs" />
     <Compile Include="Projections\IProjectionStoreFactory.cs" />
     <Compile Include="Projections\IProjectionWriter.cs" />
-    <Compile Include="Projections\JsonProjectionSerializer.cs" />
     <Compile Include="Projections\KeyFactories.cs" />
     <Compile Include="Projections\ProjectionIOException.cs" />
     <Compile Include="Projections\ProjectionReaderExtensions.cs" />

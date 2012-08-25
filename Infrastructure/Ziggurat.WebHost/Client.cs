@@ -10,6 +10,7 @@ using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.WebHost
 {
@@ -23,9 +24,10 @@ namespace Ziggurat.WebHost
 
         static Client()
         {
+            var serializer = new JsonValueSerializer();
             var projectionStore = new FileSystemProjectionStoreFactory(
                 ConfigurationManager.AppSettings["projectionsRootFolder"],
-                new JsonProjectionSerializer());
+                serializer);
 
             var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
 
