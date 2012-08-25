@@ -91,15 +91,49 @@ namespace Ziggurat.Contracts.Definition
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
 		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
 		[DataMember(Order = 2 )] public Guid FormId { get; set; }
-		[DataMember(Order = 3 )] public string BlockHeaderName { get; set; }
 
 		public FormAddedToProject() { }
-		public FormAddedToProject(Guid projectId, Guid projectLayoutId, Guid formId, string blockHeaderName)
+		public FormAddedToProject(Guid projectId, Guid projectLayoutId, Guid formId)
 		{
 			ProjectId = projectId;
 			ProjectLayoutId = projectLayoutId;
 			FormId = formId;
-			BlockHeaderName = blockHeaderName;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class AttachFormToProjectLayout : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 2 )] public Guid ProjectLayoutId { get; set; }
+
+		public AttachFormToProjectLayout() { }
+		public AttachFormToProjectLayout(Guid formId, Guid projectId, Guid projectLayoutId)
+		{
+			FormId = formId;
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class FormAttachedToProjectLayout : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 2 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 3 )] public string Blockheader { get; set; }
+		[DataMember(Order = 4 )] public int Order { get; set; }
+
+		public FormAttachedToProjectLayout() { }
+		public FormAttachedToProjectLayout(Guid formId, Guid projectId, Guid projectLayoutId, string blockheader, int order)
+		{
+			FormId = formId;
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+			Blockheader = blockheader;
+			Order = order;
 		}
 	}
 
@@ -107,15 +141,15 @@ namespace Ziggurat.Contracts.Definition
 	public sealed partial class CreateForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
 		[DataMember(Order = 2 )] public string Name { get; set; }
 		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public CreateForm() { }
-		public CreateForm(Guid projectId, Guid id, string name, string uniqueName)
+		public CreateForm(Guid projectId, Guid formId, string name, string uniqueName)
 		{
 			ProjectId = projectId;
-			Id = id;
+			FormId = formId;
 			Name = name;
 			UniqueName = uniqueName;
 		}
@@ -125,15 +159,15 @@ namespace Ziggurat.Contracts.Definition
 	public sealed partial class FormCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid Id { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
 		[DataMember(Order = 2 )] public string Name { get; set; }
 		[DataMember(Order = 3 )] public string UniqueName { get; set; }
 
 		public FormCreated() { }
-		public FormCreated(Guid projectId, Guid id, string name, string uniqueName)
+		public FormCreated(Guid projectId, Guid formId, string name, string uniqueName)
 		{
 			ProjectId = projectId;
-			Id = id;
+			FormId = formId;
 			Name = name;
 			UniqueName = uniqueName;
 		}

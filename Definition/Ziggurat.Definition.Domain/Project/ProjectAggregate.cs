@@ -23,6 +23,14 @@ namespace Ziggurat.Definition.Domain.Project
             Apply(new ProjectCreated(id, projectLayoutId, name, shortName));
         }
 
+
+        public void AddForm(Guid formId)
+        {
+            //business logic: forms restriction, etc
+
+            Apply(new FormAddedToProject(State.Id, State.LayoutId, formId));
+        }
+
         private void EnsureShortName(string shortName)
         {
             if (!Regex.IsMatch(shortName, @"^\w+$")) throw new ArgumentException("shortName can only contain letters and digits", "shortName");
