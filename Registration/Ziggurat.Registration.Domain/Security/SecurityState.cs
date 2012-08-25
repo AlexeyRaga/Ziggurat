@@ -8,5 +8,7 @@ namespace Ziggurat.Registration.Domain.Security
 {
     public sealed class SecurityState : State
     {
+        public Guid UserId { get; set; }
+
     }
 }
