@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Inftastructure.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Configuration.Web", "Definition\Ziggurat.Configuration.Web\Ziggurat.Configuration.Web.csproj", "{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Registration", "Registration", "{98CC97BE-4FAB-416E-8A2C-097952C4312C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Domain", "Registration\Ziggurat.Registration.Domain\Ziggurat.Registration.Domain.csproj", "{21E38C29-3990-4A5F-95A0-F895D7FAC64A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +110,6 @@ Global
 		{E6217A10-AFEA-4EE1-9887-2092E3FDA201} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
 		{D4B57488-42AA-4C9D-B67A-D0D2516F2361} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
 		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
+		{21E38C29-3990-4A5F-95A0-F895D7FAC64A} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 	EndGlobalSection
 EndGlobal
