@@ -71,5 +71,57 @@ namespace Ziggurat.Contracts.Registration
 		}
 	}
 
+	[Serializable, DataContract]
+	public sealed partial class CreateSecurityForRegistration : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
+		[DataMember(Order = 1 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 2 )] public SecurityData Security { get; set; }
+
+		public CreateSecurityForRegistration() { }
+		public CreateSecurityForRegistration(Guid securityId, Guid registrationId, SecurityData security)
+		{
+			SecurityId = securityId;
+			RegistrationId = registrationId;
+			Security = security;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class SecurityPasswordSet : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
+		[DataMember(Order = 2 )] public string EncryptedPassword { get; set; }
+
+		public SecurityPasswordSet() { }
+		public SecurityPasswordSet(Guid securityId, string login, string encryptedPassword)
+		{
+			SecurityId = securityId;
+			Login = login;
+			EncryptedPassword = encryptedPassword;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class SecurityCreatedForRegistration : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
+		[DataMember(Order = 1 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 2 )] public string Login { get; set; }
+		[DataMember(Order = 3 )] public string DisplayName { get; set; }
+		[DataMember(Order = 4 )] public string Email { get; set; }
+
+		public SecurityCreatedForRegistration() { }
+		public SecurityCreatedForRegistration(Guid securityId, Guid registrationId, string login, string displayName, string email)
+		{
+			SecurityId = securityId;
+			RegistrationId = registrationId;
+			Login = login;
+			DisplayName = displayName;
+			Email = email;
+		}
+	}
+
 }
 
