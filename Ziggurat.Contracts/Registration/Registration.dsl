@@ -1,4 +1,4 @@
-﻿CreateRegistration? Guid registrationId, string login, string password
-RegistrationCreated! Guid registrationId, string login, string password
+﻿CreateRegistration? Guid registrationId, RegistrationData data
+RegistrationCreated! Guid registrationId, RegistrationData registration
 RegistrationFailed! Guid registrationId, string login, IList<string> errors
 RegistrationSucceded! Guid registrationId, string login

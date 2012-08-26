@@ -8,16 +8,16 @@ using Ziggurat.Infrastructure.Projections;
 
 namespace Ziggurat.Registration.Domain.Lookups.LoginIndex
 {
-    public interface ILoginIndexService
+    public interface ILoginIndexLookupService
     {
         bool IsLoginTaken(string login);
     }
 
-    public sealed class LoginIndexService : ILoginIndexService
+    public sealed class LoginIndexLookupService : ILoginIndexLookupService
     {
         private readonly IProjectionReader<byte, LoginIndexLookup> _reader;
 
-        public LoginIndexService(IProjectionStoreFactory storeFactory)
+        public LoginIndexLookupService(IProjectionStoreFactory storeFactory)
         {
             if (storeFactory == null) throw new ArgumentNullException("storeFactory");
             _reader = storeFactory.GetReader<byte, LoginIndexLookup>();
