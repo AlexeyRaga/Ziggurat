@@ -92,14 +92,14 @@ namespace Ziggurat.Contracts.Registration
 	{
 		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
 		[DataMember(Order = 1 )] public string Login { get; set; }
-		[DataMember(Order = 2 )] public string EncryptedPassword { get; set; }
+		[DataMember(Order = 2 )] public string Password { get; set; }
 
 		public SecurityPasswordSet() { }
-		public SecurityPasswordSet(Guid securityId, string login, string encryptedPassword)
+		public SecurityPasswordSet(Guid securityId, string login, string password)
 		{
 			SecurityId = securityId;
 			Login = login;
-			EncryptedPassword = encryptedPassword;
+			Password = password;
 		}
 	}
 
