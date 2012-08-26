@@ -12,5 +12,14 @@ namespace Ziggurat.Contracts.Registration
         public string Login { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public SecurityData() { }
+        public SecurityData(Guid id, string login, string email, string password)
+        {
+            SecurityId = id;
+            Login = login;
+            Email = email;
+            Password = password;
+        }
     }
 }
