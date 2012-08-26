@@ -72,6 +72,34 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class CompleteRegistrationWithSecurity : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
+
+		public CompleteRegistrationWithSecurity() { }
+		public CompleteRegistrationWithSecurity(Guid registrationId, Guid securityId)
+		{
+			RegistrationId = registrationId;
+			SecurityId = securityId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class CompleteRegistrationWithProfile : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProfileId { get; set; }
+
+		public CompleteRegistrationWithProfile() { }
+		public CompleteRegistrationWithProfile(Guid registrationId, Guid profileId)
+		{
+			RegistrationId = registrationId;
+			ProfileId = profileId;
+		}
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class CreateSecurityForRegistration : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
@@ -132,6 +160,52 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			Login = login;
 			Email = email;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class CreateProfileForRegistration : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProfileId { get; set; }
+		[DataMember(Order = 1 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 2 )] public ProfileData Profile { get; set; }
+
+		public CreateProfileForRegistration() { }
+		public CreateProfileForRegistration(Guid profileId, Guid registrationId, ProfileData profile)
+		{
+			ProfileId = profileId;
+			RegistrationId = registrationId;
+			Profile = profile;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProfileCreated : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProfileId { get; set; }
+		[DataMember(Order = 1 )] public string DisplayName { get; set; }
+		[DataMember(Order = 2 )] public string Email { get; set; }
+
+		public ProfileCreated() { }
+		public ProfileCreated(Guid profileId, string displayName, string email)
+		{
+			ProfileId = profileId;
+			DisplayName = displayName;
+			Email = email;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProfileCreatedForRegistration : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProfileId { get; set; }
+		[DataMember(Order = 1 )] public Guid RegistrationId { get; set; }
+
+		public ProfileCreatedForRegistration() { }
+		public ProfileCreatedForRegistration(Guid profileId, Guid registrationId)
+		{
+			ProfileId = profileId;
+			RegistrationId = registrationId;
 		}
 	}
 
