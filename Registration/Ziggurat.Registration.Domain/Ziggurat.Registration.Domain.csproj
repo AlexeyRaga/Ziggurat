@@ -43,6 +43,9 @@
     <Compile Include="Base\ApplicationServiceBase.cs" />
     <Compile Include="Base\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\RegistrationAggregate.cs" />
+    <Compile Include="Registration\RegistrationApplicationService.cs" />
+    <Compile Include="Registration\RegistrationState.cs" />
     <Compile Include="Security\SecurityAggregate.cs" />
     <Compile Include="Security\SecurityState.cs" />
   </ItemGroup>

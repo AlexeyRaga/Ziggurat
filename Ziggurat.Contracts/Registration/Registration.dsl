@@ -1,2 +1,2 @@
-﻿RegisterUser? Guid userId, string username, string password
-UserRegistered! Guid userId, string username, string password
+﻿RegisterUser? Guid userId, string login, string password
+UserRegistered! Guid userId, string login, string password
