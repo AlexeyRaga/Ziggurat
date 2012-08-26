@@ -109,16 +109,14 @@ namespace Ziggurat.Contracts.Registration
 		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
 		[DataMember(Order = 1 )] public Guid RegistrationId { get; set; }
 		[DataMember(Order = 2 )] public string Login { get; set; }
-		[DataMember(Order = 3 )] public string DisplayName { get; set; }
-		[DataMember(Order = 4 )] public string Email { get; set; }
+		[DataMember(Order = 3 )] public string Email { get; set; }
 
 		public SecurityCreatedForRegistration() { }
-		public SecurityCreatedForRegistration(Guid securityId, Guid registrationId, string login, string displayName, string email)
+		public SecurityCreatedForRegistration(Guid securityId, Guid registrationId, string login, string email)
 		{
 			SecurityId = securityId;
 			RegistrationId = registrationId;
 			Login = login;
-			DisplayName = displayName;
 			Email = email;
 		}
 	}

@@ -5,4 +5,4 @@ RegistrationSucceded! Guid registrationId, string login
 
 CreateSecurityForRegistration? Guid securityId, Guid registrationId, SecurityData security
 SecurityPasswordSet! Guid securityId, string login, string password
-SecurityCreatedForRegistration! Guid securityId, Guid registrationId, string login, string displayName, string email
+SecurityCreatedForRegistration! Guid securityId, Guid registrationId, string login, string email
