@@ -16,13 +16,20 @@ namespace Ziggurat.Registration.Domain.Registration
 
         }
 
-        public void When(RegistrationAttachSecurity evt)
+        public void When(CreateRegistration cmd)
         {
-
+            Update(cmd.RegistrationId, aggregate =>
+                aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data, null));
         }
 
-        public void When(RegistrationAttachProfile evt)
+        public void When(RegistrationAttachSecurity cmd)
         {
+            Update(cmd.RegistrationId, aggregate => aggregate.AttachSecurity(cmd.SecurityId));
+        }
+
+        public void When(RegistrationAttachProfile cmd)
+        {
+            Update(cmd.RegistrationId, aggregate => aggregate.AttachProfile(cmd.ProfileId));
         }
     }
 }
