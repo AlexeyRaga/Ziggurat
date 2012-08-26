@@ -54,6 +54,7 @@
     <Compile Include="Registration\RegistrationApplicationService.cs" />
     <Compile Include="Registration\RegistrationState.cs" />
     <Compile Include="Security\SecurityAggregate.cs" />
+    <Compile Include="Security\SecurityApplicationService.cs" />
     <Compile Include="Security\SecurityState.cs" />
   </ItemGroup>
   <ItemGroup>
