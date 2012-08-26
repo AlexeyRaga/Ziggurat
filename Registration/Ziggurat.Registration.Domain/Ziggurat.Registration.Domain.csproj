@@ -42,6 +42,9 @@
     <Compile Include="Base\AggregateRoot.cs" />
     <Compile Include="Base\ApplicationServiceBase.cs" />
     <Compile Include="Base\State.cs" />
+    <Compile Include="Lookups\LoginIndex\LoginIndexLookup.cs" />
+    <Compile Include="Lookups\LoginIndex\LoginIndexProjection.cs" />
+    <Compile Include="Lookups\LoginIndex\LoginIndexService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\RegistrationAggregate.cs" />
     <Compile Include="Registration\RegistrationApplicationService.cs" />

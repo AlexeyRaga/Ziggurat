@@ -54,6 +54,7 @@
     <Compile Include="ICommandSender.cs" />
     <Compile Include="NamespaceBasedCommandRouter.cs" />
     <Compile Include="Now.cs" />
+    <Compile Include="Partition.cs" />
     <Compile Include="Projections\FileSystemProjectionReaderWriter.cs" />
     <Compile Include="Projections\FileSystemProjectionStoreFactory.cs" />
     <Compile Include="Projections\InMemoryProjectionReaderWriter.cs" />
