@@ -58,6 +58,7 @@
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
     <Compile Include="Definition\PropertyType.cs" />
+    <Compile Include="Registration\RegistrationIdGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Definition\Definition.dsl" />
