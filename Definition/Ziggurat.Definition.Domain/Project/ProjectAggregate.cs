@@ -18,7 +18,7 @@ namespace Ziggurat.Definition.Domain.Project
 
             EnsureShortName(shortName);
 
-            var projectLayoutId = IdGenerator.GenerateId(DefinitionContract.ProjectLayoutNamespace, id.ToString());
+            var projectLayoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
 
             Apply(new ProjectCreated(id, projectLayoutId, name, shortName));
         }

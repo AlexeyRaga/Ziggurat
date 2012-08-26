@@ -18,7 +18,7 @@ namespace Ziggurat.Definition.Domain.Tests.Project
         public void Should_create_project()
         {
             var id = Guid.NewGuid();
-            var layoutId = IdGenerator.GenerateId(DefinitionContract.ProjectLayoutNamespace, id.ToString());
+            var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
             When = prj => prj.Create(id, "Some Name", "shortName2");
             Then = new IEvent[] {
                 new ProjectCreated(id, layoutId, "Some Name", "shortName2")
@@ -29,7 +29,7 @@ namespace Ziggurat.Definition.Domain.Tests.Project
         public void Double_create_should_fail()
         {
             var id = Guid.NewGuid();
-            var layoutId = IdGenerator.GenerateId(DefinitionContract.ProjectLayoutNamespace, id.ToString());
+            var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
             Given = new IEvent[] {
                 new ProjectCreated(id, layoutId, "Some Name", "shortName")
             };

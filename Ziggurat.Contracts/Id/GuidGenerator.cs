@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ziggurat.Infrastructure
+namespace Ziggurat.Contracts
 {
     /// <summary>
     /// Helper methods for working with <see cref="Guid"/>.

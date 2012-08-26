@@ -47,13 +47,11 @@
   <ItemGroup>
     <Compile Include="Evel\ConventionalToWhenDispatcher.cs" />
     <Compile Include="Evel\DelegateAdjuster.cs" />
-    <Compile Include="Evel\GuidGenerator.cs" />
     <Compile Include="EventStore\Envelope.cs" />
     <Compile Include="EventStore\EventHeaderKeys.cs" />
     <Compile Include="EventStore\EventStream.cs" />
     <Compile Include="EventStore\IEventStore.cs" />
     <Compile Include="ICommandSender.cs" />
-    <Compile Include="IdGenerator.cs" />
     <Compile Include="NamespaceBasedCommandRouter.cs" />
     <Compile Include="Now.cs" />
     <Compile Include="Projections\FileSystemProjectionReaderWriter.cs" />
