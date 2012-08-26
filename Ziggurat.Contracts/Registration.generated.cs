@@ -10,34 +10,64 @@ using System.Runtime.Serialization;
 namespace Ziggurat.Contracts.Registration
 {
 	[Serializable, DataContract]
-	public sealed partial class RegisterUser : ICommand
+	public sealed partial class CreateRegistration : ICommand
 	{
-		[DataMember(Order = 0 )] public Guid UserId { get; set; }
-		[DataMember(Order = 1 )] public string Username { get; set; }
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
 		[DataMember(Order = 2 )] public string Password { get; set; }
 
-		public RegisterUser() { }
-		public RegisterUser(Guid userId, string username, string password)
+		public CreateRegistration() { }
+		public CreateRegistration(Guid registrationId, string login, string password)
 		{
-			UserId = userId;
-			Username = username;
+			RegistrationId = registrationId;
+			Login = login;
 			Password = password;
 		}
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class UserRegistered : IEvent
+	public sealed partial class RegistrationCreated : IEvent
 	{
-		[DataMember(Order = 0 )] public Guid UserId { get; set; }
-		[DataMember(Order = 1 )] public string Username { get; set; }
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
 		[DataMember(Order = 2 )] public string Password { get; set; }
 
-		public UserRegistered() { }
-		public UserRegistered(Guid userId, string username, string password)
+		public RegistrationCreated() { }
+		public RegistrationCreated(Guid registrationId, string login, string password)
 		{
-			UserId = userId;
-			Username = username;
+			RegistrationId = registrationId;
+			Login = login;
 			Password = password;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class RegistrationFailed : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
+		[DataMember(Order = 2 )] public IList<string> Errors { get; set; }
+
+		public RegistrationFailed() { }
+		public RegistrationFailed(Guid registrationId, string login, IList<string> errors)
+		{
+			RegistrationId = registrationId;
+			Login = login;
+			Errors = errors;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class RegistrationSucceded : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
+
+		public RegistrationSucceded() { }
+		public RegistrationSucceded(Guid registrationId, string login)
+		{
+			RegistrationId = registrationId;
+			Login = login;
 		}
 	}
 

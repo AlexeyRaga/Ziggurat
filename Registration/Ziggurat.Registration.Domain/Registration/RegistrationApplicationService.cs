@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Registration.Domain.Registration
@@ -11,6 +12,11 @@ namespace Ziggurat.Registration.Domain.Registration
     {
         public RegistrationApplicationService(IEventStore eventStore)
             : base(eventStore)
+        {
+
+        }
+
+        public void When(CreateRegistration cmd)
         {
 
         }
