@@ -24,10 +24,10 @@ namespace Ziggurat.Definition.Domain.Tests.ProjectLayout
                 new ProjectLayoutCreated(ProjectId, LayoutId)
             };
 
-            When = layout => layout.AddForm(FormId);
+            When = layout => layout.AttachForm(FormId);
 
             Then = new IEvent[] {
-                new FormAddedToProject(ProjectId, LayoutId, FormId, ProjectLayoutAggregate.DefaultBlockHeaderName)
+                new FormAttachedToProjectLayout(FormId, ProjectId, LayoutId, ProjectLayoutAggregate.DefaultBlockHeaderName, 0)
             };
         }
     }

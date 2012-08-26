@@ -39,7 +39,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
 
         public void When(FormCreated evt)
         {
-            Id = evt.Id;
+            Id = evt.FormId;
         }
 
         public void When(PropertyCreated evt)

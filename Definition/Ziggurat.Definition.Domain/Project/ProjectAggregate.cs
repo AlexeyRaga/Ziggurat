@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Ziggurat.Contracts;
 using Ziggurat.Contracts.Definition;
+using Ziggurat.Infrastructure;
 
 namespace Ziggurat.Definition.Domain.Project
 {
@@ -17,7 +18,17 @@ namespace Ziggurat.Definition.Domain.Project
 
             EnsureShortName(shortName);
 
-            Apply(new ProjectCreated(id, name, shortName));
+            var projectLayoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
+
+            Apply(new ProjectCreated(id, projectLayoutId, name, shortName));
+        }
+
+
+        public void AddForm(Guid formId)
+        {
+            //business logic: forms restriction, etc
+
+            Apply(new FormAddedToProject(State.Id, State.LayoutId, formId));
         }
 
         private void EnsureShortName(string shortName)

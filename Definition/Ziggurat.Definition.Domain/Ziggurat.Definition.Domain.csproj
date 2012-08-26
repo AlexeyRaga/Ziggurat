@@ -67,7 +67,7 @@
     <Compile Include="FormDefinition\Properties\TextboxProperty.cs" />
     <Compile Include="FormDefinition\Properties\ThreadHistoryProperty.cs" />
     <Compile Include="FormDefinition\Properties\TimeProperty.cs" />
-    <Compile Include="Lookups\ProjectLayoutLookup.cs" />
+    <Compile Include="Processes\FormCreationProcess.cs" />
     <Compile Include="Processes\ProjectCreationProcess.cs" />
     <Compile Include="ProjectLayout\ProjectLayoutAggregate.cs" />
     <Compile Include="ProjectLayout\ProjectLayoutApplicationService.cs" />
@@ -90,7 +90,9 @@
   <ItemGroup>
     <Content Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Lookups\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
