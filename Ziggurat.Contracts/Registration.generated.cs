@@ -88,6 +88,20 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class SecurityCreated : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
+
+		public SecurityCreated() { }
+		public SecurityCreated(Guid securityId, string login)
+		{
+			SecurityId = securityId;
+			Login = login;
+		}
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class SecurityPasswordSet : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
