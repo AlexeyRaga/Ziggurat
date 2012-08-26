@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ziggurat.Contracts.Registration
 {
-    public sealed class AccountData
+    public sealed class ProfileData
     {
-        public Guid AccountId { get; set; }
+        public Guid ProfileId { get; set; }
         public string DisplayName { get; set; }
     }
 }
