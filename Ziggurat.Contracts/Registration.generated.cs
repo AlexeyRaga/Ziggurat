@@ -13,15 +13,13 @@ namespace Ziggurat.Contracts.Registration
 	public sealed partial class CreateRegistration : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public string Login { get; set; }
-		[DataMember(Order = 2 )] public string Password { get; set; }
+		[DataMember(Order = 1 )] public RegistrationData Data { get; set; }
 
 		public CreateRegistration() { }
-		public CreateRegistration(Guid registrationId, string login, string password)
+		public CreateRegistration(Guid registrationId, RegistrationData data)
 		{
 			RegistrationId = registrationId;
-			Login = login;
-			Password = password;
+			Data = data;
 		}
 	}
 
@@ -29,15 +27,15 @@ namespace Ziggurat.Contracts.Registration
 	public sealed partial class RegistrationCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public string Login { get; set; }
-		[DataMember(Order = 2 )] public string Password { get; set; }
+		[DataMember(Order = 1 )] public SecurityData Security { get; set; }
+		[DataMember(Order = 2 )] public ProfileData Profile { get; set; }
 
 		public RegistrationCreated() { }
-		public RegistrationCreated(Guid registrationId, string login, string password)
+		public RegistrationCreated(Guid registrationId, SecurityData security, ProfileData profile)
 		{
 			RegistrationId = registrationId;
-			Login = login;
-			Password = password;
+			Security = security;
+			Profile = profile;
 		}
 	}
 
