@@ -16,9 +16,13 @@ namespace Ziggurat.Registration.Domain.Registration
 
         }
 
-        public void When(CreateRegistration cmd)
+        public void When(RegistrationAttachSecurity evt)
         {
 
+        }
+
+        public void When(RegistrationAttachProfile evt)
+        {
         }
     }
 }

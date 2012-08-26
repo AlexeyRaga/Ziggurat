@@ -21,11 +21,20 @@ namespace Ziggurat.Registration.Domain.Processes
         {
             _commandSender.SendCommand(
                 new CreateSecurityForRegistration(evt.Security.SecurityId, evt.RegistrationId, evt.Security));
+            _commandSender.SendCommand(
+                new CreateProfileForRegistration(evt.Profile.ProfileId, evt.RegistrationId, evt.Profile));
         }
 
         public void When(SecurityCreatedForRegistration evt)
         {
+            _commandSender.SendCommand(
+                new RegistrationAttachSecurity(evt.RegistrationId, evt.SecurityId));
+        }
 
+        public void When(ProfileCreatedForRegistration evt)
+        {
+            _commandSender.SendCommand(
+                new RegistrationAttachProfile(evt.RegistrationId, evt.ProfileId));
         }
     }
 }

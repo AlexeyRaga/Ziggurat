@@ -58,48 +58,6 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class RegistrationSucceded : IEvent
-	{
-		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public string Login { get; set; }
-
-		public RegistrationSucceded() { }
-		public RegistrationSucceded(Guid registrationId, string login)
-		{
-			RegistrationId = registrationId;
-			Login = login;
-		}
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class CompleteRegistrationWithSecurity : ICommand
-	{
-		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
-
-		public CompleteRegistrationWithSecurity() { }
-		public CompleteRegistrationWithSecurity(Guid registrationId, Guid securityId)
-		{
-			RegistrationId = registrationId;
-			SecurityId = securityId;
-		}
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class CompleteRegistrationWithProfile : ICommand
-	{
-		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public Guid ProfileId { get; set; }
-
-		public CompleteRegistrationWithProfile() { }
-		public CompleteRegistrationWithProfile(Guid registrationId, Guid profileId)
-		{
-			RegistrationId = registrationId;
-			ProfileId = profileId;
-		}
-	}
-
-	[Serializable, DataContract]
 	public sealed partial class CreateSecurityForRegistration : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid SecurityId { get; set; }
@@ -206,6 +164,76 @@ namespace Ziggurat.Contracts.Registration
 		{
 			ProfileId = profileId;
 			RegistrationId = registrationId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class RegistrationAttachSecurity : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
+
+		public RegistrationAttachSecurity() { }
+		public RegistrationAttachSecurity(Guid registrationId, Guid securityId)
+		{
+			RegistrationId = registrationId;
+			SecurityId = securityId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class RegistrationAttachProfile : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProfileId { get; set; }
+
+		public RegistrationAttachProfile() { }
+		public RegistrationAttachProfile(Guid registrationId, Guid profileId)
+		{
+			RegistrationId = registrationId;
+			ProfileId = profileId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProfileAttachedToRegistration : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProfileId { get; set; }
+
+		public ProfileAttachedToRegistration() { }
+		public ProfileAttachedToRegistration(Guid registrationId, Guid profileId)
+		{
+			RegistrationId = registrationId;
+			ProfileId = profileId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class SecurityAttachedToRegistration : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
+
+		public SecurityAttachedToRegistration() { }
+		public SecurityAttachedToRegistration(Guid registrationId, Guid securityId)
+		{
+			RegistrationId = registrationId;
+			SecurityId = securityId;
+		}
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class RegistrationSucceded : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
+		[DataMember(Order = 1 )] public string Login { get; set; }
+
+		public RegistrationSucceded() { }
+		public RegistrationSucceded(Guid registrationId, string login)
+		{
+			RegistrationId = registrationId;
+			Login = login;
 		}
 	}
 

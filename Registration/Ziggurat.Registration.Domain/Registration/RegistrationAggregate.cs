@@ -36,5 +36,25 @@ namespace Ziggurat.Registration.Domain.Registration
             Apply(new RegistrationCreated(registrationId, data.CreatedDate, securityData, profileData));
 
         }
+
+        public void AttachSecurity(Guid securityId)
+        {
+            Apply(new SecurityAttachedToRegistration(State.Id, securityId));
+            TryCompleteRegistration();
+        }
+
+        public void AttachProfile(Guid profileId)
+        {
+            Apply(new ProfileAttachedToRegistration(State.Id, profileId));
+            TryCompleteRegistration();
+        }
+
+        private void TryCompleteRegistration()
+        {
+            if (State.SecurityId.HasValue && State.ProfileId.HasValue)
+            {
+                Apply(new RegistrationSucceded(State.Id, State.Login));
+            }
+        }
     }
 }
