@@ -5,21 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure.EventStore;
+using Ziggurat.Registration.Domain.Lookups.LoginIndex;
 
 namespace Ziggurat.Registration.Domain.Registration
 {
     public sealed class RegistrationApplicationService : ApplicationServiceBase<RegistrationAggregate>
     {
-        public RegistrationApplicationService(IEventStore eventStore)
+        private readonly ILoginIndexLookupService _loginIndexService;
+
+        public RegistrationApplicationService(IEventStore eventStore, ILoginIndexLookupService loginIndexService)
             : base(eventStore)
         {
-
+            _loginIndexService = loginIndexService;
         }
 
         public void When(CreateRegistration cmd)
         {
             Update(cmd.RegistrationId, aggregate =>
-                aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data, null));
+                aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data, _loginIndexService));
         }
 
         public void When(RegistrationAttachSecurity cmd)

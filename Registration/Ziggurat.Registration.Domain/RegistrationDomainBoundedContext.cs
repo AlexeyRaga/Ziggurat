@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Registration.Domain.Lookups.LoginIndex;
 
 namespace Ziggurat.Registration.Domain
 {
@@ -17,11 +18,13 @@ namespace Ziggurat.Registration.Domain
             yield break;
         }
 
-        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore)
+        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore, IProjectionStoreFactory projectionStore)
         {
+            var loginIndexService = new LoginIndexLookupService(projectionStore);
+
             yield return new Security.SecurityApplicationService(eventStore);
             yield return new Profile.ProfileApplicationService(eventStore);
-            yield return new Registration.RegistrationApplicationService(eventStore);
+            yield return new Registration.RegistrationApplicationService(eventStore, loginIndexService);
             yield break;
         }
 
