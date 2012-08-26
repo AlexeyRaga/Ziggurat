@@ -23,37 +23,44 @@ namespace Ziggurat.Definition.Service
 
         public static void Main(string[] args)
         {
-            var commandSender = new SimpleCommandSender(CommandDispatcher);
-
+            //how things are serialized
             var serializer = new JsonValueSerializer();
 
-            var projectionFactory =
+            //where all the queues are located
+            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
+
+            //where to send commands: how to put them in the right queue
+            var whereToSendCommands = new NamespaceBasedCommandRouter("cmd", queueFactory, serializer);
+
+            //build the projections storage
+            var projectionStorage =
                 new FileSystemProjectionStoreFactory(
-                    ConfigurationManager.AppSettings["projectionsRootFolder"], 
+                    ConfigurationManager.AppSettings["projectionsRootFolder"],
                     serializer);
 
-            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
-            var commandsQueue = queueFactory.CreateReader("cmd-contracts-definition");
+            //this BC only receives commands for registrations domain
+            var whereToReceiveCommands = queueFactory.CreateReader("cmd-contracts-definition");
 
-            var commandsReceiver = new MessageReceiver(new[] { commandsQueue });
+            //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
+            var commandsReceiver = new ReceivedMessageDispatcher(
+                dispatchTo: CommandDispatcher.DispatchToOneAndOnlyOne,
+                serializer: serializer,
+                receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
 
-            var commandsDispatcher = new ReceivedMessageDispatcher(
-                CommandDispatcher.DispatchToOneAndOnlyOne,
-                serializer,
-                commandsReceiver);
 
-            using (commandsDispatcher)
+            using (commandsReceiver)
             {
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
                 {
-                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionFactory);
-                    var processes = DomainBoundedContext.BuildEventProcessors(commandSender);
-                    var projections = ClientBoundedContext.BuildProjections(projectionFactory);
+                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionStorage);
+                    var processes = DomainBoundedContext.BuildEventProcessors(whereToSendCommands);
+                    var projections = ClientBoundedContext.BuildProjections(projectionStorage);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
+                    commandsReceiver.Run();
                     Console.ReadKey();
                 }
             }
