@@ -19,6 +19,7 @@ namespace Ziggurat.Registration.Domain.Processes
 
         public void When(RegistrationCreated evt)
         {
+            
         }
     }
 }
