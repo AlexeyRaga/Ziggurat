@@ -8,5 +8,7 @@ namespace Ziggurat.Registration.Domain.Registration
 {
     public sealed class RegistrationState : State
     {
+        public Guid Id { get; set; }
+        public bool Success { get; set; }
     }
 }

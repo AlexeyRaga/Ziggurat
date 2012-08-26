@@ -8,5 +8,6 @@ namespace Ziggurat.Registration.Domain.Registration
 {
     public sealed class RegistrationAggregate : AggregateRootBase<RegistrationState>
     {
+            
     }
 }
