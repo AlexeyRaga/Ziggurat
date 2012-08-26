@@ -33,6 +33,8 @@ namespace Ziggurat.Registration.Domain.Registration
             var securityData = new SecurityData(securityId, data.Login, data.Email, data.Password);
             var profileData = new ProfileData(profileId, data.DisplayName, data.Email);
 
+            Apply(new RegistrationCreated(registrationId, securityData, profileData));
+
         }
     }
 }
