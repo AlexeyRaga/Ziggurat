@@ -45,6 +45,7 @@
     <Compile Include="Lookups\LoginIndex\LoginIndexLookup.cs" />
     <Compile Include="Lookups\LoginIndex\LoginIndexProjection.cs" />
     <Compile Include="Lookups\LoginIndex\LoginIndexLookupService.cs" />
+    <Compile Include="Processes\RegistrationProcess.cs" />
     <Compile Include="Profile\ProfileAggregate.cs" />
     <Compile Include="Profile\ProfileApplicationService.cs" />
     <Compile Include="Profile\ProfileState.cs" />
