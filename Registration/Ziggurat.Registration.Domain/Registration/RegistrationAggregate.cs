@@ -53,7 +53,7 @@ namespace Ziggurat.Registration.Domain.Registration
         {
             if (State.SecurityId.HasValue && State.ProfileId.HasValue)
             {
-                Apply(new RegistrationSucceded(State.Id, State.Login));
+                Apply(new RegistrationSucceded(State.Id, State.SecurityId.Value, State.ProfileId.Value, State.Login));
             }
         }
     }

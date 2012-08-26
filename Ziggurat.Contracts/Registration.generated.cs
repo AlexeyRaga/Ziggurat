@@ -227,12 +227,16 @@ namespace Ziggurat.Contracts.Registration
 	public sealed partial class RegistrationSucceded : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public string Login { get; set; }
+		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
+		[DataMember(Order = 2 )] public Guid ProfileId { get; set; }
+		[DataMember(Order = 3 )] public string Login { get; set; }
 
 		public RegistrationSucceded() { }
-		public RegistrationSucceded(Guid registrationId, string login)
+		public RegistrationSucceded(Guid registrationId, Guid securityId, Guid profileId, string login)
 		{
 			RegistrationId = registrationId;
+			SecurityId = securityId;
+			ProfileId = profileId;
 			Login = login;
 		}
 	}

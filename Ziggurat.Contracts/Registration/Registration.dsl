@@ -18,4 +18,4 @@ RegistrationAttachProfile? Guid registrationId, Guid profileId
 ProfileAttachedToRegistration! Guid registrationId, Guid profileId
 SecurityAttachedToRegistration! Guid registrationId, Guid securityId
 
-RegistrationSucceded! Guid registrationId, string login
+RegistrationSucceded! Guid registrationId, Guid securityId, Guid profileId, string login
