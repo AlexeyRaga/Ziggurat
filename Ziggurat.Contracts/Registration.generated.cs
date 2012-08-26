@@ -27,13 +27,15 @@ namespace Ziggurat.Contracts.Registration
 	public sealed partial class RegistrationCreated : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
-		[DataMember(Order = 1 )] public SecurityData Security { get; set; }
-		[DataMember(Order = 2 )] public ProfileData Profile { get; set; }
+		[DataMember(Order = 1 )] public DateTime CreatedDate { get; set; }
+		[DataMember(Order = 2 )] public SecurityData Security { get; set; }
+		[DataMember(Order = 3 )] public ProfileData Profile { get; set; }
 
 		public RegistrationCreated() { }
-		public RegistrationCreated(Guid registrationId, SecurityData security, ProfileData profile)
+		public RegistrationCreated(Guid registrationId, DateTime createdDate, SecurityData security, ProfileData profile)
 		{
 			RegistrationId = registrationId;
+			CreatedDate = createdDate;
 			Security = security;
 			Profile = profile;
 		}
