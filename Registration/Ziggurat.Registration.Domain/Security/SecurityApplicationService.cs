@@ -18,6 +18,8 @@ namespace Ziggurat.Registration.Domain.Security
 
         public void When(CreateSecurityForRegistration cmd)
         {
+            Update(cmd.SecurityId,
+                aggregate => aggregate.CreateForRegistration(cmd.SecurityId, cmd.RegistrationId, cmd.Security));
         }
     }
 }
