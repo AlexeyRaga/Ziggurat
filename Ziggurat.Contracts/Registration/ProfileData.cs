@@ -11,5 +11,13 @@ namespace Ziggurat.Contracts.Registration
         public Guid ProfileId { get; set; }
         public string DisplayName { get; set; }
         public string Email { get; set; }
+
+        public ProfileData() { }
+        public ProfileData(Guid id, string displayName, string email)
+        {
+            ProfileId = id;
+            DisplayName = displayName;
+            Email = email;
+        }
     }
 }
