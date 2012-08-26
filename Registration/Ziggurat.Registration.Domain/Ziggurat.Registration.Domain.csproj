@@ -50,6 +50,7 @@
     <Compile Include="Profile\ProfileApplicationService.cs" />
     <Compile Include="Profile\ProfileState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationDomainBoundedContext.cs" />
     <Compile Include="Registration\RegistrationAggregate.cs" />
     <Compile Include="Registration\RegistrationApplicationService.cs" />
     <Compile Include="Registration\RegistrationState.cs" />
