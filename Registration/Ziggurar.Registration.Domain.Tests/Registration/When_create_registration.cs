@@ -62,8 +62,8 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
                 Password = "Password123"
             };
 
-            var securityId = RegistrationIdGenerator.NewSecutiryId("alexeyraga");
-            var profileId = RegistrationIdGenerator.NewProfileId("alexeyraga");
+            var securityId = RegistrationIdGenerator.NewSecutiryId(regId);
+            var profileId = RegistrationIdGenerator.NewProfileId(regId);
 
             var profile = new ProfileData(profileId, "Alexey Raga", "alexey.raga@somewhere.in");
             var security = new SecurityData(securityId, "alexeyraga", "alexey.raga@somewhere.in", "Password123");

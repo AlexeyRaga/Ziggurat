@@ -16,14 +16,14 @@ namespace Ziggurat.Contracts.Registration
             return Guid.NewGuid();
         }
 
-        public static Guid NewSecutiryId(string login)
+        public static Guid NewSecutiryId(Guid parentId)
         {
-            return GuidGenerator.Create(SecurityNamespace, login);
+            return GuidGenerator.Create(SecurityNamespace, parentId.ToString());
         }
 
-        public static Guid NewProfileId(string login)
+        public static Guid NewProfileId(Guid parentId)
         {
-            return GuidGenerator.Create(ProfileNamespace, login);
+            return GuidGenerator.Create(ProfileNamespace, parentId.ToString());
         }
     }
 }

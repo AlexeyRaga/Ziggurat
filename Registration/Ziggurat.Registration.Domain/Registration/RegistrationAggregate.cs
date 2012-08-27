@@ -27,8 +27,8 @@ namespace Ziggurat.Registration.Domain.Registration
                 return;
             }
 
-            var securityId = RegistrationIdGenerator.NewSecutiryId(data.Login);
-            var profileId = RegistrationIdGenerator.NewProfileId(data.Login);
+            var securityId = RegistrationIdGenerator.NewSecutiryId(registrationId);
+            var profileId = RegistrationIdGenerator.NewProfileId(registrationId);
 
             var securityData = new SecurityData(securityId, data.Login, data.Email, data.Password);
             var profileData = new ProfileData(profileId, data.DisplayName, data.Email);
