@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Base\AggregateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\When_attach_profile.cs" />
+    <Compile Include="Registration\When_attach_security.cs" />
     <Compile Include="Registration\When_create_registration.cs" />
   </ItemGroup>
   <ItemGroup>
