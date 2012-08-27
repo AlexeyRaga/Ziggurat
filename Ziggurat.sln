@@ -43,6 +43,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Web",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Service", "Registration\Ziggurat.Registration.Service\Ziggurat.Registration.Service.csproj", "{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Client", "Registration\Ziggurat.Registration.Client\Ziggurat.Registration.Client.csproj", "{528BED5A-3D3F-424F-981A-8C90B03C4BDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurar.Registration.Domain.Tests", "Registration\Ziggurar.Registration.Domain.Tests\Ziggurar.Registration.Domain.Tests.csproj", "{D781697C-3E1C-467F-9692-1CB524052923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,14 @@ Global
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528BED5A-3D3F-424F-981A-8C90B03C4BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528BED5A-3D3F-424F-981A-8C90B03C4BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528BED5A-3D3F-424F-981A-8C90B03C4BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528BED5A-3D3F-424F-981A-8C90B03C4BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D781697C-3E1C-467F-9692-1CB524052923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D781697C-3E1C-467F-9692-1CB524052923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,5 +130,7 @@ Global
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{E9930F9B-866F-4E93-9AA8-53030CAA6D43} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
+		{528BED5A-3D3F-424F-981A-8C90B03C4BDF} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
+		{D781697C-3E1C-467F-9692-1CB524052923} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 	EndGlobalSection
 EndGlobal
