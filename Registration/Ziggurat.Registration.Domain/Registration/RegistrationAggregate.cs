@@ -18,7 +18,7 @@ namespace Ziggurat.Registration.Domain.Registration
             var errors = new List<string>();
             if (uniqueIndex.IsLoginTaken(data.Login))
             {
-                errors.Add(String.Format("Username '{0}' is already taken"));
+                errors.Add(String.Format("Username '{0}' is already taken", data.Login));
             }
 
             if (errors.Any())
