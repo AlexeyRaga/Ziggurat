@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ziggurat.Contracts.Registration
 {
+    [Serializable]
     public sealed class ProfileData
     {
         public Guid ProfileId { get; set; }

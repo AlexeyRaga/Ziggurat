@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ziggurat.Contracts.Registration
 {
+    [Serializable]
     public sealed class SecurityData
     {
         public Guid SecurityId { get; set; }
