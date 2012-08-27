@@ -19,7 +19,7 @@ namespace Ziggurat.Registration.Domain.Registration
             _loginIndexService = loginIndexService;
         }
 
-        public void When(CreateRegistration cmd)
+        public void When(StartRegistration cmd)
         {
             Update(cmd.RegistrationId, aggregate =>
                 aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data, _loginIndexService));

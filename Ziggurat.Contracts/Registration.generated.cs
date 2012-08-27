@@ -10,13 +10,13 @@ using System.Runtime.Serialization;
 namespace Ziggurat.Contracts.Registration
 {
 	[Serializable, DataContract]
-	public sealed partial class CreateRegistration : ICommand
+	public sealed partial class StartRegistration : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
 		[DataMember(Order = 1 )] public RegistrationData Data { get; set; }
 
-		public CreateRegistration() { }
-		public CreateRegistration(Guid registrationId, RegistrationData data)
+		public StartRegistration() { }
+		public StartRegistration(Guid registrationId, RegistrationData data)
 		{
 			RegistrationId = registrationId;
 			Data = data;
@@ -24,15 +24,15 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class RegistrationCreated : IEvent
+	public sealed partial class RegistrationStarted : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
 		[DataMember(Order = 1 )] public DateTime CreatedDate { get; set; }
 		[DataMember(Order = 2 )] public SecurityData Security { get; set; }
 		[DataMember(Order = 3 )] public ProfileData Profile { get; set; }
 
-		public RegistrationCreated() { }
-		public RegistrationCreated(Guid registrationId, DateTime createdDate, SecurityData security, ProfileData profile)
+		public RegistrationStarted() { }
+		public RegistrationStarted(Guid registrationId, DateTime createdDate, SecurityData security, ProfileData profile)
 		{
 			RegistrationId = registrationId;
 			CreatedDate = createdDate;
@@ -224,15 +224,15 @@ namespace Ziggurat.Contracts.Registration
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class RegistrationSucceded : IEvent
+	public sealed partial class RegistrationCompleted : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid RegistrationId { get; set; }
 		[DataMember(Order = 1 )] public Guid SecurityId { get; set; }
 		[DataMember(Order = 2 )] public Guid ProfileId { get; set; }
 		[DataMember(Order = 3 )] public string Login { get; set; }
 
-		public RegistrationSucceded() { }
-		public RegistrationSucceded(Guid registrationId, Guid securityId, Guid profileId, string login)
+		public RegistrationCompleted() { }
+		public RegistrationCompleted(Guid registrationId, Guid securityId, Guid profileId, string login)
 		{
 			RegistrationId = registrationId;
 			SecurityId = securityId;

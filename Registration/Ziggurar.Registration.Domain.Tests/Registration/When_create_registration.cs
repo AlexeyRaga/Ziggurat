@@ -73,7 +73,7 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
 
             When = aggregate => aggregate.CreateRegistration(regId, regData, index);
             Then = new IEvent[] {
-                new RegistrationCreated(regId, fakeNow, security, profile)
+                new RegistrationStarted(regId, fakeNow, security, profile)
             };
         }
     }

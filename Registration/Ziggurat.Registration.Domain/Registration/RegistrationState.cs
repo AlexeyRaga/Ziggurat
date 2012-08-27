@@ -16,7 +16,7 @@ namespace Ziggurat.Registration.Domain.Registration
 
         public bool Success { get; set; }
 
-        public void When(RegistrationCreated evt)
+        public void When(RegistrationStarted evt)
         {
             Id = evt.RegistrationId;
             Login = evt.Security.Login;

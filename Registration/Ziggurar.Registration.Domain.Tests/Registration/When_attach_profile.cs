@@ -40,11 +40,11 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
             When = aggregate => aggregate.AttachProfile(createdEvent.Profile.ProfileId);
             Then = new IEvent[] {
                 new ProfileAttachedToRegistration(createdEvent.RegistrationId, createdEvent.Profile.ProfileId),
-                new RegistrationSucceded(createdEvent.RegistrationId, createdEvent.Security.SecurityId, createdEvent.Profile.ProfileId, createdEvent.Security.Login)
+                new RegistrationCompleted(createdEvent.RegistrationId, createdEvent.Security.SecurityId, createdEvent.Profile.ProfileId, createdEvent.Security.Login)
             };
         }
 
-        private RegistrationCreated GetCreatedEvent()
+        private RegistrationStarted GetCreatedEvent()
         {
             var regId = RegistrationIdGenerator.NewRegistrationId();
 
@@ -54,7 +54,7 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
             var profile = new ProfileData(profileId, "Alexey Raga", "alexey.raga@somewhere.in");
             var security = new SecurityData(securityId, "alexeyraga", "alexey.raga@somewhere.in", "Password123");
 
-            return new RegistrationCreated(regId, Now.UtcTime, security, profile);
+            return new RegistrationStarted(regId, Now.UtcTime, security, profile);
         }
     }
 }

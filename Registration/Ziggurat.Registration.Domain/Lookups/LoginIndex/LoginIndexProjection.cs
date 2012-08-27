@@ -17,7 +17,7 @@ namespace Ziggurat.Registration.Domain.Lookups.LoginIndex
             _writer = storeFactory.GetWriter<byte, LoginIndexLookup>();
         }
 
-        public void When(RegistrationSucceded evt)
+        public void When(RegistrationCompleted evt)
         {
             var partition = Partition.GetPartition(evt.Login);
             _writer.AddOrUpdate(partition, index => index.Logins[evt.Login] = evt.SecurityId);

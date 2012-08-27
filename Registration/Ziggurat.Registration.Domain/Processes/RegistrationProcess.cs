@@ -17,7 +17,7 @@ namespace Ziggurat.Registration.Domain.Processes
             _commandSender = commandSender;
         }
 
-        public void When(RegistrationCreated evt)
+        public void When(RegistrationStarted evt)
         {
             _commandSender.SendCommand(
                 new CreateSecurityForRegistration(evt.Security.SecurityId, evt.RegistrationId, evt.Security));

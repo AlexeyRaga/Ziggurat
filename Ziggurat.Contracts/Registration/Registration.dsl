@@ -1,5 +1,5 @@
-﻿CreateRegistration? Guid registrationId, RegistrationData data
-RegistrationCreated! Guid registrationId, DateTime createdDate, SecurityData security, ProfileData profile
+﻿StartRegistration? Guid registrationId, RegistrationData data
+RegistrationStarted! Guid registrationId, DateTime createdDate, SecurityData security, ProfileData profile
 RegistrationFailed! Guid registrationId, string login, IList<string> errors
 
 
@@ -18,4 +18,4 @@ RegistrationAttachProfile? Guid registrationId, Guid profileId
 ProfileAttachedToRegistration! Guid registrationId, Guid profileId
 SecurityAttachedToRegistration! Guid registrationId, Guid securityId
 
-RegistrationSucceded! Guid registrationId, Guid securityId, Guid profileId, string login
+RegistrationCompleted! Guid registrationId, Guid securityId, Guid profileId, string login

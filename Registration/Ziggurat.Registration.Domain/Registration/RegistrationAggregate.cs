@@ -33,7 +33,7 @@ namespace Ziggurat.Registration.Domain.Registration
             var securityData = new SecurityData(securityId, data.Login, data.Email, data.Password);
             var profileData = new ProfileData(profileId, data.DisplayName, data.Email);
 
-            Apply(new RegistrationCreated(registrationId, data.CreatedDate, securityData, profileData));
+            Apply(new RegistrationStarted(registrationId, data.CreatedDate, securityData, profileData));
 
         }
 
@@ -53,7 +53,7 @@ namespace Ziggurat.Registration.Domain.Registration
         {
             if (State.SecurityId.HasValue && State.ProfileId.HasValue)
             {
-                Apply(new RegistrationSucceded(State.Id, State.SecurityId.Value, State.ProfileId.Value, State.Login));
+                Apply(new RegistrationCompleted(State.Id, State.SecurityId.Value, State.ProfileId.Value, State.Login));
             }
         }
     }
