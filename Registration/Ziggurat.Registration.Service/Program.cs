@@ -43,7 +43,7 @@ namespace Ziggurat.Registration.Service
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
             var commandsReceiver = new ReceivedMessageDispatcher(
-                dispatchTo: CommandDispatcher.DispatchToOneAndOnlyOne,
+                dispatchTo: DispatchCommand,
                 serializer: serializer,
                 receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
 

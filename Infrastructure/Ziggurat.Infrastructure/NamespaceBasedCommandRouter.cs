@@ -44,6 +44,8 @@ namespace Ziggurat.Infrastructure
             var ns = message.GetType().Namespace.ToLowerInvariant();
             if (ns.Contains(".")) ns = ns.Substring(ns.IndexOf('.') + 1);
 
+            ns = ns.Replace('.', '-');
+
             return _queueNamePrefix + ns;
         }
 
