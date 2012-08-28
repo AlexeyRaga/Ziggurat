@@ -23,6 +23,7 @@ namespace Ziggurat.Contracts.Definition
 			Name = name;
 			ShortName = shortName;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -41,6 +42,7 @@ namespace Ziggurat.Contracts.Definition
 			Name = name;
 			ShortName = shortName;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -55,6 +57,7 @@ namespace Ziggurat.Contracts.Definition
 			ProjectId = projectId;
 			Id = id;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -69,6 +72,7 @@ namespace Ziggurat.Contracts.Definition
 			ProjectId = projectId;
 			Id = id;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -83,6 +87,7 @@ namespace Ziggurat.Contracts.Definition
 			ProjectId = projectId;
 			FormId = formId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -99,6 +104,7 @@ namespace Ziggurat.Contracts.Definition
 			ProjectLayoutId = projectLayoutId;
 			FormId = formId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -115,6 +121,7 @@ namespace Ziggurat.Contracts.Definition
 			ProjectId = projectId;
 			ProjectLayoutId = projectLayoutId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -135,6 +142,7 @@ namespace Ziggurat.Contracts.Definition
 			Blockheader = blockheader;
 			Order = order;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -153,6 +161,7 @@ namespace Ziggurat.Contracts.Definition
 			Name = name;
 			UniqueName = uniqueName;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -171,6 +180,7 @@ namespace Ziggurat.Contracts.Definition
 			Name = name;
 			UniqueName = uniqueName;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -189,6 +199,7 @@ namespace Ziggurat.Contracts.Definition
 			Type = type;
 			Name = name;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -207,6 +218,7 @@ namespace Ziggurat.Contracts.Definition
 			Type = type;
 			Name = name;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -221,6 +233,7 @@ namespace Ziggurat.Contracts.Definition
 			FormId = formId;
 			PropertyId = propertyId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -235,6 +248,7 @@ namespace Ziggurat.Contracts.Definition
 			FormId = formId;
 			PropertyId = propertyId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -249,6 +263,7 @@ namespace Ziggurat.Contracts.Definition
 			FormId = formId;
 			PropertyId = propertyId;
 		}
+
 	}
 
 	[Serializable, DataContract]
@@ -263,6 +278,7 @@ namespace Ziggurat.Contracts.Definition
 			FormId = formId;
 			PropertyId = propertyId;
 		}
+
 	}
 
 }

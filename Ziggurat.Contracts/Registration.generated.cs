@@ -21,6 +21,11 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			Data = data;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Start Registration: (RegistrationId: {0})", RegistrationId);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -39,6 +44,11 @@ namespace Ziggurat.Contracts.Registration
 			Security = security;
 			Profile = profile;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Registration Started: (RegistrationId: {0}, CreatedDate: {1})", RegistrationId, CreatedDate);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -54,6 +64,11 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			Login = login;
 			Errors = errors;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Registration Failed: (RegistrationId: {0}, Login: {1})", RegistrationId, Login);
 		}
 	}
 
@@ -71,6 +86,11 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			Security = security;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Create Security For Registration: (RegistrationId: {0})", RegistrationId);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -84,6 +104,11 @@ namespace Ziggurat.Contracts.Registration
 		{
 			SecurityId = securityId;
 			Login = login;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Security Created: (Login: {0})", Login);
 		}
 	}
 
@@ -100,6 +125,11 @@ namespace Ziggurat.Contracts.Registration
 			SecurityId = securityId;
 			Login = login;
 			Password = password;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Security Password Set: (Login: {0})", Login);
 		}
 	}
 
@@ -119,6 +149,11 @@ namespace Ziggurat.Contracts.Registration
 			Login = login;
 			Email = email;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Security Created For Registration: (RegistrationId: {0}, Login: {1})", RegistrationId, Login);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -134,6 +169,11 @@ namespace Ziggurat.Contracts.Registration
 			ProfileId = profileId;
 			RegistrationId = registrationId;
 			Profile = profile;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Create Profile For Registration: (RegistrationId: {0})", RegistrationId);
 		}
 	}
 
@@ -151,6 +191,11 @@ namespace Ziggurat.Contracts.Registration
 			DisplayName = displayName;
 			Email = email;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Profile Created: (DisplayName: {0}, Email: {1})", DisplayName, Email);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -164,6 +209,11 @@ namespace Ziggurat.Contracts.Registration
 		{
 			ProfileId = profileId;
 			RegistrationId = registrationId;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Profile Created For Registration: (RegistrationId: {0})", RegistrationId);
 		}
 	}
 
@@ -179,6 +229,11 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			SecurityId = securityId;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Registration Attach Security: (RegistrationId: {0})", RegistrationId);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -192,6 +247,11 @@ namespace Ziggurat.Contracts.Registration
 		{
 			RegistrationId = registrationId;
 			ProfileId = profileId;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Registration Attach Profile: (RegistrationId: {0})", RegistrationId);
 		}
 	}
 
@@ -207,6 +267,11 @@ namespace Ziggurat.Contracts.Registration
 			RegistrationId = registrationId;
 			ProfileId = profileId;
 		}
+
+        public override string ToString()
+        {
+		    return String.Format("Profile Attached To Registration: (RegistrationId: {0})", RegistrationId);
+		}
 	}
 
 	[Serializable, DataContract]
@@ -220,6 +285,11 @@ namespace Ziggurat.Contracts.Registration
 		{
 			RegistrationId = registrationId;
 			SecurityId = securityId;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Security Attached To Registration: (RegistrationId: {0})", RegistrationId);
 		}
 	}
 
@@ -238,6 +308,11 @@ namespace Ziggurat.Contracts.Registration
 			SecurityId = securityId;
 			ProfileId = profileId;
 			Login = login;
+		}
+
+        public override string ToString()
+        {
+		    return String.Format("Registration Completed: (RegistrationId: {0}, Login: {1})", RegistrationId, Login);
 		}
 	}
 
