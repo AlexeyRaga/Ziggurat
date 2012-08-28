@@ -59,6 +59,17 @@ namespace Ziggurat.Registration.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous, HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            ModelState.AddModelError("", "Invalid");
+            return View(model);
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

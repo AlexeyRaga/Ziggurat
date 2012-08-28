@@ -262,6 +262,10 @@
       <Project>{c591d32b-17d8-42b6-8c13-492213b32827}</Project>
       <Name>Ziggurat.Inftastructure.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ziggurat.Contracts\Ziggurat.Contracts.csproj">
+      <Project>{b2ed7cad-8488-420f-89f1-2b5dc698084e}</Project>
+      <Name>Ziggurat.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

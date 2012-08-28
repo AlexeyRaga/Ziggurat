@@ -53,6 +53,8 @@ namespace Ziggurat.Registration.Web.Models
         public string DisplayName { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         [Display(Name = "Contact email")]
         public string Email { get; set; }
 
