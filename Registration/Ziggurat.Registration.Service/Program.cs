@@ -66,10 +66,23 @@ namespace Ziggurat.Registration.Service
             }
         }
 
+        private static void DispatchCommand(object command)
+        {
+            using (Colorize.With(ConsoleColor.Green))
+            {
+                Console.WriteLine(command.ToString());
+            }
+            CommandDispatcher.DispatchToOneAndOnlyOne(command);
+        }
+
         private static void DispatchEvents(IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
+                using (Colorize.With(ConsoleColor.Yellow))
+                {
+                    Console.WriteLine(evt.ToString());
+                }
                 EventsDispatcher.DispatchToAll(evt.Body);
             }
         }
