@@ -5,6 +5,8 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Ziggurat.Contracts.Registration;
+using Ziggurat.Infrastructure;
 using Ziggurat.Registration.Web.Models;
 
 namespace Ziggurat.Registration.Web.Controllers
@@ -64,9 +66,15 @@ namespace Ziggurat.Registration.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var regId = RegistrationIdGenerator.NewRegistrationId();
+
+                var data = new RegistrationData(model.UserName, model.Email, model.DisplayName, model.Password, Now.UtcTime);
+                var cmd = new StartRegistration(regId, data);
+
+                Client.CommandSender.SendCommand(cmd);
+
                 return View();
             }
-            ModelState.AddModelError("", "Invalid");
             return View(model);
         }
 

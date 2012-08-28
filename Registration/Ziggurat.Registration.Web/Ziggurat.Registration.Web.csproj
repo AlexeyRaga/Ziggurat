@@ -124,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -131,6 +132,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -258,6 +260,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
+      <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
+      <Name>Ziggurat.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Ziggurat.Inftastructure.Web\Ziggurat.Inftastructure.Web.csproj">
       <Project>{c591d32b-17d8-42b6-8c13-492213b32827}</Project>
       <Name>Ziggurat.Inftastructure.Web</Name>

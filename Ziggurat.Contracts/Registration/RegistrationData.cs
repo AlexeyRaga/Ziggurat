@@ -13,5 +13,15 @@ namespace Ziggurat.Contracts.Registration
         public string DisplayName { get; set; }
         public string Password { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public RegistrationData() { }
+        public RegistrationData(string login, string email, string displayName, string password, DateTime createdAt)
+        {
+            Login = login;
+            Email = email;
+            DisplayName = displayName;
+            Password = password;
+            CreatedDate = createdAt;
+        }
     }
 }

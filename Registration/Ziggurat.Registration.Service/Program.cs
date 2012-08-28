@@ -72,7 +72,7 @@ namespace Ziggurat.Registration.Service
             {
                 Console.WriteLine(command.ToString());
             }
-            CommandDispatcher.DispatchToOneAndOnlyOne(command);
+            //CommandDispatcher.DispatchToOneAndOnlyOne(command);
         }
 
         private static void DispatchEvents(IEnumerable<Envelope> events)
