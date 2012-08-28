@@ -67,6 +67,7 @@
     <Compile Include="Registration\When_attach_profile.cs" />
     <Compile Include="Registration\When_attach_security.cs" />
     <Compile Include="Registration\When_create_registration.cs" />
+    <Compile Include="Security\When_create_security_for_registration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
