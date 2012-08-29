@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
 using Ziggurat.Definition.Domain;
@@ -23,6 +24,7 @@ namespace Ziggurat.Definition.Service
 
         public static void Main(string[] args)
         {
+            Console.WriteLine("Run service, thread id: {0}", Thread.CurrentThread.ManagedThreadId);
             //how things are serialized
             var serializer = new JsonValueSerializer();
 
@@ -48,7 +50,7 @@ namespace Ziggurat.Definition.Service
                 receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
 
 
-            using (commandsReceiver)
+            using (var host = new Host())
             {
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
                 {
@@ -60,7 +62,13 @@ namespace Ziggurat.Definition.Service
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
-                    commandsReceiver.Run();
+                    host.AddTask(c => Task.Factory.StartNew(() =>
+                    {
+                        Console.WriteLine("Run receiver in thread id: {0}", Thread.CurrentThread.ManagedThreadId);
+                        commandsReceiver.Run(c);
+                    }));
+
+                    host.Run();
                     Console.ReadKey();
                 }
             }

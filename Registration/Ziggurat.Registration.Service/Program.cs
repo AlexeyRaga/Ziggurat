@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
 using Ziggurat.Infrastructure;
@@ -23,6 +24,7 @@ namespace Ziggurat.Registration.Service
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Run service, thread id: {0}", Thread.CurrentThread.ManagedThreadId);
             //how things are serialized
             var serializer = new JsonValueSerializer();
 
@@ -47,8 +49,7 @@ namespace Ziggurat.Registration.Service
                 serializer: serializer,
                 receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
 
-            //start receiving commands
-            using (commandsReceiver)
+            using (var host = new Host())
             {
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
                 {
@@ -60,7 +61,12 @@ namespace Ziggurat.Registration.Service
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
-                    commandsReceiver.Run();
+                    host.AddTask(c => Task.Factory.StartNew(() =>
+                    {
+                        Console.WriteLine("Run receiver, thread id: {0}", Thread.CurrentThread.ManagedThreadId);
+                        commandsReceiver.Run(c);
+                    }));
+                    host.Run();
                     Console.ReadKey();
                 }
             }
@@ -72,7 +78,7 @@ namespace Ziggurat.Registration.Service
             {
                 Console.WriteLine(command.ToString());
             }
-            //CommandDispatcher.DispatchToOneAndOnlyOne(command);
+            CommandDispatcher.DispatchToOneAndOnlyOne(command);
         }
 
         private static void DispatchEvents(IEnumerable<Envelope> events)
@@ -81,7 +87,7 @@ namespace Ziggurat.Registration.Service
             {
                 using (Colorize.With(ConsoleColor.Yellow))
                 {
-                    Console.WriteLine(evt.ToString());
+                    Console.WriteLine(evt.Body.ToString());
                 }
                 EventsDispatcher.DispatchToAll(evt.Body);
             }

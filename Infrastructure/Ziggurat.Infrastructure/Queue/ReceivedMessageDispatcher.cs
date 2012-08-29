@@ -8,13 +8,11 @@ using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Queue
 {
-    public sealed class ReceivedMessageDispatcher : IDisposable
+    public sealed class ReceivedMessageDispatcher
     {
         private readonly Action<object> _dispatchTo;
         private readonly IMessageReceiver _receiver;
         private readonly QueueMessageSerializer _serializer;
-
-        private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
         public ReceivedMessageDispatcher(Action<object> dispatchTo, ISerializer serializer, IMessageReceiver receiver)
         {
@@ -27,21 +25,17 @@ namespace Ziggurat.Infrastructure.Queue
             _serializer = new QueueMessageSerializer(serializer);
         }
 
-        public void Run()
+        public void Run(CancellationToken cancellation)
         {
-            Task.Factory.StartNew(() =>
-            {
-                ReceiveMessages();
-
-            }, _cancellation.Token);
+            ReceiveMessages(cancellation);
         }
 
-        private void ReceiveMessages()
+        private void ReceiveMessages(CancellationToken cancellation)
         {
-            while (!_cancellation.Token.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
                 IQueueMessage receivedMessage;
-                if (_receiver.TryReceive(_cancellation.Token, out receivedMessage))
+                if (_receiver.TryReceive(cancellation, out receivedMessage))
                 {
                     HandleMessage(receivedMessage);
                 }
@@ -54,11 +48,6 @@ namespace Ziggurat.Infrastructure.Queue
             var realMessage = _serializer.Deserialize(messageBody);
             _dispatchTo(realMessage);
             receivedMessage.Queue.Ack(receivedMessage);
-        }
-
-        public void Dispose()
-        {
-            _cancellation.Dispose();
         }
     }
 }
