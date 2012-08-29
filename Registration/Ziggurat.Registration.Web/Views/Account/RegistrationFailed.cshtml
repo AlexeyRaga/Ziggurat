@@ -4,12 +4,19 @@
     ViewBag.Title = "Registration failed!";
 }
 
-<h1>Registration failed!</h1>
+<div class="alert alert-error">
+    This registration has been unsuccessful.
+</div>
 
-@for (var i = 1; i <= Model.Errors.Count; i++)
-{
-    <div class="alert alert-error">
-        <span class="badge badge-important">@i</span>
-        <span>@Model.Errors[i-1]</span>
-    </div>
-}
+<fieldset>
+    <legend>Here is the list of errors:</legend>
+    @for (var i = 1; i <= Model.Errors.Count; i++)
+    {
+        <div class="well well-small">
+            <span class="badge badge-important">@i</span>
+            <span>@Model.Errors[i-1]</span>
+        </div>
+    }
+</fieldset>
+
+

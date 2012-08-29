@@ -254,6 +254,7 @@
     <Content Include="Views\Account\RegistrationThankYou.cshtml" />
     <Content Include="Views\Account\RegistrationSuccessful.cshtml" />
     <Content Include="Views\Account\RegistrationFailed.cshtml" />
+    <Content Include="Views\Account\RegistrationInProgress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
