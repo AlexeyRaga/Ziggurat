@@ -23,7 +23,7 @@ namespace Ziggurat.Registration.Domain
             var events = _store.LoadAll(aggregateId);
 
             var aggregate = new T();
-            aggregate.ApplyFromHistory(events.Events.Cast<IEvent>());
+            aggregate.ApplyFromHistory(events.Events.Select(UnwrapFromEnvelope));
 
             updateAction(aggregate);
 
@@ -37,6 +37,11 @@ namespace Ziggurat.Registration.Domain
             envelope.DateCreated = Now.UtcTime;
 
             return envelope;
+        }
+
+        private IEvent UnwrapFromEnvelope(Envelope env)
+        {
+            return (IEvent)env.Body;
         }
     }
 
