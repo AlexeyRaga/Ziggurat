@@ -14,10 +14,10 @@ namespace Ziggurat.Registration.Client.RegistrationStatus
         public string DisplayName { get; set; }
         public List<string> Errors { get; set; }
 
-        public RegistrationStatus Status { get; set; }
+        public RegistrationProcessStatus Status { get; set; }
     }
 
-    public enum RegistrationStatus
+    public enum RegistrationProcessStatus
     {
         InProgress = 0,
         Successful = 1,

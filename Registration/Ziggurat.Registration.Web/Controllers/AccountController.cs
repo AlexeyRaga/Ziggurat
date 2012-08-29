@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure;
+using Ziggurat.Registration.Client.RegistrationStatus;
 using Ziggurat.Registration.Web.Models;
 
 namespace Ziggurat.Registration.Web.Controllers
@@ -76,6 +77,21 @@ namespace Ziggurat.Registration.Web.Controllers
                 return View("RegistrationThankYou", regId);
             }
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegistrationStatus(Guid id)
+        {
+            RegistrationStatusView view;
+
+            if (!Client.ViewModelReader.TryGet<Guid, RegistrationStatusView>(id, out view)) 
+            {
+                view = new RegistrationStatusView { Status = RegistrationProcessStatus.InProgress };
+            }
+
+            var viewName = "Registration" + view.Status.ToString();
+
+            return View(viewName, view);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

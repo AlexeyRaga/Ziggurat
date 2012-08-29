@@ -20,7 +20,7 @@ namespace Ziggurat.Registration.Client.RegistrationStatus
         {
             _writer.Add(evt.RegistrationId, new RegistrationStatusView
             {
-                Status = RegistrationStatus.InProgress,
+                Status = RegistrationProcessStatus.InProgress,
                 Login = evt.Security.Login,
                 DisplayName = evt.Profile.DisplayName,
                 Email = evt.Security.Email,
@@ -30,19 +30,19 @@ namespace Ziggurat.Registration.Client.RegistrationStatus
 
         public void When(RegistrationFailed evt)
         {
-            _writer.Update(evt.RegistrationId, view =>
+            _writer.AddOrUpdate(evt.RegistrationId, view =>
             {
-                view.Status = RegistrationStatus.Failed;
+                view.Status = RegistrationProcessStatus.Failed;
                 view.Errors = evt.Errors.ToList();
             });
         }
 
         public void When(RegistrationCompleted evt)
         {
-            _writer.Update(evt.RegistrationId, view =>
+            _writer.AddOrUpdate(evt.RegistrationId, view =>
             {
                 view.Errors = new List<string>();
-                view.Status = RegistrationStatus.Successful;
+                view.Status = RegistrationProcessStatus.Successful;
             });
         }
     }

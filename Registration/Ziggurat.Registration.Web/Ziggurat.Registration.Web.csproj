@@ -251,8 +251,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Account\RegistrationInfo.cshtml" />
     <Content Include="Views\Account\RegistrationThankYou.cshtml" />
+    <Content Include="Views\Account\RegistrationSuccessful.cshtml" />
+    <Content Include="Views\Account\RegistrationFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,6 +274,10 @@
     <ProjectReference Include="..\..\Ziggurat.Contracts\Ziggurat.Contracts.csproj">
       <Project>{b2ed7cad-8488-420f-89f1-2b5dc698084e}</Project>
       <Name>Ziggurat.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ziggurat.Registration.Client\Ziggurat.Registration.Client.csproj">
+      <Project>{528bed5a-3d3f-424f-981a-8c90b03c4bdf}</Project>
+      <Name>Ziggurat.Registration.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

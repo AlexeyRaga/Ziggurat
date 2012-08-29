@@ -1,0 +1,15 @@
+﻿@model Ziggurat.Registration.Client.RegistrationStatus.RegistrationStatusView
+
+@{
+    ViewBag.Title = "Registration failed!";
+}
+
+<h1>Registration failed!</h1>
+
+@for (var i = 1; i <= Model.Errors.Count; i++)
+{
+    <div class="alert alert-error">
+        <span class="badge badge-important">@i</span>
+        <span>@Model.Errors[i-1]</span>
+    </div>
+}
