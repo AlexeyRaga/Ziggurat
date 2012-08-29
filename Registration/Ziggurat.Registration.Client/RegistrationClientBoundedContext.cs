@@ -9,7 +9,7 @@ namespace Ziggurat.Registration.Client
 {
     public static class RegistrationClientBoundedContext
     {
-        public IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
+        public static IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
         {
             yield return new RegistrationStatus.RegistrationStatusProjection(factory);
         }
