@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure.EventStore;
 
 namespace Ziggurat.Registration.Domain.Profile
@@ -13,6 +14,11 @@ namespace Ziggurat.Registration.Domain.Profile
             : base(eventStore)
         {
 
+        }
+
+        public void When(CreateProfileForRegistration cmd)
+        {
+            Update(cmd.ProfileId, aggregate => aggregate.CreateForRegistration(cmd.ProfileId, cmd.RegistrationId, cmd.Profile));
         }
     }
 }
