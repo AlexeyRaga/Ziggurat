@@ -73,7 +73,7 @@ namespace Ziggurat.Registration.Web.Controllers
 
                 Client.CommandSender.SendCommand(cmd);
 
-                return View();
+                return View("RegistrationThankYou", regId);
             }
             return View(model);
         }
