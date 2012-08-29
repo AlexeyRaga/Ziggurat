@@ -58,7 +58,7 @@ namespace Ziggurat.Client.Setup
         {
             foreach (var evt in events)
             {
-                var msg = new EventMessage { Body = evt };
+                var msg = new EventMessage { Body = evt.Body };
 
                 //populate message headers: extra information for audit and history reasons.
                 FillInEnvelopeSpecificHeaders(msg, evt);
