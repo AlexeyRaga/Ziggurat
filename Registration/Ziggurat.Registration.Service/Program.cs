@@ -13,6 +13,7 @@ using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;
+using Ziggurat.Registration.Client;
 using Ziggurat.Registration.Domain;
 
 namespace Ziggurat.Registration.Service
@@ -55,7 +56,10 @@ namespace Ziggurat.Registration.Service
                 {
                     var appServices = RegistrationDomainBoundedContext.BuildApplicationServices(eventStore, projectionStorage);
                     var processes = RegistrationDomainBoundedContext.BuildEventProcessors(whereToSendCommands);
-                    var projections = RegistrationDomainBoundedContext.BuildProjections(projectionStorage);
+                    
+                    var domainProjections = RegistrationDomainBoundedContext.BuildProjections(projectionStorage);
+                    var clientProjections = RegistrationClientBoundedContext.BuildProjections(projectionStorage);
+                    var projections = domainProjections.Concat(clientProjections);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
