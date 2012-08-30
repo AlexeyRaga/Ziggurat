@@ -12,6 +12,7 @@ namespace Ziggurat.Registration.Client
         public static IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
         {
             yield return new RegistrationStatus.RegistrationStatusProjection(factory);
+            yield return new Login.UserLoginProjection(factory);
         }
     }
 }

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login\UserPasswords.cs" />
+    <Compile Include="Login\UserLoginProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationClientBoundedContext.cs" />
     <Compile Include="RegistrationStatus\RegistrationStatusProjection.cs" />
