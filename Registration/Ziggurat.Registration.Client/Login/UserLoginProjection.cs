@@ -11,10 +11,10 @@ namespace Ziggurat.Registration.Client.Login
 {
     public sealed class UserLoginProjection
     {
-        private IProjectionWriter<byte, UserPasswords> _passwordsWriter;
+        private IProjectionWriter<byte, PasswordIndex> _passwordsWriter;
         public UserLoginProjection(IProjectionStoreFactory storeFactory)
         {
-            _passwordsWriter = storeFactory.GetWriter<byte, UserPasswords>();
+            _passwordsWriter = storeFactory.GetWriter<byte, PasswordIndex>();
         }
 
         public void When(SecurityPasswordSet evt)

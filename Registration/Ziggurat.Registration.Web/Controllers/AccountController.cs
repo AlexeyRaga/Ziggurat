@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure;
+using Ziggurat.Registration.Client.Login;
 using Ziggurat.Registration.Client.RegistrationStatus;
 using Ziggurat.Registration.Web.Models;
 
@@ -33,14 +34,28 @@ namespace Ziggurat.Registration.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && IsAuthenticated(model.UserName, model.Password))
             {
+                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        private bool IsAuthenticated(string login, string password)
+        {
+            PasswordIndex index;
+            if (!Client.ViewModelReader.TryGet<byte, PasswordIndex>(Partition.GetPartition(login), out index))
+                return false;
+
+            string realPassword;
+            if (!index.Passwords.TryGetValue(login, out realPassword))
+                return false;
+
+            return realPassword == password;
         }
 
         //
@@ -50,6 +65,7 @@ namespace Ziggurat.Registration.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
