@@ -16,8 +16,6 @@ namespace Ziggurat.Registration.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -26,8 +24,6 @@ namespace Ziggurat.Registration.Web.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
 
         [HttpPost]
         [AllowAnonymous]
@@ -40,7 +36,6 @@ namespace Ziggurat.Registration.Web.Controllers
                 return RedirectToLocal(returnUrl);
             }
 
-            // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
@@ -58,9 +53,6 @@ namespace Ziggurat.Registration.Web.Controllers
             return realPassword == password;
         }
 
-        //
-        // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -69,12 +61,44 @@ namespace Ziggurat.Registration.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
+            return View();
+        }
+
+        public ActionResult Manage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Manage(LocalPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var login = User.Identity.Name;
+                PasswordIndex index;
+                if (!Client.ViewModelReader.TryGet<byte, PasswordIndex>(Partition.GetPartition(login), out index))
+                {
+                    ModelState.AddModelError("unknown", "Cannot verify, please try again.");
+                    return View();
+                }
+
+                string realPassword;
+                if (!index.Passwords.TryGetValue(login, out realPassword))
+                {
+                    ModelState.AddModelError("unknown", "Cannot verify, please try again.");
+                    return View();
+                }
+
+                if (model.OldPassword != realPassword)
+                {
+                    ModelState.AddModelError("invalid", "Invalid password");
+                    return View();
+                }
+            }
+
             return View();
         }
 
