@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Ziggurat.Client.Setup;
@@ -19,10 +20,6 @@ namespace Ziggurat.Registration.Web
 
         public static ICommandSender CommandSender { get; private set; }
         public static IViewModelReader ViewModelReader { get; private set; }
-
-        public static void Initialize()
-        {
-        }
 
         static Client()
         {

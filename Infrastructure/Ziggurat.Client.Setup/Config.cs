@@ -89,7 +89,7 @@ namespace Ziggurat.Client.Setup
         private static string CreateSubfolder(string rootFolder, string subfolderName)
         {
             var path = Path.Combine(rootFolder, subfolderName);
-            EnsureFolder(subfolderName);
+            EnsureFolder(path);
             return path;
         }
     }
