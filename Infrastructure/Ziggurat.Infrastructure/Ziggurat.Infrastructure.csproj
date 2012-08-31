@@ -80,7 +80,7 @@
     <Compile Include="Serialization\JsonValueSerializer.cs" />
     <Compile Include="Serialization\SerializationException.cs" />
     <Compile Include="Serialization\SerializerExtensions.cs" />
-    <Compile Include="SimpleCommandSender.cs" />
+    <Compile Include="ToDispatcherCommandSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
