@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using Ziggurat.Client.Setup;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.Projections;
@@ -19,17 +20,17 @@ namespace Ziggurat.Registration.Web
         public static ICommandSender CommandSender { get; private set; }
         public static IViewModelReader ViewModelReader { get; private set; }
 
+        public static void Initialize()
+        {
+        }
+
         static Client()
         {
-            var serializer = new JsonValueSerializer();
-            var projectionStore = new FileSystemProjectionStoreFactory(
-                ConfigurationManager.AppSettings["projectionsRootFolder"],
-                serializer);
+            var config = Config.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
 
-            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
-
-            CommandSender = new NamespaceBasedCommandRouter("cmd", queueFactory, serializer);
-            ViewModelReader = new SimpleProjectionReader(projectionStore);
+            CommandSender = config.CreateCommandSender();
+            
+            ViewModelReader = new SimpleProjectionReader(config.ProjectionsStore);
         }
     }
 }

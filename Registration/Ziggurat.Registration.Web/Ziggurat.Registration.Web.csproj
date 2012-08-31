@@ -264,6 +264,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj">
+      <Project>{878a7983-395d-4930-a901-df576e64d070}</Project>
+      <Name>Ziggurat.Client.Setup</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
       <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
       <Name>Ziggurat.Infrastructure</Name>

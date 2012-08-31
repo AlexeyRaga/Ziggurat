@@ -28,6 +28,9 @@ namespace Ziggurat.Infrastructure
             _queueNamePrefix = MakePrefix(queueNamePrefix);
         }
 
+        public NamespaceBasedCommandRouter(IQueueFactory queueFactory, ISerializer serializer)
+            : this(String.Empty, queueFactory, serializer) { }
+
         public void SendCommand(object command)
         {
             if (command == null) return;

@@ -17,46 +17,29 @@ namespace Ziggurat.Definition.Service
 {
     public class Program
     {
+        const string IncommingCommandsQueue = "cmd-contracts-definition";
         static readonly IMessageDispatcher EventsDispatcher = new ConventionalToWhenDispatcher();
         static readonly IMessageDispatcher CommandDispatcher = new ConventionalToWhenDispatcher();
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Run service, thread id: {0}", Thread.CurrentThread.ManagedThreadId);
-            //how things are serialized
-            var serializer = new JsonValueSerializer();
+            var config = Config.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
 
-            //where all the queues are located
-            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
-
-			//where to send commands: this command sender is used by "processes" (things that receive events and
-			//publish commands). It makes sense to do it "locally", avoiding any queues.
-			//So it would look: got an event -> produced a command -> dispatched/executed it immediately.
-			var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
-
-            //build the projections storage
-            var projectionStorage =
-                new FileSystemProjectionStoreFactory(
-                    ConfigurationManager.AppSettings["projectionsRootFolder"],
-                    serializer);
-
-            //this BC only receives commands for registrations domain
-            var whereToReceiveCommands = queueFactory.CreateReader("cmd-contracts-definition");
+            //where to send commands: this command sender is used by "processes" (things that receive events and
+            //publish commands). It makes sense to do it "locally", avoiding any queues.
+            //So it would look: got an event -> produced a command -> dispatched/executed it immediately.
+            var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
-            var commandsReceiver = new ReceivedMessageDispatcher(
-                dispatchTo: CommandDispatcher.DispatchToOneAndOnlyOne,
-                serializer: serializer,
-                receiver: new IncomingMessagesStream(new[] { whereToReceiveCommands }));
-
+            var commandsReceiver = config.CreateIncomingCommandsDispatcher(IncommingCommandsQueue, DispatchCommand);
 
             using (var host = new Host())
             {
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
                 {
-                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionStorage);
+                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
                     var processes = DomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
-                    var projections = ClientBoundedContext.BuildProjections(projectionStorage);
+                    var projections = ClientBoundedContext.BuildProjections(config.ProjectionsStore);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
@@ -75,10 +58,17 @@ namespace Ziggurat.Definition.Service
 
         }
 
+        private static void DispatchCommand(object command)
+        {
+            Console.WriteLine(command.ToString());
+            CommandDispatcher.DispatchToOneAndOnlyOne(command);
+        }
+
         private static void DispatchEvents(IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
+                Console.WriteLine(evt.Body.ToString());
                 EventsDispatcher.DispatchToAll(evt.Body);
             }
         }
