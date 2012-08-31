@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
@@ -31,8 +29,10 @@ namespace Ziggurat.Definition.Service
             //where all the queues are located
             var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
 
-            //where to send commands: how to put them in the right queue
-            var whereToSendCommands = new NamespaceBasedCommandRouter("cmd", queueFactory, serializer);
+			//where to send commands: this command sender is used by "processes" (things that receive events and
+			//publish commands). It makes sense to do it "locally", avoiding any queues.
+			//So it would look: got an event -> produced a command -> dispatched/executed it immediately.
+			var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
 
             //build the projections storage
             var projectionStorage =
@@ -55,7 +55,7 @@ namespace Ziggurat.Definition.Service
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
                 {
                     var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionStorage);
-                    var processes = DomainBoundedContext.BuildEventProcessors(whereToSendCommands);
+                    var processes = DomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
                     var projections = ClientBoundedContext.BuildProjections(projectionStorage);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
