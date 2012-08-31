@@ -47,7 +47,7 @@ namespace Ziggurat.Definition.Service
             var commandsReceiver = new ReceivedMessageDispatcher(
                 dispatchTo: CommandDispatcher.DispatchToOneAndOnlyOne,
                 serializer: serializer,
-                receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
+                receiver: new IncomingMessagesStream(new[] { whereToReceiveCommands }));
 
 
             using (var host = new Host())

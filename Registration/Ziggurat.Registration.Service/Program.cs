@@ -49,7 +49,7 @@ namespace Ziggurat.Registration.Service
             var commandsReceiver = new ReceivedMessageDispatcher(
                 dispatchTo: DispatchCommand,
                 serializer: serializer,
-                receiver: new MessageReceiver(new[] { whereToReceiveCommands }));
+                receiver: new IncomingMessagesStream(new[] { whereToReceiveCommands }));
 
             using (var host = new Host())
             {

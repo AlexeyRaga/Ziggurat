@@ -4,15 +4,15 @@ using System.Threading;
 
 namespace Ziggurat.Infrastructure.Queue
 {
-    public interface IMessageReceiver
+    public interface IIncomingMessagesStream
     {
         bool TryReceive(CancellationToken cancellation, out IQueueMessage message);
     }
 
-    public sealed class MessageReceiver : IMessageReceiver
+    public sealed class IncomingMessagesStream : IIncomingMessagesStream
     {
         private static IQueueReader[] _readers;
-        public MessageReceiver(IQueueReader[] readers)
+        public IncomingMessagesStream(IQueueReader[] readers)
         {
             if (readers == null) throw new ArgumentNullException("Readers expected");
             _readers = readers.Where(x => x != null).ToArray();

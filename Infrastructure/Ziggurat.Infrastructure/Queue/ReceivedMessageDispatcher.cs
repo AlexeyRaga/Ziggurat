@@ -11,10 +11,10 @@ namespace Ziggurat.Infrastructure.Queue
     public sealed class ReceivedMessageDispatcher
     {
         private readonly Action<object> _dispatchTo;
-        private readonly IMessageReceiver _receiver;
+        private readonly IIncomingMessagesStream _receiver;
         private readonly QueueMessageSerializer _serializer;
 
-        public ReceivedMessageDispatcher(Action<object> dispatchTo, ISerializer serializer, IMessageReceiver receiver)
+        public ReceivedMessageDispatcher(Action<object> dispatchTo, ISerializer serializer, IIncomingMessagesStream receiver)
         {
             if (dispatchTo == null) throw new ArgumentNullException("dispatchTo");
             if (serializer == null) throw new ArgumentNullException("serializer");
