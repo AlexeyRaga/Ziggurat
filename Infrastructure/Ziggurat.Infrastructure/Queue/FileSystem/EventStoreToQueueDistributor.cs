@@ -41,6 +41,8 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
         {
             var lastMarker = GetMarker();
             lastDistributedStamp = lastMarker.Stamp;
+
+            PerformDistribution(token);
         }
 
         private void PerformDistribution(CancellationToken token)
@@ -48,16 +50,24 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             while (!token.IsCancellationRequested)
             {
                 var envelopes = _eventStore
-                    .LoadSince(lastDistributedStamp);
+                    .LoadSince(lastDistributedStamp + 1);
 
                 bool thereWasSomethingNew = false;
                 foreach (var envelope in envelopes)
                 {
                     thereWasSomethingNew = true;
                     _queueWriter.Enqueue(_serializer.SerializeToByteArray(envelope));
+                    lastDistributedStamp = envelope.GetStamp();
                 }
 
-                if (!thereWasSomethingNew) Thread.Sleep(500);
+                if (thereWasSomethingNew)
+                {
+                    _markerWriter.AddOrUpdate(_queueName, marker => marker.Stamp = lastDistributedStamp);
+                }
+                else
+                {
+                    Thread.Sleep(500);
+                }
             }
         }
 
