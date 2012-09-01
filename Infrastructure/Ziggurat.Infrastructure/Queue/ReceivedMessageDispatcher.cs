@@ -39,6 +39,10 @@ namespace Ziggurat.Infrastructure.Queue
                 {
                     HandleMessage(receivedMessage);
                 }
+                else
+                {
+                    Thread.Sleep(250);
+                }
             }
         }
 

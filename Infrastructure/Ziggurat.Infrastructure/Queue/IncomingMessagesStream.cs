@@ -11,7 +11,7 @@ namespace Ziggurat.Infrastructure.Queue
 
     public sealed class IncomingMessagesStream : IIncomingMessagesStream
     {
-        private static IQueueReader[] _readers;
+        private readonly IQueueReader[] _readers;
         public IncomingMessagesStream(IQueueReader[] readers)
         {
             if (readers == null) throw new ArgumentNullException("Readers expected");

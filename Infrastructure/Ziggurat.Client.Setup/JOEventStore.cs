@@ -21,10 +21,19 @@ namespace Ziggurat.Client.Setup
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
 
-            using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
-            {
-                return new EventStream(stream.StreamRevision, stream.CommittedEvents.ToEnvelopes());
-            }
+            var commits = _realEventStore.Advanced
+                .GetFrom(aggregateIdentity, revision, Int32.MaxValue)
+                .ToList();
+
+            var lastCommit = commits.LastOrDefault();
+
+            var newRevision = lastCommit == null ? revision : lastCommit.StreamRevision;
+
+            var envelopes = commits
+                .SelectMany(x => x.EventsToEnvelopes())
+                .ToList();
+
+            return new EventStream(newRevision, envelopes);
         }
 
         public IEnumerable<Envelope> LoadSince(long stamp)
