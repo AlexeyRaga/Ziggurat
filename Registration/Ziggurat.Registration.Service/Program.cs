@@ -19,7 +19,7 @@ namespace Ziggurat.Registration.Service
     public class Program
     {
         const string IncommingCommandsQueue = "cmd-contracts-registration";
-        const string IncommingEventsQueue = "evt-contracts-registration";
+        const string IncommingEventsQueue = "evt-registration";
 
         static readonly IMessageDispatcher EventsDispatcher = new ConventionalToWhenDispatcher();
         static readonly IMessageDispatcher CommandDispatcher = new ConventionalToWhenDispatcher();
@@ -36,12 +36,12 @@ namespace Ziggurat.Registration.Service
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
             var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
-            //var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, DispatchEvents);
+            var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, DispatchEvent);
 
 
             using (var host = new Host())
             {
-                using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
+                using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvent))
                 {
                     var appServices = RegistrationDomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
                     var processes = RegistrationDomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
@@ -72,7 +72,16 @@ namespace Ziggurat.Registration.Service
             CommandDispatcher.DispatchToOneAndOnlyOne(command);
         }
 
-        private static void DispatchEvents(IEnumerable<Envelope> events)
+        public static void DispatchEvent(object evt)
+        {
+            using (Colorize.With(ConsoleColor.Yellow))
+            {
+                Console.WriteLine(evt.ToString());
+            }
+            EventsDispatcher.DispatchToAll(evt);
+        }
+
+        private static void DispatchEvent(IEnumerable<Envelope> events)
         {
             foreach (var evt in events)
             {
