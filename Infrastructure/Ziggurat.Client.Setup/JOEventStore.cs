@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using EventStore;
 using Ziggurat.Infrastructure.EventStore;
@@ -26,6 +27,14 @@ namespace Ziggurat.Client.Setup
             }
         }
 
+        public IEnumerable<Envelope> LoadSince(long stamp)
+        {
+            var dateStamp = new DateTime(stamp);
+            var commits = _realEventStore.Advanced.GetFrom(dateStamp);
+
+            return commits.SelectMany(x => x.EventsToEnvelopes());
+        }
+
         public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events)
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
@@ -48,6 +57,17 @@ namespace Ziggurat.Client.Setup
 
     public static class EnvelopeExtensions
     {
+        public static IEnumerable<Envelope> EventsToEnvelopes(this Commit commit)
+        {
+            var stamp = commit.CommitStamp.Ticks;
+            foreach (var msg in commit.Events)
+            {
+                var envelope = new Envelope(msg.Body, msg.Headers);
+                envelope.SetStamp(stamp);
+                yield return envelope;
+            }
+        }
+
         public static IEnumerable<Envelope> ToEnvelopes(this IEnumerable<EventMessage> messages)
         {
             foreach (var msg in messages)

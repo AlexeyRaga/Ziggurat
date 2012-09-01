@@ -6,7 +6,7 @@ namespace Ziggurat.Infrastructure.EventStore
     public interface IEventStore : IDisposable
     {
         EventStream Load(Guid aggregateIdentity, int revision);
-
+        IEnumerable<Envelope> LoadSince(long stamp);
         void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events);
     }
 

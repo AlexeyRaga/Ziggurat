@@ -14,8 +14,8 @@ namespace Ziggurat.Infrastructure.EventStore
         public DateTime GetDateCreated() { return GetValueFromHeaders<DateTime>(EventHeaderKeys.DateCreated); }
         public void SetDateCreated(DateTime dateCreated) { Headers[EventHeaderKeys.DateCreated] = dateCreated; }
 
-        public void SetStamp(ulong stamp) { Headers[EventHeaderKeys.Stamp] = stamp; }
-        public ulong GetStamp() { return GetValueFromHeaders<ulong>(EventHeaderKeys.Stamp); }
+        public void SetStamp(long stamp) { Headers[EventHeaderKeys.Stamp] = stamp; }
+        public long GetStamp() { return GetValueFromHeaders<long>(EventHeaderKeys.Stamp); }
 
         public object Body { get; set; }
         public IDictionary<string, object> Headers { get; set; }
