@@ -38,11 +38,13 @@ namespace Ziggurat.Registration.Service
             var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
             var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, DispatchEvent);
 
-
             using (var host = new Host())
             {
                 using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvent))
                 {
+                    var eventsFromEventSourceToQueueDistributor =
+                        new EventStoreToQueueDistributor(IncommingEventsQueue, config.QueueFactory, eventStore, config.ProjectionsStore, config.Serializer);
+
                     var appServices = RegistrationDomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
                     var processes = RegistrationDomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
                     
@@ -55,6 +57,7 @@ namespace Ziggurat.Registration.Service
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
                     host.AddTask(c => commandsReceiver.Run(c));
+                    host.AddTask(c => eventsFromEventSourceToQueueDistributor.Run(c));
                     host.Run();
 
                     Thread.Sleep(400);
