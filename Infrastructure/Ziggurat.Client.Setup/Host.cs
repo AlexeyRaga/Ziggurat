@@ -23,6 +23,12 @@ namespace Ziggurat.Client.Setup
             _hostTasks.Add(new HostTask(taskFactory));
         }
 
+        public void AddTask(Action<CancellationToken> task)
+        {
+            if (task == null) throw new ArgumentNullException("task");
+            AddTask(c => Task.Factory.StartNew(() => task(c)));
+        }
+
         public Task Run()
         {
             var allTasks = _hostTasks

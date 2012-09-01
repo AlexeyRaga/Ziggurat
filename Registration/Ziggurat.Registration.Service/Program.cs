@@ -52,11 +52,7 @@ namespace Ziggurat.Registration.Service
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
-                    host.AddTask(c => Task.Factory.StartNew(() =>
-                    {
-                        Console.WriteLine("Run receiver, thread id: {0}", Thread.CurrentThread.ManagedThreadId);
-                        commandsReceiver.Run(c);
-                    }));
+                    host.AddTask(c => commandsReceiver.Run(c));
                     host.Run();
 
                     Thread.Sleep(400);
