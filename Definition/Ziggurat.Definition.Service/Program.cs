@@ -24,7 +24,7 @@ namespace Ziggurat.Definition.Service
         public static void Main(string[] args)
         {
             Console.WriteLine("Starting in thread: {0}", Thread.CurrentThread.ManagedThreadId); 
-            var config = Config.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
+            var config = LocalConfig.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
 
             //where to send commands: this command sender is used by "processes" (things that receive events and
             //publish commands). It makes sense to do it "locally", avoiding any queues.

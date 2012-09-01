@@ -23,7 +23,7 @@ namespace Ziggurat.Registration.Web
 
         static Client()
         {
-            var config = Config.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
+            var config = LocalConfig.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
 
             CommandSender = config.CreateCommandSender();
             

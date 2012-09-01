@@ -13,7 +13,7 @@ using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Client.Setup
 {
-    public sealed class Config
+    public sealed class LocalConfig
     {
         private readonly string _queuesFolder;
         private readonly string _projectionsFolder;
@@ -24,7 +24,7 @@ namespace Ziggurat.Client.Setup
         public ISerializer Serializer { get { return _serializer; } }
         public IProjectionStoreFactory ProjectionsStore { get { return _projectionsStore; } }
 
-        private Config(string queuesFolder, string projectionsFolder)
+        private LocalConfig(string queuesFolder, string projectionsFolder)
         {
             _queuesFolder      = queuesFolder;
             _projectionsFolder = projectionsFolder;
@@ -70,14 +70,14 @@ namespace Ziggurat.Client.Setup
             return incomingStream;
         }
 
-        public static Config CreateNew(string rootFolder)
+        public static LocalConfig CreateNew(string rootFolder)
         {
             EnsureFolder(rootFolder);
 
             var queuesFolder      = CreateSubfolder(rootFolder, "Queues");
             var projectionsFolder = CreateSubfolder(rootFolder, "Views");
 
-            return new Config(queuesFolder, projectionsFolder);
+            return new LocalConfig(queuesFolder, projectionsFolder);
         }
 
         private static void EnsureFolder(string folder)
