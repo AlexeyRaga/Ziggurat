@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
 using Ziggurat.Infrastructure;
-using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;

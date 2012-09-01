@@ -1,4 +1,4 @@
-﻿using Ziggurat.Infrastructure.Evel;
+﻿using Ziggurat.Infrastructure;
 
 namespace Ziggurat.Infrastructure
 {

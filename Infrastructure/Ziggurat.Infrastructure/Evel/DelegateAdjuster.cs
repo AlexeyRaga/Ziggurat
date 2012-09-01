@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Ziggurat.Infrastructure.Evel
+namespace Ziggurat.Infrastructure
 {
-    class DelegateAdjuster
+    internal class DelegateAdjuster
     {
         public static Action<BaseT> CastArgument<BaseT, DerivedT>(Expression<Action<DerivedT>> source) where DerivedT : BaseT
         {

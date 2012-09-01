@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using Ziggurat.Client.Setup;
 using Ziggurat.Infrastructure;
-using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;

@@ -33,8 +33,8 @@ namespace Ziggurat.Registration.Domain
         private Envelope WrapIntoEnvelope(Guid aggregateId, IEvent evt)
         {
             var envelope = new Envelope(evt, null);
-            envelope.AggregateId = aggregateId;
-            envelope.DateCreated = Now.UtcTime;
+            envelope.SetAggregateId(aggregateId);
+            envelope.SetDateCreated(Now.UtcTime);
 
             return envelope;
         }
