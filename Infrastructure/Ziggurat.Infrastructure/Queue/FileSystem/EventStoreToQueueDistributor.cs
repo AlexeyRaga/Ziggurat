@@ -16,7 +16,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
         private readonly IProjectionWriter<string, EventStoreMarker> _markerWriter;
         private readonly IEventStore _eventStore;
         private readonly IQueueWriter _queueWriter;
-        private readonly ISerializer _serializer;
+        private readonly QueueMessageSerializer _serializer;
 
         private readonly string _queueName;
 
@@ -34,7 +34,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             _queueName = queueName;
             _eventStore = eventStore;
             _queueWriter = queueFactory.CreateWriter(queueName);
-            _serializer = serializer;
+            _serializer = new QueueMessageSerializer(serializer);
         }
 
         public void Run(CancellationToken token)
@@ -56,7 +56,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
                 foreach (var envelope in envelopes.Where(x=>x.GetStamp() > lastDistributedStamp))
                 {
                     thereWasSomethingNew = true;
-                    _queueWriter.Enqueue(_serializer.SerializeToByteArray(envelope));
+                    _queueWriter.Enqueue(_serializer.Serialize(envelope));
                     lastDistributedStamp = envelope.GetStamp();
                 }
 

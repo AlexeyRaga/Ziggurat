@@ -36,11 +36,11 @@ namespace Ziggurat.Registration.Service
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
             var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
-            var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, DispatchEvent);
+            var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, x => DispatchEvent((Envelope)x));
 
             using (var host = new Host())
             {
-                using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvent))
+                using (var eventStore = config.CreateEventStore("ZigguratES"))
                 {
                     var eventsFromEventSourceToQueueDistributor =
                         new EventStoreToQueueDistributor(IncommingEventsQueue, config.QueueFactory, eventStore, config.ProjectionsStore, config.Serializer);
@@ -58,6 +58,7 @@ namespace Ziggurat.Registration.Service
 
                     host.AddTask(c => commandsReceiver.Run(c));
                     host.AddTask(c => eventsFromEventSourceToQueueDistributor.Run(c));
+                    host.AddTask(c => eventsReceiver.Run(c));
                     host.Run();
 
                     Thread.Sleep(400);
@@ -75,25 +76,13 @@ namespace Ziggurat.Registration.Service
             CommandDispatcher.DispatchToOneAndOnlyOne(command);
         }
 
-        public static void DispatchEvent(object evt)
+        public static void DispatchEvent(Envelope evt)
         {
             using (Colorize.With(ConsoleColor.Yellow))
             {
-                Console.WriteLine(evt.ToString());
+                Console.WriteLine(evt.Body.ToString());
             }
-            EventsDispatcher.DispatchToAll(evt);
-        }
-
-        private static void DispatchEvent(IEnumerable<Envelope> events)
-        {
-            foreach (var evt in events)
-            {
-                using (Colorize.With(ConsoleColor.Yellow))
-                {
-                    Console.WriteLine(evt.Body.ToString());
-                }
-                EventsDispatcher.DispatchToAll(evt.Body);
-            }
+            EventsDispatcher.DispatchToAll(evt.Body);
         }
     }
 }
