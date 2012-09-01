@@ -13,7 +13,7 @@ using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Client.Setup
 {
-    public sealed class LocalConfig
+    public sealed class LocalConfig : Ziggurat.Client.Setup.IConfig
     {
         private readonly string _queuesFolder;
         private readonly string _projectionsFolder;
@@ -23,6 +23,7 @@ namespace Ziggurat.Client.Setup
 
         public ISerializer Serializer { get { return _serializer; } }
         public IProjectionStoreFactory ProjectionsStore { get { return _projectionsStore; } }
+        public IQueueFactory QueueFactory { get { return _queueFactory; } }
 
         private LocalConfig(string queuesFolder, string projectionsFolder)
         {
