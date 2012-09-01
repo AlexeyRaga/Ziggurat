@@ -50,10 +50,10 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             while (!token.IsCancellationRequested)
             {
                 var envelopes = _eventStore
-                    .LoadSince(lastDistributedStamp + 1);
+                    .LoadSince(lastDistributedStamp);
 
                 bool thereWasSomethingNew = false;
-                foreach (var envelope in envelopes)
+                foreach (var envelope in envelopes.Where(x=>x.GetStamp() > lastDistributedStamp))
                 {
                     thereWasSomethingNew = true;
                     _queueWriter.Enqueue(_serializer.SerializeToByteArray(envelope));
