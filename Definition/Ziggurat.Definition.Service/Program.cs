@@ -32,7 +32,7 @@ namespace Ziggurat.Definition.Service
             var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
-            var commandsReceiver = config.CreateIncomingCommandsDispatcher(IncommingCommandsQueue, DispatchCommand);
+            var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
 
             using (var host = new Host())
             {

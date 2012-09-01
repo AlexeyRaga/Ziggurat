@@ -20,6 +20,7 @@ namespace Ziggurat.Registration.Service
     public class Program
     {
         const string IncommingCommandsQueue = "cmd-contracts-registration";
+        const string IncommingEventsQueue = "evt-contracts-registration";
 
         static readonly IMessageDispatcher EventsDispatcher = new ConventionalToWhenDispatcher();
         static readonly IMessageDispatcher CommandDispatcher = new ConventionalToWhenDispatcher();
@@ -35,7 +36,9 @@ namespace Ziggurat.Registration.Service
 	        var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
 
             //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
-            var commandsReceiver = config.CreateIncomingCommandsDispatcher(IncommingCommandsQueue, DispatchCommand);
+            var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
+            //var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, DispatchEvents);
+
 
             using (var host = new Host())
             {

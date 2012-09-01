@@ -46,18 +46,18 @@ namespace Ziggurat.Client.Setup
             return new NamespaceBasedCommandRouter("cmd", _queueFactory, _serializer);
         }
 
-        public ReceivedMessageDispatcher CreateIncomingCommandsDispatcher(string streamName, Action<object> whereToDispatchCommands)
+        public ReceivedMessageDispatcher CreateIncomingMessagesDispatcher(string streamName, Action<object> whereToDispatch)
         {
             if (String.IsNullOrWhiteSpace(streamName)) throw new ArgumentNullException("streamName");
-            if (whereToDispatchCommands == null) throw new ArgumentNullException("whereToDispatchCommands");
+            if (whereToDispatch == null) throw new ArgumentNullException("whereToDispatch");
 
-            var incommingCommandsStream = CreateIncomingStream(streamName);
+            var incommingStream = CreateIncomingStream(streamName);
 
-            //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
+            //spin up a messages receiver, it will receive messages and push them to the dispatcher
             var commandsReceiver = new ReceivedMessageDispatcher(
-                dispatchTo: whereToDispatchCommands,
+                dispatchTo: whereToDispatch,
                 serializer: _serializer,
-                receiver: incommingCommandsStream);
+                receiver: incommingStream);
 
             return commandsReceiver;
         }
