@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
+using Ziggurat.Client.Setup.ProjectionRebuilder;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
@@ -47,10 +48,19 @@ namespace Ziggurat.Registration.Service
 
                     var appServices = RegistrationDomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
                     var processes = RegistrationDomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
-                    
-                    var domainProjections = RegistrationDomainBoundedContext.BuildProjections(config.ProjectionsStore);
-                    var clientProjections = RegistrationClientBoundedContext.BuildProjections(config.ProjectionsStore);
-                    var projections = domainProjections.Concat(clientProjections);
+
+                    Func<IProjectionStoreFactory, IEnumerable<object>> getProjectionsFunction =
+                        factory =>
+                        {
+                            var domainProjections = RegistrationDomainBoundedContext.BuildProjections(factory);
+                            var clientProjections = RegistrationClientBoundedContext.BuildProjections(factory);
+                            return domainProjections.Concat(clientProjections);
+                        };
+
+                    var projectionRebuilder = new Rebuilder(config.ProjectionsStore, getProjectionsFunction);
+                    projectionRebuilder.Run();
+
+                    var projections = getProjectionsFunction(config.ProjectionsStore);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);

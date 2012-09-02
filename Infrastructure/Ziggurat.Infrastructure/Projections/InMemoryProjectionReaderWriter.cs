@@ -22,7 +22,7 @@ namespace Ziggurat.Infrastructure.Projections
 
         private ConcurrentDictionary<TKey, TView> GetOrCreateStorage<TKey, TView>()
         {
-            var dictionary = Structure.GetOrAdd(typeof(TKey), t => new ConcurrentDictionary<TKey, TView>());
+            var dictionary = Structure.GetOrAdd(typeof(TView), t => new ConcurrentDictionary<TKey, TView>());
             var typedDictionary = (ConcurrentDictionary<TKey, TView>)dictionary;
 
             return typedDictionary;

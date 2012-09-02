@@ -34,20 +34,27 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         public void Run()
         {
-            var registeredProjections = BuildProjections();
-            var knownProjections      = GetKnownProjectionsSignatures();
-            var realProjections       = GetProjectionsSignatures(registeredProjections);
+            var registeredProjections          = BuildProjections();
+            var knownProjections               = GetKnownProjectionsSignatures();
+            var realProjectionSignatures       = GetProjectionsSignatures(registeredProjections);
 
-            var projectionsToRebuild  = GetProjectionsToRebuild(realProjections, knownProjections.TypeSignature);
+            var projectionsToRebuild  = GetProjectionsToRebuild(realProjectionSignatures, knownProjections.TypeSignatures);
 
-            if (projectionsToRebuild.Count > 0)
+            Console.WriteLine("Projections to rebuild: " + projectionsToRebuild.Count);
+            foreach (var prj in projectionsToRebuild)
             {
-                Console.WriteLine("Projections to rebuild: ");
-                foreach (var prj in projectionsToRebuild)
-                {
-                    Console.WriteLine("\t" + prj.Key.GetType().Name);
-                }
+                Console.WriteLine("\t" + prj.Key.GetType().Name);
             }
+
+            PersistProjectionSignatures(realProjectionSignatures);
+        }
+
+        private void PersistProjectionSignatures(IDictionary<object, string> realProjectionSignatures)
+        {
+            var typesAndSignatures = realProjectionSignatures
+                .ToDictionary(x => x.Key.GetType().FullName, x => x.Value);
+
+            _signatureWriter.AddOrReplace("rebuilder", new ProjectionsSignatures(typesAndSignatures));
         }
 
         private Dictionary<object, string> GetProjectionsToRebuild(
