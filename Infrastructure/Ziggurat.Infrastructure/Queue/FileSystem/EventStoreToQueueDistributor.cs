@@ -20,7 +20,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
 
         private readonly string _queueName;
 
-        private long lastDistributedStamp;
+        private EventStoreMarker _lastKnownDispatchSituation;
 
         public EventStoreToQueueDistributor(
             string queueName, 
@@ -39,8 +39,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
 
         public void Run(CancellationToken token)
         {
-            var lastMarker = GetMarker();
-            lastDistributedStamp = lastMarker.Stamp;
+            _lastKnownDispatchSituation = GetMarker();
 
             PerformDistribution(token);
         }
@@ -50,19 +49,30 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             while (!token.IsCancellationRequested)
             {
                 var envelopes = _eventStore
-                    .LoadSince(lastDistributedStamp);
+                    .LoadSince(_lastKnownDispatchSituation.Stamp);
 
                 bool thereWasSomethingNew = false;
-                foreach (var envelope in envelopes.Where(x=>x.GetStamp() > lastDistributedStamp))
+
+                foreach (var envelope in envelopes)
                 {
+                    var envelopeStamp = envelope.GetStamp();
+                    var envelopeUniqueId = envelope.GetUniqueId();
+
+                    if (_lastKnownDispatchSituation.KnownMessagesWithinStamp.Contains(envelopeUniqueId)) continue;
+
                     thereWasSomethingNew = true;
+
+                    if (_lastKnownDispatchSituation.Stamp != envelopeStamp)
+                        _lastKnownDispatchSituation = new EventStoreMarker(envelopeStamp);
+
+                    _lastKnownDispatchSituation.KnownMessagesWithinStamp.Add(envelopeUniqueId);
+
                     _queueWriter.Enqueue(_serializer.Serialize(envelope));
-                    lastDistributedStamp = envelope.GetStamp();
                 }
 
                 if (thereWasSomethingNew)
                 {
-                    _markerWriter.AddOrUpdate(_queueName, marker => marker.Stamp = lastDistributedStamp);
+                    _markerWriter.AddOrReplace(_queueName, _lastKnownDispatchSituation);
                 }
                 else
                 {
@@ -83,6 +93,18 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
         public sealed class EventStoreMarker
         {
             public long Stamp { get; set; }
+            public List<string> KnownMessagesWithinStamp { get; set; }
+
+            public EventStoreMarker()
+            {
+                KnownMessagesWithinStamp = new List<string>();
+            }
+
+            public EventStoreMarker(long stamp)
+                : this()
+            {
+                Stamp = stamp;
+            }
         }
     }
 }

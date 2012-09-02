@@ -17,6 +17,9 @@ namespace Ziggurat.Infrastructure.EventStore
         public void SetStamp(long stamp) { Headers[EventHeaderKeys.Stamp] = stamp; }
         public long GetStamp() { return GetValueFromHeaders<long>(EventHeaderKeys.Stamp); }
 
+        public void SetUniqueId(string uniqueId) { Headers[EventHeaderKeys.UniqueId] = uniqueId; }
+        public string GetUniqueId() { return GetValueFromHeaders<string>(EventHeaderKeys.UniqueId); }
+
         public object Body { get; set; }
         public IDictionary<string, object> Headers { get; set; }
 

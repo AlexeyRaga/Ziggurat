@@ -69,10 +69,15 @@ namespace Ziggurat.Client.Setup
         public static IEnumerable<Envelope> EventsToEnvelopes(this Commit commit)
         {
             var stamp = commit.CommitStamp.Ticks;
-            foreach (var msg in commit.Events)
+            var commitUniqueId = String.Concat(commit.CommitId, "-", commit.StreamRevision.ToString());
+
+            for (var i = 0; i < commit.Events.Count; i++ )
             {
+                var msg = commit.Events[i];
+                var msgUniqueId = String.Concat(commitUniqueId, ":", i.ToString());
                 var envelope = new Envelope(msg.Body, msg.Headers);
                 envelope.SetStamp(stamp);
+                envelope.SetUniqueId(msgUniqueId);
                 yield return envelope;
             }
         }
