@@ -32,7 +32,7 @@ namespace Ziggurat.Infrastructure.Queue
                     return true;
                 }
 
-                var waiter = cancellation.WaitHandle.WaitOne(100);
+                var waiter = cancellation.WaitHandle.WaitOne(250);
             }
 
             message = null;
