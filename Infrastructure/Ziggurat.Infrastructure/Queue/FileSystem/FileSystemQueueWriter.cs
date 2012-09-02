@@ -30,7 +30,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             var messageId = Interlocked.Increment(ref CurrentMessageId);
 
             var realFileName = String.Format("{0:yyyy-MM-dd-hh-mm-ss-ffff}-{1:00000000}.msg",
-                DateTime.UtcNow.ToString("yyyy-MM-dd-hh-mm-ss-ffff"),
+                DateTime.UtcNow,
                 messageId);
 
             var fullRealFileName = Path.Combine(_queueFolder, realFileName);
