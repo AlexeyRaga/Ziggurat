@@ -59,11 +59,12 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             DoRebuildProjections(projectionsToRebuild.Keys.ToList());
 
             Console.WriteLine("Saving rebuilt projections...");
+            SaveProjectionToRealStore();
 
             PersistProjectionSignatures(realProjectionSignatures);
         }
 
-        private void PersistProjections()
+        private void SaveProjectionToRealStore()
         {
             var timer = new Stopwatch();
 
