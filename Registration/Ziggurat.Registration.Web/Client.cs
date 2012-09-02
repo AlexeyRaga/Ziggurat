@@ -14,9 +14,6 @@ namespace Ziggurat.Registration.Web
 {
     public static class Client
     {
-        private static readonly IMessageDispatcher _commandDispatcher = new ConventionalToWhenDispatcher();
-        private static readonly IMessageDispatcher _eventsDispatcher = new ConventionalToWhenDispatcher();
-
         public static ICommandSender CommandSender { get; private set; }
         public static IViewModelReader ViewModelReader { get; private set; }
 
