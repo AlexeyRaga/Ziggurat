@@ -4,6 +4,16 @@ using System.Linq;
 
 namespace Ziggurat.Infrastructure.EventStore
 {
+    public static class EventHeaderKeys
+    {
+        public static string Stamp = "StampES";
+        public static string UniqueId = "UniqueId";
+
+        public static string AggregateId = "AggregateId";
+        public static string DateCreated = "DateCreated";
+        public static string MemberId = "MemberId";
+    }
+
     public sealed class Envelope
     {
         public bool IsAggregateIdSet() { return Headers.ContainsKey(EventHeaderKeys.AggregateId); }
