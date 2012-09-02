@@ -18,7 +18,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             return signature;
         }
 
-        public static string GenerateSignature(string value)
+        private static string GenerateSignature(string value)
         {
             using (var md5 = MD5.Create())
             {
