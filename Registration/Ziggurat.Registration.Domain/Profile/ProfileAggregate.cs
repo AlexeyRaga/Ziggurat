@@ -11,6 +11,9 @@ namespace Ziggurat.Registration.Domain.Profile
     {
         public void CreateForRegistration(Guid id, Guid registrationId, ProfileData data)
         {
+            if (State.Created)
+                throw new InvalidOperationException("Profile has already been created. Duplication?");
+
             Apply(new ProfileCreated(id, data.DisplayName, data.Email));
             Apply(new ProfileCreatedForRegistration(id, registrationId));
         }

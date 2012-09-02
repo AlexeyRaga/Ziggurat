@@ -11,6 +11,9 @@ namespace Ziggurat.Registration.Domain.Security
     {
         public void CreateForRegistration(Guid id, Guid registrationId, SecurityData data)
         {
+            if (State.Created)
+                throw new InvalidOperationException("Security aggregate has already been created. Duplication?");
+
             Apply(new SecurityCreated(id, data.Login));
             Apply(new SecurityPasswordSet(id, data.Login, data.Password));
             Apply(new SecurityCreatedForRegistration(id, registrationId, data.Login, data.Email));
