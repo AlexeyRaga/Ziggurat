@@ -11,10 +11,23 @@ namespace Ziggurat.Client.Setup
     {
         public CancellationTokenSource Cancellation { get; private set; }
         private readonly List<HostTask> _hostTasks = new List<HostTask>();
+        private readonly List<HostTask> _startupTasks = new List<HostTask>();
 
         public Host()
         {
             Cancellation = new CancellationTokenSource();
+        }
+
+        public void AddStartupTask(Func<CancellationToken, Task> taskFactory)
+        {
+            if (taskFactory == null) throw new ArgumentNullException("taskFactory");
+            _startupTasks.Add(new HostTask(taskFactory));
+        }
+
+        public void AddStartupTask(Action<CancellationToken> task)
+        {
+            if (task == null) throw new ArgumentNullException("task");
+            AddStartupTask(c => Task.Factory.StartNew(() => task(c)));
         }
 
         public void AddTask(Func<CancellationToken, Task> taskFactory)
@@ -31,18 +44,24 @@ namespace Ziggurat.Client.Setup
 
         public Task Run()
         {
-            var allTasks = _hostTasks
+            var startupTask = RunGroupOfTasks(_startupTasks);
+            return startupTask.ContinueWith(task => RunGroupOfTasks(_hostTasks), Cancellation.Token);
+        }
+
+        private Task RunGroupOfTasks(IList<HostTask> hostTasks)
+        {
+            var tplTasks = hostTasks
                 .Select(x => x.GetTask(Cancellation.Token))
                 .ToArray();
 
-            foreach (var task in allTasks.Where(x => x.Status == TaskStatus.Created))
+            foreach (var task in tplTasks.Where(x => x.Status == TaskStatus.Created))
             {
                 task.Start();
             }
 
             return Task.Factory.StartNew(() =>
             {
-                Task.WaitAll(allTasks);
+                Task.WaitAll(tplTasks);
             }, Cancellation.Token);
         }
 

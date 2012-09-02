@@ -61,7 +61,8 @@ namespace Ziggurat.Registration.Service
                         eventStore, 
                         config.ProjectionsStore, 
                         getProjectionsFunction);
-                    projectionRebuilder.Run();
+
+                    host.AddStartupTask(c => projectionRebuilder.Run());
 
                     var projections = getProjectionsFunction(config.ProjectionsStore);
 
