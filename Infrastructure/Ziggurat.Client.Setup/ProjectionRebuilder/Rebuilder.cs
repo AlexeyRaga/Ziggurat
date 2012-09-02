@@ -42,9 +42,9 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         public void Run()
         {
-            var registeredProjections          = BuildProjections();
-            var knownProjections               = GetKnownProjectionsSignatures();
-            var realProjectionSignatures       = GetProjectionsSignatures(registeredProjections);
+            var registeredProjections    = BuildProjections();
+            var knownProjections         = GetKnownProjectionsSignatures();
+            var realProjectionSignatures = GetProjectionsSignatures(registeredProjections);
 
             var projectionsToRebuild  = GetProjectionsToRebuild(realProjectionSignatures, knownProjections.TypeSignatures);
 
