@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TypeName = System.String;
+using Signature = System.String;
 
 namespace Ziggurat.Client.Setup.ProjectionRebuilder
 {
     public class ProjectionsSignatures
     {
-        public IDictionary<string, string> TypeSignatures { get; set; }
+        public IDictionary<TypeName, Signature> TypeSignatures { get; set; }
 
         public ProjectionsSignatures()
         {
-            TypeSignatures = new Dictionary<string, string>();
+            TypeSignatures = new Dictionary<TypeName, Signature>();
         }
 
-        public ProjectionsSignatures(IDictionary<string, string> value)
+        public ProjectionsSignatures(IDictionary<TypeName, Signature> value)
         {
             if (value == null)
-                value = new Dictionary<string, string>();
+                value = new Dictionary<TypeName, Signature>();
             else
-                value = new Dictionary<string, string>(value);
+                value = new Dictionary<TypeName, Signature>(value);
 
             TypeSignatures = value;
         }
