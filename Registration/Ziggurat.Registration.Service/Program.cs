@@ -57,7 +57,10 @@ namespace Ziggurat.Registration.Service
                             return domainProjections.Concat(clientProjections);
                         };
 
-                    var projectionRebuilder = new Rebuilder(config.ProjectionsStore, getProjectionsFunction);
+                    var projectionRebuilder = new Rebuilder(
+                        eventStore, 
+                        config.ProjectionsStore, 
+                        getProjectionsFunction);
                     projectionRebuilder.Run();
 
                     var projections = getProjectionsFunction(config.ProjectionsStore);
