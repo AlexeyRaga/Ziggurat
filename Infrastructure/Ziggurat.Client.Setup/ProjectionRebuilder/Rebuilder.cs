@@ -49,7 +49,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
             if (projectionsToRebuild.Count == 0) return;
 
-            Console.WriteLine("Projections to rebuild: " + projectionsToRebuild.Count);
+            Console.WriteLine("Projections to rebuild: {0}, running...", projectionsToRebuild.Count);
             foreach (var prj in projectionsToRebuild)
             {
                 Console.WriteLine("\t" + prj.Key.GetType().Name);
@@ -57,7 +57,17 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
             DoRebuildProjections(projectionsToRebuild.Keys.ToList());
 
+            Console.WriteLine("Saving rebuilt projections...");
+
             PersistProjectionSignatures(realProjectionSignatures);
+        }
+
+        private void PersistProjections()
+        {
+            var timer = new Stopwatch();
+
+            timer.Stop();
+            Console.WriteLine("Saving projections took {0}", timer.Elapsed);
         }
 
         private void DoRebuildProjections(List<object> projections)
@@ -65,14 +75,14 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             var dispatcher = new ConventionalToWhenDispatcher();
             projections.ForEach(x => dispatcher.Subscribe(x));
 
-            var time = new Stopwatch();
+            var timer = new Stopwatch();
             var allEvents = _eventStore.LoadSince(0);
 
             foreach (var evt in allEvents)
                 dispatcher.DispatchToAll(evt);
 
-            time.Stop();
-            Console.WriteLine("Rebuilding projections took: {0}", time.Elapsed);
+            timer.Stop();
+            Console.WriteLine("Rebuilding projections took: {0}", timer.Elapsed);
         }
 
         private void PersistProjectionSignatures(IDictionary<object, string> realProjectionSignatures)
