@@ -8,6 +8,7 @@ using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Queue
 {
+    // This guy should DIE in pain. I hate this class.
     internal sealed class QueueMessageSerializer
     {
         private readonly ISerializer _innerSerializer;

@@ -10,6 +10,11 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
     public sealed class FileSystemQueueFactory : IQueueFactory
     {
         private readonly string _queuesFolder;
+
+        /// <summary>
+        /// Creates an insance of the file system queue factory
+        /// </summary>
+        /// <param name="queuesFolder">The location where all the queues will be sitting</param>
         public FileSystemQueueFactory(string queuesFolder)
         {
             if (!Directory.Exists(queuesFolder))

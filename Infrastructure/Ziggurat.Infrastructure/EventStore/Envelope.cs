@@ -14,8 +14,16 @@ namespace Ziggurat.Infrastructure.EventStore
         public static string MemberId = "MemberId";
     }
 
+    /// <summary>
+    /// A message (event) envelope that contains a message itself + some "metadata".
+    /// Every message coming in or out of EventStore is wrapped into this envelope.
+    /// </summary>
     public sealed class Envelope
     {
+        //Get or set some metadata.
+        //Getter and setter are defined as functions, not as properties to avoid serialization problems
+        //Question: move them to some extention methods? Or it doesn't make sense as there is only 1 envelope type?
+
         public bool IsAggregateIdSet() { return Headers.ContainsKey(EventHeaderKeys.AggregateId); }
         public Guid GetAggregateId() { return GetValueFromHeaders<Guid>(EventHeaderKeys.AggregateId); }
         public void SetAggregateId(Guid id) { Headers[EventHeaderKeys.AggregateId] = id; }

@@ -9,6 +9,11 @@ namespace Ziggurat.Infrastructure
 {
     public static class Partition
     {
+        /// <summary>
+        /// Generates a deterministic partition number (key) for the specified value
+        /// </summary>
+        /// <param name="value">A value to be partitioned</param>
+        /// <returns>A partition number.</returns>
         public static byte GetPartition(string value)
         {
             using (var md = new MD5CryptoServiceProvider())

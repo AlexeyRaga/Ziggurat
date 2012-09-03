@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 
 namespace Ziggurat.Infrastructure.Queue.FileSystem
 {
+    /// <summary>
+    /// Reads the file system queue
+    /// </summary>
     internal sealed class FileSystemQueueReader : IQueueReader
     {
+        //where is this queue sitting
         private readonly DirectoryInfo _queueFolder;
+
         internal FileSystemQueueReader(string queueFolder)
         {
             _queueFolder = new DirectoryInfo(queueFolder);
@@ -18,6 +23,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
 
         public IQueueMessage Peek()
         {
+            //just get the first message and return it!
             var firstMessage = _queueFolder.EnumerateFiles("*.msg")
                 .FirstOrDefault();
 
@@ -30,6 +36,8 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
         {
             if (msg == null) throw new ArgumentNullException("msg");
             var fsMessafe = (FileSystemQueueMessage)msg;
+
+            //hurray, this message is finally acked! delete it!
             fsMessafe.MessageFile.Delete();
         }
     }

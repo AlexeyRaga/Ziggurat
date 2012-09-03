@@ -7,6 +7,9 @@ using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Queue
 {
+    /// <summary>
+    /// Is responsible for sending messages to the specified queue.
+    /// </summary>
     public sealed class MessageSender
     {
         private readonly IQueueWriter _writer;

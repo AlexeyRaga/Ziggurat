@@ -11,9 +11,12 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
 {
     internal sealed class FileSystemQueueWriter : IQueueWriter
     {
+        //just a counter, used for generating a message file name
         private static long CurrentMessageId;
-
+        
+        //where this queue is sitting
         private readonly string _queueFolder;
+
         internal FileSystemQueueWriter(string queueFolder)
         {
             _queueFolder = queueFolder;
