@@ -66,6 +66,7 @@
     <Compile Include="Host.cs" />
     <Compile Include="IConfig.cs" />
     <Compile Include="JOEventStore.cs" />
+    <Compile Include="ProjectionRebuilder\ProjectionFactoryWrapper.cs" />
     <Compile Include="ProjectionRebuilder\ProjectionsSignatures.cs" />
     <Compile Include="ProjectionRebuilder\Rebuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
