@@ -53,6 +53,12 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             };
         }
 
+        public Action<object, object> CreateStreamerFor(Tuple<Type, Type> keyAndViewTypes, IProjectionStoreFactory streamTo)
+        {
+            var info = _cachedWriterInfos[keyAndViewTypes];
+            return info.CreateStreamer(streamTo);
+        }
+
         public sealed class IntermediateWriterInfo
         {
             public Func<IProjectionStoreFactory, Action<object, object>> CreateStreamer { get; private set; }

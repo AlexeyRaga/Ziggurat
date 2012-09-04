@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Ziggurat.Infrastructure.Projections
 {
     public sealed class InMemoryProjectionStoreFactory : IProjectionStoreFactory
     {
-        private readonly ConcurrentDictionary<Type, IDictionary> Structure = new ConcurrentDictionary<Type, IDictionary>(); 
+        private readonly ConcurrentDictionary<Tuple<Type, Type>, IDictionary> Structure
+            = new ConcurrentDictionary<Tuple<Type, Type>, IDictionary>();
+
+        public IDictionary<Tuple<Type, Type>, IDictionary> GetAllSets()
+        {
+            return Structure;
+        }
 
         public IProjectionReader<TKey, TView> GetReader<TKey, TView>()
         {
@@ -22,7 +29,9 @@ namespace Ziggurat.Infrastructure.Projections
 
         private ConcurrentDictionary<TKey, TView> GetOrCreateStorage<TKey, TView>()
         {
-            var dictionary = Structure.GetOrAdd(typeof(TView), t => new ConcurrentDictionary<TKey, TView>());
+            var dictionary = Structure.GetOrAdd(
+                Tuple.Create(typeof(TKey), typeof(TView)),
+                t => new ConcurrentDictionary<TKey, TView>());
             var typedDictionary = (ConcurrentDictionary<TKey, TView>)dictionary;
 
             return typedDictionary;

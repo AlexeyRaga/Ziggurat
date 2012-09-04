@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -33,7 +34,6 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             _eventStore       = eventStore;
             _realStoreFactory = realStoreFactory;
 
-            _inMemoryProjectionStore = new InMemoryProjectionStoreFactory();
             _howToBuildProjections   = howToBuildProjections;
 
             _signatureReader = realStoreFactory.GetReader<string, ProjectionsSignatures>();
@@ -42,7 +42,10 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         public void Run()
         {
-            var registeredProjections    = BuildProjections();
+            var inMemoryStore = new InMemoryProjectionStoreFactory();
+            var intermediateStore = new ProjectionFactoryWrapper(inMemoryStore);
+
+            var registeredProjections    = BuildProjections(intermediateStore);
             var knownProjections         = GetKnownProjectionsSignatures();
             var realProjectionSignatures = GetProjectionsSignatures(registeredProjections);
 
@@ -58,10 +61,28 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
             DoRebuildProjections(projectionsToRebuild.Keys.ToList());
 
-            Console.WriteLine("Saving rebuilt projections...");
-            SaveProjectionToRealStore();
+            WriteProjectionsToRealStore(inMemoryStore, intermediateStore);
 
             PersistProjectionSignatures(realProjectionSignatures);
+        }
+
+        private void WriteProjectionsToRealStore(InMemoryProjectionStoreFactory inMemoryStore, ProjectionFactoryWrapper intermediateStore)
+        {
+            Console.WriteLine("Saving rebuilt projections...");
+
+            var timer = new Stopwatch();
+            var allSets = inMemoryStore.GetAllSets();
+            foreach (var set in allSets)
+            {
+                var streamer = intermediateStore.CreateStreamerFor(set.Key, _realStoreFactory);
+
+                foreach (DictionaryEntry data in set.Value)
+                {
+                    streamer(data.Key, data.Value);
+                }
+            }
+            timer.Stop();
+            Console.WriteLine("Saved, it took {0}", timer.Elapsed);
         }
 
         private void SaveProjectionToRealStore()
@@ -81,7 +102,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             var allEvents = _eventStore.LoadSince(0);
 
             foreach (var evt in allEvents)
-                dispatcher.DispatchToAll(evt);
+                dispatcher.DispatchToAll(evt.Body);
 
             timer.Stop();
             Console.WriteLine("Rebuilding projections took: {0}", timer.Elapsed);
@@ -112,9 +133,9 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             return value;
         }
 
-        private IList<object> BuildProjections()
+        private IList<object> BuildProjections(IProjectionStoreFactory storeFactory)
         {
-            return _howToBuildProjections(_inMemoryProjectionStore).ToList();
+            return _howToBuildProjections(storeFactory).ToList();
         }
 
         private IDictionary<object, string> GetProjectionsSignatures(IList<object> projections)
