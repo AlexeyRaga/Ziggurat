@@ -85,14 +85,6 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             Console.WriteLine("Saved, it took {0}", timer.Elapsed);
         }
 
-        private void SaveProjectionToRealStore()
-        {
-            var timer = new Stopwatch();
-
-            timer.Stop();
-            Console.WriteLine("Saving projections took {0}", timer.Elapsed);
-        }
-
         private void DoRebuildProjections(List<object> projections)
         {
             var dispatcher = new ConventionalToWhenDispatcher();
