@@ -15,7 +15,7 @@ using Ziggurat.Infrastructure.Serialization;
 using Ziggurat.Registration.Client;
 using Ziggurat.Registration.Domain;
 
-namespace Ziggurat.Registration.Service
+namespace Ziggurat.Registration.Worker
 {
     public class Program
     {

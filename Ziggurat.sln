@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Infrastructure.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Client.Setup", "Infrastructure\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj", "{878A7983-395D-4930-A901-DF576E64D070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Service", "Definition\Ziggurat.Definition.Service\Ziggurat.Definition.Service.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Worker", "Definition\Ziggurat.Definition.Worker\Ziggurat.Definition.Worker.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Projections", "Definition\Ziggurat.Definition.Projections\Ziggurat.Definition.Projections.csproj", "{D4B57488-42AA-4C9D-B67A-D0D2516F2361}"
 EndProject
@@ -41,7 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Web", "Registration\Ziggurat.Registration.Web\Ziggurat.Registration.Web.csproj", "{E9930F9B-866F-4E93-9AA8-53030CAA6D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Service", "Registration\Ziggurat.Registration.Service\Ziggurat.Registration.Service.csproj", "{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Worker", "Registration\Ziggurat.Registration.Worker\Ziggurat.Registration.Worker.csproj", "{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Client", "Registration\Ziggurat.Registration.Client\Ziggurat.Registration.Client.csproj", "{528BED5A-3D3F-424F-981A-8C90B03C4BDF}"
 EndProject

@@ -7,8 +7,8 @@
     <ProjectGuid>{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ziggurat.Registration.Service</RootNamespace>
-    <AssemblyName>Ziggurat.Registration.Service</AssemblyName>
+    <RootNamespace>Ziggurat.Registration.Worker</RootNamespace>
+    <AssemblyName>Ziggurat.Registration.Worker</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Ziggurat.Registration.Worker.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

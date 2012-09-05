@@ -14,7 +14,7 @@ using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;
 using Ziggurat.Definition.Domain;
 
-namespace Ziggurat.Definition.Service
+namespace Ziggurat.Definition.Worker
 {
     public class Program
     {

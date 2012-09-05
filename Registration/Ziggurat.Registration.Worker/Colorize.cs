@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ziggurat.Registration.Service
+namespace Ziggurat.Registration.Worker
 {
     public sealed class Colorize : IDisposable
     {
