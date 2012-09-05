@@ -16,7 +16,6 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
     {
         private readonly IEventStore _eventStore;
         private readonly IProjectionStoreFactory _realStoreFactory;
-        private readonly IProjectionStoreFactory _inMemoryProjectionStore;
         private readonly Func<IProjectionStoreFactory, IEnumerable<object>> _howToBuildProjections;
 
         private readonly IProjectionWriter<string, ProjectionsSignatures> _signatureWriter;
