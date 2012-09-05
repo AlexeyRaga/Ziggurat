@@ -7,8 +7,8 @@
     <ProjectGuid>{D4B57488-42AA-4C9D-B67A-D0D2516F2361}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ziggurat.Definition.Projections</RootNamespace>
-    <AssemblyName>Ziggurat.Definition.Projections</AssemblyName>
+    <RootNamespace>Ziggurat.Definition.Client</RootNamespace>
+    <AssemblyName>Ziggurat.Definition.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientBoundedContext.cs" />
     <Compile Include="ProjectList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -13,6 +13,7 @@ using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;
 using Ziggurat.Definition.Domain;
+using Ziggurat.Definition.Client;
 
 namespace Ziggurat.Definition.Worker
 {

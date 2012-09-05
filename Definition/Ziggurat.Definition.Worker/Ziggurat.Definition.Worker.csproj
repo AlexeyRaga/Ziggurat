@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientBoundedContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,9 +63,9 @@
       <Project>{033dba65-b099-4129-b3be-3c39903329c7}</Project>
       <Name>Ziggurat.Definition.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ziggurat.Definition.Projections\Ziggurat.Definition.Projections.csproj">
+    <ProjectReference Include="..\Ziggurat.Definition.Client\Ziggurat.Definition.Client.csproj">
       <Project>{d4b57488-42aa-4c9d-b67a-d0d2516f2361}</Project>
-      <Name>Ziggurat.Definition.Projections</Name>
+      <Name>Ziggurat.Definition.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

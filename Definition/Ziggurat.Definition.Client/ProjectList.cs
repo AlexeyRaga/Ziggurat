@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ziggurat.Contracts.Definition;
 using Ziggurat.Infrastructure.Projections;
 
-namespace Ziggurat.Definition.Projections
+namespace Ziggurat.Definition.Client
 {
     public sealed class ProjectListItem
     {
