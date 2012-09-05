@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Registration.Domain.Lookups.LoginIndex
 {
@@ -15,9 +15,9 @@ namespace Ziggurat.Registration.Domain.Lookups.LoginIndex
 
     public sealed class LoginIndexLookupService : ILoginIndexLookupService
     {
-        private readonly IProjectionReader<byte, LoginIndexLookup> _reader;
+        private readonly IDocumentReader<byte, LoginIndexLookup> _reader;
 
-        public LoginIndexLookupService(IProjectionStoreFactory storeFactory)
+        public LoginIndexLookupService(IDocumentStore storeFactory)
         {
             if (storeFactory == null) throw new ArgumentNullException("storeFactory");
             _reader = storeFactory.GetReader<byte, LoginIndexLookup>();

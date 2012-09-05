@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Registration.Web
 {
@@ -16,8 +16,8 @@ namespace Ziggurat.Registration.Web
     // concrete readers can be cached for performance reasons if it is needed.
     public sealed class SimpleProjectionReader : IViewModelReader
     {
-        private readonly IProjectionStoreFactory _projectionStore;
-        public SimpleProjectionReader(IProjectionStoreFactory projectionStore)
+        private readonly IDocumentStore _projectionStore;
+        public SimpleProjectionReader(IDocumentStore projectionStore)
         {
             _projectionStore = projectionStore;
         }

@@ -8,7 +8,7 @@ using Ziggurat.Client.Setup;
 using Ziggurat.Client.Setup.ProjectionRebuilder;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;
@@ -51,7 +51,7 @@ namespace Ziggurat.Registration.Worker
                     var appServices = RegistrationDomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
                     var processes = RegistrationDomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
 
-                    Func<IProjectionStoreFactory, IEnumerable<object>> getProjectionsFunction =
+                    Func<IDocumentStore, IEnumerable<object>> getProjectionsFunction =
                         factory =>
                         {
                             var domainProjections = RegistrationDomainBoundedContext.BuildProjections(factory);

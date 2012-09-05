@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts.Definition;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Definition.Client
 {
@@ -35,9 +35,9 @@ namespace Ziggurat.Definition.Client
 
     public sealed class ProjectListProjection
     {
-        private IProjectionWriter<string, ProjectList> _writer;
+        private IDocumentWriter<string, ProjectList> _writer;
 
-        public ProjectListProjection(IProjectionStoreFactory store)
+        public ProjectListProjection(IDocumentStore store)
         {
             _writer = store.GetWriter<string, ProjectList>();
         }

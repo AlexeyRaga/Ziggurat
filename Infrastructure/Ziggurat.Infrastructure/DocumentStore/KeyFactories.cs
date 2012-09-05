@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Ziggurat.Infrastructure.Projections
+namespace Ziggurat.Infrastructure.DocumentStore
 {
 	public static class KeyFactories
 	{

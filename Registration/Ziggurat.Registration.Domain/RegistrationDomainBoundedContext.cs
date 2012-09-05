@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 using Ziggurat.Registration.Domain.Lookups.LoginIndex;
 
 namespace Ziggurat.Registration.Domain
 {
     public sealed class RegistrationDomainBoundedContext
     {
-        public static IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
+        public static IEnumerable<object> BuildProjections(IDocumentStore factory)
         {
             yield return new Lookups.LoginIndex.LoginIndexProjection(factory);
             yield break;
         }
 
-        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore, IProjectionStoreFactory projectionStore)
+        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore, IDocumentStore projectionStore)
         {
             var loginIndexService = new LoginIndexLookupService(projectionStore);
 

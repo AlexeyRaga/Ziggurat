@@ -4,28 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Client.Setup.ProjectionRebuilder
 {
-    public sealed class ProjectionFactoryWrapper : IProjectionStoreFactory
+    public sealed class ProjectionFactoryWrapper : IDocumentStore
     {
         private ConcurrentDictionary<Tuple<Type, Type>, IntermediateWriterInfo> _cachedWriterInfos
             = new ConcurrentDictionary<Tuple<Type, Type>, IntermediateWriterInfo>();
 
-        private readonly IProjectionStoreFactory _innerFactory;
-        public ProjectionFactoryWrapper(IProjectionStoreFactory innerFactory)
+        private readonly IDocumentStore _innerFactory;
+        public ProjectionFactoryWrapper(IDocumentStore innerFactory)
         {
             _innerFactory = innerFactory;
         }
 
-        public IProjectionReader<TKey, TView> GetReader<TKey, TView>()
+        public IDocumentReader<TKey, TView> GetReader<TKey, TView>()
         {
             var innerReader = _innerFactory.GetReader<TKey, TView>();
             return innerReader;
         }
 
-        public IProjectionWriter<TKey, TView> GetWriter<TKey, TView>()
+        public IDocumentWriter<TKey, TView> GetWriter<TKey, TView>()
         {
             var cachedWriter = _cachedWriterInfos.GetOrAdd(
                 Tuple.Create(typeof(TKey), typeof(TView)),
@@ -37,10 +37,10 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
                         storeFactory => GenerateUntypedCallingAction<TKey, TView>(storeFactory));
                 });
 
-            return (IProjectionWriter<TKey, TView>)cachedWriter.IntermediateWriter;
+            return (IDocumentWriter<TKey, TView>)cachedWriter.IntermediateWriter;
         }
 
-        private Action<object, object> GenerateUntypedCallingAction<TKey, TView>(IProjectionStoreFactory storeFactory)
+        private Action<object, object> GenerateUntypedCallingAction<TKey, TView>(IDocumentStore storeFactory)
         {
             var typedWriter = storeFactory.GetWriter<TKey, TView>();
             return (key, view) =>
@@ -53,7 +53,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             };
         }
 
-        public Action<object, object> CreateStreamerFor(Tuple<Type, Type> keyAndViewTypes, IProjectionStoreFactory streamTo)
+        public Action<object, object> CreateStreamerFor(Tuple<Type, Type> keyAndViewTypes, IDocumentStore streamTo)
         {
             var info = _cachedWriterInfos[keyAndViewTypes];
             return info.CreateStreamer(streamTo);
@@ -61,12 +61,12 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         public sealed class IntermediateWriterInfo
         {
-            public Func<IProjectionStoreFactory, Action<object, object>> CreateStreamer { get; private set; }
+            public Func<IDocumentStore, Action<object, object>> CreateStreamer { get; private set; }
             public object IntermediateWriter { get; private set; }
 
             public IntermediateWriterInfo(
                 object intermediateWriter, 
-                Func<IProjectionStoreFactory, Action<object, object>> createStreamer)
+                Func<IDocumentStore, Action<object, object>> createStreamer)
             {
                 IntermediateWriter = intermediateWriter;
                 CreateStreamer = createStreamer;

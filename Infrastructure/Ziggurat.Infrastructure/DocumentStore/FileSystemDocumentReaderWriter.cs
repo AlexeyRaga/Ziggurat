@@ -2,9 +2,9 @@
 using System.IO;
 using Ziggurat.Infrastructure.Serialization;
 
-namespace Ziggurat.Infrastructure.Projections
+namespace Ziggurat.Infrastructure.DocumentStore
 {
-	public sealed class FileSystemProjectionReaderWriter<TKey, TView> : IProjectionReader<TKey, TView>, IProjectionWriter<TKey, TView>
+	public sealed class FileSystemDocumentReaderWriter<TKey, TDocument> : IDocumentReader<TKey, TDocument>, IDocumentWriter<TKey, TDocument>
 	{
 		public string RootFolder { get; private set; }
 
@@ -12,28 +12,28 @@ namespace Ziggurat.Infrastructure.Projections
 		private readonly Func<TKey, string> _subfolderFactory;
 
 		/// <summary>
-		/// Creates a projection reader and writer which is capable of persisting view models in a file system
+		/// Creates a document reader and writer which is capable of persisting view models in a file system
 		/// </summary>
 		/// <param name="rootFolder">A root folder on disk where everything is persisted.</param>
 		/// <param name="serializer">A serializer to use</param>
-		public FileSystemProjectionReaderWriter(string rootFolder, ISerializer serializer)
+		public FileSystemDocumentReaderWriter(string rootFolder, ISerializer serializer)
 			: this(rootFolder, null, serializer)
 		{
 		}
 
 		/// <summary>
-		/// Creates a projection reader and writer which is capable of persisting view models in a file system
+		/// Creates a document reader and writer which is capable of persisting view models in a file system
 		/// </summary>
 		/// <param name="rootFolder">A root folder on disk where everything is persisted.</param>
 		/// <param name="subfolderFactory">Optional. A factory function from a key to subfolders tree. 
 		/// For example, one may want to evenly distribute files between N subfolders.</param>
 		/// <param name="serializer">A serializer to use</param>
-		public FileSystemProjectionReaderWriter(string rootFolder, Func<TKey, string> subfolderFactory, ISerializer serializer)
+		public FileSystemDocumentReaderWriter(string rootFolder, Func<TKey, string> subfolderFactory, ISerializer serializer)
 		{
 			if (String.IsNullOrWhiteSpace(rootFolder)) throw new ArgumentNullException("rootFolder");
 			if (serializer == null) throw new ArgumentNullException("serializer");
 
-			RootFolder = Path.Combine(rootFolder, typeof(TView).Name);
+			RootFolder = Path.Combine(rootFolder, typeof(TDocument).Name);
 			_serializer = serializer;
 			_subfolderFactory = subfolderFactory;
 		}
@@ -46,7 +46,7 @@ namespace Ziggurat.Infrastructure.Projections
 		private static string GetFileNameOnly(TKey key)
 		{
 			var idFileNamePart = key.ToString();
-			return String.Format("{0}-{1}.ivm", idFileNamePart, typeof (TView).Name);
+			return String.Format("{0}-{1}.ivm", idFileNamePart, typeof (TDocument).Name);
 		}
 
 		private string GetStoreFolder(TKey key)
@@ -62,7 +62,7 @@ namespace Ziggurat.Infrastructure.Projections
 			return Path.Combine(folderPath, fileName);
 		}
 
-		public bool TryGet(TKey key, out TView view)
+		public bool TryGet(TKey key, out TDocument document)
 		{
 			var fileName = GetFullFileName(key);
 
@@ -72,23 +72,23 @@ namespace Ziggurat.Infrastructure.Projections
 				{
 					using (var stream = File.OpenRead(fileName))
 					{
-						view = _serializer.Deserialize<TView>(stream);
+						document = _serializer.Deserialize<TDocument>(stream);
 						return true;
 					}
 				}
 			} 
 			catch(IOException)
 			{
-				view = default(TView);
+				document = default(TDocument);
 				return false;
 			}
-			catch (ProjectionSerializationException)
+			catch (DocumentSerializationException)
 			{
-				view = default(TView);
+				document = default(TDocument);
 				return false;
 			}
 
-			view = default(TView);
+			document = default(TDocument);
 			return false;
 		}
 
@@ -98,7 +98,7 @@ namespace Ziggurat.Infrastructure.Projections
             return File.Exists(fileName);
         }
 
-		public TView AddOrUpdate(TKey key, Func<TView> addFactory, Func<TView, TView> updateFactory)
+		public TDocument AddOrUpdate(TKey key, Func<TDocument> addFactory, Func<TDocument, TDocument> updateFactory)
 		{
 			var folderPath = GetStoreFolder(key);
 			var fileName = GetFullFileName(key);
@@ -110,14 +110,14 @@ namespace Ziggurat.Infrastructure.Projections
 				// we are locking this file.
 				using (var file = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
 				{
-					TView result;
+					TDocument result;
 					if (file.Length == 0)
 					{
 						result = addFactory();
 					}
 					else
 					{
-						result = _serializer.Deserialize<TView>(file);
+						result = _serializer.Deserialize<TDocument>(file);
 						result = updateFactory(result);
 					}
 
@@ -128,13 +128,13 @@ namespace Ziggurat.Infrastructure.Projections
 					return result;
 				}
 			}
-			catch (ProjectionSerializationException ex)
+			catch (DocumentSerializationException ex)
 			{
-				throw new ProjectionIOException(key, ex.Message, ex);
+				throw new DocumentStoreIOException(key, ex.Message, ex);
 			}
 			catch (IOException ex)
 			{
-				throw new ProjectionIOException(key, ex.Message, ex);
+				throw new DocumentStoreIOException(key, ex.Message, ex);
 			}
 		}
 

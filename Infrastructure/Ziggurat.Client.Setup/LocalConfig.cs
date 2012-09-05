@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
 using Ziggurat.Infrastructure.Serialization;
@@ -18,11 +18,11 @@ namespace Ziggurat.Client.Setup
         private readonly string _queuesFolder;
         private readonly string _projectionsFolder;
         private readonly ISerializer _serializer;
-        private readonly IProjectionStoreFactory _projectionsStore;
+        private readonly IDocumentStore _projectionsStore;
         private readonly IQueueFactory _queueFactory;
 
         public ISerializer Serializer { get { return _serializer; } }
-        public IProjectionStoreFactory ProjectionsStore { get { return _projectionsStore; } }
+        public IDocumentStore ProjectionsStore { get { return _projectionsStore; } }
         public IQueueFactory QueueFactory { get { return _queueFactory; } }
 
         private LocalConfig(string queuesFolder, string projectionsFolder)
@@ -30,7 +30,7 @@ namespace Ziggurat.Client.Setup
             _queuesFolder      = queuesFolder;
             _projectionsFolder = projectionsFolder;
             _serializer        = new JsonValueSerializer();
-            _projectionsStore  = new FileSystemProjectionStoreFactory(projectionsFolder, _serializer);
+            _projectionsStore  = new FileSystemDocumentStore(projectionsFolder, _serializer);
             _queueFactory      = new FileSystemQueueFactory(queuesFolder);
         }
 

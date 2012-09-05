@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts.Registration;
 using Ziggurat.Infrastructure;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Registration.Client.Login
 {
     public sealed class UserLoginProjection
     {
-        private IProjectionWriter<byte, PasswordIndex> _passwordsWriter;
-        public UserLoginProjection(IProjectionStoreFactory storeFactory)
+        private IDocumentWriter<byte, PasswordIndex> _passwordsWriter;
+        public UserLoginProjection(IDocumentStore storeFactory)
         {
             _passwordsWriter = storeFactory.GetWriter<byte, PasswordIndex>();
         }

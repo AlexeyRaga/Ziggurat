@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Definition.Domain
 {
     public static class DomainBoundedContext
     {
-        public static IEnumerable<object> BuildProjections(IProjectionStoreFactory factory)
+        public static IEnumerable<object> BuildProjections(IDocumentStore factory)
         {
             yield break;
         }
 
-        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore, IProjectionStoreFactory projectionStore)
+        public static IEnumerable<object> BuildApplicationServices(IEventStore eventStore, IDocumentStore projectionStore)
         {
             yield return new FormDefinition.FormDefinitionApplicationService(eventStore);
             yield return new Project.ProjectApplicationService(eventStore);

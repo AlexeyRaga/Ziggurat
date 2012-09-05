@@ -8,23 +8,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Client.Setup.ProjectionRebuilder
 {
     public sealed class Rebuilder
     {
         private readonly IEventStore _eventStore;
-        private readonly IProjectionStoreFactory _realStoreFactory;
-        private readonly Func<IProjectionStoreFactory, IEnumerable<object>> _howToBuildProjections;
+        private readonly IDocumentStore _realStoreFactory;
+        private readonly Func<IDocumentStore, IEnumerable<object>> _howToBuildProjections;
 
-        private readonly IProjectionWriter<string, ProjectionsSignatures> _signatureWriter;
-        private readonly IProjectionReader<string, ProjectionsSignatures> _signatureReader;
+        private readonly IDocumentWriter<string, ProjectionsSignatures> _signatureWriter;
+        private readonly IDocumentReader<string, ProjectionsSignatures> _signatureReader;
 
         public Rebuilder(
             IEventStore eventStore,
-            IProjectionStoreFactory realStoreFactory, 
-            Func<IProjectionStoreFactory, IEnumerable<object>> howToBuildProjections)
+            IDocumentStore realStoreFactory, 
+            Func<IDocumentStore, IEnumerable<object>> howToBuildProjections)
         {
             if (eventStore == null) throw new ArgumentNullException("eventStore");
             if (realStoreFactory == null) throw new ArgumentNullException("realStoreFactory");
@@ -41,7 +41,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         public void Run()
         {
-            var inMemoryStore = new InMemoryProjectionStoreFactory();
+            var inMemoryStore = new InMemoryDocumentStoreFactory();
             var intermediateStore = new ProjectionFactoryWrapper(inMemoryStore);
 
             var registeredProjections    = BuildProjections(intermediateStore);
@@ -52,7 +52,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
             if (projectionsToRebuild.Count == 0) return;
 
-            Console.WriteLine("Projections to rebuild: {0}, running...", projectionsToRebuild.Count);
+            Console.WriteLine("DocumentStore to rebuild: {0}, running...", projectionsToRebuild.Count);
             foreach (var prj in projectionsToRebuild)
             {
                 Console.WriteLine("\t" + prj.Key.GetType().Name);
@@ -65,7 +65,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             PersistProjectionSignatures(realProjectionSignatures);
         }
 
-        private void WriteProjectionsToRealStore(InMemoryProjectionStoreFactory inMemoryStore, ProjectionFactoryWrapper intermediateStore)
+        private void WriteProjectionsToRealStore(InMemoryDocumentStoreFactory inMemoryStore, ProjectionFactoryWrapper intermediateStore)
         {
             Console.WriteLine("Saving rebuilt projections...");
 
@@ -124,7 +124,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             return value;
         }
 
-        private IList<object> BuildProjections(IProjectionStoreFactory storeFactory)
+        private IList<object> BuildProjections(IDocumentStore storeFactory)
         {
             return _howToBuildProjections(storeFactory).ToList();
         }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Ziggurat.Infrastructure.Serialization;
 
-namespace Ziggurat.Infrastructure.Projections
+namespace Ziggurat.Infrastructure.DocumentStore
 {
-	public sealed class FileSystemProjectionStoreFactory : IProjectionStoreFactory
+	public sealed class FileSystemDocumentStore : IDocumentStore
 	{
 		private readonly string _rootFolder;
 		private readonly ISerializer _serializer;
@@ -12,7 +12,7 @@ namespace Ziggurat.Infrastructure.Projections
 		private readonly Dictionary<Type, object> _keyFactories
 			= new Dictionary<Type, object>();
 
-		public FileSystemProjectionStoreFactory(string rootFolder, ISerializer serializer)
+		public FileSystemDocumentStore(string rootFolder, ISerializer serializer)
 		{
 			if (serializer == null) throw new ArgumentNullException("serializer");
 			if (String.IsNullOrEmpty(rootFolder)) throw new ArgumentNullException("rootFolder");
@@ -24,16 +24,16 @@ namespace Ziggurat.Infrastructure.Projections
             RegisterKeyFactory<string>(KeyFactories.TwoSubfolders);
 		}
 
-		public IProjectionReader<TKey, TView> GetReader<TKey, TView>()
+		public IDocumentReader<TKey, TDocument> GetReader<TKey, TDocument>()
 		{
 			var keyFactory = GetKeyFactory<TKey>();
-			return new FileSystemProjectionReaderWriter<TKey, TView>(_rootFolder, keyFactory, _serializer);
+			return new FileSystemDocumentReaderWriter<TKey, TDocument>(_rootFolder, keyFactory, _serializer);
 		}
 
-		public IProjectionWriter<TKey, TView> GetWriter<TKey, TView>()
+		public IDocumentWriter<TKey, TDocument> GetWriter<TKey, TDocument>()
 		{
 			var keyFactory = GetKeyFactory<TKey>();
-			return new FileSystemProjectionReaderWriter<TKey, TView>(_rootFolder, keyFactory, _serializer);
+			return new FileSystemDocumentReaderWriter<TKey, TDocument>(_rootFolder, keyFactory, _serializer);
 		}
 
 		private Func<TKey, string> GetKeyFactory<TKey>()
