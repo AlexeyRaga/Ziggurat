@@ -17,5 +17,10 @@ namespace Ziggurat.Definition.Domain.Project
 
             Update(cmd.Id, prj => prj.Create(cmd.Id, cmd.Name, cmd.ShortName));
         }
+
+        public void When(AddFormToProject cmd)
+        {
+            Update(cmd.ProjectId, prj => prj.AddForm(cmd.FormId));
+        }
     }
 }

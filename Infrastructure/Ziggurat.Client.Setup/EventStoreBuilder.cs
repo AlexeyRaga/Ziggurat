@@ -26,7 +26,7 @@ namespace Ziggurat.Client.Setup
         {
             return Wireup.Init()
                .LogToOutputWindow()
-               .UsingSqlPersistence("ESTest") // Connection string is in app.config
+               .UsingSqlPersistence("ZigguratES") // Connection string is in app.config
                    .EnlistInAmbientTransaction() // two-phase commit
                    .InitializeStorageEngine()
                    .UsingJsonSerialization()

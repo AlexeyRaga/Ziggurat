@@ -43,7 +43,10 @@
     <Compile Include="Definition.generated.cs">
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
-    <Compile Include="DefinitionInterfaces.cs" />
+    <Compile Include="Definition\DefinitionInterfaces.cs" />
+    <Compile Include="Definition\DefinitionContract.cs" />
+    <Compile Include="Definition\DefinitionIdGenerator.cs" />
+    <Compile Include="Id\GuidGenerator.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Messages.cs">
       <AutoGen>True</AutoGen>
@@ -51,15 +54,23 @@
       <DependentUpon>Messages.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyType.cs" />
+    <Compile Include="Registration.generated.cs">
+      <DependentUpon>Messages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Definition\PropertyType.cs" />
+    <Compile Include="Registration\ProfileData.cs" />
+    <Compile Include="Registration\RegistrationData.cs" />
+    <Compile Include="Registration\RegistrationIdGenerator.cs" />
+    <Compile Include="Registration\SecurityData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Definition.dsl" />
+    <None Include="Definition\Definition.dsl" />
     <None Include="Messages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Messages.cs</LastGenOutput>
     </None>
     <None Include="MultipleOutputHelper.ttinclude" />
+    <None Include="Registration\Registration.dsl" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -67,6 +78,7 @@
   <ItemGroup>
     <Content Include="README.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

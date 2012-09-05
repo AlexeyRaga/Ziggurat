@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using EventStore;
 using Ziggurat.Infrastructure.EventStore;
@@ -20,10 +21,27 @@ namespace Ziggurat.Client.Setup
         {
             if (aggregateIdentity == null) throw new ArgumentNullException("aggregateIdentity");
 
-            using (var stream = _realEventStore.OpenStream(aggregateIdentity, revision, int.MaxValue))
-            {
-                return new EventStream(stream.StreamRevision, stream.CommittedEvents.ToEnvelopes());
-            }
+            var commits = _realEventStore.Advanced
+                .GetFrom(aggregateIdentity, revision, Int32.MaxValue)
+                .ToList();
+
+            var lastCommit = commits.LastOrDefault();
+
+            var newRevision = lastCommit == null ? revision : lastCommit.StreamRevision;
+
+            var envelopes = commits
+                .SelectMany(x => x.EventsToEnvelopes())
+                .ToList();
+
+            return new EventStream(newRevision, envelopes);
+        }
+
+        public IEnumerable<Envelope> LoadSince(long stamp)
+        {
+            var dateStamp = new DateTime(stamp);
+            var commits = _realEventStore.Advanced.GetFrom(dateStamp);
+
+            return commits.SelectMany(x => x.EventsToEnvelopes());
         }
 
         public void Append(Guid aggregateIdentity, int revision, Guid commitId, IEnumerable<Envelope> events)
@@ -48,6 +66,22 @@ namespace Ziggurat.Client.Setup
 
     public static class EnvelopeExtensions
     {
+        public static IEnumerable<Envelope> EventsToEnvelopes(this Commit commit)
+        {
+            var stamp = commit.CommitStamp.Ticks;
+            var commitUniqueId = String.Concat(commit.CommitId, "-", commit.StreamRevision.ToString());
+
+            for (var i = 0; i < commit.Events.Count; i++ )
+            {
+                var msg = commit.Events[i];
+                var msgUniqueId = String.Concat(commitUniqueId, ":", i.ToString());
+                var envelope = new Envelope(msg.Body, msg.Headers);
+                envelope.SetStamp(stamp);
+                envelope.SetUniqueId(msgUniqueId);
+                yield return envelope;
+            }
+        }
+
         public static IEnumerable<Envelope> ToEnvelopes(this IEnumerable<EventMessage> messages)
         {
             foreach (var msg in messages)
@@ -58,7 +92,7 @@ namespace Ziggurat.Client.Setup
         {
             foreach (var evt in events)
             {
-                var msg = new EventMessage { Body = evt };
+                var msg = new EventMessage { Body = evt.Body };
 
                 //populate message headers: extra information for audit and history reasons.
                 FillInEnvelopeSpecificHeaders(msg, evt);

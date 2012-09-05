@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ziggurat.Infrastructure.Projections;
+using System.Collections.Concurrent;
 
 namespace Ziggurat.Infrastructure.Tests.Projections
 {
@@ -10,7 +11,7 @@ namespace Ziggurat.Infrastructure.Tests.Projections
         [TestMethod]
         public void Should_be_able_to_add_a_view()
         {
-            var readerWriter = new InMemoryProjectionReaderWriter<Guid, DummyView>();
+            var readerWriter = new InMemoryProjectionReaderWriter<Guid, DummyView>(new ConcurrentDictionary<Guid, DummyView>());
             var view = new DummyView() {
                 Id = Guid.NewGuid(),
             };
@@ -24,7 +25,7 @@ namespace Ziggurat.Infrastructure.Tests.Projections
             "InvalidOperationException should be thrown if trying to add a view with existing key")]
         public void Should_not_be_able_to_add_a_view_with_existing_key()
         {
-            var readerWriter = new InMemoryProjectionReaderWriter<Guid, DummyView>();
+            var readerWriter = new InMemoryProjectionReaderWriter<Guid, DummyView>(new ConcurrentDictionary<Guid, DummyView>());
             var key = Guid.NewGuid();
 
             var view1 = new DummyView() {

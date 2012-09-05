@@ -2,67 +2,95 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Client.Setup;
-using Ziggurat.Definition.Domain;
+using Ziggurat.Client.Setup.ProjectionRebuilder;
 using Ziggurat.Infrastructure;
-using Ziggurat.Infrastructure.Evel;
 using Ziggurat.Infrastructure.EventStore;
 using Ziggurat.Infrastructure.Projections;
 using Ziggurat.Infrastructure.Queue;
 using Ziggurat.Infrastructure.Queue.FileSystem;
+using Ziggurat.Infrastructure.Serialization;
+using Ziggurat.Definition.Domain;
 
 namespace Ziggurat.Definition.Service
 {
     public class Program
     {
+        const string IncommingCommandsQueue = "cmd-contracts-definition";
+        const string IncommingEventsQueue = "evt-definition";
+
         static readonly IMessageDispatcher EventsDispatcher = new ConventionalToWhenDispatcher();
         static readonly IMessageDispatcher CommandDispatcher = new ConventionalToWhenDispatcher();
 
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            var commandSender = new SimpleCommandSender(CommandDispatcher);
+            Console.WriteLine("Starting in thread: {0}", Thread.CurrentThread.ManagedThreadId); 
+            var config = LocalConfig.CreateNew(ConfigurationManager.AppSettings["fileStore"]);
 
-            var projectionFactory =
-                new FileSystemProjectionStoreFactory(
-                    ConfigurationManager.AppSettings["projectionsRootFolder"], 
-                    new JsonProjectionSerializer());
+            //where to send commands: this command sender is used by "processes" (things that receive events and
+            //publish commands). It makes sense to do it "locally", avoiding any queues.
+            //So it would look: got an event -> produced a command -> dispatched/executed it immediately.
+            var whereToSendLocalCommands = new ToDispatcherCommandSender(CommandDispatcher);
 
-            var queueFactory = new FileSystemQueueFactory(ConfigurationManager.AppSettings["queuesFolder"]);
-            var commandsQueue = queueFactory.CreateReader("cmd-contracts-definition");
+            //spin up a commands receiver, it will receive commands and dispatch them to the CommandDispatcher
+            var commandsReceiver = config.CreateIncomingMessagesDispatcher(IncommingCommandsQueue, DispatchCommand);
+            var eventsReceiver = config.CreateIncomingMessagesDispatcher(IncommingEventsQueue, x => DispatchEvent((Envelope)x));
 
-            var commandsReceiver = new MessageReceiver(new[] { commandsQueue });
-
-            var commandsDispatcher = new ReceivedMessageDispatcher(
-                CommandDispatcher.DispatchToOneAndOnlyOne,
-                new JsonQueueMessageSerializer(),
-                commandsReceiver);
-
-            using (commandsDispatcher)
+            using (var host = new Host())
             {
-                using (var eventStore = EventStoreBuilder.CreateEventStore(DispatchEvents))
+                using (var eventStore = config.CreateEventStore("ZigguratES"))
                 {
-                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, projectionFactory);
-                    var processes = DomainBoundedContext.BuildEventProcessors(commandSender);
-                    var projections = ClientBoundedContext.BuildProjections(projectionFactory);
+                    var eventsFromEventSourceToQueueDistributor =
+                        new EventStoreToQueueDistributor(IncommingEventsQueue, config.QueueFactory, eventStore, config.ProjectionsStore, config.Serializer);
+
+                    var appServices = DomainBoundedContext.BuildApplicationServices(eventStore, config.ProjectionsStore);
+                    var processes = DomainBoundedContext.BuildEventProcessors(whereToSendLocalCommands);
+
+                    Func<IProjectionStoreFactory, IEnumerable<object>> getProjectionsFunction =
+                        factory =>
+                        {
+                            var domainProjections = DomainBoundedContext.BuildProjections(factory);
+                            var clientProjections = ClientBoundedContext.BuildProjections(factory);
+                            return domainProjections.Concat(clientProjections);
+                        };
+
+                    var projectionRebuilder = new Rebuilder(eventStore, config.ProjectionsStore, getProjectionsFunction);
+
+                    host.AddStartupTask(c => projectionRebuilder.Run());
+
+                    var projections = getProjectionsFunction(config.ProjectionsStore);
 
                     foreach (var appService in appServices) CommandDispatcher.Subscribe(appService);
                     foreach (var projection in projections) EventsDispatcher.Subscribe(projection);
                     foreach (var process in processes) EventsDispatcher.Subscribe(process);
 
+                    host.AddTask(c => commandsReceiver.Run(c));
+                    host.AddTask(c => eventsFromEventSourceToQueueDistributor.Run(c));
+                    host.AddTask(c => eventsReceiver.Run(c));
+                    host.Run();
+
+                    Thread.Sleep(400);
+
+                    host.Run();
+                    Thread.Sleep(400);
                     Console.ReadKey();
                 }
             }
 
         }
 
-        private static void DispatchEvents(IEnumerable<Envelope> events)
+        private static void DispatchCommand(object command)
         {
-            foreach (var evt in events)
-            {
-                EventsDispatcher.DispatchToAll(evt.Body);
-            }
+            Console.WriteLine(command.ToString());
+            CommandDispatcher.DispatchToOneAndOnlyOne(command);
+        }
+
+        public static void DispatchEvent(Envelope evt)
+        {
+            Console.WriteLine(evt.Body.ToString());
+            EventsDispatcher.DispatchToAll(evt.Body);
         }
     }
 }

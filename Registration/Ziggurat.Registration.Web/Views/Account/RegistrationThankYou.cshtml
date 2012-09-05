@@ -1,0 +1,16 @@
+﻿@model System.Guid
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="hero-unit">
+    <h1>Thank you.</h1>
+
+    <p>We have received your registration and working hard settling you up in our system.</p>
+    <p>You will be notified when your account is ready.</p>
+
+    <p>However, if you can't wait (or don't trust us), you can click the button below 
+        to see your registration status.</p>
+
+    @Html.ActionLink("Can't wait!", "RegistrationStatus", new { id = Model }, new { @class="btn btn-primary btn-large"})
+</div>

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ziggurat.Contracts;
 using Ziggurat.Definition.Domain.Project;
 using Ziggurat.Contracts.Definition;
+using Ziggurat.Infrastructure;
 
 namespace Ziggurat.Definition.Domain.Tests.Project
 {
@@ -13,9 +14,10 @@ namespace Ziggurat.Definition.Domain.Tests.Project
         public void Should_create_project()
         {
             var id = Guid.NewGuid();
+            var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
             When = prj => prj.Create(id, "Some Name", "shortName2");
             Then = new IEvent[] {
-                new ProjectCreated(id, "Some Name", "shortName2")
+                new ProjectCreated(id, layoutId, "Some Name", "shortName2")
             };
         }
 
@@ -23,8 +25,9 @@ namespace Ziggurat.Definition.Domain.Tests.Project
         public void Double_create_should_fail()
         {
             var id = Guid.NewGuid();
+            var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
             Given = new IEvent[] {
-                new ProjectCreated(id, "Some Name", "shortName")
+                new ProjectCreated(id, layoutId, "Some Name", "shortName")
             };
 
             When = prj => prj.Create(id, "Some Other Name", "otherShortName");

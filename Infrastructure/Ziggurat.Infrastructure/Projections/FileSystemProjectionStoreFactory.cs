@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Projections
 {
 	public sealed class FileSystemProjectionStoreFactory : IProjectionStoreFactory
 	{
 		private readonly string _rootFolder;
-		private readonly IProjectionSerializer _serializer;
+		private readonly ISerializer _serializer;
 
 		private readonly Dictionary<Type, object> _keyFactories
 			= new Dictionary<Type, object>();
 
-		public FileSystemProjectionStoreFactory(string rootFolder, IProjectionSerializer serializer)
+		public FileSystemProjectionStoreFactory(string rootFolder, ISerializer serializer)
 		{
 			if (serializer == null) throw new ArgumentNullException("serializer");
 			if (String.IsNullOrEmpty(rootFolder)) throw new ArgumentNullException("rootFolder");

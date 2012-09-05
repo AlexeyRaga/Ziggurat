@@ -1,0 +1,24 @@
+﻿@model Ziggurat.Registration.Client.RegistrationStatus.RegistrationStatusView
+
+@{
+    ViewBag.Title = "Registration Successful!";
+}
+
+<div class="alert alert-success">
+    Dear @Model.DisplayName! Your registration has been successful!.
+</div>
+
+<fieldset>
+    <legend>Here is what we know about you:</legend>
+    <ol>
+        <li>
+            @Html.NameFor(m => m.Login): @Model.Login
+        </li>
+        <li>
+            @Html.NameFor(m => m.DisplayName): @Model.DisplayName
+        </li>
+        <li>
+            @Html.NameFor(m => m.Email): @Model.Email
+        </li>
+    </ol>
+</fieldset>

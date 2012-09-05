@@ -1,0 +1,60 @@
+﻿@using Ziggurat.Inftastructure.Web.Helpers
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Ziggurat</title>
+
+           <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+           <!--[if lt IE 9]>
+             <script src="~/scripts/html5.js"></script>
+           <![endif]-->
+        
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Scripts.Render("~/bundles/setup")
+        @Styles.Render("~/bundles/bootstrap/css")
+
+        @Styles.Render("~/Content/css")
+    </head>
+    <body>
+        <header>
+
+            <div class="navbar navbar-fixed-top">
+              <div class="navbar-inner">
+                <div class="container-fluid">
+                  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </a>
+                  <a class="brand" href='@Url.Action("Index", "Home")'><img src="/Content/images/ziggurat.png" width="102" height="20" alt="Just prototype" /></a>
+                  <div class="nav-collapse">
+                    <ul class="nav">
+                      @Html.MenuItem("Home", "Index", "Home")
+                      <li><a href="#about">About</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="nav pull-right">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                  </div><!--/.nav-collapse -->
+                </div>
+              </div>
+            </div>
+        </header>
+
+        @RenderBody()
+
+        <footer>
+            <div class="push">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap/js")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

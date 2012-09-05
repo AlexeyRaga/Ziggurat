@@ -25,18 +25,18 @@ using System.Runtime.Serialization;
 <#
     var DefRegex = new Regex(@"^let\s+(?<symbol>[?!@#$^&*])\s+=\s*?(?<base>\w+)$", RegexOptions.Compiled);
 	var LineRegex = new Regex(@"^\s*(?<name>\w+)\s*(?<type>[?!@#$^&*])\s*(?<params>.*)$", RegexOptions.Compiled);
-	var ParamsRegex = new Regex(@"\s*([\w<>_@]+)\s+(\w+)", RegexOptions.Compiled);
+	var ParamsRegex = new Regex(@"\s*([\w<>_@]+)\s+(\w+\*?)", RegexOptions.Compiled);
 
 	var symbols = new Dictionary<string, string>();
-	symbols["?"] = "ICommand";
-	symbols["!"] = "IEvent";
 
-	var dslFiles = Directory.GetFiles(Path.GetDirectoryName(Host.ResolvePath(Host.TemplateFile)), "*.dsl");
+	var dslFiles = Directory.GetFiles(Path.GetDirectoryName(Host.ResolvePath(Host.TemplateFile)), "*.dsl", System.IO.SearchOption.AllDirectories);
 
 	foreach(var fileName in dslFiles) {
 	    var justName = Path.GetFileNameWithoutExtension(fileName);
 
 		manager.StartNewFile(justName + ".generated.cs");
+		symbols["?"] = "ICommand";
+		symbols["!"] = "IEvent";
 #>
 namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint") #>.<#= justName #>
 {
@@ -88,7 +88,7 @@ namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Name
 	{
 <#+ var i = 0;
 	foreach(var parm in prms) { #>
-		[DataMember(Order = <#= i #> )] public <#= parm.Value #> <#= ToPascalCase(parm.Key) #> { get; set; }
+		[DataMember(Order = <#= i #> )] public <#= parm.Value #> <#= ToPublicMemberName(parm.Key) #> { get; set; }
 <#+ i++;
 	} #>
 
@@ -96,9 +96,20 @@ namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Name
 		public <#= name #>(<#= GenerateParamsString(prms) #>)
 		{
 <#+ foreach(var parm in prms) { #>
-			<#=	ToPascalCase(parm.Key) #> = <#= ToCamelCase(parm.Key) #>;
+			<#=	ToPublicMemberName(parm.Key) #> = <#= ToParameterName(parm.Key) #>;
 <#+ } #>
 		}
+
+<#+ var tsProps = prms.Where(x=>x.Key.EndsWith("*")).ToList(); 
+	if (tsProps.Any()) { 
+	    var format = String.Join(", ", tsProps.Select((prop, num) => ToPublicMemberName(prop.Key) + ": {" + num + "}"));
+		var values = String.Join(", ", tsProps.Select(x=>ToPublicMemberName(x.Key)));
+	#>
+        public override string ToString()
+        {
+		    return String.Format("<#= HumanizeString(name) #>: (<#= format #>)", <#= values #>);
+		}
+<#+ } #>
 	}
 
 <#+
@@ -108,21 +119,37 @@ namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Name
 
 <#+ 
 
+	private string HumanizeString(string source)
+    {
+        var sb = new StringBuilder();
+
+        char last = char.MinValue;
+        foreach (char c in source)
+        {
+            if (char.IsLower(last) &&
+            char.IsUpper(c))
+            { sb.Append(' '); }
+            sb.Append(c);
+            last = c;
+        }
+        return sb.ToString();
+    }
+
 	private static string GenerateParamsString(IDictionary<string, string> parms)
 	{
 		var pairs = parms
-			.Select(x => String.Format("{0} {1}", x.Value, ToCamelCase(x.Key)));
+			.Select(x => String.Format("{0} {1}", x.Value, ToParameterName(x.Key)));
 		return string.Join(", ", pairs);
 	}
 
-	private static string ToCamelCase(string value)
+	private static string ToParameterName(string value)
 	{
-		return Char.ToLower(value[0]) + value.Substring(1);
+		return Char.ToLower(value[0]) + value.Substring(1).TrimEnd('*');
 	}
 
-	private static string ToPascalCase(string value)
+	private static string ToPublicMemberName(string value)
 	{
-		return Char.ToUpper(value[0]) + value.Substring(1);
+		return Char.ToUpper(value[0]) + value.Substring(1).TrimEnd('*');
 	}
 
 	private static IDictionary<string, string> GetParams(Regex paramsRegex, string paramsToken)

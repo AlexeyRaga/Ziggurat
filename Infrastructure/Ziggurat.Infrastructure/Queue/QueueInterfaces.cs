@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ziggurat.Infrastructure.Queue
 {
-    public interface IQueueMessage
+    public interface IQueueFactory
     {
-        IQueueReader Queue { get; }
-        byte[] GetBody();
+        IQueueWriter CreateWriter(string queueName);
+        IQueueReader CreateReader(string queueName);
     }
+
 
     public interface IQueueWriter
     {
@@ -23,9 +24,9 @@ namespace Ziggurat.Infrastructure.Queue
         void Ack(IQueueMessage msg);
     }
 
-    public interface IQueueFactory
+    public interface IQueueMessage
     {
-        IQueueWriter CreateWriter(string queueName);
-        IQueueReader CreateReader(string queueName);
+        IQueueReader Queue { get; }
+        byte[] GetBody();
     }
 }
