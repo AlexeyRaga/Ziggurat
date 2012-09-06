@@ -128,7 +128,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
-    <Compile Include="Areas\Account\Controllers\TestController.cs" />
     <Compile Include="Areas\Account\Controllers\UserController.cs" />
     <Compile Include="Areas\Account\Models\AccountModels.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
@@ -214,7 +213,6 @@
     <Content Include="Areas\Account\Views\User\RegistrationInProgress.cshtml" />
     <Content Include="Areas\Account\Views\User\RegistrationSuccessful.cshtml" />
     <Content Include="Areas\Account\Views\User\RegistrationThankYou.cshtml" />
-    <Content Include="Areas\Account\Views\Test\Index.cshtml" />
     <Content Include="Areas\Account\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
