@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Additional Data", "1. Ad
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.WebHost", "Ziggurat.WebHost\Ziggurat.WebHost.csproj", "{398B3AEF-3883-4FCE-95D4-3F2859655A83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{D781697C-3E1C-467F-9692-1CB524052923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
