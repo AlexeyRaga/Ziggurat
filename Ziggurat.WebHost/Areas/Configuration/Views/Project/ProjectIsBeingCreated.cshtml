@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Project is being created";
+}
+
+<div class="hero-unit">
+    <h2>Creating a new project</h2>
+
+    <p>We are created a new project for you as requested.</p>
+    <p>You can jump straight into this new project by clicking the button below.</p>
+
+    @Html.ActionLink("Jump into!", "Configure", new { id = Model }, new { @class="btn btn-primary btn-large"})
+</div>

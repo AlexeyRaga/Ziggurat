@@ -1,0 +1,32 @@
+﻿@model Ziggurat.Web.Areas.Configuration.Models.CreateProjectModel
+@{
+    ViewBag.Title = "Create New Project";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>New project parameters</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ShortName)
+                @Html.TextBoxFor(m => m.ShortName)
+            </li>
+        </ol>
+        <button type="submit" class="btn btn-primary">Create project</button>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
