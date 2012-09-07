@@ -12,6 +12,16 @@ namespace Ziggurat.Web
         bool TryGet<TKey, TView>(TKey key, out TView view);
     }
 
+    public static class IViewModelReaderExtensions
+    {
+        public static TView LoadOrDefault<TKey, TView>(this IViewModelReader reader, TKey key)
+        {
+            TView view;
+            reader.TryGet(key, out view);
+            return view;
+        }
+    }
+
     // A very simple reader.
     // concrete readers can be cached for performance reasons if it is needed.
     public sealed class SimpleProjectionReader : IViewModelReader
