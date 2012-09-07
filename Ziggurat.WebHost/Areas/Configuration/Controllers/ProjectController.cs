@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ziggurat.Contracts.Definition;
 using Ziggurat.Infrastructure;
 using Ziggurat.Web.Areas.Configuration.Models;
 
@@ -32,6 +33,11 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             if (ModelState.IsValid)
             {
+                var newProjectId = DefinitionIdGenerator.NewProjectId();
+                var cmd = new CreateProject(newProjectId, model.Name, model.ShortName);
+
+                _commandSender.SendCommand(cmd);
+
                 return View("ProjectIsBeingCreated");
             }
 
