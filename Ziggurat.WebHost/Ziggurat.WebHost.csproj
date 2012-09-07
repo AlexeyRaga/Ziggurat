@@ -120,10 +120,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\HomeController.cs" />
     <Compile Include="Areas\Account\Controllers\UserController.cs" />
     <Compile Include="Areas\Account\Models\AccountModels.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
+    <Compile Include="Areas\Configuration\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
+    <Compile Include="Areas\Contacts\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Forms\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Forms\FormsAreaRegistration.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,7 +202,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Configuration\Views\Web.config" />
     <Content Include="Areas\Account\Views\User\_ChangePasswordPartial.cshtml" />
     <Content Include="Areas\Account\Views\User\_SetPasswordPartial.cshtml" />
     <Content Include="Areas\Account\Views\User\Login.cshtml" />
@@ -206,6 +212,16 @@
     <Content Include="Areas\Account\Views\User\RegistrationSuccessful.cshtml" />
     <Content Include="Areas\Account\Views\User\RegistrationThankYou.cshtml" />
     <Content Include="Areas\Account\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Account\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Contacts\Views\Web.config" />
+    <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Forms\Views\Web.config" />
+    <Content Include="Areas\Forms\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Forms\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Configuration\Views\Web.config" />
+    <Content Include="Areas\Configuration\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />
@@ -240,14 +256,17 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Account\Views\Shared\" />
-    <Folder Include="Areas\Configuration\Controllers\" />
     <Folder Include="Areas\Configuration\Models\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Areas\Contacts\Models\" />
+    <Folder Include="Areas\Contacts\Views\Shared\" />
+    <Folder Include="Areas\Forms\Models\" />
+    <Folder Include="Areas\Forms\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

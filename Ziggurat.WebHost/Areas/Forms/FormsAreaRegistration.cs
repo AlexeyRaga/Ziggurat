@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace Ziggurat.Web.Areas.Account
+namespace Ziggurat.Web.Areas.Forms
 {
-    public class AccountAreaRegistration : AreaRegistration
+    public class FormsAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Account";
+                return "Forms";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Account_default",
-                "Account/{controller}/{action}/{id}",
+                "Forms_default",
+                "Forms/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }

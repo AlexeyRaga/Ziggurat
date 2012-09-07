@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Ziggurat.WebHost.Areas.Configuration
+namespace Ziggurat.Web.Areas.Configuration
 {
     public class ConfigurationAreaRegistration : AreaRegistration
     {
