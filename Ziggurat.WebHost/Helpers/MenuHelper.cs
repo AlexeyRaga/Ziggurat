@@ -69,12 +69,14 @@ namespace Ziggurat.Web.Helpers
             var menu = new TagBuilder("li");
             var currentController = (string)htmlHelper.ViewContext.RouteData.Values["controller"];
             var currentAction = (string)htmlHelper.ViewContext.RouteData.Values["action"];
+            var currentArea = (string)htmlHelper.ViewContext.RouteData.DataTokens["area"];
 
             if (!string.IsNullOrWhiteSpace(id))
                 menu.Attributes.Add("id", id.Trim());
 
             if (string.Equals(controller, currentController, StringComparison.InvariantCultureIgnoreCase)
-                && string.Equals(action, currentAction, StringComparison.InvariantCultureIgnoreCase))
+                && string.Equals(action, currentAction, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(area, currentArea, StringComparison.InvariantCultureIgnoreCase))
             {
                 menu.AddCssClass("active");
             }
@@ -82,7 +84,7 @@ namespace Ziggurat.Web.Helpers
             if (cssClasses != null)
                 foreach (var css in cssClasses) menu.AddCssClass(css);
 
-            var routeValues = String.IsNullOrWhiteSpace(area)
+            var routeValues = area == null
                 ? null
                 : new { area = area };
 
