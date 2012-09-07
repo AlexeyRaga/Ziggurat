@@ -17,7 +17,7 @@ namespace Ziggurat.Web.Areas.Configuration
             context.MapRoute(
                 "Configuration_default",
                 "Configuration/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
