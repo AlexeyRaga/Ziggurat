@@ -10,18 +10,114 @@ using System.Runtime.Serialization;
 namespace Ziggurat.Contracts.Definition
 {
 	[Serializable, DataContract]
-	public sealed partial class CreateProject : ICommand
+	public sealed partial class CreateNewProject : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid Id { get; set; }
 		[DataMember(Order = 1 )] public string Name { get; set; }
 		[DataMember(Order = 2 )] public string ShortName { get; set; }
 
-		public CreateProject() { }
-		public CreateProject(Guid id, string name, string shortName)
+		public CreateNewProject() { }
+		public CreateNewProject(Guid id, string name, string shortName)
 		{
 			Id = id;
 			Name = name;
 			ShortName = shortName;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProjectCreationFailed : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public string Name { get; set; }
+		[DataMember(Order = 2 )] public string ShortName { get; set; }
+		[DataMember(Order = 3 )] public IList<string> Errors { get; set; }
+
+		public ProjectCreationFailed() { }
+		public ProjectCreationFailed(Guid projectId, string name, string shortName, IList<string> errors)
+		{
+			ProjectId = projectId;
+			Name = name;
+			ShortName = shortName;
+			Errors = errors;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class NewProjectRegistered : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public string Name { get; set; }
+		[DataMember(Order = 2 )] public string ShortName { get; set; }
+
+		public NewProjectRegistered() { }
+		public NewProjectRegistered(Guid projectId, string name, string shortName)
+		{
+			ProjectId = projectId;
+			Name = name;
+			ShortName = shortName;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class CreateLayoutForProject : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+
+		public CreateLayoutForProject() { }
+		public CreateLayoutForProject(Guid projectId, Guid projectLayoutId)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProjectLayoutCreated : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+
+		public ProjectLayoutCreated() { }
+		public ProjectLayoutCreated(Guid projectId, Guid projectLayoutId)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class AssignProjectLayoutToProject : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+
+		public AssignProjectLayoutToProject() { }
+		public AssignProjectLayoutToProject(Guid projectId, Guid projectLayoutId)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ProjectLayoutAssignedToProject : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
+		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
+
+		public ProjectLayoutAssignedToProject() { }
+		public ProjectLayoutAssignedToProject(Guid projectId, Guid projectLayoutId)
+		{
+			ProjectId = projectId;
+			ProjectLayoutId = projectLayoutId;
 		}
 
 	}
@@ -41,36 +137,6 @@ namespace Ziggurat.Contracts.Definition
 			ProjectLayoutId = projectLayoutId;
 			Name = name;
 			ShortName = shortName;
-		}
-
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class CreateProjectLayout : ICommand
-	{
-		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid Id { get; set; }
-
-		public CreateProjectLayout() { }
-		public CreateProjectLayout(Guid projectId, Guid id)
-		{
-			ProjectId = projectId;
-			Id = id;
-		}
-
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class ProjectLayoutCreated : IEvent
-	{
-		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid Id { get; set; }
-
-		public ProjectLayoutCreated() { }
-		public ProjectLayoutCreated(Guid projectId, Guid id)
-		{
-			ProjectId = projectId;
-			Id = id;
 		}
 
 	}

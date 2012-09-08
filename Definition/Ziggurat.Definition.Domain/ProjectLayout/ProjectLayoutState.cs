@@ -11,7 +11,7 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
 
         public void When(ProjectLayoutCreated evt)
         {
-            Id = evt.Id;
+            Id = evt.ProjectLayoutId;
             ProjectId = evt.ProjectId;
         }
     }

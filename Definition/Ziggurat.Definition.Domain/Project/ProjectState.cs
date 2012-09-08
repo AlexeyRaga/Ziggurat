@@ -9,10 +9,18 @@ namespace Ziggurat.Definition.Domain.Project
     {
         public Guid Id { get; set; }
         public Guid LayoutId { get; set; }
+        public string Name { get; set; }
+        public string ShortName { get; set; }
 
-        public void When(ProjectCreated evt)
+        public void When(NewProjectRegistered evt)
         {
-            Id = evt.Id;
+            Id = evt.ProjectId;
+            Name = evt.Name;
+            ShortName = evt.ShortName;
+        }
+
+        public void When(ProjectLayoutAssignedToProject evt)
+        {
             LayoutId = evt.ProjectLayoutId;
         }
     }

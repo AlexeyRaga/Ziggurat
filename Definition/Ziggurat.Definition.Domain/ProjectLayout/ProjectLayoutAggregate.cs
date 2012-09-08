@@ -12,9 +12,9 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
     {
         public const string DefaultBlockHeaderName = "Mailbox";
 
-        public void CreateForProject(Guid projectId, Guid id)
+        public void CreateForProject(Guid projectLayoutId, Guid projectId)
         {
-            Apply(new ProjectLayoutCreated(projectId, id));
+            Apply(new ProjectLayoutCreated(projectId, projectLayoutId));
         }
 
         public void AttachForm(Guid formId)

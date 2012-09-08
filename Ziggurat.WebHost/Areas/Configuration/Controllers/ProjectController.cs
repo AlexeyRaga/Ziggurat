@@ -40,7 +40,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             }
 
             var newProjectId = DefinitionIdGenerator.NewProjectId();
-            var cmd = new CreateProject(newProjectId, model.Name, model.ShortName);
+            var cmd = new CreateNewProject(newProjectId, model.Name, model.ShortName);
 
             _commandSender.SendCommand(cmd);
 

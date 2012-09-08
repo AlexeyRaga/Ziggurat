@@ -16,9 +16,15 @@ namespace Ziggurat.Definition.Domain.Processes
             _commandSender = commandSender;
         }
 
-        public void When(ProjectCreated evt)
+        public void When(NewProjectRegistered evt)
         {
-            _commandSender.SendCommand(new CreateProjectLayout(evt.Id, evt.ProjectLayoutId));
+            var projectLayoutId = DefinitionIdGenerator.NewProjectLayoutId(evt.ProjectId);
+            _commandSender.SendCommand(new CreateLayoutForProject(evt.ProjectId, projectLayoutId));
+        }
+
+        public void When(ProjectLayoutCreated evt)
+        {
+            _commandSender.SendCommand(new AssignProjectLayoutToProject(evt.ProjectId, evt.ProjectLayoutId));
         }
     }
 }
