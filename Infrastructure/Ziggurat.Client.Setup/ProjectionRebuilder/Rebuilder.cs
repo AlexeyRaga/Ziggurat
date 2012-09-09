@@ -14,6 +14,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 {
     public sealed class Rebuilder
     {
+        private readonly string _parititionName;
         private readonly IEventStore _eventStore;
         private readonly IDocumentStore _realStoreFactory;
         private readonly Func<IDocumentStore, IEnumerable<object>> _howToBuildProjections;
@@ -22,10 +23,12 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
         private readonly IDocumentReader<string, ProjectionsSignatures> _signatureReader;
 
         public Rebuilder(
+            string partitionName,
             IEventStore eventStore,
             IDocumentStore realStoreFactory, 
             Func<IDocumentStore, IEnumerable<object>> howToBuildProjections)
         {
+            if (String.IsNullOrWhiteSpace(partitionName)) throw new ArgumentNullException("partitionName");
             if (eventStore == null) throw new ArgumentNullException("eventStore");
             if (realStoreFactory == null) throw new ArgumentNullException("realStoreFactory");
             if (howToBuildProjections == null) throw new ArgumentNullException("howToBuildProjections");
@@ -104,7 +107,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             var typesAndSignatures = realProjectionSignatures
                 .ToDictionary(x => x.Key.GetType().FullName, x => x.Value);
 
-            _signatureWriter.AddOrReplace("rebuilder", new ProjectionsSignatures(typesAndSignatures));
+            _signatureWriter.AddOrReplace(_parititionName, new ProjectionsSignatures(typesAndSignatures));
         }
 
         private Dictionary<object, string> GetProjectionsToRebuild(
@@ -137,7 +140,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
 
         private ProjectionsSignatures GetKnownProjectionsSignatures()
         {
-            return _signatureReader.LoadOrDefault("rebuilder", x => new ProjectionsSignatures());
+            return _signatureReader.LoadOrDefault(_parititionName, x => new ProjectionsSignatures());
         }
     }
 }
