@@ -10,6 +10,7 @@ using Ziggurat.Web.Areas.Configuration.Models;
 
 namespace Ziggurat.Web.Areas.Configuration.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly IViewModelReader _modelReader;
