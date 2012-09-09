@@ -33,6 +33,7 @@ namespace Ziggurat.Client.Setup.ProjectionRebuilder
             if (realStoreFactory == null) throw new ArgumentNullException("realStoreFactory");
             if (howToBuildProjections == null) throw new ArgumentNullException("howToBuildProjections");
 
+            _parititionName   = partitionName;
             _eventStore       = eventStore;
             _realStoreFactory = realStoreFactory;
 
