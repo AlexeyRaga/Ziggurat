@@ -144,6 +144,13 @@ namespace Ziggurat.Web.Areas.Account.Controllers
             return View(viewName, view);
         }
 
+        [AllowAnonymous, OutputCache(Duration=0)]
+        public ActionResult GetRegistrationStatus(Guid id)
+        {
+            var view = _modelReader.LoadOrDefault<Guid, RegistrationStatusView>(id);
+            return Json(view, JsonRequestBehavior.AllowGet);
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
