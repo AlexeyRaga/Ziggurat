@@ -44,8 +44,21 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
 
             _commandSender.SendCommand(cmd);
 
-            return View("ProjectIsBeingCreated");
+            return View("ProjectIsBeingCreated", newProjectId);
 
+        }
+
+        [HttpGet]
+        [OutputCache(Duration=0)]
+        public ActionResult Exists(Guid id)
+        {
+            var projectExists = false;
+            var list = _modelReader.LoadOrDefault<string, ProjectList>("all");
+            
+            if (list != null) 
+                projectExists = list.Projects.Any(x => x.Id == id);
+
+            return Json(projectExists, JsonRequestBehavior.AllowGet);
         }
 
         private bool ValidateUniqueShortName(string shortName)
