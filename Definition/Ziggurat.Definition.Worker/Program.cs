@@ -77,9 +77,6 @@ namespace Ziggurat.Definition.Worker
                     host.Run();
 
                     Thread.Sleep(400);
-
-                    host.Run();
-                    Thread.Sleep(400);
                     Console.ReadKey();
                 }
             }
