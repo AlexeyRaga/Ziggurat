@@ -14,10 +14,11 @@ namespace Ziggurat.Infrastructure.Serialization
         {
             public static readonly JsonSerializer Serializer = new JsonSerializer
             {
-                TypeNameHandling = TypeNameHandling.Auto,
-                DefaultValueHandling = DefaultValueHandling.Ignore,
+                TypeNameHandling      = TypeNameHandling.Auto,
+                DefaultValueHandling  = DefaultValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat
+                DateFormatHandling    = DateFormatHandling.IsoDateFormat,
+                Formatting            = Formatting.Indented
             };
         }
 

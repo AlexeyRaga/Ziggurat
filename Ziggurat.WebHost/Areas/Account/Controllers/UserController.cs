@@ -52,15 +52,18 @@ namespace Ziggurat.Web.Areas.Account.Controllers
 
         private bool IsAuthenticated(string login, string password)
         {
-            PasswordIndex index;
-            if (!_modelReader.TryGet<byte, PasswordIndex>(Partition.GetPartition(login), out index))
+            UserLoginIndex index;
+            if (!_modelReader.TryGet<byte, UserLoginIndex>(Partition.GetPartition(login), out index))
                 return false;
 
-            string realPassword;
-            if (!index.Passwords.TryGetValue(login, out realPassword))
-                return false;
+            var loginData = index.Logins
+                .FirstOrDefault(x =>
+                    String.Equals(x.Username, login, StringComparison.InvariantCultureIgnoreCase)
+                    && x.Password == password);
 
-            return realPassword == password;
+            if (loginData == null) return false;
+
+            return true;
         }
 
         [HttpPost]
@@ -82,35 +85,35 @@ namespace Ziggurat.Web.Areas.Account.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Manage(LocalPasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var login = User.Identity.Name;
-                PasswordIndex index;
-                if (!_modelReader.TryGet<byte, PasswordIndex>(Partition.GetPartition(login), out index))
-                {
-                    ModelState.AddModelError("unknown", "Cannot verify, please try again.");
-                    return View();
-                }
+        //[HttpPost]
+        //public ActionResult Manage(LocalPasswordModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var login = User.Identity.Name;
+        //        PasswordIndex index;
+        //        if (!_modelReader.TryGet<byte, PasswordIndex>(Partition.GetPartition(login), out index))
+        //        {
+        //            ModelState.AddModelError("unknown", "Cannot verify, please try again.");
+        //            return View();
+        //        }
 
-                string realPassword;
-                if (!index.Passwords.TryGetValue(login, out realPassword))
-                {
-                    ModelState.AddModelError("unknown", "Cannot verify, please try again.");
-                    return View();
-                }
+        //        string realPassword;
+        //        if (!index.Passwords.TryGetValue(login, out realPassword))
+        //        {
+        //            ModelState.AddModelError("unknown", "Cannot verify, please try again.");
+        //            return View();
+        //        }
 
-                if (model.OldPassword != realPassword)
-                {
-                    ModelState.AddModelError("invalid", "Invalid password");
-                    return View();
-                }
-            }
+        //        if (model.OldPassword != realPassword)
+        //        {
+        //            ModelState.AddModelError("invalid", "Invalid password");
+        //            return View();
+        //        }
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [AllowAnonymous, HttpPost, ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
