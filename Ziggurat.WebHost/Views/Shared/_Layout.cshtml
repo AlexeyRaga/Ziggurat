@@ -46,6 +46,9 @@
         </header>
 
         <div class="well well-small">
+            <div>
+                @RenderSection("submenu", required: false)
+            </div>
             <div class="pull-right">
             @{Html.RenderAction("List", "Project", new { area = "Configuration" });}
             </div>
