@@ -2,10 +2,12 @@
 
 @if (Request.IsAuthenticated) {
     <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "User", routeValues: new { area = "Account" }, htmlAttributes: new { @class = "username", title = "Manage" })!
+        <span class="navbar-text">
+        Logged in as @Html.ActionLink(User.Identity.Name, "Manage", "User", routeValues: new { area = "Account" }, htmlAttributes: new { @class = "navbar-link", title = "Manage" })
+        </span>
         @using (Html.BeginForm("LogOff", "User", new { area = "Account" }, FormMethod.Post, new { id = "logoutForm", style="display: inline" })) {
             @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="navbar-link">(log off)</a>
         }
     </text>
 } else {
