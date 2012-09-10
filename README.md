@@ -1,3 +1,12 @@
+IMPORTANT CHANGE
+================
+**From now Ziggurat Web Host is expected to be run on *localtest.me* domain**
+Recommended configuration steps:
+
+ 1. In IIS create a new web site and point it to Ziggurat.WebHost project folder
+ 2. In IIS bindings you may change the port, but *leave '**Host&nbsp;Name**' field empty*!
+ 3. Go to '*http://localtest.me*' and it should work.
+
 Ziggurat Overview
 =================
 
