@@ -40,5 +40,23 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             //hurray, this message is finally acked! delete it!
             fsMessafe.MessageFile.Delete();
         }
+
+        public void Nack(IQueueMessage msg, Exception exception = null)
+        {
+            if (msg == null) throw new ArgumentNullException("msg");
+            var fsMessafe = (FileSystemQueueMessage)msg;
+
+            var poisonedFolder = EnsurePoisonedQueueFolder();
+            var fileNameInPoisonedFolder = Path.Combine(poisonedFolder, fsMessafe.MessageFile.Name);
+            fsMessafe.MessageFile.MoveTo(fileNameInPoisonedFolder);
+        }
+
+        private string EnsurePoisonedQueueFolder()
+        {
+            var poisonedFolderName = Path.Combine(_queueFolder.FullName, "poisoned");
+            if (!Directory.Exists(poisonedFolderName)) Directory.CreateDirectory(poisonedFolderName);
+
+            return poisonedFolderName;
+        }
     }
 }
