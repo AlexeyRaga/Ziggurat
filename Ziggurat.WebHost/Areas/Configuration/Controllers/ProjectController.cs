@@ -76,6 +76,20 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Switch(string id)
+        {
+            var currentHost = Request.Url.Host;
+            var twoLastParts = currentHost.Split('.').Reverse().Take(2).Reverse();
+            var baseDomain = String.Join(".", twoLastParts);
+            var newHost = id + "." + baseDomain;
+
+            var urlToGo = (Request.UrlReferrer != null)
+                ? Request.UrlReferrer.ToString().Replace(currentHost, newHost)
+                : "http://" + newHost;
+
+            return Redirect(urlToGo);
+        }
+
         [ChildActionOnly]
         public ActionResult List()
         {

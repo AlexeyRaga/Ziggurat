@@ -29,10 +29,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#">[ Ziggurat ]</a>
+                  <a class="brand" href="/">[ Ziggurat ]</a>
                   <div class="nav-collapse">
                     <ul class="nav">
-                      @Html.MenuItem(null, "Home", "Index", "Home")
                       @Html.MenuItemForPath(@"Configuration\Home\Index", "Configuration")
                       @Html.MenuItemForPath(@"Contacts\Home\Index", "Contacts")
                       @Html.MenuItemForPath(@"Forms\Home\Index", "Documents")
@@ -45,6 +44,13 @@
               </div>
             </div>
         </header>
+
+        <div class="well well-small">
+            <div class="pull-right">
+            @{Html.RenderAction("List", "Project", new { area = "Configuration" });}
+            </div>
+            <div class="clearfix"></div>
+        </div>
 
         @RenderBody()
 
