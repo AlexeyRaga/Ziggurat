@@ -1,11 +1,23 @@
 IMPORTANT CHANGE
 ================
 **From now Ziggurat Web Host is expected to be run on *localtest.me* domain**
+
+The reason is: each project is expected to be a "subdomain".
+
 Recommended configuration steps:
 
  1. In IIS create a new web site and point it to Ziggurat.WebHost project folder
  2. In IIS bindings you may change the port, but *leave '**Host&nbsp;Name**' field empty*!
+It allows IIS to handle all the requests including subdomains.
  3. Go to '*http://localtest.me*' and it should work.
+
+Note
+----
+In fact, the domain name is not really important, and Ziggurat doesn't check for 'localtest.me' anywhere in code.
+But it is important for authentication. Currently 'localtest.me' is specified in Web.config file as a host to
+create auth cookies for. 
+We can make the authentication functionality (UserController) to be smart enough and to create an auth
+cookie against the *current* domain (should be 3 lines of code) and it will eliminate this requirement.
 
 Ziggurat Overview
 =================
