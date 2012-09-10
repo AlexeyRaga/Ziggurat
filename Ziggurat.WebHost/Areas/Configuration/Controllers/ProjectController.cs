@@ -75,5 +75,13 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        [ChildActionOnly]
+        public ActionResult List()
+        {
+            var list = _modelReader.LoadOrDefault<string, ProjectList>("all");
+
+            return PartialView(list);
+        }
     }
 }
