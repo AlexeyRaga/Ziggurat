@@ -3,7 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@RenderBody()
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+        <div class="well sidebar-nav">
+            Some left pane
+        </div>
+    </div>
+    <div class="span9">
+      @RenderBody()
+    </div>
+  </div>
+</div>
 
 @section Scripts {
     @RenderSection("scripts", required: false)
