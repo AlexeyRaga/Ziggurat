@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 using System.Collections.Concurrent;
 
 namespace Ziggurat.Infrastructure.Tests.Projections

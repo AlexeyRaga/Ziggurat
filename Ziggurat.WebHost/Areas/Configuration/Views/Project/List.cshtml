@@ -1,0 +1,25 @@
+﻿@using Ziggurat.Web.Helpers
+@model Ziggurat.Definition.Client.ProjectList
+
+
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    @{
+        var currentDomain = Url.GetCurrentProjectDomain();
+        var project = Model.Projects.FirstOrDefault(x => String.Equals(x.ShortName, currentDomain));
+        var currentProjectName = project != null ? project.Name : "Select a project";
+    }
+      @currentProjectName &nbsp;
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+      @foreach (var item in Model.Projects)
+      {
+          <li><a href="@Url.Action("Switch", "Project", new {area="Configuration", id=item.ShortName})">@item.Name</a></li>
+      }
+      <li class="divider"></li>
+      <li>
+          <a href="@Url.ActionUrlForPath("Configuration/Project/New")"><i class="icon-plus"></i> New Project</a>
+      </li>
+  </ul>
+</div>

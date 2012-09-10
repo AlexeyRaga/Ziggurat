@@ -27,25 +27,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Infrastructure.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Client.Setup", "Infrastructure\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj", "{878A7983-395D-4930-A901-DF576E64D070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Service", "Definition\Ziggurat.Definition.Service\Ziggurat.Definition.Service.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Worker", "Definition\Ziggurat.Definition.Worker\Ziggurat.Definition.Worker.csproj", "{E6217A10-AFEA-4EE1-9887-2092E3FDA201}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Projections", "Definition\Ziggurat.Definition.Projections\Ziggurat.Definition.Projections.csproj", "{D4B57488-42AA-4C9D-B67A-D0D2516F2361}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Definition.Client", "Definition\Ziggurat.Definition.Client\Ziggurat.Definition.Client.csproj", "{D4B57488-42AA-4C9D-B67A-D0D2516F2361}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Inftastructure.Web", "Infrastructure\Ziggurat.Inftastructure.Web\Ziggurat.Inftastructure.Web.csproj", "{C591D32B-17D8-42B6-8C13-492213B32827}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Configuration.Web", "Definition\Ziggurat.Configuration.Web\Ziggurat.Configuration.Web.csproj", "{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Registration", "Registration", "{98CC97BE-4FAB-416E-8A2C-097952C4312C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Domain", "Registration\Ziggurat.Registration.Domain\Ziggurat.Registration.Domain.csproj", "{21E38C29-3990-4A5F-95A0-F895D7FAC64A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Web", "Registration\Ziggurat.Registration.Web\Ziggurat.Registration.Web.csproj", "{E9930F9B-866F-4E93-9AA8-53030CAA6D43}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Service", "Registration\Ziggurat.Registration.Service\Ziggurat.Registration.Service.csproj", "{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Worker", "Registration\Ziggurat.Registration.Worker\Ziggurat.Registration.Worker.csproj", "{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Registration.Client", "Registration\Ziggurat.Registration.Client\Ziggurat.Registration.Client.csproj", "{528BED5A-3D3F-424F-981A-8C90B03C4BDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurar.Registration.Domain.Tests", "Registration\Ziggurar.Registration.Domain.Tests\Ziggurar.Registration.Domain.Tests.csproj", "{D781697C-3E1C-467F-9692-1CB524052923}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Additional Data", "1. Additional Data", "{A1240147-2A7D-4FEC-B333-7966DE13E3A8}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.WebHost", "Ziggurat.WebHost\Ziggurat.WebHost.csproj", "{398B3AEF-3883-4FCE-95D4-3F2859655A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,18 +92,10 @@ Global
 		{C591D32B-17D8-42B6-8C13-492213B32827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C591D32B-17D8-42B6-8C13-492213B32827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C591D32B-17D8-42B6-8C13-492213B32827}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9930F9B-866F-4E93-9AA8-53030CAA6D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9930F9B-866F-4E93-9AA8-53030CAA6D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9930F9B-866F-4E93-9AA8-53030CAA6D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9930F9B-866F-4E93-9AA8-53030CAA6D43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,6 +108,10 @@ Global
 		{D781697C-3E1C-467F-9692-1CB524052923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D781697C-3E1C-467F-9692-1CB524052923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,9 +125,7 @@ Global
 		{DC28A70F-2B49-4C8E-83BD-7ADCF1FD5FE2} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
 		{E6217A10-AFEA-4EE1-9887-2092E3FDA201} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
 		{D4B57488-42AA-4C9D-B67A-D0D2516F2361} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
-		{70AC8F5E-F79D-44AD-B1F2-956D2B6DC55D} = {B153F36F-4A23-4A88-B9F3-985BA9B67411}
 		{21E38C29-3990-4A5F-95A0-F895D7FAC64A} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
-		{E9930F9B-866F-4E93-9AA8-53030CAA6D43} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{528BED5A-3D3F-424F-981A-8C90B03C4BDF} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{D781697C-3E1C-467F-9692-1CB524052923} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}

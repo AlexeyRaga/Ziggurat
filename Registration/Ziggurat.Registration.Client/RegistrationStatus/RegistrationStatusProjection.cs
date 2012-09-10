@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ziggurat.Contracts.Registration;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 
 namespace Ziggurat.Registration.Client.RegistrationStatus
 {
     public sealed class RegistrationStatusProjection
     {
-        private IProjectionWriter<Guid, RegistrationStatusView> _writer;
-        public RegistrationStatusProjection(IProjectionStoreFactory factory)
+        private IDocumentWriter<Guid, RegistrationStatusView> _writer;
+        public RegistrationStatusProjection(IDocumentStore factory)
         {
             _writer = factory.GetWriter<Guid, RegistrationStatusView>();
         }

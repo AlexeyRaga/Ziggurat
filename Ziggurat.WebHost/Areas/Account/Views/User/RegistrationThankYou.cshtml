@@ -1,0 +1,67 @@
+﻿@model System.Guid
+@using Ziggurat.Web.Helpers
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="hero-unit">
+    <h1>Thank you.</h1>
+
+    <p>We have received your registration and working hard settling you up in our system.</p>
+
+    <div id="progress" class="progress">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+
+    <div id="takesTimeAlert" class="alert alert-block" style="display: none">
+        <h4>It takes time...</h4>
+        <p>
+            Unfortunately the registration process takes a bit more time than we expected.
+            Why don't you leave it with us and come back later when it is done?
+        </p>
+        <p>
+            You may also check your registration status @Html.ActionLink("here", "RegistrationStatus", new { id = Model })
+        </p>
+    </div>
+
+    <div id="failureAlert" class="alert alert-block alert-error" style="display: none">
+        <h4>Registration Failed</h4>
+        <p>
+            Unfortunatelly the registration failed. The errors were:
+            <ol id="errorList">
+
+            </ol>
+        </p>
+    </div>
+
+    <div id="successfulAlert" class="alert alert-block alert-success" style="display: none">
+        <h4>Done!</h4>
+        The registration has been finished successfully. You may now @Html.ActionLink("Log In", "Login", "User")
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/common.elements.js"></script>
+
+    <script type="text/javascript">
+        var url = '/Account/User/GetRegistrationStatus/@Model';
+
+        $('#progress').pullRequestWithProgress(url, {
+            predicate: function(data) { return data !== null && data.Status !== 0; },
+            onNotFinished: function (data) { $('#takesTimeAlert').show(500); },
+            onFinished: function (data) {
+                if (data.Status === 1) {
+                    $('#successfulAlert').show(500);
+                } else {
+                    var errorItems = $.map(data.Errors, function (item, index) {
+                        return "<li><span>" + item + "</span></li>";
+                    }).join('');
+                    
+                    $('#errorList').html(errorItems);
+                    $('#failureAlert').show(400);
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@model System.Guid
+@{
+    ViewBag.Title = "Project is being created";
+}
+
+<div class="hero-unit">
+    <h2>Creating a new project</h2>
+
+    <p>We are creating a new project for you as requested.</p>
+
+    <div id="creationProgress" class="progress">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+
+    <div id="takesTimeAlert" class="alert alert-block" style="display: none">
+        <h4>It takes time...</h4>
+        Unfortunately creating this project will take a bit more time than we expected.
+        Why don't you leave it with us and come back later when it is done? 
+    </div>
+
+    <div id="projectCreatedAlert" class="alert alert-block alert-success" style="display: none">
+        <h4>Done!</h4>
+        You can go in configure your new project!
+        @Html.ActionLink("Jump into it!", "Switch", new { id = Model }, new { @class="btn btn-primary btn-large"})
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/common.elements.js"></script>
+
+    <script type="text/javascript">
+        var url = '/Configuration/Project/Exists/@Model';
+
+        $('#creationProgress').pullRequestWithProgress(url, { 
+            onNotFinished: function () {
+                $('#takesTimeAlert').show(500);
+            },
+            onFinished: function () { $('#projectCreatedAlert').show(500); }
+        });
+    </script>
+}

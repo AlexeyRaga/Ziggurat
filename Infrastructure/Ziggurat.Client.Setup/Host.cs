@@ -13,6 +13,8 @@ namespace Ziggurat.Client.Setup
         private readonly List<HostTask> _hostTasks = new List<HostTask>();
         private readonly List<HostTask> _startupTasks = new List<HostTask>();
 
+        private bool _isRunning = false;
+
         public Host()
         {
             Cancellation = new CancellationTokenSource();
@@ -44,6 +46,8 @@ namespace Ziggurat.Client.Setup
 
         public Task Run()
         {
+            if (_isRunning) throw new InvalidOperationException("Host is already running");
+            _isRunning = true;
             var startupTask = RunGroupOfTasks(_startupTasks);
             return startupTask.ContinueWith(task => RunGroupOfTasks(_hostTasks), Cancellation.Token);
         }

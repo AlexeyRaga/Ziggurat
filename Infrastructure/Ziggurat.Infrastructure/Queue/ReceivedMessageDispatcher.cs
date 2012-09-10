@@ -70,13 +70,56 @@ namespace Ziggurat.Infrastructure.Queue
         {
             //get the real message
             var messageBody = receivedMessage.GetBody();
-            var realMessage = _serializer.Deserialize(messageBody);
+            object realMessage;
 
-            //and dispatch it!
-            _dispatchTo(realMessage);
+            //if cannot deserialize the message => Nack it immediately, retries will not help
+            try
+            {
+                realMessage = _serializer.Deserialize(messageBody);
+            }
+            catch (Exception ex)
+            {
+                receivedMessage.Queue.Nack(receivedMessage, ex);
+                return;
+            }
 
-            //Important bit: acking the message!
-            receivedMessage.Queue.Ack(receivedMessage);
+            var tryCount = 0;
+            Exception dispatchError = null;
+
+            do
+            {
+                tryCount++;
+
+                dispatchError = TryDispatchMessage(realMessage);
+                if (dispatchError == null)
+                {
+                    //Important bit: acking the message!
+                    receivedMessage.Queue.Ack(receivedMessage);
+                    return;
+                }
+
+                //something happened, message was not dispatched.
+                //wait a bit and try again
+                Thread.Sleep(50);
+
+            } while (tryCount < 5);
+
+            // If we are here it means the message has not been dispatched for several times,
+            // Nack it and move on
+            receivedMessage.Queue.Nack(receivedMessage, dispatchError);
+        }
+
+        private Exception TryDispatchMessage(object message)
+        {
+            try
+            {
+                _dispatchTo(message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
     }
 }

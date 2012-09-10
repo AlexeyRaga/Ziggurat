@@ -1,0 +1,16 @@
+﻿@using Ziggurat.Web.Helpers
+
+@if (Request.IsAuthenticated) {
+    <text>
+        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "User", routeValues: new { area = "Account" }, htmlAttributes: new { @class = "username", title = "Manage" })!
+        @using (Html.BeginForm("LogOff", "User", new { area = "Account" }, FormMethod.Post, new { id = "logoutForm", style="display: inline" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }
+    </text>
+} else {
+    <ul class="nav">
+        @Html.MenuItemForPath("Account/User/Register", "Register", "registerLink")
+        @Html.MenuItemForPath("Account/User/Login", "Log in", "loginLink")
+    </ul>
+}

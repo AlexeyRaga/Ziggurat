@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ziggurat.Infrastructure.EventStore;
-using Ziggurat.Infrastructure.Projections;
+using Ziggurat.Infrastructure.DocumentStore;
 using Ziggurat.Infrastructure.Serialization;
 
 namespace Ziggurat.Infrastructure.Queue.FileSystem
 {
     public sealed class EventStoreToQueueDistributor
     {
-        private readonly IProjectionReader<string, EventStoreMarker> _markerReader;
-        private readonly IProjectionWriter<string, EventStoreMarker> _markerWriter;
+        private readonly IDocumentReader<string, EventStoreMarker> _markerReader;
+        private readonly IDocumentWriter<string, EventStoreMarker> _markerWriter;
         private readonly IEventStore _eventStore;
         private readonly IQueueWriter _queueWriter;
         private readonly QueueMessageSerializer _serializer;
@@ -26,7 +26,7 @@ namespace Ziggurat.Infrastructure.Queue.FileSystem
             string queueName, 
             IQueueFactory queueFactory, 
             IEventStore eventStore, 
-            IProjectionStoreFactory projectionStore,
+            IDocumentStore projectionStore,
             ISerializer serializer)
         {
             _markerReader = projectionStore.GetReader<string, EventStoreMarker>();

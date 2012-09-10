@@ -1,14 +1,21 @@
-﻿CreateProject? Guid id, string name, string shortName
-ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
+﻿CreateNewProject? Guid id, string name, string shortName
+ProjectCreationFailed! Guid projectId, string name, string shortName, IList<string> errors
+NewProjectRegistered! Guid projectId, string name, string shortName
 
-CreateProjectLayout? Guid projectId, Guid id
-ProjectLayoutCreated! Guid projectId, Guid id
+CreateLayoutForProject? Guid projectId, Guid projectLayoutId
+ProjectLayoutCreated! Guid projectId, Guid projectLayoutId
+
+AssignProjectLayoutToProject? Guid projectId, Guid projectLayoutId
+ProjectLayoutAssignedToProject! Guid projectId, Guid projectLayoutId
+
+ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
 
 AddFormToProject? Guid projectId, Guid formId
 FormAddedToProject! Guid projectId, Guid projectLayoutId, Guid formId
 
 AttachFormToProjectLayout? Guid formId, Guid projectId, Guid projectLayoutId
 FormAttachedToProjectLayout! Guid formId, Guid projectId, Guid projectLayoutId, string blockheader, int order
+
 
 CreateForm? Guid projectId, Guid formId, string name, string uniqueName
 FormCreated! Guid projectId, Guid formId, string name, string uniqueName

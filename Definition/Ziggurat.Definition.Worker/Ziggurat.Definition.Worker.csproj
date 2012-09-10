@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6217A10-AFEA-4EE1-9887-2092E3FDA201}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ziggurat.Definition.Worker</RootNamespace>
+    <AssemblyName>Ziggurat.Definition.Worker</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Ziggurat.Definition.Worker.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Ziggurat.Client.Setup\Ziggurat.Client.Setup.csproj">
+      <Project>{878a7983-395d-4930-a901-df576e64d070}</Project>
+      <Name>Ziggurat.Client.Setup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
+      <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
+      <Name>Ziggurat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ziggurat.Contracts\Ziggurat.Contracts.csproj">
+      <Project>{b2ed7cad-8488-420f-89f1-2b5dc698084e}</Project>
+      <Name>Ziggurat.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ziggurat.Definition.Domain\Ziggurat.Definition.Domain.csproj">
+      <Project>{033dba65-b099-4129-b3be-3c39903329c7}</Project>
+      <Name>Ziggurat.Definition.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ziggurat.Definition.Client\Ziggurat.Definition.Client.csproj">
+      <Project>{d4b57488-42aa-4c9d-b67a-d0d2516f2361}</Project>
+      <Name>Ziggurat.Definition.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="README.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

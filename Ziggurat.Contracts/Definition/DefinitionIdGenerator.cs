@@ -12,9 +12,9 @@ namespace Ziggurat.Contracts.Definition
         public static readonly Guid FormNamespace = new Guid("941691C2-DB1D-4B0E-AB48-060FD11C7734");
         public static readonly Guid ProjectLayoutNamespace = new Guid("19DE97E2-B5D3-4825-A19C-C8EC0D3E8B45");
 
-        public static Guid NewProjectId(string shortName)
+        public static Guid NewProjectId()
         {
-            return GuidGenerator.Create(ProjectNamespace, shortName);
+            return Guid.NewGuid();
         }
 
         public static Guid NewFormId()

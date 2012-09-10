@@ -22,6 +22,7 @@ namespace Ziggurat.Infrastructure.Queue
     {
         IQueueMessage Peek();
         void Ack(IQueueMessage msg);
+        void Nack(IQueueMessage msg, Exception exception = null);
     }
 
     public interface IQueueMessage

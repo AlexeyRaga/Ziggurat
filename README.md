@@ -1,3 +1,12 @@
+IMPORTANT CHANGE
+================
+**From now Ziggurat Web Host is expected to be run on *localtest.me* domain**
+Recommended configuration steps:
+
+ 1. In IIS create a new web site and point it to Ziggurat.WebHost project folder
+ 2. In IIS bindings you may change the port, but *leave '**Host&nbsp;Name**' field empty*!
+ 3. Go to '*http://localtest.me*' and it should work.
+
 Ziggurat Overview
 =================
 
@@ -40,8 +49,7 @@ It consists of the following projects:
 The **Definition** functionality is represenred by:
  
   - **Ziggurat.Definition.Domain**. A definition domain BC. Contains the aggregates that are included into this BC (such as _Project_, _ProjectStructure_, _FormDefinition_) as well as domain-specific services and lookups (implemented through projections).
-  - **Ziggurat.Definition.Projections**. A definition client BC. This project is responsible for building projections that are needed by the client (e.g. list of projects, project structure or "left nav tree", etc). This projections-building functionality is intentionally separated from the frontend (WebHost). The main reason for this separation is the ability to "stop" the client BC, upgrade it, regenerate projections while the WebHost can continue serving users and displaying data.
-  - **Ziggurat.Definition.Service** Simply a "runner" (a console app or a windows service) for the Definition functionality. It supposed to wire things up. This is the physical process where commands are received, business logic is performed, events are fired, etc.
+  - **Ziggurat.Definition.Client**. A definition client BC. This project is responsible for building projections that are needed by the client (e.g. list of projects, project structure or "left nav tree", etc). This projections-building functionality is intentionally separated from the frontend (WebHost). The main reason for this separation is the ability to "stop" the client BC, upgrade it, regenerate projections while the WebHost can continue serving users and displaying data.
+  - **Ziggurat.Definition.Worker** Simply a "runner" (a console app or a windows service, ot an azure worker) for the Definition functionality. It supposed to wire things up. This is the physical process where commands are received, business logic is performed, events are fired, etc.
   
- **NOTE**: _Ziggurat.Definition.Projections_ is a **BAD** name. We need to come up with something more meaningful and descriptive. Maybe _Ziggurat.Definition.Client_ because it is for a client BC? Or _Ziggurat.Definition.Views_?
-  
+ The **Registration** functionality is responsible for registering/administering users. In the end of the day, we will need some, don't we? :)
