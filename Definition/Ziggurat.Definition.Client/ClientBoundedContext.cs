@@ -10,9 +10,10 @@ namespace Ziggurat.Definition.Client
 {
     public sealed class ClientBoundedContext
     {
-        public static IEnumerable<object> BuildProjections(IDocumentStore factory)
+        public static IEnumerable<object> BuildProjections(IDocumentStore store)
         {
-            yield return new ProjectListProjection(factory);
+            yield return new ProjectListProjection(store);
+            yield return new ProjectOverviewProjection(store);
             yield break;
         }
     }

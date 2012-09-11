@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Ziggurat.Definition.Client.ProjectOverview
+
+@{
     ViewBag.Title = "Index";
 }
 
@@ -9,3 +11,15 @@
 <div class="page-header">
     <h1>Project Overview</h1>
 </div>
+
+<fieldset>
+    <legend>Basic settings:</legend>
+    <ol class="unstyled">
+        <li>
+            Name: <strong>@Model.Name</strong>
+        </li>
+        <li>
+            Short name: <strong>@Model.ShortName</strong>
+        </li>
+    </ol>
+</fieldset>

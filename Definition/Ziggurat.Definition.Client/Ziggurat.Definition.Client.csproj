@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ClientBoundedContext.cs" />
     <Compile Include="ProjectList.cs" />
+    <Compile Include="ProjectOverview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
