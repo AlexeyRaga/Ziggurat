@@ -43,9 +43,11 @@
         <div class="well well-small">
             <div class="container-fluid">
                 @RenderSection("submenu", required: false)
-                <div class="pull-right">
-                @{Html.RenderAction("List", "Project", new { area = "Configuration" });}
-                </div>
+                @if (Request.IsAuthenticated) {
+                    <div class="pull-right">
+                      @{Html.RenderAction("List", "Project", new { area = "Configuration" });}
+                    </div>
+                }
             </div>
         </div>
 
