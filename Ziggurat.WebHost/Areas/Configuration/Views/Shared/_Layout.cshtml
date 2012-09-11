@@ -3,7 +3,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@RenderBody()
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+        <div class="well">
+        <ul class="nav nav-list" style="padding: 8px 0;">
+            <li class="nav-header">MAILBOX</li>
+            <li><a href="#">RFI</a></li>
+            <li><a href="#">Design Document</a></li>
+
+            <li class="nav-header">REPORTS</li>
+            <li><a href="#">Legacy systems</a></li>
+            <li><a href="#">Overall loss</a></li>
+        </ul>
+        </div>
+    </div>
+    <div class="span9">
+      @RenderBody()
+    </div>
+  </div>
+</div>
+
+@section Submenu {
+    @RenderSection("submenu", required: false)
+}
 
 @section Scripts {
     @RenderSection("scripts", required: false)

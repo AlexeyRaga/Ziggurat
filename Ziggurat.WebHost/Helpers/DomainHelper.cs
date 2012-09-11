@@ -10,7 +10,12 @@ namespace Ziggurat.Web.Helpers
     {
         public static string GetCurrentProjectDomain(this UrlHelper helper)
         {
-            var hostParts = helper.RequestContext.HttpContext.Request.Url.Host.Split('.');
+            return GetCurrentProjectDomain(helper.RequestContext.HttpContext.Request);
+        }
+
+        public static string GetCurrentProjectDomain(this HttpRequestBase request)
+        {
+            var hostParts = request.Url.Host.Split('.');
             if (hostParts.Length != 3) return String.Empty;
 
             return hostParts[0];

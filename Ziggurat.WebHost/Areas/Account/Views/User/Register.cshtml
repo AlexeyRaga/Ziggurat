@@ -1,12 +1,11 @@
 ﻿@model Ziggurat.Web.Account.Models.RegisterModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create an account";
 }
 
-<hgroup class="title">
+<div class="page-header">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
-</hgroup>
+</div>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -14,7 +13,7 @@
 
     <fieldset>
         <legend>Registration Form</legend>
-        <ol>
+        <ol class="unstyled">
             <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
