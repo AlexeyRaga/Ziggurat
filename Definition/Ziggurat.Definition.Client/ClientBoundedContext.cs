@@ -14,6 +14,7 @@ namespace Ziggurat.Definition.Client
         {
             yield return new ProjectListProjection(store);
             yield return new ProjectOverviewProjection(store);
+            yield return new ProjectInfoProjection(store);
             yield break;
         }
     }
