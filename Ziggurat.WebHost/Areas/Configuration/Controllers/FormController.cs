@@ -51,8 +51,9 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var formId = DefinitionIdGenerator.NewFormId();
 
             var cmd = new CreateForm(projectInfo.ProjectId, formId, model.Name, model.UniqueName);
+            _commandSender.SendCommand(cmd);
 
-            return Json("OK");
+            return Json(formId);
         }
     }
 }

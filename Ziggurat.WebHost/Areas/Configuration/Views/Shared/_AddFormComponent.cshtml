@@ -1,9 +1,10 @@
 ﻿@model Ziggurat.Web.Areas.Configuration.Models.CreateFormModel
+@using Ziggurat.Web.Helpers
 
 <a href="#addFormModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New document type</a>
 
 <div class="modal hide" id="addFormModal" tabindex="-1" role="dialog" aria-labelledby="addFormModalLabel" aria-hidden="true">
-    @using (Ajax.BeginForm("AddNewForm", "Form", new AjaxOptions { UpdateTargetId = "result", OnSuccess = "alert", OnFailure = "OnFailure" })) 
+    @using (Ajax.BeginForm("AddNewForm", "Form", new AjaxOptions { OnSuccess = "onCreateFormSuccess", OnFailure = "onCreateFormFailure", OnBegin="onBeginCreatingForm" })) 
     {
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -22,7 +23,7 @@
                 @Html.ValidationMessageFor(m => m.UniqueName)
             </li>
         </ol>
-        <div id="validationSummary" style="color:red"></div>
+        <div id="errorMessage" style="color:red"></div>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -32,7 +33,13 @@
 </div>
 
     <script type="text/javascript">
-        function OnFailure(response) {
-            $("#validationSummary").text(response.responseText);
+        function onBeginCreatingForm() {
+            $('#errorMessage').html('');
+        }
+        function onCreateFormFailure(response) {
+            $("#errorMessage").text(response.responseText);
+        }
+        function onCreateFormSuccess(response) {
+            window.location.href = '@Url.ActionUrlForPath("Configuration/Form/Index")/' + response;
         }
     </script>
