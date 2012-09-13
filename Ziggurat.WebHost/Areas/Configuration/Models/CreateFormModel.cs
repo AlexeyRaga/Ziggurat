@@ -14,7 +14,8 @@ namespace Ziggurat.Web.Areas.Configuration.Models
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.Text), MaxLength(50)]
+        [DataType(DataType.Text), MaxLength(20)]
+        [RegularExpression(@"\w+", ErrorMessage="Invalid unique name.")]
         [Display(Name = "Form type unique name")]
         public string UniqueName { get; set; }
     }

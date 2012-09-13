@@ -33,10 +33,15 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         [HttpPost]
         public ActionResult AddNewForm(CreateFormModel model)
         {
-            if (!ModelState.IsValid) return Json("");
+            if (!ModelState.IsValid) {
+                var errors = ModelState
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x=>x.ErrorMessage)
+                    .ToArray();
 
-            Response.StatusCode = 500;
-            return Json("Invalid something");
+                Response.StatusCode = 500;
+                return Json(errors);
+            }
 
             var currentProject = DomainHelper.GetCurrentProjectDomain(Request);
             var projectInfo = _viewModelReader.LoadOrDefault<string, ProjectInfo>(currentProject);

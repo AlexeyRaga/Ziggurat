@@ -15,6 +15,7 @@ namespace Ziggurat.Web.Areas.Configuration.Models
 
         [Required]
         [DataType(DataType.Text), MaxLength(20)]
+        [RegularExpression(@"\w+", ErrorMessage="Invalid short name")]
         [Display(Name = "Project short name")]
         public string ShortName { get; set; }
     }
