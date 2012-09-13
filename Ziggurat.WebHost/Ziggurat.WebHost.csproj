@@ -236,6 +236,8 @@
     <Content Include="Areas\Configuration\Views\Shared\_ProjectFormsList.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_AddFormComponent.cshtml" />
     <Content Include="Areas\Configuration\Views\Form\AddNewForm.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\Manage.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\FormIsBeingCreated.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />

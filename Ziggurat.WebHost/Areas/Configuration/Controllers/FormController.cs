@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Ziggurat.Contracts.Definition;
@@ -11,6 +12,7 @@ using Ziggurat.Web.Helpers;
 
 namespace Ziggurat.Web.Areas.Configuration.Controllers
 {
+    [Authorize]
     public class FormController : Controller
     {
         private IViewModelReader _viewModelReader;
@@ -25,7 +27,30 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public FormController()
             : this(Client.ViewModelReader, Client.CommandSender) { }
 
-        public ActionResult Index()
+        public ActionResult Manage(Guid id)
+        {
+            var formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
+            if (formInfo == null)
+            {
+                Thread.Sleep(5000);
+                _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
+            }
+
+            if (formInfo == null) return View("FormIsBeingCreated", id);
+
+            return View(formInfo);
+        }
+
+        [HttpGet]
+        [OutputCache(Duration = 0)]
+        public ActionResult Exists(Guid id)
+        {
+            var data = _viewModelReader.LoadOrDefault<Guid, ProjectList>(id);
+
+            return Json(data != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Boo()
         {
             return View();
         }
