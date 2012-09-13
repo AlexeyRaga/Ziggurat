@@ -18,12 +18,8 @@ namespace Ziggurat.Definition.Domain.Processes
 
         public void When(FormCreated evt)
         {
-            _commandSender.SendCommand(new AddFormToProject(evt.ProjectId, evt.FormId));
-        }
-
-        public void When(FormAddedToProject evt)
-        {
-            _commandSender.SendCommand(new AttachFormToProjectLayout(evt.FormId, evt.ProjectId, evt.ProjectLayoutId));
+            var projectLayoutId = DefinitionIdGenerator.NewProjectLayoutId(evt.ProjectId);
+            _commandSender.SendCommand(new AttachFormToProjectLayout(projectLayoutId, evt.FormId, evt.ProjectId));
         }
     }
 }

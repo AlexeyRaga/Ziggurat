@@ -142,76 +142,6 @@ namespace Ziggurat.Contracts.Definition
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class AddFormToProject : ICommand
-	{
-		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid FormId { get; set; }
-
-		public AddFormToProject() { }
-		public AddFormToProject(Guid projectId, Guid formId)
-		{
-			ProjectId = projectId;
-			FormId = formId;
-		}
-
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class FormAddedToProject : IEvent
-	{
-		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 1 )] public Guid ProjectLayoutId { get; set; }
-		[DataMember(Order = 2 )] public Guid FormId { get; set; }
-
-		public FormAddedToProject() { }
-		public FormAddedToProject(Guid projectId, Guid projectLayoutId, Guid formId)
-		{
-			ProjectId = projectId;
-			ProjectLayoutId = projectLayoutId;
-			FormId = formId;
-		}
-
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class AttachFormToProjectLayout : ICommand
-	{
-		[DataMember(Order = 0 )] public Guid FormId { get; set; }
-		[DataMember(Order = 1 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 2 )] public Guid ProjectLayoutId { get; set; }
-
-		public AttachFormToProjectLayout() { }
-		public AttachFormToProjectLayout(Guid formId, Guid projectId, Guid projectLayoutId)
-		{
-			FormId = formId;
-			ProjectId = projectId;
-			ProjectLayoutId = projectLayoutId;
-		}
-
-	}
-
-	[Serializable, DataContract]
-	public sealed partial class FormAttachedToProjectLayout : IEvent
-	{
-		[DataMember(Order = 0 )] public Guid FormId { get; set; }
-		[DataMember(Order = 1 )] public Guid ProjectId { get; set; }
-		[DataMember(Order = 2 )] public Guid ProjectLayoutId { get; set; }
-		[DataMember(Order = 3 )] public string Blockheader { get; set; }
-		[DataMember(Order = 4 )] public int Order { get; set; }
-
-		public FormAttachedToProjectLayout() { }
-		public FormAttachedToProjectLayout(Guid formId, Guid projectId, Guid projectLayoutId, string blockheader, int order)
-		{
-			FormId = formId;
-			ProjectId = projectId;
-			ProjectLayoutId = projectLayoutId;
-			Blockheader = blockheader;
-			Order = order;
-		}
-
-	}
-
-	[Serializable, DataContract]
 	public sealed partial class CreateForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid ProjectId { get; set; }
@@ -245,6 +175,78 @@ namespace Ziggurat.Contracts.Definition
 			FormId = formId;
 			Name = name;
 			UniqueName = uniqueName;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class AttachFormToProjectLayout : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+		[DataMember(Order = 2 )] public Guid ProjectId { get; set; }
+
+		public AttachFormToProjectLayout() { }
+		public AttachFormToProjectLayout(Guid projectLayoutId, Guid formId, Guid projectId)
+		{
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			ProjectId = projectId;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class FormAttachedToProjectLayout : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+		[DataMember(Order = 2 )] public Guid ProjectId { get; set; }
+
+		public FormAttachedToProjectLayout() { }
+		public FormAttachedToProjectLayout(Guid projectLayoutId, Guid formId, Guid projectId)
+		{
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			ProjectId = projectId;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class MoveFormInProjectLayout : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+		[DataMember(Order = 2 )] public string BlockHeader { get; set; }
+		[DataMember(Order = 3 )] public int Order { get; set; }
+
+		public MoveFormInProjectLayout() { }
+		public MoveFormInProjectLayout(Guid projectLayoutId, Guid formId, string blockHeader, int order)
+		{
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			BlockHeader = blockHeader;
+			Order = order;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class FormMovedInProjectLayout : IEvent
+	{
+		[DataMember(Order = 0 )] public Guid ProjectLayoutId { get; set; }
+		[DataMember(Order = 1 )] public Guid FormId { get; set; }
+		[DataMember(Order = 2 )] public string BlockHeader { get; set; }
+		[DataMember(Order = 3 )] public int Order { get; set; }
+
+		public FormMovedInProjectLayout() { }
+		public FormMovedInProjectLayout(Guid projectLayoutId, Guid formId, string blockHeader, int order)
+		{
+			ProjectLayoutId = projectLayoutId;
+			FormId = formId;
+			BlockHeader = blockHeader;
+			Order = order;
 		}
 
 	}

@@ -27,7 +27,8 @@ namespace Ziggurat.Definition.Domain.Tests.ProjectLayout
             When = layout => layout.AttachForm(FormId);
 
             Then = new IEvent[] {
-                new FormAttachedToProjectLayout(FormId, ProjectId, LayoutId, ProjectLayoutAggregate.DefaultBlockHeaderName, 0)
+                new FormAttachedToProjectLayout(LayoutId, FormId, ProjectId),
+                new FormMovedInProjectLayout(LayoutId, FormId, ProjectLayoutAggregate.DefaultBlockHeaderName, 0)
             };
         }
     }

@@ -19,7 +19,8 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
 
         public void AttachForm(Guid formId)
         {
-            Apply(new FormAttachedToProjectLayout(formId, State.ProjectId, State.Id, DefaultBlockHeaderName, 0));
+            Apply(new FormAttachedToProjectLayout(State.Id, formId, State.ProjectId));
+            Apply(new FormMovedInProjectLayout(State.Id, formId, DefaultBlockHeaderName, 0));
         }
     }
 }
