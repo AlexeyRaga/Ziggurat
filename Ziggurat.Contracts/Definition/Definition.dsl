@@ -10,15 +10,13 @@ ProjectLayoutAssignedToProject! Guid projectId, Guid projectLayoutId
 
 ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
 
-AddFormToProject? Guid projectId, Guid formId
-FormAddedToProject! Guid projectId, Guid projectLayoutId, Guid formId
-
-AttachFormToProjectLayout? Guid formId, Guid projectId, Guid projectLayoutId
-FormAttachedToProjectLayout! Guid formId, Guid projectId, Guid projectLayoutId, string blockheader, int order
-
-
 CreateForm? Guid projectId, Guid formId, string name, string uniqueName
 FormCreated! Guid projectId, Guid formId, string name, string uniqueName
+
+AttachFormToProjectLayout? Guid projectLayoutId, Guid formId, Guid projectId, 
+FormAttachedToProjectLayout! Guid projectLayoutId, Guid formId, Guid projectId
+MoveFormInProjectLayout? Guid projectLayoutId, Guid formId, string blockHeader, int order
+FormMovedInProjectLayout! Guid projectLayoutId, Guid formId, string blockHeader, int order
 
 // Property is an ENTITY.
 // ENTITIES inside the boundary have local identity, unique only within the AGGREGATE.

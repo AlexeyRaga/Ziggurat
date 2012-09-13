@@ -22,10 +22,5 @@ namespace Ziggurat.Definition.Domain.Project
         {
             Update(cmd.ProjectId, aggregate => aggregate.AssignProjectLayout(cmd.ProjectLayoutId));
         }
-
-        public void When(AddFormToProject cmd)
-        {
-            Update(cmd.ProjectId, prj => prj.AddForm(cmd.FormId));
-        }
     }
 }

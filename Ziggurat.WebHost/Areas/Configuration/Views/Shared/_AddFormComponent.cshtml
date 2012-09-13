@@ -1,0 +1,38 @@
+﻿@model Ziggurat.Web.Areas.Configuration.Models.CreateFormModel
+
+<a href="#addFormModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New document type</a>
+
+<div class="modal hide" id="addFormModal" tabindex="-1" role="dialog" aria-labelledby="addFormModalLabel" aria-hidden="true">
+    @using (Ajax.BeginForm("AddNewForm", "Form", new AjaxOptions { UpdateTargetId = "result", OnSuccess = "alert", OnFailure = "OnFailure" })) 
+    {
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="addFormModalLabel">Add new form type</h3>
+      </div>
+      <div class="modal-body">
+        <ol class="unstyled">
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.UniqueName)
+                @Html.TextBoxFor(m => m.UniqueName)
+                @Html.ValidationMessageFor(m => m.UniqueName)
+            </li>
+        </ol>
+        <div id="validationSummary" style="color:red"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" class="btn btn-primary">Proceed</button>
+      </div>
+    }
+</div>
+
+    <script type="text/javascript">
+        function OnFailure(response) {
+            $("#validationSummary").text(response.responseText);
+        }
+    </script>

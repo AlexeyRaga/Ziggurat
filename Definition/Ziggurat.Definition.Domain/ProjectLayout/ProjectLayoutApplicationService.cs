@@ -19,5 +19,10 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
         {
             Update(cmd.ProjectLayoutId, aggregate => aggregate.CreateForProject(cmd.ProjectLayoutId, cmd.ProjectId));
         }
+
+        public void When(AttachFormToProjectLayout cmd)
+        {
+            Update(cmd.ProjectLayoutId, aggregate => aggregate.AttachForm(cmd.FormId));
+        }
     }
 }

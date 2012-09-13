@@ -6,17 +6,17 @@ using System.Web;
 
 namespace Ziggurat.Web.Areas.Configuration.Models
 {
-    public sealed class CreateProjectModel
+    public sealed class CreateFormModel
     {
         [Required]
         [DataType(DataType.Text), MaxLength(50)]
-        [Display(Name = "Project name")]
+        [Display(Name = "Form type name")]
         public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Text), MaxLength(20)]
-        [RegularExpression(@"\w+", ErrorMessage="Invalid short name")]
-        [Display(Name = "Project short name")]
-        public string ShortName { get; set; }
+        [RegularExpression(@"\w+", ErrorMessage="Invalid unique name.")]
+        [Display(Name = "Form type unique name")]
+        public string UniqueName { get; set; }
     }
 }
