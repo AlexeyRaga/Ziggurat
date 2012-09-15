@@ -36,6 +36,9 @@ namespace Ziggurat.Definition.Client
                     layout.BlockHeaderForms.Add(evt.BlockHeader, formsInBlockHeader);
                 }
 
+                var currentGroup = layout.BlockHeaderForms.FirstOrDefault(x => x.Value.Contains(evt.FormId));
+                if (currentGroup.Value != null) currentGroup.Value.Remove(evt.FormId);
+
                 if (evt.Order >= formsInBlockHeader.Count)
                     formsInBlockHeader.Add(evt.FormId);
                 else
