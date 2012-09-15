@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ziggurat.Contracts.Definition;
 using Ziggurat.Infrastructure;
 using Ziggurat.Definition.Client;
 using Ziggurat.Web.Areas.Configuration.Models;
@@ -28,9 +29,13 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         [HttpPost]
         public void ChangeFormPosition(FormPositionInLayout model)
         {
-            
+            var projectInfo = GetCurrentProjectInfo();
+
+            var cmd = new MoveFormInProjectLayout(projectInfo.ProjectLayoutId, model.FormId, model.Header, model.Position);
+            _commandSender.SendCommand(cmd);
         }
 
+        [ChildActionOnly]
         public ActionResult FormList()
         {
             var projectInfo = GetCurrentProjectInfo();

@@ -22,5 +22,10 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
             Apply(new FormAttachedToProjectLayout(State.Id, formId, State.ProjectId));
             Apply(new FormMovedInProjectLayout(State.Id, formId, DefaultBlockHeaderName, 0));
         }
+
+        public void MoveFormToPosition(Guid formId, string blockHeader, int position)
+        {
+            Apply(new FormMovedInProjectLayout(State.Id, formId, blockHeader, position));
+        }
     }
 }

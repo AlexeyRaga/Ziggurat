@@ -24,5 +24,10 @@ namespace Ziggurat.Definition.Domain.ProjectLayout
         {
             Update(cmd.ProjectLayoutId, aggregate => aggregate.AttachForm(cmd.FormId));
         }
+
+        public void When(MoveFormInProjectLayout cmd)
+        {
+            Update(cmd.ProjectLayoutId, aggregate => aggregate.MoveFormToPosition(cmd.FormId, cmd.BlockHeader, cmd.Order));
+        }
     }
 }
