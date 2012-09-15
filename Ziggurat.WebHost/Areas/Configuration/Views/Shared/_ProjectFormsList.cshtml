@@ -1,11 +1,14 @@
-﻿<ul class="nav nav-list" style="padding: 8px 0;">
-    <li class="nav-header">MAILBOX <a href="#" class="pull-right" title="New document type under Mailbox"><i class="icon icon-plus"></i></a></li>
-    <li><a href="#">RFI</a></li>
-    <li><a href="#">Design Document</a></li>
+﻿@model Ziggurat.Web.Areas.Configuration.Models.ProjectFormsListModel
 
-    <li class="nav-header">REPORTS</li>
-    <li><a href="#">Legacy systems</a></li>
-    <li><a href="#">Overall loss</a></li>
+<ul id="formsList" class="nav nav-list" style="padding: 8px 0;">
+    @foreach (var group in Model.FormGroups)
+    {
+        <li class="nav-header">@group.Header</li>
+        foreach (var form in group.Forms)
+        {
+            <li data-id="@form.FormId"><a href="#">@form.Name</a></li>
+        }
+    }
     <li class="divider"></li>
     <li>
         <div class="input-append">

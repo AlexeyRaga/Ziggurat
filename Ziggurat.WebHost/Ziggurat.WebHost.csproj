@@ -127,8 +127,11 @@
     <Compile Include="Areas\Configuration\Controllers\FormController.cs" />
     <Compile Include="Areas\Configuration\Controllers\HomeController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ProjectController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\ProjectLayoutController.cs" />
     <Compile Include="Areas\Configuration\Models\CreateFormModel.cs" />
     <Compile Include="Areas\Configuration\Models\CreateProjectModel.cs" />
+    <Compile Include="Areas\Configuration\Models\FormPositionInLayout.cs" />
+    <Compile Include="Areas\Configuration\Models\ProjectFormsListModel.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\HomeController.cs" />
     <Compile Include="Areas\Forms\Controllers\HomeController.cs" />
@@ -238,6 +241,7 @@
     <Content Include="Areas\Configuration\Views\Form\AddNewForm.cshtml" />
     <Content Include="Areas\Configuration\Views\Form\Manage.cshtml" />
     <Content Include="Areas\Configuration\Views\Form\FormIsBeingCreated.cshtml" />
+    <Content Include="Areas\Configuration\Scripts\configuration.formList.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />
@@ -249,6 +253,8 @@
     <Content Include="Scripts\jquery-1.8.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.min.js" />
+    <Content Include="Scripts\jquery.sortable.js" />
+    <Content Include="Scripts\jquery.sortable.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

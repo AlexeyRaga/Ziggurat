@@ -1,11 +1,14 @@
 ﻿@model Ziggurat.Definition.Client.ProjectOverview
+@using Ziggurat.Web.Helpers
 
 @{
     ViewBag.Title = "Index";
 }
 
 @section Submenu {
-   @Html.Partial("_AddFormComponent", new Ziggurat.Web.Areas.Configuration.Models.CreateFormModel())
+    @if (Url.IsInProject()) {
+        @Html.Partial("_AddFormComponent", new Ziggurat.Web.Areas.Configuration.Models.CreateFormModel())
+    }
 }
 
 <div class="page-header">
