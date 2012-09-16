@@ -43,9 +43,11 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var projectInfo = _viewModelReader.LoadOrDefault<string, ProjectInfo>(currentProject);
 
             var propertyId = DefinitionIdGenerator.NewPropertyId();
-            
 
-            return Json("");
+            var cmd = new AddNewPropertyToForm(model.FormId, propertyId, model.Type, model.Name);
+            _commandSender.SendCommand(cmd);
+
+            return Json(propertyId);
         }
     }
 }
