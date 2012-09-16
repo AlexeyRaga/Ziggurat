@@ -49,5 +49,10 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
 
             return Json(propertyId);
         }
+
+        public ActionResult Overview(Guid id)
+        {
+            return View();
+        }
     }
 }
