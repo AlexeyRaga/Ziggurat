@@ -51,6 +51,18 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             return Json(propertyId);
         }
 
+        public void MakeUsed(Guid formId, Guid propertyId)
+        {
+            var cmd = new MakePropertyUsed(formId, propertyId);
+            _commandSender.SendCommand(cmd);
+        }
+
+        public void MakeUnused(Guid formId, Guid propertyId)
+        {
+            var cmd = new MakePropertyUnused(formId, propertyId);
+            _commandSender.SendCommand(cmd);
+        }
+
         public ActionResult Overview(Guid id)
         {
             return View();
