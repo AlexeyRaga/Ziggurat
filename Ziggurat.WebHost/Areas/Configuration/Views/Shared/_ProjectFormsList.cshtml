@@ -1,4 +1,5 @@
 ﻿@model Ziggurat.Web.Areas.Configuration.Models.ProjectFormsListModel
+@using Ziggurat.Web.Helpers
 
 <ul id="formsList" class="nav nav-list" style="padding: 8px 0;">
     @foreach (var group in Model.FormGroups)
@@ -6,7 +7,7 @@
         <li class="nav-header">@group.Header</li>
         foreach (var form in group.Forms)
         {
-            <li data-id="@form.FormId"><a href="#">@form.Name</a></li>
+            <li data-id="@form.FormId"><a href="@Url.Action("Overview", "Form", new{id = form.FormId})">@form.Name</a></li>
         }
     }
 </ul>
