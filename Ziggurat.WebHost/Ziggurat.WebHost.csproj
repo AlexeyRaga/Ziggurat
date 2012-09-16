@@ -148,6 +148,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Helpers\LinkHelper.cs" />
+    <Compile Include="ProjectContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
