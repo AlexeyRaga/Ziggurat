@@ -51,12 +51,14 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             return Json(propertyId);
         }
 
+        [HttpPost]
         public void MakeUsed(Guid formId, Guid propertyId)
         {
             var cmd = new MakePropertyUsed(formId, propertyId);
             _commandSender.SendCommand(cmd);
         }
 
+        [HttpPost]
         public void MakeUnused(Guid formId, Guid propertyId)
         {
             var cmd = new MakePropertyUnused(formId, propertyId);
