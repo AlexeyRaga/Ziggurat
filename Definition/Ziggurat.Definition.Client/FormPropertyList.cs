@@ -55,6 +55,7 @@ namespace Ziggurat.Definition.Client
                     var property = new FormPropertyList.Property
                     {
                         Id   = evt.PropertyId,
+                        Type = evt.Type,
                         Name = evt.Name
                     };
 
