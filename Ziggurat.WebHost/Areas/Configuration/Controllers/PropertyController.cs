@@ -26,6 +26,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             : this(Client.ViewModelReader, Client.CommandSender) { }
 
         [HttpPost]
+        [OutputCache(Duration = 0)]
         public ActionResult AddNew(NewPropertyModel model)
         {
             if (!ModelState.IsValid)

@@ -67,6 +67,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         }
 
         [HttpPost]
+        [OutputCache(Duration = 0)]
         public ActionResult AddNewForm(CreateFormModel model)
         {
             if (!ModelState.IsValid) {
