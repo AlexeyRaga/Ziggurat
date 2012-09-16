@@ -1,11 +1,12 @@
 ﻿@model Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel
 @using Ziggurat.Web.Helpers
 
-<a href="#addPropertyModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New Form</a>
+<a href="#addPropertyModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New Property</a>
 
 <div class="modal hide" id="addPropertyModal" tabindex="-1" role="dialog" aria-labelledby="addPropertyModalLabel" aria-hidden="true">
-    @using (Ajax.BeginForm("AddNew", "Property", new AjaxOptions { OnSuccess = "onAddPropertySuccess", OnFailure = "onAddPropertyFailure", OnBegin="onBeginAddingForm" })) 
+    @using (Ajax.BeginForm("AddNew", "Property", new AjaxOptions { OnSuccess = "onAddPropertySuccess", OnFailure = "onAddPropertyFailure", OnBegin="onBeginAddProperty" })) 
     {
+      @Html.HiddenFor(m => m.FormId)
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="addPropertyModalLabel">Add new property</h3>
@@ -19,6 +20,7 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.Type)
+                @Html.EnumDropDownListFor(m => m.Type)
             </li>
         </ol>
         <div id="errorMessage" style="color:red"></div>
@@ -31,7 +33,7 @@
 </div>
 
     <script type="text/javascript">
-        function onBeginAddingProperty() {
+        function onBeginAddProperty() {
             $('#errorMessage').html('');
         }
         function onAddPropertyFailure(response) {

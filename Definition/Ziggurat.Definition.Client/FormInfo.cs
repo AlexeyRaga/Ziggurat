@@ -10,6 +10,7 @@ namespace Ziggurat.Definition.Client
 {
     public sealed class FormInfo
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string UniqueName { get; set; }
     }
@@ -26,6 +27,7 @@ namespace Ziggurat.Definition.Client
         {
             _writer.AddOrUpdate(evt.FormId, info =>
             {
+                info.Id = evt.FormId;
                 info.Name = evt.Name;
                 info.UniqueName = evt.UniqueName;
             });

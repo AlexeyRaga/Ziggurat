@@ -4,7 +4,7 @@
 }
 
 @section Submenu {
-   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel())
+   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Id })
 }
 
 <div class="page-header">

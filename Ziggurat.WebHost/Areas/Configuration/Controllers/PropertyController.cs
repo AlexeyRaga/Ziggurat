@@ -13,6 +13,17 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         [HttpPost]
         public ActionResult AddNew(NewPropertyModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage)
+                    .ToArray();
+
+                Response.StatusCode = 500;
+                return Json(errors);
+            }
+
             return Json("");
         }
     }
