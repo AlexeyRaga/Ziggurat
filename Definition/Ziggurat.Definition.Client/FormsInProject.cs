@@ -17,6 +17,9 @@ namespace Ziggurat.Definition.Client
 
     public sealed class FormsInProject
     {
+        public Guid ProjectId { get; set; }
+        public string ProjectShortName { get; set; }
+
         public List<FormInProjectInfoRecord> Forms { get; set; }
 
         public FormsInProject()
@@ -31,6 +34,15 @@ namespace Ziggurat.Definition.Client
         public FormsInProjectProjection(IDocumentStore store)
         {
             _witer = store.GetWriter<Guid, FormsInProject>();
+        }
+
+        public void When(ProjectCreated evt)
+        {
+            _witer.AddOrUpdate(evt.Id, view =>
+            {
+                view.ProjectId = evt.Id;
+                view.ProjectShortName = evt.ShortName;
+            });
         }
 
         public void When(FormCreated evt)
