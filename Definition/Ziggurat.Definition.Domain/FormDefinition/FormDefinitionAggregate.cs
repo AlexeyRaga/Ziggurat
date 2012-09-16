@@ -20,9 +20,9 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             Apply(new FormCreated(projectId, id, name, uniqueName));
         }
 
-        public void CreateProperty(Guid id, PropertyType type, string name)
+        public void AddNewProperty(Guid id, PropertyType type, string name)
         {
-            Apply(new PropertyCreated(Id, id, type, name));
+            Apply(new NewPropertyAddedToForm(Id, id, type, name));
         }
 
         public void MakePropertyUnused(Guid propertyId)
@@ -42,7 +42,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             Id = evt.FormId;
         }
 
-        public void When(PropertyCreated evt)
+        public void When(NewPropertyAddedToForm evt)
         {
             var property = PropertyFactory.Create(this, evt.PropertyId, evt.Type);
             _properties.Add(property);

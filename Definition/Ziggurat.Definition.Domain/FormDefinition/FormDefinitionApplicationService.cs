@@ -17,12 +17,12 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             Update(cmd.FormId, form => form.Create(cmd.ProjectId, cmd.FormId, cmd.Name, cmd.UniqueName));
         }
 
-        public void When(CreateProperty cmd)
+        public void When(AddNewPropertyToForm cmd)
         {
             if (cmd.FormId == Guid.Empty) throw new ArgumentException("Form ID is required");
             if (String.IsNullOrWhiteSpace(cmd.Name)) throw new ArgumentException("Name is required");
 
-            Update(cmd.FormId, form => form.CreateProperty(cmd.PropertyId, cmd.Type, cmd.Name));
+            Update(cmd.FormId, form => form.AddNewProperty(cmd.PropertyId, cmd.Type, cmd.Name));
         }
 
         public void When(MakePropertyUsed cmd)
