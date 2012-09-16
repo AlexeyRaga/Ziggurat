@@ -27,9 +27,11 @@
                   <a class="brand" href="/">[ Ziggurat ]</a>
                   <div class="nav-collapse">
                     <ul class="nav">
-                      @Html.MenuItemForPath(@"Configuration\Home\Index", "Configuration")
-                      @Html.MenuItemForPath(@"Contacts\Home\Index", "Contacts")
-                      @Html.MenuItemForPath(@"Forms\Home\Index", "Documents")
+                      @if (Url.IsInProject()) {
+                          @Html.MenuItemForPath(@"Configuration\Home\Index", "Configuration")
+                          @Html.MenuItemForPath(@"Contacts\Home\Index", "Contacts")
+                          @Html.MenuItemForPath(@"Forms\Home\Index", "Documents")
+                      }
                     </ul>
                     <div class="nav pull-right">
                         @Html.Partial("_LoginPartial")
