@@ -27,13 +27,13 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public FormController()
             : this(Client.ViewModelReader, Client.CommandSender) { }
 
-        public ActionResult Manage(Guid id)
+        public ActionResult Overview(Guid id)
         {
             var formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
             if (formInfo == null)
             {
                 Thread.Sleep(5000);
-                _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
+                formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
             }
 
             if (formInfo == null) return View("FormIsBeingCreated", id);
