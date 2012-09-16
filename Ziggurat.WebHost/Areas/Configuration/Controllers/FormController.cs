@@ -61,7 +61,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         [OutputCache(Duration = 0)]
         public ActionResult Exists(Guid id)
         {
-            var data = _viewModelReader.LoadOrDefault<Guid, ProjectList>(id);
+            var data = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
 
             return Json(data != null, JsonRequestBehavior.AllowGet);
         }
