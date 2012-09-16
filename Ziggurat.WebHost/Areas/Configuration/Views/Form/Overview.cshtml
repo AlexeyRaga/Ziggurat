@@ -1,5 +1,8 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model Ziggurat.Definition.Client.FormInfo
+@{
+    ViewBag.Title = "Overviwe: " + Model.Name;
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h2>@Model.Name</h2>
+</div>
