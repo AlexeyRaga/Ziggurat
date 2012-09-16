@@ -3,6 +3,10 @@
     ViewBag.Title = "Overviwe: " + Model.Name;
 }
 
+@section Submenu {
+   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.CreateFormModel())
+}
+
 <div class="page-header">
     <h2>@Model.Name</h2>
 </div>
