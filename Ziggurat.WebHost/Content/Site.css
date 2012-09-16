@@ -30,11 +30,15 @@ header, footer, nav, section {
   text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
 }
 
-/* Sortable 
+/* Rows and icons 
 -------------------------------------------------- */
-li.sortable-placeholder {
-    border: 1px dashed #CCC;
-    background: none;
+.table tbody tr.error td:first-child i.icon.normal,
+.table tbody tr.normal td:first-child i.icon.error {
+    display: none;
+}
+.table tbody tr.normal td:first-child i.icon.normal,
+.table tbody tr.error td:first-child i.icon.error {
+    display: inline-block;
 }
 
 /* Footer
