@@ -37,7 +37,7 @@ namespace Ziggurat.Web
                 "~/Scripts/knockout-{version}.js"));
 
             bundles.Add(new StyleBundle("~/bundles/extensions").Include(
-                "~/Scripts/jquery.sortable*"));
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
