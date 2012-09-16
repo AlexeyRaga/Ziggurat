@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ClientBoundedContext.cs" />
     <Compile Include="FormInfo.cs" />
+    <Compile Include="FormPropertyList.cs" />
     <Compile Include="FormsInProject.cs" />
     <Compile Include="FormsProjectLayout.cs" />
     <Compile Include="ProjectInfo.cs" />
