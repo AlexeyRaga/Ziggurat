@@ -29,16 +29,32 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
 
         public ActionResult Overview(Guid id)
         {
-            var formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
-            if (formInfo == null)
-            {
-                Thread.Sleep(5000);
-                formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
-            }
-
+            var formInfo = GetFormInfoOrWaitABit(id);
             if (formInfo == null) return View("FormIsBeingCreated", id);
 
-            return View(formInfo);
+            var propList = GetProperties(id) ?? new FormPropertyList { FormId = id };
+
+            var model = new FormOverviewModel(formInfo, propList);
+
+            return View(model);
+        }
+
+        private FormInfo GetFormInfoOrWaitABit(Guid formId)
+        {
+            var formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(formId);
+            if (formInfo == null)
+            {
+                Thread.Sleep(3000);
+                formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(formId);
+            }
+
+            return formInfo;
+        }
+
+        private FormPropertyList GetProperties(Guid formId)
+        {
+            var propList = _viewModelReader.LoadOrDefault<Guid, FormPropertyList>(formId);
+            return propList;
         }
 
         [HttpGet]

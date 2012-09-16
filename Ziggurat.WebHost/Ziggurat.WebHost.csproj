@@ -131,6 +131,7 @@
     <Compile Include="Areas\Configuration\Controllers\PropertyController.cs" />
     <Compile Include="Areas\Configuration\Models\CreateFormModel.cs" />
     <Compile Include="Areas\Configuration\Models\CreateProjectModel.cs" />
+    <Compile Include="Areas\Configuration\Models\FormOverviewModel.cs" />
     <Compile Include="Areas\Configuration\Models\FormPositionInLayout.cs" />
     <Compile Include="Areas\Configuration\Models\NewPropertyModel.cs" />
     <Compile Include="Areas\Configuration\Models\ProjectFormsListModel.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Configuration\Scripts\configuration.propList.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />

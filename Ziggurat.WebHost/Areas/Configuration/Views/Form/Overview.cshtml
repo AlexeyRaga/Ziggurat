@@ -1,12 +1,45 @@
-﻿@model Ziggurat.Definition.Client.FormInfo
+﻿@model Ziggurat.Web.Areas.Configuration.Models.FormOverviewModel
 @{
-    ViewBag.Title = "Overviwe: " + Model.Name;
+    ViewBag.Title = "Overviwe: " + Model.Form.Name;
 }
 
 @section Submenu {
-   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Id })
+   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Form.Id })
 }
 
+@functions {
+    MvcHtmlString GetPropertyRowClass(bool isUsed) {
+        var tag = isUsed ? "" : "class='error'";
+        return new MvcHtmlString(tag);
+    }
+}
 <div class="page-header">
-    <h2>@Model.Name</h2>
+    <h2>@Model.Form.Name</h2>
 </div>
+
+<table id="propList" class="table table-striped">
+  <thead>
+      <tr>
+          <th style="width: 16px"></th>
+          <th>Name</th>
+          <th style="width:120px">Type</th>
+          <th style="width:100px"></th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var prop in Model.Properties.Properties)
+      {
+          <tr data-id="@prop.Id" data-used="@prop.IsUsed.ToString().ToLower()">
+              <td><i class="icon @(prop.IsUsed ? "icon-ok-circle" : "icon-ban-circle")"</td>
+              <td>@prop.Name</td>
+              <td>@prop.Type</td>
+              <td>
+                  <div class="btn-group" data-toggle="buttons-radio">
+                      <button type="button" class="btn @(prop.IsUsed ? "active" : "")">Used</button>
+                      <button type="button" class="btn @(!prop.IsUsed ? "active" : "")">Unused</button>
+                  </div>
+              </td>
+          </tr>
+      }
+  </tbody>
+</table>

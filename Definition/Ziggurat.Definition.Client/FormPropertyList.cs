@@ -20,6 +20,7 @@ namespace Ziggurat.Definition.Client
         {
             public Guid Id { get; set; }
             public string Name { get; set; }
+            public PropertyType Type { get; set; }
             public bool IsUsed { get; set; }
         }
     }
@@ -40,8 +41,9 @@ namespace Ziggurat.Definition.Client
                     var list = new FormPropertyList { FormId = evt.FormId };
                     var property = new FormPropertyList.Property
                     {
-                        Id = evt.PropertyId,
-                        Name = evt.Name
+                        Id   = evt.PropertyId,
+                        Name = evt.Name,
+                        Type = evt.Type,
                     };
                     list.Properties.Add(property);
                     return list;
@@ -52,7 +54,7 @@ namespace Ziggurat.Definition.Client
 
                     var property = new FormPropertyList.Property
                     {
-                        Id = evt.PropertyId,
+                        Id   = evt.PropertyId,
                         Name = evt.Name
                     };
 
