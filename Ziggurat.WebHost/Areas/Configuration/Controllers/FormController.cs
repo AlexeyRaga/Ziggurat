@@ -50,11 +50,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             return Json(data != null, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Boo()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult AddNewForm(CreateFormModel model)
         {
