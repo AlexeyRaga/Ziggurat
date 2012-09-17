@@ -23,7 +23,16 @@
 
 <div class="tab-content">
   <div class="tab-pane active" id="home">
-      
+      <fieldset>
+        <ol class="unstyled">
+            <li>
+                Name: <strong>@Model.Name</strong>
+            </li>
+            <li>
+                Unique name: <strong>@Model.UniqueName</strong>
+            </li>
+        </ol>
+      </fieldset>
   </div>
   <div class="tab-pane" id="profile">
       @Html.Action("BasicPropertyList", new { id = Model.Id })
