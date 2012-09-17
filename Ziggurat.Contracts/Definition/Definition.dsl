@@ -1,4 +1,5 @@
-﻿CreateNewProject? Guid id, string name, string shortName
+﻿// Project level commands and events
+CreateNewProject? Guid id, string name, string shortName
 ProjectCreationFailed! Guid projectId, string name, string shortName, IList<string> errors
 NewProjectRegistered! Guid projectId, string name, string shortName
 
@@ -10,6 +11,7 @@ ProjectLayoutAssignedToProject! Guid projectId, Guid projectLayoutId
 
 ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
 
+//Form level commands and events
 CreateForm? Guid projectId, Guid formId, string name, string uniqueName
 FormCreated! Guid projectId, Guid formId, string name, string uniqueName
 
