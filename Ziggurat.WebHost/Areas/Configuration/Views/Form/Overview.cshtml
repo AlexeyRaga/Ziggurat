@@ -13,62 +13,25 @@
         return new MvcHtmlString(tag);
     }
 }
-<div class="page-header">
-    <h2>@Model.Form.Name</h2>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">@Model.Form.Name</a></li>
+  <li><a href="#profile" data-toggle="tab">Properties</a></li>
+  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+      
+  </div>
+  <div class="tab-pane" id="profile">
+      @Html.Action("BasicPropertyList", new { id = Model.Form.Id })
+  </div>
+  <div class="tab-pane" id="messages">...</div>
+  <div class="tab-pane" id="settings">...</div>
 </div>
 
-<table id="propList" class="table table-striped">
-  <thead>
-      <tr>
-          <th style="width: 16px"></th>
-          <th>Name</th>
-          <th style="width:120px">Type</th>
-          <th style="width:100px"></th>
-      </tr>
-  </thead>
-  <tbody>
-      @foreach (var prop in Model.Properties.Properties)
-      {
-          <tr data-id="@prop.Id" class="@(prop.IsUsed ? "normal" : "error")">
-              <td>
-                  <i class="icon icon-ok-circle normal"></i>
-                  <i class="icon icon-ban-circle error"></i>
-              </td>
-              <td>@prop.Name</td>
-              <td>@prop.Type</td>
-              <td>
-                  <div class="btn-group" data-toggle="buttons-radio">
-                      <button type="button" data-used="true" class="btn @(prop.IsUsed ? "active" : "")">Used</button>
-                      <button type="button" data-used="false" class="btn @(!prop.IsUsed ? "active" : "")">Unused</button>
-                  </div>
-              </td>
-          </tr>
-      }
-  </tbody>
-</table>
-
 @section Scripts {
-    <script type="text/javascript">
-        $('#propList').on('click', '.btn-group .btn',
-            function () {
-                var button = $(this);
-                var isUsed = button.data('used');
-                var row = button.closest('tr');
-                var propertyId = row.data('id');
-
-                row.toggleClass('error', !isUsed);
-                row.toggleClass('normal', isUsed);
-
-                var data = { formId: '@Model.Form.Id', propertyId: propertyId };
-
-                if (isUsed) {
-                    $.post('@Url.Action("MakeUsed", "Property")', data)
-                    .error(function () { alert('Unable to comply'); });
-                } else {
-                    $.post('@Url.Action("MakeUnused", "Property")', data)
-                    .error(function () { alert('Unable to comply'); });
-                }
-
-            });
-    </script>
+ <script src="~/Areas/Configuration/Scripts/configuration.basicPropList.js"></script>
 }

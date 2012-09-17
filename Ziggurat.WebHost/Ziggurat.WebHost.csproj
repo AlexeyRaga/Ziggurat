@@ -153,7 +153,7 @@
     <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Configuration\Scripts\configuration.propList.js" />
+    <Content Include="Areas\Configuration\Scripts\configuration.basicPropList.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -251,6 +251,7 @@
     <Content Include="Areas\Configuration\Views\Shared\_AddPropertyComponent.cshtml" />
     <Content Include="Areas\Configuration\Views\Property\Overview.cshtml" />
     <Content Include="Areas\Configuration\Views\Property\PropertyIsBeingCreated.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\BasicPropertyList.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />
