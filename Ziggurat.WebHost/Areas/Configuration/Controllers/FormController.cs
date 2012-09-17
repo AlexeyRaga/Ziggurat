@@ -32,11 +32,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var formInfo = GetFormInfoOrWaitABit(id);
             if (formInfo == null) return View("FormIsBeingCreated", id);
 
-            var propList = GetProperties(id) ?? new FormPropertyList { FormId = id };
-
-            var model = new FormOverviewModel(formInfo, propList);
-
-            return View(model);
+            return View(formInfo);
         }
 
         private FormInfo GetFormInfoOrWaitABit(Guid formId)

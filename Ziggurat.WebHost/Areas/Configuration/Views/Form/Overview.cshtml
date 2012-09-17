@@ -1,10 +1,10 @@
-﻿@model Ziggurat.Web.Areas.Configuration.Models.FormOverviewModel
+﻿@model Ziggurat.Definition.Client.FormInfo
 @{
-    ViewBag.Title = "Overviwe: " + Model.Form.Name;
+    ViewBag.Title = "Overviwe: " + Model.Name;
 }
 
 @section Submenu {
-   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Form.Id })
+   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Id })
 }
 
 @functions {
@@ -15,7 +15,7 @@
 }
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab">@Model.Form.Name</a></li>
+  <li class="active"><a href="#home" data-toggle="tab">@Model.Name</a></li>
   <li><a href="#profile" data-toggle="tab">Properties</a></li>
   <li><a href="#messages" data-toggle="tab">Messages</a></li>
   <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -26,7 +26,7 @@
       
   </div>
   <div class="tab-pane" id="profile">
-      @Html.Action("BasicPropertyList", new { id = Model.Form.Id })
+      @Html.Action("BasicPropertyList", new { id = Model.Id })
   </div>
   <div class="tab-pane" id="messages">...</div>
   <div class="tab-pane" id="settings">...</div>
