@@ -1,9 +1,9 @@
 ﻿$(function () {
-    $('#propList').on('click', '.btn-group .btn',
+    $('#propList').on('click', '.btn',
     function () {
         var button = $(this);
         var formId = $('#propList').data('formId');
-        var isUsed = button.data('used');
+        var isUsed = !button.hasClass('active');
         var row = button.closest('tr');
         var propertyId = row.data('id');
 

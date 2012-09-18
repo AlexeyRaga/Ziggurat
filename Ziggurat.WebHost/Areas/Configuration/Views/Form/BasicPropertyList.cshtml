@@ -20,10 +20,7 @@
                 <td>@prop.Name</td>
                 <td>@prop.Type</td>
                 <td>
-                    <div class="btn-group" data-toggle="buttons-radio">
-                        <button type="button" data-used="true" class="btn @(prop.IsUsed ? "active" : "")">Used</button>
-                        <button type="button" data-used="false" class="btn @(!prop.IsUsed ? "active" : "")">Unused</button>
-                    </div>
+                    <button type="button" class="btn @(prop.IsUsed ? "active" : "")" data-toggle="button">Used</button>
                 </td>
             </tr>
         }
