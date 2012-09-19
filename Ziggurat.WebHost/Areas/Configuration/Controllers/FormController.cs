@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Ziggurat.Contracts.Definition;
@@ -11,6 +12,7 @@ using Ziggurat.Web.Helpers;
 
 namespace Ziggurat.Web.Areas.Configuration.Controllers
 {
+    [Authorize]
     public class FormController : Controller
     {
         private IViewModelReader _viewModelReader;
@@ -25,12 +27,51 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public FormController()
             : this(Client.ViewModelReader, Client.CommandSender) { }
 
-        public ActionResult Index()
+        public ActionResult Overview(Guid id)
         {
-            return View();
+            var formInfo = GetFormInfoOrWaitABit(id);
+            if (formInfo == null) return View("FormIsBeingCreated", id);
+
+            return View(formInfo);
+        }
+
+        private FormInfo GetFormInfoOrWaitABit(Guid formId)
+        {
+            var formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(formId);
+            if (formInfo == null)
+            {
+                Thread.Sleep(3000);
+                formInfo = _viewModelReader.LoadOrDefault<Guid, FormInfo>(formId);
+            }
+
+            return formInfo;
+        }
+
+        private FormPropertyList GetProperties(Guid formId)
+        {
+            var propList = _viewModelReader.LoadOrDefault<Guid, FormPropertyList>(formId);
+            return propList;
+        }
+
+        [ChildActionOnly]
+        public ActionResult BasicPropertyList(Guid id)
+        {
+            ViewBag.FormId = id;
+            var list = GetProperties(id);
+            return PartialView(list);
+        }
+
+        [HttpGet]
+        [OutputCache(Duration = 0)]
+        public ActionResult Exists(Guid id)
+        {
+            var data = _viewModelReader.LoadOrDefault<Guid, FormInfo>(id);
+
+            return Json(data != null, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
+        [OutputCache(Duration = 0)]
         public ActionResult AddNewForm(CreateFormModel model)
         {
             if (!ModelState.IsValid) {
@@ -51,8 +92,9 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var formId = DefinitionIdGenerator.NewFormId();
 
             var cmd = new CreateForm(projectInfo.ProjectId, formId, model.Name, model.UniqueName);
+            _commandSender.SendCommand(cmd);
 
-            return Json("OK");
+            return Json(formId);
         }
     }
 }

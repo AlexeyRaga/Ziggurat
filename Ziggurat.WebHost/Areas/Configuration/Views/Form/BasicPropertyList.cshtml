@@ -1,0 +1,28 @@
+﻿@model Ziggurat.Definition.Client.FormPropertyList
+
+<table id="propList" class="table table-striped" data-form-id="@ViewBag.FormId">
+    <thead>
+        <tr>
+            <th style="width: 16px"></th>
+            <th>Name</th>
+            <th style="width:120px">Type</th>
+            <th style="width:100px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prop in Model.Properties)
+        {
+            <tr data-id="@prop.Id" class="@(prop.IsUsed ? "normal" : "error")">
+                <td>
+                    <i class="icon icon-ok-circle normal"></i>
+                    <i class="icon icon-ban-circle error"></i>
+                </td>
+                <td>@prop.Name</td>
+                <td>@prop.Type</td>
+                <td>
+                    <button type="button" class="btn @(prop.IsUsed ? "active" : "")" data-toggle="button">Used</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

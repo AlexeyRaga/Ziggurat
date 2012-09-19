@@ -1,0 +1,38 @@
+﻿@model System.Guid
+@using Ziggurat.Web.Helpers
+@{
+    ViewBag.Title = "Form is being created";
+}
+
+<div class="hero-unit">
+    <h2>Creating a new property/h2>
+
+    <p>We are handling your request to create a new property.</p>
+
+    <div id="creationProgress" class="progress">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+
+    <div id="takesTimeAlert" class="alert alert-block" style="display: none">
+        <h4>It takes time...</h4>
+        Unfortunately creating a property for you will take a bit more time than we expected.
+        Why don't you leave it with us and come back later when it is done? 
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/common.elements.js"></script>
+
+    <script type="text/javascript">
+        var url = '/Configuration/Property/Exists/@Model';
+
+        $('#creationProgress').pullRequestWithProgress(url, { 
+            onNotFinished: function () {
+                $('#takesTimeAlert').show(500);
+            },
+            onFinished: function () {
+                window.location.href = '@Url.ActionUrlForPath("Configuration/Property/Overview", new { id = Model })'; 
+            }
+        });
+    </script>
+}

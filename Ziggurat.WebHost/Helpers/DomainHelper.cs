@@ -20,5 +20,10 @@ namespace Ziggurat.Web.Helpers
 
             return hostParts[0];
         }
+
+        public static bool IsInProject(this UrlHelper helper)
+        {
+            return !String.IsNullOrEmpty(GetCurrentProjectDomain(helper));
+        }
     }
 }

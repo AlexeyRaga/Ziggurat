@@ -127,8 +127,13 @@
     <Compile Include="Areas\Configuration\Controllers\FormController.cs" />
     <Compile Include="Areas\Configuration\Controllers\HomeController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ProjectController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\ProjectLayoutController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\PropertyController.cs" />
     <Compile Include="Areas\Configuration\Models\CreateFormModel.cs" />
     <Compile Include="Areas\Configuration\Models\CreateProjectModel.cs" />
+    <Compile Include="Areas\Configuration\Models\FormPositionInLayout.cs" />
+    <Compile Include="Areas\Configuration\Models\NewPropertyModel.cs" />
+    <Compile Include="Areas\Configuration\Models\ProjectFormsListModel.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\HomeController.cs" />
     <Compile Include="Areas\Forms\Controllers\HomeController.cs" />
@@ -139,12 +144,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DomainHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Helpers\LinkHelper.cs" />
+    <Compile Include="ProjectContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleProjectionReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Configuration\Scripts\configuration.basicPropList.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -236,6 +244,13 @@
     <Content Include="Areas\Configuration\Views\Shared\_ProjectFormsList.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_AddFormComponent.cshtml" />
     <Content Include="Areas\Configuration\Views\Form\AddNewForm.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\Overview.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\FormIsBeingCreated.cshtml" />
+    <Content Include="Areas\Configuration\Scripts\configuration.formList.js" />
+    <Content Include="Areas\Configuration\Views\Shared\_AddPropertyComponent.cshtml" />
+    <Content Include="Areas\Configuration\Views\Property\Overview.cshtml" />
+    <Content Include="Areas\Configuration\Views\Property\PropertyIsBeingCreated.cshtml" />
+    <Content Include="Areas\Configuration\Views\Form\BasicPropertyList.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />

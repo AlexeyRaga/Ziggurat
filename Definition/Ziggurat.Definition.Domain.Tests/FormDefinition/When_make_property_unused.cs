@@ -22,7 +22,7 @@ namespace Ziggurat.Definition.Domain.Tests.FormDefinition
         {
             Given = new IEvent[] {
                 new FormCreated(ProjectId, FormId, "Some Form", "formUniqueName"),
-                new PropertyCreated(FormId, PropertyId, PropertyType.Textbox, "Subject")
+                new NewPropertyAddedToForm(FormId, PropertyId, PropertyType.Textbox, "Subject")
             };
 
             //remember: property is unused by default!
@@ -36,7 +36,7 @@ namespace Ziggurat.Definition.Domain.Tests.FormDefinition
         {
             Given = new IEvent[] {
                 new FormCreated(ProjectId, FormId, "Some Form", "formUniqueName"),
-                new PropertyCreated(FormId, PropertyId, PropertyType.Textbox, "Subject")
+                new NewPropertyAddedToForm(FormId, PropertyId, PropertyType.Textbox, "Subject")
             };
 
             //remember: property is unused by default!
@@ -52,7 +52,7 @@ namespace Ziggurat.Definition.Domain.Tests.FormDefinition
         {
             Given = new IEvent[] {
                 new FormCreated(ProjectId, FormId, "Some Form", "formUniqueName"),
-                new PropertyCreated(FormId, PropertyId, PropertyType.Textbox, "Subject"),
+                new NewPropertyAddedToForm(FormId, PropertyId, PropertyType.Textbox, "Subject"),
                 new PropertyMadeUsed(FormId, PropertyId)
             };
 
@@ -67,7 +67,7 @@ namespace Ziggurat.Definition.Domain.Tests.FormDefinition
         {
             Given = new IEvent[] {
                 new FormCreated(ProjectId, FormId, "Some Form", "formUniqueName"),
-                new PropertyCreated(FormId, PropertyId, PropertyType.Textbox, "Subject"),
+                new NewPropertyAddedToForm(FormId, PropertyId, PropertyType.Textbox, "Subject"),
                 new PropertyMadeUsed(FormId, PropertyId)
             };
 

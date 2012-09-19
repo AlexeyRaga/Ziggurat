@@ -1,14 +1,15 @@
-﻿@model Ziggurat.Web.Areas.Configuration.Models.CreateFormModel
+﻿@model Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel
 @using Ziggurat.Web.Helpers
 
-<a href="#addFormModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New Form</a>
+<a href="#addPropertyModal" class="btn" data-toggle="modal"><i class="icon icon-plus"></i> New Property</a>
 
-<div class="modal hide" id="addFormModal" tabindex="-1" role="dialog" aria-labelledby="addFormModalLabel" aria-hidden="true">
-    @using (Ajax.BeginForm("AddNewForm", "Form", new AjaxOptions { OnSuccess = "onCreateFormSuccess", OnFailure = "onCreateFormFailure", OnBegin="onBeginCreatingForm" })) 
+<div class="modal hide" id="addPropertyModal" tabindex="-1" role="dialog" aria-labelledby="addPropertyModalLabel" aria-hidden="true">
+    @using (Ajax.BeginForm("AddNew", "Property", new AjaxOptions { OnSuccess = "onAddPropertySuccess", OnFailure = "onAddPropertyFailure", OnBegin="onBeginAddProperty" })) 
     {
+      @Html.HiddenFor(m => m.FormId)
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="addFormModalLabel">Add new form</h3>
+        <h3 id="addPropertyModalLabel">Add new property</h3>
       </div>
       <div class="modal-body">
         <ol class="unstyled">
@@ -18,9 +19,8 @@
                 @Html.ValidationMessageFor(m => m.Name)
             </li>
             <li>
-                @Html.LabelFor(m => m.UniqueName)
-                @Html.TextBoxFor(m => m.UniqueName)
-                @Html.ValidationMessageFor(m => m.UniqueName)
+                @Html.LabelFor(m => m.Type)
+                @Html.EnumDropDownListFor(m => m.Type)
             </li>
         </ol>
         <div id="errorMessage" style="color:red"></div>
@@ -33,13 +33,13 @@
 </div>
 
     <script type="text/javascript">
-        function onBeginCreatingForm() {
+        function onBeginAddProperty() {
             $('#errorMessage').html('');
         }
-        function onCreateFormFailure(response) {
+        function onAddPropertyFailure(response) {
             $("#errorMessage").text(response.responseText);
         }
-        function onCreateFormSuccess(response) {
-            window.location.href = '@Url.ActionUrlForPath("Configuration/Form/Overview")/' + response;
+        function onAddPropertySuccess(response) {
+            window.location.href = '@Url.ActionUrlForPath("Configuration/Property/Overview")/' + response;
         }
     </script>

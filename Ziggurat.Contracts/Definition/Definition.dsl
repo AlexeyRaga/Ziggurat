@@ -1,4 +1,5 @@
-﻿CreateNewProject? Guid id, string name, string shortName
+﻿// Project level commands and events
+CreateNewProject? Guid id, string name, string shortName
 ProjectCreationFailed! Guid projectId, string name, string shortName, IList<string> errors
 NewProjectRegistered! Guid projectId, string name, string shortName
 
@@ -10,6 +11,7 @@ ProjectLayoutAssignedToProject! Guid projectId, Guid projectLayoutId
 
 ProjectCreated! Guid id, Guid projectLayoutId, string name, string shortName
 
+//Form level commands and events
 CreateForm? Guid projectId, Guid formId, string name, string uniqueName
 FormCreated! Guid projectId, Guid formId, string name, string uniqueName
 
@@ -20,8 +22,8 @@ FormMovedInProjectLayout! Guid projectLayoutId, Guid formId, string blockHeader,
 
 // Property is an ENTITY.
 // ENTITIES inside the boundary have local identity, unique only within the AGGREGATE.
-CreateProperty? Guid formId, Guid propertyId, PropertyType type, string name
-PropertyCreated! Guid formId, Guid propertyId, PropertyType type, string name
+AddNewPropertyToForm? Guid formId, Guid propertyId, PropertyType type, string name
+NewPropertyAddedToForm! Guid formId, Guid propertyId, PropertyType type, string name
 
 let ! = IPropertyDefinitionEvent
 

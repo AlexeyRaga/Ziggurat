@@ -15,6 +15,10 @@ namespace Ziggurat.Definition.Client
             yield return new ProjectListProjection(store);
             yield return new ProjectOverviewProjection(store);
             yield return new ProjectInfoProjection(store);
+            yield return new FormsProjectLayoutProjection(store);
+            yield return new FormsInProjectProjection(store);
+            yield return new FormInfoProjection(store);
+            yield return new FormPropertyListProjection(store);
             yield break;
         }
     }

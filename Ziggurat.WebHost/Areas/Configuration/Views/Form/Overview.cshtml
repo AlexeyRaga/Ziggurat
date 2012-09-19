@@ -1,0 +1,46 @@
+﻿@model Ziggurat.Definition.Client.FormInfo
+@{
+    ViewBag.Title = "Overviwe: " + Model.Name;
+}
+
+@section Submenu {
+   @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Id })
+}
+
+@functions {
+    MvcHtmlString GetPropertyRowClass(bool isUsed) {
+        var tag = isUsed ? "" : "class='error'";
+        return new MvcHtmlString(tag);
+    }
+}
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">@Model.Name</a></li>
+  <li><a href="#profile" data-toggle="tab">Properties</a></li>
+  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+      <fieldset>
+        <ol class="unstyled">
+            <li>
+                Name: <strong>@Model.Name</strong>
+            </li>
+            <li>
+                Unique name: <strong>@Model.UniqueName</strong>
+            </li>
+        </ol>
+      </fieldset>
+  </div>
+  <div class="tab-pane" id="profile">
+      @Html.Action("BasicPropertyList", new { id = Model.Id })
+  </div>
+  <div class="tab-pane" id="messages">...</div>
+  <div class="tab-pane" id="settings">...</div>
+</div>
+
+@section Scripts {
+ <script src="~/Areas/Configuration/Scripts/configuration.basicPropList.js"></script>
+}

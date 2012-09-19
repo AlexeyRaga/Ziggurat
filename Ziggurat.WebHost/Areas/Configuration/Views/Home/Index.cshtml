@@ -1,19 +1,21 @@
 ﻿@model Ziggurat.Definition.Client.ProjectOverview
+@using Ziggurat.Web.Helpers
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Overview: " + Model.Name;
 }
 
 @section Submenu {
-   @Html.Partial("_AddFormComponent", new Ziggurat.Web.Areas.Configuration.Models.CreateFormModel())
+    @if (Url.IsInProject()) {
+        @Html.Partial("_AddFormComponent", new Ziggurat.Web.Areas.Configuration.Models.CreateFormModel())
+    }
 }
 
 <div class="page-header">
-    <h1>Project Overview</h1>
+    <h1>@Model.Name</h1>
 </div>
 
 <fieldset>
-    <legend>Basic settings:</legend>
     <ol class="unstyled">
         <li>
             Name: <strong>@Model.Name</strong>

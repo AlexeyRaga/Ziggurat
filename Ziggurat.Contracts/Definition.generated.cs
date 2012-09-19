@@ -252,15 +252,15 @@ namespace Ziggurat.Contracts.Definition
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class CreateProperty : ICommand
+	public sealed partial class AddNewPropertyToForm : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
 		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
 		[DataMember(Order = 3 )] public string Name { get; set; }
 
-		public CreateProperty() { }
-		public CreateProperty(Guid formId, Guid propertyId, PropertyType type, string name)
+		public AddNewPropertyToForm() { }
+		public AddNewPropertyToForm(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;
@@ -271,15 +271,15 @@ namespace Ziggurat.Contracts.Definition
 	}
 
 	[Serializable, DataContract]
-	public sealed partial class PropertyCreated : IEvent
+	public sealed partial class NewPropertyAddedToForm : IEvent
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
 		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
 		[DataMember(Order = 2 )] public PropertyType Type { get; set; }
 		[DataMember(Order = 3 )] public string Name { get; set; }
 
-		public PropertyCreated() { }
-		public PropertyCreated(Guid formId, Guid propertyId, PropertyType type, string name)
+		public NewPropertyAddedToForm() { }
+		public NewPropertyAddedToForm(Guid formId, Guid propertyId, PropertyType type, string name)
 		{
 			FormId = formId;
 			PropertyId = propertyId;

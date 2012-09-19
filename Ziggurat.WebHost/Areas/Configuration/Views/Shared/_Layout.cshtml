@@ -7,7 +7,9 @@
   <div class="row-fluid">
     <div class="span3">
         <div class="well">
-            @Html.Partial("_ProjectFormsList")
+            @if (Url.IsInProject()) {
+                @Html.Action("FormList", "ProjectLayout")
+            }
         </div>
     </div>
     <div class="span9">
@@ -21,5 +23,6 @@
 }
 
 @section Scripts {
+    <script src="~/Areas/Configuration/Scripts/configuration.formList.js"></script>
     @RenderSection("scripts", required: false)
 }

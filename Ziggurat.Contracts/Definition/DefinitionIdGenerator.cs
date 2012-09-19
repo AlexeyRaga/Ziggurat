@@ -26,5 +26,10 @@ namespace Ziggurat.Contracts.Definition
         {
             return GuidGenerator.Create(ProjectLayoutNamespace, projectId.ToString());
         }
+
+        public static Guid NewPropertyId()
+        {
+            return Guid.NewGuid();
+        }
     }
 }
