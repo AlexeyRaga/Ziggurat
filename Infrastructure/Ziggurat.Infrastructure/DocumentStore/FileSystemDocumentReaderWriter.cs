@@ -130,11 +130,13 @@ namespace Ziggurat.Infrastructure.DocumentStore
 			}
 			catch (DocumentSerializationException ex)
 			{
-				throw new DocumentStoreIOException(key, ex.Message, ex);
+				var message = String.Format("[Key: {0}] {1}", key, ex.Message);
+				throw new DocumentStoreIOException(message, ex);
 			}
 			catch (IOException ex)
 			{
-				throw new DocumentStoreIOException(key, ex.Message, ex);
+				var message = String.Format("[Key: {0}] {1}", key, ex.Message);
+				throw new DocumentStoreIOException(message, ex);
 			}
 		}
 
