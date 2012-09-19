@@ -73,6 +73,7 @@ namespace Ziggurat.Definition.Domain.Tests
             {
                 var target = CreateAggregate();
                 var result = ExecuteWhen(target);
+                PrintEvents("Unexpectedly got", result);
             }
             catch (Exception ex)
             {

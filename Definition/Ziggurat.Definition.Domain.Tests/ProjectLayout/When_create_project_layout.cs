@@ -19,7 +19,7 @@ namespace Ziggurat.Definition.Domain.Tests.ProjectLayout
         [TestMethod]
         public void Should_create_aggregate()
         {
-            When = layout => layout.CreateForProject(ProjectId, LayoutId);
+            When = layout => layout.CreateForProject(LayoutId, ProjectId);
             Then = new IEvent[] {
                 new ProjectLayoutCreated(ProjectId, LayoutId)
             };
