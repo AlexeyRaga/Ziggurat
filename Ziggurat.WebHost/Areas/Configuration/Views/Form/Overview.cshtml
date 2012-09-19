@@ -18,7 +18,7 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="#home" data-toggle="tab">@Model.Name</a></li>
     <li><a href="#properties" data-toggle="tab">Properties</a></li>
-    <li><a href="#layout" data-toggle="tab">Messages</a></li>
+    <li><a href="#layout" data-toggle="tab">Layout</a></li>
     <li><a href="#settings" data-toggle="tab">Settings</a></li>
 </ul>
 
@@ -37,55 +37,6 @@
         @Html.Action("BasicPropertyList", new { id = Model.Id })
     </div>
     <div class="tab-pane" id="layout">
-        <div class="container-fluid">
-            <div id="drag" class="row-fluid">
-                <div class="span3">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="drag">First Prop</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="drag">Second Prop</div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span9">
-                    <table>
-                        <colgroup>
-                            <col width="100" />
-                            <col width="100" />
-                            <col width="100" />
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <div class="drag">Hello World!</div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
     </div>
     <div class="tab-pane" id="settings">...</div>
