@@ -57,7 +57,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public ActionResult BasicPropertyList(Guid id)
         {
             ViewBag.FormId = id;
-            var list = GetProperties(id);
+            var list = GetProperties(id) ?? new FormPropertyList();
             return PartialView(list);
         }
 
