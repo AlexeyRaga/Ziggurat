@@ -46,7 +46,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             _commandSender.SendCommand(cmd);
 
             return View("ProjectIsBeingCreated", newProjectId);
-
         }
 
         [HttpGet]
