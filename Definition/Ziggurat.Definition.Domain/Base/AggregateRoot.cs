@@ -7,12 +7,16 @@ namespace Ziggurat.Definition.Domain
 {
     public interface IAggregateRoot
     {
+        Guid Id { get; set; }
+        int Revision { get; set; }
         void ApplyFromHistory(IEnumerable<IEvent> events);
         IEnumerable<IEvent> Changes { get; }
     }
 
     public abstract class AggregateRootBase : IAggregateRoot
     {
+        public Guid Id { get; set; }
+        public int Revision { get; set; }
         private readonly List<IEvent> _changes = new List<IEvent>();
         public IEnumerable<IEvent> Changes { get { return _changes; } }
 

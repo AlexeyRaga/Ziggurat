@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base\AggregateRoot.cs" />
     <Compile Include="Base\ApplicationServiceBase.cs" />
+    <Compile Include="Base\CommonRepository.cs" />
     <Compile Include="Base\State.cs" />
     <Compile Include="DomainBoundedContext.cs" />
     <Compile Include="FormDefinition\FormDefinitionAggregate.cs" />

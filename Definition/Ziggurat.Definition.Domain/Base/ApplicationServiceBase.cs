@@ -10,38 +10,29 @@ namespace Ziggurat.Definition.Domain
         where T : IAggregateRoot, new()
     {
         private readonly IEventStore _store;
+        private readonly CommonRepository _repository;
+
+        /// <summary>
+        /// A repository that can load any type of aggregate (for read-only purposes)
+        /// </summary>
+        protected IAggregateRepository Repository { get { return _repository; } }
 
         protected ApplicationServiceBase(IEventStore store)
         {
             if (store == null) throw new ArgumentNullException("store");
-            _store = store;
+
+            _repository = new CommonRepository(store);
+            _store      = store;
         }
 
         //this.Update(myId, ar => ar.DoSomething(parameters));
         protected void Update(Guid aggregateId, Action<T> updateAction)
         {
-            var events = _store.LoadAll(aggregateId);
-
-            var aggregate = new T();
-            aggregate.ApplyFromHistory(events.Events.Select(UnwrapFromEnvelope));
-
+            var aggregate = _repository.GetById<T>(aggregateId);
+ 
             updateAction(aggregate);
 
-            _store.Append(aggregateId, events.Revision, aggregate.Changes.Select(x=>WrapIntoEnvelope(aggregateId, x)));
-        }
-
-        private Envelope WrapIntoEnvelope(Guid aggregateId, IEvent evt)
-        {
-            var envelope = new Envelope(evt, null);
-            envelope.SetAggregateId(aggregateId);
-            envelope.SetDateCreated(Now.UtcTime);
-
-            return envelope;
-        }
-
-        private IEvent UnwrapFromEnvelope(Envelope env)
-        {
-            return (IEvent)env.Body;
+            _repository.Save(aggregate);
         }
     }
 
