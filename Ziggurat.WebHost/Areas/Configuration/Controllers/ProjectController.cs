@@ -46,7 +46,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             _commandSender.SendCommand(cmd);
 
             return View("ProjectIsBeingCreated", newProjectId);
-
         }
 
         [HttpGet]
@@ -93,7 +92,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            var list = _modelReader.LoadOrDefault<string, ProjectList>("all");
+            var list = _modelReader.LoadOrDefault<string, ProjectList>("all") ?? new ProjectList();
 
             return PartialView(list);
         }

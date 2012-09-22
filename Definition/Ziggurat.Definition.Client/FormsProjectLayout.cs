@@ -25,6 +25,11 @@ namespace Ziggurat.Definition.Client
             _writer = store.GetWriter<Guid, FormsProjectLayout>();
         }
 
+        public void When(ProjectLayoutCreated evt)
+        {
+            _writer.Add(evt.ProjectLayoutId, new FormsProjectLayout());
+        }
+
         public void When(FormMovedInProjectLayout evt)
         {
             _writer.AddOrUpdate(evt.ProjectLayoutId, layout =>

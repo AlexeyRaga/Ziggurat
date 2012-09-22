@@ -29,6 +29,12 @@
 	    input.val('');
 	});
 
+    $('#newHeaderText').keydown(function(e) {
+        if(e.keyCode === 13) {
+            $('#addBlockHeader').click();
+        }
+    });
+
 	function getKnownHeaders() {
 	    return $('#formsList')
             .find('li.nav-header')
