@@ -290,6 +290,40 @@ namespace Ziggurat.Contracts.Definition
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class SetFormulaForConcatenationProperty : ICommand
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+		[DataMember(Order = 2 )] public ConcatenationFormulaDescriptor Formula { get; set; }
+
+		public SetFormulaForConcatenationProperty() { }
+		public SetFormulaForConcatenationProperty(Guid formId, Guid propertyId, ConcatenationFormulaDescriptor formula)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+			Formula = formula;
+		}
+
+	}
+
+	[Serializable, DataContract]
+	public sealed partial class ConcatenationPropertyFormulaSet : IPropertyDefinitionEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+		[DataMember(Order = 2 )] public ConcatenationFormulaDescriptor Formula { get; set; }
+
+		public ConcatenationPropertyFormulaSet() { }
+		public ConcatenationPropertyFormulaSet(Guid formId, Guid propertyId, ConcatenationFormulaDescriptor formula)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+			Formula = formula;
+		}
+
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class MakePropertyUnused : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
