@@ -251,7 +251,6 @@
     <Content Include="Areas\Configuration\Views\Property\Overview.cshtml" />
     <Content Include="Areas\Configuration\Views\Property\PropertyIsBeingCreated.cshtml" />
     <Content Include="Areas\Configuration\Views\Form\BasicPropertyList.cshtml" />
-    <Content Include="Areas\Configuration\Views\Property\Overview-Textbox.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Content\html5reset-1.6.1.css" />
