@@ -30,9 +30,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var key = PropertyData.CreateKey(formId, propertyId);
             var propData = _viewModelReader.Load<string, PropertyData>(key);
 
-            var viewName = "Overview-" + propData.Type.ToString();
-
-            return View(viewName, propData);
+            return View(propData);
         }
 
         [HttpPost]
