@@ -40,6 +40,11 @@
             $("#errorMessage").text(response.responseText);
         }
         function onAddPropertySuccess(response) {
-            window.location.href = '@Url.ActionUrlForPath("Configuration/Property/Overview")/' + response;
+            if(response.viewCreated) {
+                window.location.href = '/Configuration/Form/@Model.FormId/p/' + response.propertyId;
+            } else {
+                //TODO: LEISHI redirect to property is being created page
+                window.location.href = '/Configuration/Form/@Model.FormId/p/' + response.propertyId;
+            }
         }
     </script>

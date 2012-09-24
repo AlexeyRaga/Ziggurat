@@ -36,7 +36,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         }
 
         [HttpPost]
-        [OutputCache(Duration = 0)]
         public ActionResult AddNew(NewPropertyModel model)
         {
             if (!ModelState.IsValid)
@@ -58,7 +57,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             var cmd = new AddNewPropertyToForm(model.FormId, propertyId, model.Type, model.Name);
             _commandSender.SendCommand(cmd);
 
-            return Json(propertyId);
+            return Json(new { viewCreated = false, propertyId = propertyId });
         }
 
         [HttpPost]

@@ -1,11 +1,11 @@
-﻿@model System.Guid
+﻿@model Tuple<System.Guid, System.Guid>
 @using Ziggurat.Web.Helpers
 @{
-    ViewBag.Title = "Form is being created";
+    ViewBag.Title = "Property is being created";
 }
 
 <div class="hero-unit">
-    <h2>Creating a new property/h2>
+    <h2>Creating a new property</h2>
 
     <p>We are handling your request to create a new property.</p>
 
@@ -21,7 +21,7 @@
 </div>
 
 @section Scripts {
-    <script src="/Scripts/common.elements.js"></script>
+    <script src="~/Scripts/common.elements.js"></script>
 
     <script type="text/javascript">
         var url = '/Configuration/Property/Exists/@Model';
@@ -31,7 +31,7 @@
                 $('#takesTimeAlert').show(500);
             },
             onFinished: function () {
-                window.location.href = '@Url.ActionUrlForPath("Configuration/Property/Overview", new { id = Model })'; 
+                window.location.href = '/Configuration/Form/@Model.Item1/p/@Model.Item2'; 
             }
         });
     </script>
