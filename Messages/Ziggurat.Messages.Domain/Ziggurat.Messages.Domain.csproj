@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2ED7CAD-8488-420F-89F1-2B5DC698084E}</ProjectGuid>
+    <ProjectGuid>{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ziggurat.Contracts</RootNamespace>
-    <AssemblyName>Ziggurat.Contracts</AssemblyName>
+    <RootNamespace>Ziggurat.Messages.Domain</RootNamespace>
+    <AssemblyName>Ziggurat.Messages.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,46 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Definition.generated.cs">
-      <DependentUpon>Messages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Definition\ConcatenationFormulaDescriptor.cs" />
-    <Compile Include="Definition\DefinitionInterfaces.cs" />
-    <Compile Include="Definition\DefinitionContract.cs" />
-    <Compile Include="Definition\DefinitionIdGenerator.cs" />
-    <Compile Include="Id\GuidGenerator.cs" />
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="Messages.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.tt</DependentUpon>
-    </Compile>
+    <Compile Include="MessagesDomainBoundedContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration.generated.cs">
-      <DependentUpon>Messages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Definition\PropertyType.cs" />
-    <Compile Include="Registration\ProfileData.cs" />
-    <Compile Include="Registration\RegistrationData.cs" />
-    <Compile Include="Registration\RegistrationIdGenerator.cs" />
-    <Compile Include="Registration\SecurityData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Definition\Definition.dsl" />
-    <None Include="Messages.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Messages.cs</LastGenOutput>
-    </None>
-    <None Include="MultipleOutputHelper.ttinclude" />
-    <None Include="Registration\Registration.dsl" />
+    <ProjectReference Include="..\..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
+      <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
+      <Name>Ziggurat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ziggurat.Contracts\Ziggurat.Contracts.csproj">
+      <Project>{b2ed7cad-8488-420f-89f1-2b5dc698084e}</Project>
+      <Name>Ziggurat.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.md" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

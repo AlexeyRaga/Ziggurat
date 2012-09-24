@@ -27,6 +27,9 @@ NewPropertyAddedToForm! Guid formId, Guid propertyId, PropertyType type, string 
 
 let ! = IPropertyDefinitionEvent
 
+SetFormulaForConcatenationProperty? Guid formId, Guid propertyId, ConcatenationFormulaDescriptor formula
+ConcatenationPropertyFormulaSet! Guid formId, Guid propertyId, ConcatenationFormulaDescriptor formula
+
 MakePropertyUnused? Guid formId, Guid propertyId
 MakePropertyUsed? Guid formId, Guid propertyId
 

@@ -11,27 +11,14 @@ namespace Ziggurat.Definition.Domain.Tests.Project
     public sealed class When_create_project : AggregateTest<ProjectAggregate>
     {
         [TestMethod]
-        public void Should_create_project()
+        public void Should_register_new_project()
         {
             var id = Guid.NewGuid();
             var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
             When = prj => prj.Create(id, "Some Name", "shortName2");
             Then = new IEvent[] {
-                new ProjectCreated(id, layoutId, "Some Name", "shortName2")
+                new NewProjectRegistered(id, "Some Name", "shortName2")
             };
-        }
-
-        [TestMethod]
-        public void Double_create_should_fail()
-        {
-            var id = Guid.NewGuid();
-            var layoutId = DefinitionIdGenerator.NewProjectLayoutId(id);
-            Given = new IEvent[] {
-                new ProjectCreated(id, layoutId, "Some Name", "shortName")
-            };
-
-            When = prj => prj.Create(id, "Some Other Name", "otherShortName");
-            ThenException = ex => ex is InvalidOperationException;
         }
 
         [TestMethod]

@@ -50,6 +50,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Additional Data", "1. Ad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.WebHost", "Ziggurat.WebHost\Ziggurat.WebHost.csproj", "{398B3AEF-3883-4FCE-95D4-3F2859655A83}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messages", "Messages", "{5FB1EF43-C557-47E1-9B80-ECF1E7DD9106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Messages.Domain", "Messages\Ziggurat.Messages.Domain\Ziggurat.Messages.Domain.csproj", "{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Messages.Worker", "Messages\Ziggurat.Messages.Worker\Ziggurat.Messages.Worker.csproj", "{05E607BB-0E3A-4579-8289-50E790E1F16B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggurat.Messages.Client", "Messages\Ziggurat.Messages.Client\Ziggurat.Messages.Client.csproj", "{05734AEA-C665-4701-928E-C541EAD223F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +120,18 @@ Global
 		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{398B3AEF-3883-4FCE-95D4-3F2859655A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E607BB-0E3A-4579-8289-50E790E1F16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E607BB-0E3A-4579-8289-50E790E1F16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E607BB-0E3A-4579-8289-50E790E1F16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E607BB-0E3A-4579-8289-50E790E1F16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05734AEA-C665-4701-928E-C541EAD223F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05734AEA-C665-4701-928E-C541EAD223F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05734AEA-C665-4701-928E-C541EAD223F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05734AEA-C665-4701-928E-C541EAD223F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +149,8 @@ Global
 		{FB0C1A27-B0CD-4FAC-BDF9-02921F54A050} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{528BED5A-3D3F-424F-981A-8C90B03C4BDF} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
 		{D781697C-3E1C-467F-9692-1CB524052923} = {98CC97BE-4FAB-416E-8A2C-097952C4312C}
+		{ECA81D9C-AA73-4DB3-A71F-EEA6D5E4B920} = {5FB1EF43-C557-47E1-9B80-ECF1E7DD9106}
+		{05E607BB-0E3A-4579-8289-50E790E1F16B} = {5FB1EF43-C557-47E1-9B80-ECF1E7DD9106}
+		{05734AEA-C665-4701-928E-C541EAD223F6} = {5FB1EF43-C557-47E1-9B80-ECF1E7DD9106}
 	EndGlobalSection
 EndGlobal
