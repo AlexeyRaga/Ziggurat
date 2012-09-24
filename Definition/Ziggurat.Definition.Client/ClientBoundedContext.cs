@@ -19,6 +19,7 @@ namespace Ziggurat.Definition.Client
             yield return new FormsInProjectProjection(store);
             yield return new FormInfoProjection(store);
             yield return new FormPropertyListProjection(store);
+            yield return new PropertyDataProjection(store);
             yield break;
         }
     }

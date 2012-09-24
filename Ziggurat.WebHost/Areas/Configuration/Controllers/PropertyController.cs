@@ -25,6 +25,16 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public PropertyController()
             : this(Client.ViewModelReader, Client.CommandSender) { }
 
+        public ActionResult Overview(Guid formId, Guid propertyId)
+        {
+            var key = PropertyData.CreateKey(formId, propertyId);
+            var propData = _viewModelReader.Load<string, PropertyData>(key);
+
+            var viewName = "Overview-" + propData.Type.ToString();
+
+            return View(viewName, propData);
+        }
+
         [HttpPost]
         [OutputCache(Duration = 0)]
         public ActionResult AddNew(NewPropertyModel model)
@@ -63,11 +73,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             var cmd = new MakePropertyUnused(formId, propertyId);
             _commandSender.SendCommand(cmd);
-        }
-
-        public ActionResult Overview(Guid id)
-        {
-            return View();
         }
     }
 }
