@@ -58,7 +58,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
             _commandSender.SendCommand(cmd);
             
             //TODO: LEISHI do we create a extension method which will try to load a view until x seconds of timeout? 
-            //so if times out, we reuturn viewCreated: true, otherwise false. client side will handle this scenario. 
+            //so if times out, we reuturn viewCreated: false, otherwise true. client side will handle this scenario. 
             return Json(new { viewCreated = true, propertyId = propertyId });
         }
 
