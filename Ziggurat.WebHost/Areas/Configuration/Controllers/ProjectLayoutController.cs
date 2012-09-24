@@ -49,7 +49,7 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
                 var header = rawGroup.Key;
                 var formsData = forms.Forms
                     .Where(x => rawGroup.Value.Contains(x.FormId))
-                    .Select(x => new ProjectFormsListModel.Form(x.FormId, x.Name));
+                    .Select(x => new ProjectFormsListModel.Form(x.FormId, x.Name, x.UniqueName));
 
                 var group = new ProjectFormsListModel.Group(header, formsData);
                 model.FormGroups.Add(group);

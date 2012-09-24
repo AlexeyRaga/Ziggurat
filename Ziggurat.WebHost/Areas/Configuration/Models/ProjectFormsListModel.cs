@@ -18,11 +18,13 @@ namespace Ziggurat.Web.Areas.Configuration.Models
         {
             public Guid FormId { get; private set; }
             public string Name { get; private set; }
+            public string UniqueName { get; set; }
 
-            public Form(Guid formId, string name)
+            public Form(Guid formId, string name, string uniqueName)
             {
-                FormId = formId;
-                Name = name;
+                FormId     = formId;
+                Name       = name;
+                UniqueName = uniqueName;
             }
         }
 
