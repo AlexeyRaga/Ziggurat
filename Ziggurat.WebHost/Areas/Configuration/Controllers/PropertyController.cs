@@ -34,7 +34,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         }
 
         [HttpPost]
-        [OutputCache(Duration = 0)]
         public ActionResult AddNew(NewPropertyModel model)
         {
             if (!ModelState.IsValid)
@@ -55,8 +54,10 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
 
             var cmd = new AddNewPropertyToForm(model.FormId, propertyId, model.Type, model.Name);
             _commandSender.SendCommand(cmd);
-
-            return Json(propertyId);
+            
+            //TODO: LEISHI do we create a extension method which will try to load a view until x seconds of timeout? 
+            //so if times out, we reuturn viewCreated: false, otherwise true. client side will handle this scenario. 
+            return Json(new { viewCreated = true, propertyId = propertyId });
         }
 
         [HttpPost]

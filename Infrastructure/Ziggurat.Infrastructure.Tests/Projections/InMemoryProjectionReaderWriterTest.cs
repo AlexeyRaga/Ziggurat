@@ -9,7 +9,7 @@ namespace Ziggurat.Infrastructure.Tests.Projections
     public class InMemoryProjectionReaderWriterTest
     {
         [TestMethod]
-        public void Should_be_able_add_a_view()
+        public void Should_be_able_to_add_a_view()
         {
             var readerWriter = new InMemoryProjectionReaderWriter<Guid, DummyView>(new ConcurrentDictionary<Guid, DummyView>());
             var view = new DummyView() {
