@@ -3,6 +3,30 @@
     ViewBag.Title = "Overview";
 }
 
-<div class="page-header">
-    <h2>Property Overview</h2>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Property: <strong>@Model.Name</strong></a></li>
+    <li><a href="#specifics" data-toggle="tab">Specifics</a></li>
+    <li><a href="#display" data-toggle="tab">Layout</a></li>
+    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="home">
+        <fieldset>
+            <ol class="unstyled">
+                <li>Name: @Html.TextBoxFor(m=>m.Name)</li>
+                <li>Unique name: <strong>@Model.Type</strong> (cannot be changed)
+                </li>
+            </ol>
+        </fieldset>
+    </div>
+    <div class="tab-pane" id="specifics">
+        Property specifics goes here
+    </div>
+    <div class="tab-pane" id="display">
+        Some display options
+    </div>
+    <div class="tab-pane" id="settings">
+        Other very important settings
+    </div>
 </div>
