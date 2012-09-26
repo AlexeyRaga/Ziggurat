@@ -21,7 +21,7 @@
         </fieldset>
     </div>
     <div class="tab-pane" id="specifics">
-        Property specifics goes here
+        @Html.Partial(Model.Type.ToString() + "-Specifics", Model.Specifics)
     </div>
     <div class="tab-pane" id="display">
         Some display options
