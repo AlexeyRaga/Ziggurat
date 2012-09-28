@@ -4,12 +4,13 @@
     <table>
 	    <tbody data-bind="foreach: parts">
 		    <tr>
+                <td><button type="button" class="btn"><i class="icon icon-remove"></i></button></td>
 			    <td><span data-bind="text: $data"></span></td>
 		    </tr>
 	    </tbody>
 	    <tfoot>
 		    <tr>
-			    <td>
+			    <td colspan="2">
 				    <div class="input-append">
 				    <input type="text" placeholder="Constant" data-bind="value: newConstantPart"/>
 				    <select data-bind="value: newPropertyPart"></select>
