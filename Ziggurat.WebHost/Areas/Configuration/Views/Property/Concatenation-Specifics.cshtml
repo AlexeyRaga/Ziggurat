@@ -1,20 +1,22 @@
 ﻿<script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
 
-<table>
-	<tbody data-bind="foreach: parts">
-		<tr>
+<section id="concatenationFormula">
+    <table>
+	    <tbody data-bind="foreach: parts">
+		    <tr>
 			
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td>
-				<div class="input-append">
-				<input type="text" placeholder="Constant" data-bind="value:newConstantPart"/>
-				<select data-bind="value:newPropertyPart"></select>
-				<button id="addFormulaPart" class="btn" type="button">Add</button>
-                    </div>
-			</td>
-		</tr>
-	</tfoot>
-</table>
+		    </tr>
+	    </tbody>
+	    <tfoot>
+		    <tr>
+			    <td>
+				    <div class="input-append">
+				    <input type="text" placeholder="Constant" data-bind="value: newConstantPart"/>
+				    <select data-bind="value: newPropertyPart"></select>
+				    <button id="addFormulaPart" class="btn" type="button" data-bind="click: addNewPart">Add</button>
+                        </div>
+			    </td>
+		    </tr>
+	    </tfoot>
+    </table>
+</section>
