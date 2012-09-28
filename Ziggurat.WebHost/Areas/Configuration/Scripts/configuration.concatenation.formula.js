@@ -1,19 +1,35 @@
-﻿$(function() {
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+$(function() {
+  var FormulaModel, model, view;
+  FormulaModel = (function() {
+    var model;
+
     function FormulaModel() {
-        var model = this;
+      this.addNewPart = __bind(this.addNewPart, this);
 
-        this.parts = ko.observableArray([]);
-        this.newConstantPart = ko.observable();
-        this.newPropertyPart = ko.observable();
+    }
 
-        this.addNewPart = function () {
-            var constant = model.newConstantPart();
-            alert(model.newConstantPart());
-        };
+    model = FormulaModel;
+
+    FormulaModel.prototype.parts = ko.observableArray();
+
+    FormulaModel.prototype.newConstantPart = ko.observable();
+
+    FormulaModel.prototype.newPropertyPart = ko.observable();
+
+    FormulaModel.prototype.addNewPart = function() {
+      var constant;
+      constant = this.newConstantPart();
+      if ((constant != null) && constant !== '') {
+        return this.parts.push(constant);
+      }
     };
 
-    var view = $('#concatenationFormula')[0];
-    var model = new FormulaModel();
+    return FormulaModel;
 
-    ko.applyBindings(model, view);
+  })();
+  view = $("#concatenationFormula")[0];
+  model = new FormulaModel();
+  return ko.applyBindings(model, view);
 });

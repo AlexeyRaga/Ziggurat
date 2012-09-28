@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LessCoffee">
+      <HintPath>..\packages\LessCoffee.2.2.0.1\lib\LessCoffee.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -153,7 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Configuration\Scripts\configuration.basicPropList.js" />
+    <None Include="Areas\Configuration\Scripts\configuration.concatenation.formula.coffee" />
     <Content Include="Areas\Configuration\Scripts\configuration.concatenation.formula.js" />
+    <Content Include="Areas\Configuration\Scripts\Copy of configuration.concatenation.formula.js">
+      <DependentUpon>configuration.concatenation.formula.coffee</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
