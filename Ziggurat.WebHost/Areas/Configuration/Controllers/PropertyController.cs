@@ -28,9 +28,19 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         public ActionResult Overview(Guid formId, Guid propertyId)
         {
             var key = PropertyData.CreateKey(formId, propertyId);
-            var propData = _viewModelReader.Load<string, PropertyData>(key);
+            var propData = _viewModelReader.LoadOrDefault<string, PropertyData>(key);
+
+            if (propData == null) return View("PropertyIsBeingCreated", Tuple.Create(formId, propertyId));
 
             return View(propData);
+        }
+
+        public ActionResult Exists(Guid formId, Guid propertyId)
+        {
+            var key = PropertyData.CreateKey(formId, propertyId);
+            var exists = _viewModelReader.Exists<string, PropertyData>(key);
+
+            return Json(exists, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
