@@ -10,6 +10,7 @@ namespace Ziggurat.Web
     {
         TView Load<TKey, TView>(TKey key);
         bool TryGet<TKey, TView>(TKey key, out TView view);
+        bool Exists<TKey>(TKey key);
     }
 
     public static class IViewModelReaderExtensions
@@ -30,6 +31,12 @@ namespace Ziggurat.Web
         public SimpleProjectionReader(IDocumentStore projectionStore)
         {
             _projectionStore = projectionStore;
+        }
+
+        public bool Exists<TKey, TView>(TKey key)
+        {
+            var actualReader = _projectionStore.GetReader<TKey, TView>();
+            return actualReader.Exists(key);
         }
 
         public TView Load<TKey, TView>(TKey key)
