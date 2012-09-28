@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Configuration\Scripts\configuration.basicPropList.js" />
+    <Content Include="Areas\Configuration\Scripts\configuration.concatenation.formula.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
