@@ -10,7 +10,7 @@ namespace Ziggurat.Web
     {
         TView Load<TKey, TView>(TKey key);
         bool TryGet<TKey, TView>(TKey key, out TView view);
-        bool Exists<TKey>(TKey key);
+        bool Exists<TKey, TView>(TKey key);
     }
 
     public static class IViewModelReaderExtensions
