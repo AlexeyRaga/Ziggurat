@@ -1,10 +1,10 @@
-﻿@model Ziggurat.Definition.Client.FormInfo
+﻿@model Ziggurat.Web.Areas.Configuration.Models.FormInfoModel
 @{
-    ViewBag.Title = "Overview: " + Model.Name;
+    ViewBag.Title = "Overview: " + Model.Form.Name;
 }
 
 @section Submenu {
-    @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Id })
+    @Html.Partial("_AddPropertyComponent", new Ziggurat.Web.Areas.Configuration.Models.NewPropertyModel { FormId = Model.Form.Id })
 }
 
 @functions {
@@ -16,7 +16,7 @@
 }
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#home" data-toggle="tab">@Model.Name</a></li>
+    <li class="active"><a href="#home" data-toggle="tab">@Model.Form.Name</a></li>
     <li><a href="#properties" data-toggle="tab">Properties</a></li>
     <li><a href="#layout" data-toggle="tab">Layout</a></li>
     <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -26,15 +26,15 @@
     <div class="tab-pane active" id="home">
         <fieldset>
             <ol class="unstyled">
-                <li>Name: <strong>@Model.Name</strong>
+                <li>Name: <strong>@Model.Form.Name</strong>
                 </li>
-                <li>Unique name: <strong>@Model.UniqueName</strong>
+                <li>Unique name: <strong>@Model.Form.UniqueName</strong>
                 </li>
             </ol>
         </fieldset>
     </div>
     <div class="tab-pane" id="properties">
-        @Html.Action("BasicPropertyList", new { id = Model.Id })
+        @Html.Partial("BasicPropertyList", Model.Properties)
     </div>
     <div class="tab-pane" id="layout">
 

@@ -134,6 +134,7 @@
     <Compile Include="Areas\Configuration\Controllers\PropertyController.cs" />
     <Compile Include="Areas\Configuration\Models\CreateFormModel.cs" />
     <Compile Include="Areas\Configuration\Models\CreateProjectModel.cs" />
+    <Compile Include="Areas\Configuration\Models\FormInfoModel.cs" />
     <Compile Include="Areas\Configuration\Models\FormPositionInLayout.cs" />
     <Compile Include="Areas\Configuration\Models\NewPropertyModel.cs" />
     <Compile Include="Areas\Configuration\Models\ProjectFormsListModel.cs" />
@@ -157,8 +158,7 @@
   <ItemGroup>
     <Content Include="Areas\Configuration\Scripts\configuration.basicPropList.js" />
     <None Include="Areas\Configuration\Scripts\configuration.concatenation.formula.coffee" />
-    <Content Include="Areas\Configuration\Scripts\configuration.concatenation.formula.js" />
-    <Content Include="Areas\Configuration\Scripts\Copy of configuration.concatenation.formula.js">
+    <Content Include="Areas\Configuration\Scripts\configuration.concatenation.formula.js">
       <DependentUpon>configuration.concatenation.formula.coffee</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-responsive.css" />

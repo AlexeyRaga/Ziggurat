@@ -29,10 +29,15 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
 
         public ActionResult Overview(Guid id)
         {
+            ViewBag.FormId = id;
             var formInfo = GetFormInfoOrWaitABit(id);
             if (formInfo == null) return View("FormIsBeingCreated", id);
 
-            return View(formInfo);
+            var props = _viewModelReader.LoadOrNew<Guid, FormPropertyList>(id);
+
+            var model = new FormInfoModel(formInfo, props);
+
+            return View(model);
         }
 
         private FormInfo GetFormInfoOrWaitABit(Guid formId)
@@ -51,14 +56,6 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             var propList = _viewModelReader.LoadOrDefault<Guid, FormPropertyList>(formId);
             return propList;
-        }
-
-        [ChildActionOnly]
-        public ActionResult BasicPropertyList(Guid id)
-        {
-            ViewBag.FormId = id;
-            var list = GetProperties(id) ?? new FormPropertyList();
-            return PartialView(list);
         }
 
         [HttpGet]
