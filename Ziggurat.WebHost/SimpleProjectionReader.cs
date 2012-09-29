@@ -21,6 +21,21 @@ namespace Ziggurat.Web
             reader.TryGet(key, out view);
             return view;
         }
+
+        public static TView LoadOrDefault<TKey, TView>(this IViewModelReader reader, TKey key, Func<TKey, TView> defaultFactory)
+        {
+            var view = reader.LoadOrDefault<TKey, TView>(key);
+            return (view == null && defaultFactory != null)
+                ? defaultFactory(key)
+                : view;
+        }
+
+        public static TView LoadOrNew<TKey, TView>(this IViewModelReader reader, TKey key)
+            where TView: class, new()
+        {
+            var view = reader.LoadOrDefault<TKey, TView>(key);
+            return view ?? new TView();
+        }
     }
 
     // A very simple reader.
