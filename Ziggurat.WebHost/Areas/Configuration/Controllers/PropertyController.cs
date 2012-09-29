@@ -29,10 +29,14 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             var key = PropertyData.CreateKey(formId, propertyId);
             var propData = _viewModelReader.LoadOrDefault<string, PropertyData>(key);
-
             if (propData == null) return View("PropertyIsBeingCreated", Tuple.Create(formId, propertyId));
 
-            return View(propData);
+            var formInfo = _viewModelReader.Load<Guid, FormInfo>(formId);
+            var allProps = _viewModelReader.Load<Guid, FormPropertyList>(formId);
+
+            var model = new PropertyInfoModel(formInfo, allProps, propData);
+
+            return View(model);
         }
 
         public ActionResult Exists(Guid formId, Guid propertyId)

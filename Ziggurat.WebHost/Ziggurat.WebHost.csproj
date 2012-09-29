@@ -138,6 +138,7 @@
     <Compile Include="Areas\Configuration\Models\FormPositionInLayout.cs" />
     <Compile Include="Areas\Configuration\Models\NewPropertyModel.cs" />
     <Compile Include="Areas\Configuration\Models\ProjectFormsListModel.cs" />
+    <Compile Include="Areas\Configuration\Models\PropertyInfoModel.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\HomeController.cs" />
     <Compile Include="Areas\Forms\Controllers\HomeController.cs" />

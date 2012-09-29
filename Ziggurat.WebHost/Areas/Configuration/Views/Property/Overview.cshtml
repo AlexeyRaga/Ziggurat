@@ -1,10 +1,10 @@
-﻿@model Ziggurat.Definition.Client.PropertyData
+﻿@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
 @{
     ViewBag.Title = "Overview";
 }
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#home" data-toggle="tab">Property: <strong>@Model.Name</strong></a></li>
+    <li class="active"><a href="#home" data-toggle="tab">Property: <strong>@Model.Property.Name</strong></a></li>
     <li><a href="#specifics" data-toggle="tab">Specifics</a></li>
     <li><a href="#display" data-toggle="tab">Layout</a></li>
     <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -14,14 +14,14 @@
     <div class="tab-pane active" id="home">
         <fieldset>
             <ol class="unstyled">
-                <li>Name: @Html.TextBoxFor(m=>m.Name)</li>
-                <li>Unique name: <strong>@Model.Type</strong> (cannot be changed)
+                <li>Name: @Html.TextBoxFor(m=>m.Property.Name)</li>
+                <li>Unique name: <strong>@Model.Property.Type</strong> (cannot be changed)
                 </li>
             </ol>
         </fieldset>
     </div>
     <div class="tab-pane" id="specifics">
-        @Html.Partial(Model.Type.ToString() + "-Specifics", Model.Specifics)
+        @Html.Partial(Model.Property.Type.ToString() + "-Specifics", Model.Property.Specifics)
     </div>
     <div class="tab-pane" id="display">
         Some display options
