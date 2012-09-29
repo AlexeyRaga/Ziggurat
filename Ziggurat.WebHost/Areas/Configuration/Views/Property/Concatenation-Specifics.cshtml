@@ -3,11 +3,12 @@
 <script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
 
 <section id="concatenationFormula">
+    <span data-bind="text: formula"></span>
     <table>
-	    <tbody data-bind="foreach: formula">
+	    <tbody data-bind="foreach: parts">
 		    <tr>
-                <td><button type="button" class="btn"><i class="icon icon-remove"></i></button></td>
-			    <td><span data-bind="text: $data"></span></td>
+                <td><button type="button" class="btn" data-bind="click: $parent.removePart"><i class="icon icon-remove"></i></button></td>
+			    <td><span data-bind="text: text"></span></td>
 		    </tr>
 	    </tbody>
 	    <tfoot>
