@@ -14,16 +14,30 @@ $(function() {
 
     FormulaModel.prototype.parts = ko.observableArray();
 
+    FormulaModel.prototype.formula = ko.observableArray();
+
     FormulaModel.prototype.newConstantPart = ko.observable();
 
     FormulaModel.prototype.newPropertyPart = ko.observable();
 
+    FormulaModel.prototype.newPropertyName = ko.observable();
+
     FormulaModel.prototype.addNewPart = function() {
-      var constant;
+      var constant, property, propertyText;
       constant = this.newConstantPart();
+      property = this.newPropertyPart();
       if ((constant != null) && constant !== '') {
-        return this.parts.push(constant);
+        this.parts.push(constant);
+        this.formula.push.constant;
       }
+      if ((property != null) && property !== '') {
+        propertyText = $('#propList option[value=' + property + ']').text();
+        this.formula.push('[' + propertyText + ']');
+        this.parts.push('[' + property + ']');
+      }
+      this.newConstantPart('');
+      this.newPropertyPart('');
+      return true;
     };
 
     return FormulaModel;

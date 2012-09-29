@@ -1,8 +1,10 @@
-﻿<script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
+﻿@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
+
+<script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
 
 <section id="concatenationFormula">
     <table>
-	    <tbody data-bind="foreach: parts">
+	    <tbody data-bind="foreach: formula">
 		    <tr>
                 <td><button type="button" class="btn"><i class="icon icon-remove"></i></button></td>
 			    <td><span data-bind="text: $data"></span></td>
@@ -12,8 +14,14 @@
 		    <tr>
 			    <td colspan="2">
 				    <div class="input-append">
-				    <input type="text" placeholder="Constant" data-bind="value: newConstantPart"/>
-				    <select data-bind="value: newPropertyPart"></select>
+				    <input type="text" placeholder="Type a constant" data-bind="value: newConstantPart"/>
+				    <select id="propList" data-bind="value: newPropertyPart">
+                        <option value="">Or choose a property...</option>
+                        @foreach (var prop in Model.AllFormProperties.Properties)
+                        {
+                            <option value="@prop.Id">@prop.Name</option>
+                        }
+				    </select>
 				    <button id="addFormulaPart" class="btn" type="button" data-bind="click: addNewPart">Add</button>
                         </div>
 			    </td>
