@@ -1,32 +1,30 @@
 ﻿@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
 
 <script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
+<style>
+    #concatenationFormula li.part { display: inline; }
+    #concatenationFormula .part:hover { background-color: #EEE; }
+    #concatenationFormula .part > .del { display:none; cursor:pointer; }
+    #concatenationFormula .part:hover > .del { display: inline; }
+</style>
 
 <section id="concatenationFormula">
-    <span data-bind="text: formula"></span>
-    <table>
-	    <tbody data-bind="foreach: parts">
-		    <tr>
-                <td><button type="button" class="btn" data-bind="click: $parent.removePart"><i class="icon icon-remove"></i></button></td>
-			    <td><span data-bind="text: text"></span></td>
-		    </tr>
-	    </tbody>
-	    <tfoot>
-		    <tr>
-			    <td colspan="2">
-				    <div class="input-append">
-				    <input type="text" placeholder="Type a constant" data-bind="value: newConstantPart"/>
-				    <select id="propList" data-bind="value: newPropertyPart">
-                        <option value="">Or choose a property...</option>
-                        @foreach (var prop in Model.AllFormProperties.Properties)
-                        {
-                            <option value="@prop.Id">@prop.Name</option>
-                        }
-				    </select>
-				    <button id="addFormulaPart" class="btn" type="button" data-bind="click: addNewPart">Add</button>
-                        </div>
-			    </td>
-		    </tr>
-	    </tfoot>
-    </table>
+
+    <div class="page-header">
+        <h1><small>Formula</small></h1>
+    </div>
+    <ul class="unstyled" data-bind="foreach: parts"><li class="part"><span data-bind="text: text"></span><span class="del" data-bind="click: $parent.removePart"><i class="icon icon-remove"></i></span></li></ul>  ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+    
+
+    <div class="input-append">
+	    <input type="text" placeholder="Type a constant" data-bind="value: newConstantPart"/>
+	    <select id="propList" data-bind="value: newPropertyPart">
+            <option value="">Or choose a property...</option>
+            @foreach (var prop in Model.AllFormProperties.Properties)
+            {
+                <option value="@prop.Id">@prop.Name</option>
+            }
+	    </select>
+	    <button id="addFormulaPart" class="btn" type="button" data-bind="click: addNewPart">Add</button>
+    </div>
 </section>
