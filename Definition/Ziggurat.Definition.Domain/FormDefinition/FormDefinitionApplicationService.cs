@@ -42,7 +42,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             if (cmd.FormId == Guid.Empty) throw new ArgumentException("Form ID is required");
             if (cmd.PropertyId == Guid.Empty) throw new ArgumentException("Property ID is required");
 
-            Update(cmd.FormId, form => form.SetConcatenationFormula(cmd.PropertyId, cmd.Formula))
+            Update(cmd.FormId, form => form.SetConcatenationFormula(cmd.PropertyId, cmd.Formula));
         }
     }
 }

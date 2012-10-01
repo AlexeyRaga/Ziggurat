@@ -62,7 +62,7 @@ namespace Ziggurat.Definition.Domain.FormDefinition
                 .Cast<ConcatenationPropRef>()
                 .Select(x=>x.Value);
 
-            Apply(new PropertyDependenciesSet(Id, propertyId, dependencies.ToList());
+            Apply(new PropertyDependenciesSet(Id, propertyId, dependencies.ToList()));
         }
     }
 }
