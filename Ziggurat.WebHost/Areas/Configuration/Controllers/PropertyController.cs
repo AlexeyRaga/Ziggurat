@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Ziggurat.Contracts.Definition;
@@ -86,6 +87,24 @@ namespace Ziggurat.Web.Areas.Configuration.Controllers
         {
             var cmd = new MakePropertyUnused(formId, propertyId);
             _commandSender.SendCommand(cmd);
+        }
+
+        [HttpPost]
+        public void SetConcatenationFormula(Guid formId, Guid propertyId, IList<string> values)
+        {
+            if (values == null) values = new List<string>();
+            var regex = new Regex("{{(.+)}}", RegexOptions.Compiled);
+            var parts = values
+                .Select(x =>
+                {
+                    var propRef = regex.Match(x);
+                    return propRef.Success
+                        ? ConcatenationFormulaPart.CreatePropRef(new Guid(propRef.Groups[1].Value))
+                        : ConcatenationFormulaPart.CreateConstant(x);
+                });
+
+            var formula = new ConcatenationFormulaDescriptor(parts);
+            _commandSender.SendCommand(new SetFormulaForConcatenationProperty(formId, propertyId, formula));
         }
     }
 }

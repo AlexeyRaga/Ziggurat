@@ -1,21 +1,19 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 $(function() {
-  var FormulaModel, model, view;
+  var FormulaModel, context, model, view;
   FormulaModel = (function() {
 
-    function FormulaModel() {
+    function FormulaModel(formId, propertyId) {
+      this.formId = formId;
+      this.propertyId = propertyId;
+      this.reportFormulaChanges = __bind(this.reportFormulaChanges, this);
+
       this.removePart = __bind(this.removePart, this);
 
-      var _this = this;
       this.parts = ko.observableArray();
       this.newConstantPart = ko.observable();
       this.newPropertyPart = ko.observable();
-      this.formula = ko.computed(function() {
-        return _this.parts().map(function(item) {
-          return item.text;
-        }).join('');
-      });
     }
 
     FormulaModel.prototype.addNewPart = function() {
@@ -39,17 +37,40 @@ $(function() {
       }
       this.newConstantPart('');
       this.newPropertyPart('');
-      return true;
+      return this.reportFormulaChanges();
     };
 
     FormulaModel.prototype.removePart = function(data) {
-      return this.parts.remove(data);
+      this.parts.remove(data);
+      return this.reportFormulaChanges();
+    };
+
+    FormulaModel.prototype.reportFormulaChanges = function() {
+      var formulaContext, values;
+      values = this.parts().map(function(item) {
+        return item.value;
+      });
+      formulaContext = {
+        formId: this.formId,
+        propertyId: this.propertyId,
+        values: values
+      };
+      $.ajax('/Configuration/Property/SetConcatenationFormula', {
+        type: 'POST',
+        traditional: true,
+        data: formulaContext,
+        error: function(data, status, xhr) {
+          return alert(xhr);
+        }
+      });
+      return true;
     };
 
     return FormulaModel;
 
   })();
   view = $("#concatenationFormula")[0];
-  model = new FormulaModel();
+  context = $(view).data();
+  model = new FormulaModel(context.formid, context.propertyid);
   return ko.applyBindings(model, view);
 });

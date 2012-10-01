@@ -1,15 +1,9 @@
 ﻿$ ->
     class FormulaModel
-        constructor: ->
+        constructor: (@formId, @propertyId) ->
             @parts = ko.observableArray()
             @newConstantPart = ko.observable()
-            @newPropertyPart = ko.observable()
-    
-            @formula = ko.computed =>
-                @parts()
-                    .map((item) -> item.text)
-                    .join('')
-                    
+            @newPropertyPart = ko.observable()                    
     
         addNewPart: ->
             constant = @newConstantPart()
@@ -22,14 +16,28 @@
               part = { value: "{{#{property}}}", text: "[#{propertyText}]" }
               @parts.push part
     
-            @newConstantPart('')
-            @newPropertyPart('')
-            true
+            @newConstantPart ''
+            @newPropertyPart ''
+            @reportFormulaChanges()
     
         removePart: (data) =>
-          @parts.remove data
+            @parts.remove data
+            @reportFormulaChanges()
+
+        reportFormulaChanges: =>
+            values = @parts().map((item) -> item.value)
+            formulaContext = {formId: @formId, propertyId: @propertyId, values: values}
+            #formulaContext = JSON.stringify(formulaContext)
+            $.ajax '/Configuration/Property/SetConcatenationFormula',
+                type: 'POST',
+                traditional: true,
+                data: formulaContext,
+                error: (data, status, xhr) -> alert xhr
+            true
 
     view = $("#concatenationFormula")[0]
-    model = new FormulaModel()
+    context = $(view).data()
+
+    model = new FormulaModel(context.formid, context.propertyid)
 
     ko.applyBindings model, view
