@@ -54,5 +54,15 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             if (propertyToDeliverEvent != null)
                 ((dynamic)propertyToDeliverEvent).When((dynamic)evt);
         }
+
+        public void SetConcatenationFormula(Guid propertyId, ConcatenationFormulaDescriptor concatenationFormulaDescriptor)
+        {
+            var dependencies = concatenationFormulaDescriptor.Parts
+                .Where(x => x.IsPropRef)
+                .Cast<ConcatenationPropRef>()
+                .Select(x=>x.Value);
+
+            Apply(new PropertyDependenciesSet(Id, propertyId, dependencies.ToList());
+        }
     }
 }

@@ -290,6 +290,23 @@ namespace Ziggurat.Contracts.Definition
 	}
 
 	[Serializable, DataContract]
+	public sealed partial class PropertyDependenciesSet : IPropertyDefinitionEvent
+	{
+		[DataMember(Order = 0 )] public Guid FormId { get; set; }
+		[DataMember(Order = 1 )] public Guid PropertyId { get; set; }
+		[DataMember(Order = 2 )] public IList<Guid> DependsOnProperties { get; set; }
+
+		public PropertyDependenciesSet() { }
+		public PropertyDependenciesSet(Guid formId, Guid propertyId, IList<Guid> dependsOnProperties)
+		{
+			FormId = formId;
+			PropertyId = propertyId;
+			DependsOnProperties = dependsOnProperties;
+		}
+
+	}
+
+	[Serializable, DataContract]
 	public sealed partial class SetFormulaForConcatenationProperty : ICommand
 	{
 		[DataMember(Order = 0 )] public Guid FormId { get; set; }
