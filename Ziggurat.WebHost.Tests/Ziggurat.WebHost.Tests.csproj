@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Routes\ConfigurationAreaRoutingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routes\RoutingTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
