@@ -138,7 +138,7 @@ namespace Ziggurat.Definition.Domain.Tests
                 actual.Select(s => s.ToString()).ToArray());
 
             CollectionAssert.AreEqual(expectedBytes, actualBytes,
-                "Expected events differ from actual, but differences are not represented in ToString() ");
+                "Expected events differ from actual, but differences are not represented in ToString()\n Hint: dfferent collection types (such as Array vs. List) may cause this.");
         }
 
         private static byte[] SerializeEventsToBytes(IEvent[] actual)
