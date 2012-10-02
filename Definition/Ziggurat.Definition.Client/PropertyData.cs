@@ -40,6 +40,8 @@ namespace Ziggurat.Definition.Client
 
     public sealed class ConcatenationPropertySpecifics : IPropertySpecifics
     {
+        public IList<string> FormulaParts { get; set; }
+        public ConcatenationPropertySpecifics() { FormulaParts = new List<string>(); }
     }
 
     public sealed class DateTimePropertySpecifics : IPropertySpecifics
@@ -62,6 +64,27 @@ namespace Ziggurat.Definition.Client
         {
             var propData = new PropertyData(evt.FormId, evt.PropertyId, evt.Name, evt.Type);
             _writer.Add(PropertyData.CreateKey(evt.FormId, evt.PropertyId), propData);
+        }
+
+        public void When(ConcatenationPropertyFormulaSet evt)
+        {
+            _writer.Update(PropertyData.CreateKey(evt.FormId, evt.PropertyId), prop =>
+            {
+                if (prop.Specifics == null) prop.Specifics = new ConcatenationPropertySpecifics();
+                var specifics = (ConcatenationPropertySpecifics)prop.Specifics;
+
+                var parts = evt.Formula.Parts
+                    .Select(x =>
+                    {
+                        if (x.IsConstant) return ((ConcatenationConstant)x).Value;
+                        if (x.IsPropRef) return "{{" + ((ConcatenationPropRef)x).Value + "}}";
+                        return String.Empty;
+                    })
+                    .Where(x => !String.IsNullOrEmpty(x))
+                    .ToList();
+
+                specifics.FormulaParts = parts;
+            });
         }
     }
 }

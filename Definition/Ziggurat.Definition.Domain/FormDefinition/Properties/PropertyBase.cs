@@ -33,6 +33,9 @@ namespace Ziggurat.Definition.Domain.FormDefinition
             Definition.Apply(new PropertyMadeUnused(Definition.Id, Id));
         }
 
+        //ignore events I don't care about
+        public void When(IPropertyDefinitionEvent evt) { }
+
         public void When(PropertyMadeUsed evt) { IsUnused = false; }
         public void When(PropertyMadeUnused evt) { IsUnused = true; }
     }
