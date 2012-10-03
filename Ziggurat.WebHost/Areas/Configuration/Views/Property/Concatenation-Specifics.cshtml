@@ -1,4 +1,7 @@
-﻿@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
+﻿@using Ziggurat.Definition.Client
+@using System.Linq
+@using Newtonsoft.Json
+@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
 
 <script src="/Areas/Configuration/Scripts/configuration.concatenation.formula.js"></script>
 <style>
@@ -8,6 +11,25 @@
     #concatenationFormula .part:hover > .del { display: inline; }
 </style>
 
+@functions {
+    MvcHtmlString ExistingFormulaParts() {
+        var concatenationSpecifics = (ConcatenationPropertySpecifics)Model.Property.Specifics;
+        var parts = concatenationSpecifics.FormulaParts
+            .Select(x =>
+            {
+                Guid propRef;
+                if (x.StartsWith("{{") && x.EndsWith("}}") && Guid.TryParse(x.Trim('{', '}'), out propRef))
+                {
+                    var prop = Model.AllFormProperties.Properties.FirstOrDefault(p => p.Id == propRef);
+                    var propName = prop != null ? prop.Name : "<unknown>";
+                    return new { value = x, text = propName };
+                }
+                return new { value = x, text = x };
+            }).ToArray();
+        return new MvcHtmlString(JsonConvert.SerializeObject(parts));
+    }
+}
+
 <section id="concatenationFormula" data-formid="@Model.Form.Id" data-propertyid="@Model.Property.PropertyId">
 
     <div class="page-header">
@@ -15,7 +37,6 @@
     </div>
     <ul class="unstyled" data-bind="foreach: parts"><li class="part"><span data-bind="text: text"></span><span class="del" data-bind="click: $parent.removePart"><i class="icon icon-remove"></i></span></li></ul>  ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
     
-
     <div class="input-append">
 	    <input type="text" placeholder="Type a constant" data-bind="value: newConstantPart"/>
 	    <select id="propList" data-bind="value: newPropertyPart">
@@ -27,4 +48,8 @@
 	    </select>
 	    <button id="addFormulaPart" class="btn" type="button" data-bind="click: addNewPart">Add</button>
     </div>
+
+    <script type="text/javascript">
+        var initConcatenationFormulaParts = @ExistingFormulaParts();
+    </script>
 </section>

@@ -1,17 +1,17 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 $(function() {
-  var FormulaModel, context, model, view;
+  var FormulaModel, allProps, context, model, view;
   FormulaModel = (function() {
 
-    function FormulaModel(formId, propertyId) {
+    function FormulaModel(formId, propertyId, existingProps) {
       this.formId = formId;
       this.propertyId = propertyId;
       this.reportFormulaChanges = __bind(this.reportFormulaChanges, this);
 
       this.removePart = __bind(this.removePart, this);
 
-      this.parts = ko.observableArray();
+      this.parts = ko.observableArray(existingProps);
       this.newConstantPart = ko.observable();
       this.newPropertyPart = ko.observable();
     }
@@ -70,7 +70,15 @@ $(function() {
 
   })();
   view = $("#concatenationFormula")[0];
+  allProps = $("#propList", view).find('option').filter(function(i, item) {
+    return item.value;
+  }).map(function(i, item) {
+    return {
+      value: item.value,
+      text: item.text
+    };
+  });
   context = $(view).data();
-  model = new FormulaModel(context.formid, context.propertyid);
+  model = new FormulaModel(context.formid, context.propertyid, initConcatenationFormulaParts);
   return ko.applyBindings(model, view);
 });

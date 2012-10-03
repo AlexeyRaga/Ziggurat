@@ -1,7 +1,7 @@
 ﻿$ ->
     class FormulaModel
-        constructor: (@formId, @propertyId) ->
-            @parts = ko.observableArray()
+        constructor: (@formId, @propertyId, existingProps) ->
+            @parts = ko.observableArray(existingProps)
             @newConstantPart = ko.observable()
             @newPropertyPart = ko.observable()                    
     
@@ -36,8 +36,13 @@
             true
 
     view = $("#concatenationFormula")[0]
+    allProps = $("#propList", view)
+        .find('option')
+        .filter((i, item) -> item.value)
+        .map((i, item) -> { value: item.value, text: item.text });
+
     context = $(view).data()
 
-    model = new FormulaModel(context.formid, context.propertyid)
+    model = new FormulaModel(context.formid, context.propertyid, initConcatenationFormulaParts)
 
     ko.applyBindings model, view
