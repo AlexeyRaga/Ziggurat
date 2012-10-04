@@ -24,29 +24,6 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
         }
 
         [TestMethod]
-        public void Should_fail_if_login_taken()
-        {
-            var regId = RegistrationIdGenerator.NewRegistrationId();
-            var regData = new RegistrationData {
-                CreatedDate = Now.UtcTime,
-                DisplayName = "Alexey Raga",
-                Login = "alexeyraga",
-                Email = "alexey.raga@somewhere.in",
-                Password = "Password123"
-            };
-
-            var index = MockRepository.GenerateMock<ILoginIndexLookupService>();
-            index.Stub(x => x.IsLoginTaken("alexeyraga")).Return(true);
-
-            When = aggregate => aggregate.CreateRegistration(regId, regData, index);
-            Then = new IEvent[] {
-                new RegistrationFailed(regId, "alexeyraga", new List<string> {
-                        "Username 'alexeyraga' is already taken"
-                    })
-            };
-        }
-
-        [TestMethod]
         public void Should_create_registration()
         {
             var regId = RegistrationIdGenerator.NewRegistrationId();
@@ -71,7 +48,7 @@ namespace Ziggurar.Registration.Domain.Tests.Registration
             var index = MockRepository.GenerateMock<ILoginIndexLookupService>();
             index.Stub(x => x.IsLoginTaken(null)).IgnoreArguments().Return(false);
 
-            When = aggregate => aggregate.CreateRegistration(regId, regData, index);
+            When = aggregate => aggregate.CreateRegistration(regId, regData);
             Then = new IEvent[] {
                 new RegistrationStarted(regId, fakeNow, security, profile)
             };

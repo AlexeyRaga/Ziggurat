@@ -22,17 +22,17 @@ namespace Ziggurat.Registration.Domain.Registration
         public void When(StartRegistration cmd)
         {
             Update(cmd.RegistrationId, aggregate =>
-                aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data, _loginIndexService));
+                aggregate.CreateRegistration(cmd.RegistrationId, cmd.Data));
         }
 
         public void When(RegistrationAttachSecurity cmd)
         {
-            Update(cmd.RegistrationId, aggregate => aggregate.AttachSecurity(cmd.SecurityId));
+            Update(cmd.RegistrationId, aggregate => aggregate.AttachSecurity(cmd.SecurityId, _loginIndexService));
         }
 
         public void When(RegistrationAttachProfile cmd)
         {
-            Update(cmd.RegistrationId, aggregate => aggregate.AttachProfile(cmd.ProfileId));
+            Update(cmd.RegistrationId, aggregate => aggregate.AttachProfile(cmd.ProfileId, _loginIndexService));
         }
     }
 }

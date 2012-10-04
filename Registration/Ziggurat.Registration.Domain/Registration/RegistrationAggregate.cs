@@ -10,23 +10,8 @@ namespace Ziggurat.Registration.Domain.Registration
 {
     public sealed class RegistrationAggregate : AggregateRootBase<RegistrationState>
     {
-        public void CreateRegistration(
-            Guid registrationId,
-            RegistrationData data,
-            ILoginIndexLookupService uniqueIndex)
+        public void CreateRegistration(Guid registrationId, RegistrationData data)
         {
-            var errors = new List<string>();
-            if (uniqueIndex.IsLoginTaken(data.Login))
-            {
-                errors.Add(String.Format("Username '{0}' is already taken", data.Login));
-            }
-
-            if (errors.Any())
-            {
-                Apply(new RegistrationFailed(registrationId, data.Login, errors));
-                return;
-            }
-
             var securityId = RegistrationIdGenerator.NewSecutiryId(registrationId);
             var profileId = RegistrationIdGenerator.NewProfileId(registrationId);
 
@@ -37,23 +22,31 @@ namespace Ziggurat.Registration.Domain.Registration
 
         }
 
-        public void AttachSecurity(Guid securityId)
+        public void AttachSecurity(Guid securityId, ILoginIndexLookupService loginIndex)
         {
             Apply(new SecurityAttachedToRegistration(State.Id, securityId));
-            TryCompleteRegistration();
+            TryCompleteRegistration(loginIndex);
         }
 
-        public void AttachProfile(Guid profileId)
+        public void AttachProfile(Guid profileId, ILoginIndexLookupService loginIndex)
         {
             Apply(new ProfileAttachedToRegistration(State.Id, profileId));
-            TryCompleteRegistration();
+            TryCompleteRegistration(loginIndex);
         }
 
-        private void TryCompleteRegistration()
+        private void TryCompleteRegistration(ILoginIndexLookupService loginIndex)
         {
             if (State.SecurityId.HasValue && State.ProfileId.HasValue)
             {
-                Apply(new RegistrationCompleted(State.Id, State.SecurityId.Value, State.ProfileId.Value, State.Login));
+                if (loginIndex.IsLoginTaken(State.Login))
+                {
+                    var errors = new List<string> { String.Format("Username '{0}' is already taken", State.Login) };
+                    Apply(new RegistrationFailed(State.Id, State.Login, errors));
+                }
+                else
+                {
+                    Apply(new RegistrationCompleted(State.Id, State.SecurityId.Value, State.ProfileId.Value, State.Login));
+                }
             }
         }
     }
