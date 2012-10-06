@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDefaultValuesProjection.cs" />
+    <Compile Include="FormValue.cs" />
     <Compile Include="MessagesClientBoundedContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace Ziggurat.Messages.Client
     {
         public static IEnumerable<object> BuildProjections(IDocumentStore docStore)
         {
-            yield break;
+            yield return new FormDefaultValuesProjection(docStore);
         }
     }
 }

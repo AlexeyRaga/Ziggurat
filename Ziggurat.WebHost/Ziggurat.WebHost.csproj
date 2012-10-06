@@ -142,6 +142,7 @@
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\HomeController.cs" />
     <Compile Include="Areas\Forms\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Forms\Controllers\PropertyDefaultValueController.cs" />
     <Compile Include="Areas\Forms\FormsAreaRegistration.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,6 +335,10 @@
     <ProjectReference Include="..\Infrastructure\Ziggurat.Infrastructure\Ziggurat.Infrastructure.csproj">
       <Project>{a561ed17-153b-4bd4-b05e-25db4c522d1e}</Project>
       <Name>Ziggurat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ziggurat.Messages.Client\Ziggurat.Messages.Client.csproj">
+      <Project>{05734aea-c665-4701-928e-c541ead223f6}</Project>
+      <Name>Ziggurat.Messages.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Registration\Ziggurat.Registration.Client\Ziggurat.Registration.Client.csproj">
       <Project>{528bed5a-3d3f-424f-981a-8c90b03c4bdf}</Project>

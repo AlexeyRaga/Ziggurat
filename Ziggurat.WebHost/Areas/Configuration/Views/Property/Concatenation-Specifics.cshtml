@@ -21,7 +21,7 @@
                 if (x.StartsWith("{{") && x.EndsWith("}}") && Guid.TryParse(x.Trim('{', '}'), out propRef))
                 {
                     var prop = Model.AllFormProperties.Properties.FirstOrDefault(p => p.Id == propRef);
-                    var propName = prop != null ? prop.Name : "<unknown>";
+                    var propName = prop != null ? "["+prop.Name+"]" : "<unknown>";
                     return new { value = x, text = propName };
                 }
                 return new { value = x, text = x };
