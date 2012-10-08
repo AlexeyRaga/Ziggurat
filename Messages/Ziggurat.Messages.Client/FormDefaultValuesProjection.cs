@@ -14,9 +14,10 @@ namespace Ziggurat.Messages.Client
         public IFormValue PropertyValue { get; set; }
 
         public DefaultFormValue() { }
-        public DefaultFormValue(PropertyType propertyType)
+        public DefaultFormValue(PropertyType propertyType, IFormValue propertyValue)
         {
-            PropertyType = propertyType;
+            PropertyType  = propertyType;
+            PropertyValue = propertyValue;
         }
     }
 
@@ -41,7 +42,7 @@ namespace Ziggurat.Messages.Client
         {
             _writer.AddOrUpdate(evt.FormId, values =>
             {
-                values.Values[evt.PropertyId] = new DefaultFormValue(evt.Type);
+                values.Values[evt.PropertyId] = new DefaultFormValue(evt.Type, FormValueFactory.CreateEmptyValue(evt.Type));
             });
         }
     }
