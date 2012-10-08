@@ -275,6 +275,12 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common.elements.js" />
     <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\TextFormValue.cshtml" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\IntegerFormValue.cshtml" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\FloatFormValue.cshtml" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\DateFormValue.cshtml" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\DateTimeFormValue.cshtml" />
+    <Content Include="Areas\Forms\Views\Shared\EditorTemplates\TimeFormValue.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -314,7 +320,6 @@
     <Folder Include="Areas\Contacts\Models\" />
     <Folder Include="Areas\Contacts\Views\Shared\" />
     <Folder Include="Areas\Forms\Models\" />
-    <Folder Include="Areas\Forms\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
