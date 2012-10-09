@@ -16,6 +16,7 @@
         @Scripts.Render("~/bundles/setup")
         @Scripts.Render("~/bundles/jquery")
         @Styles.Render("~/bundles/bootstrap/css")
+        @Styles.Render("~/Content/themes/base/css")
 
         @Styles.Render("~/Content/css")
     </head>
@@ -67,5 +68,15 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/bootstrap/js")
         @RenderSection("scripts", required: false)
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".ui-datepicker").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd'
+                });
+            });
+        </script>
     </body>
 </html>

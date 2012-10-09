@@ -1,2 +1,3 @@
 ﻿@model Ziggurat.Messages.Client.DateFormValue
-@Html.EditorFor(m => m.Value)
+
+@Html.TextBoxFor(m=>m.Value, new { @class="ui-datepicker" })
