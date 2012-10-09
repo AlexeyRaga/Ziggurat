@@ -1,4 +1,5 @@
 ﻿@model Ziggurat.Web.Areas.Configuration.Models.PropertyInfoModel
+@using Ziggurat.Web.Helpers
 @{
     ViewBag.Title = "Overview";
 }
@@ -27,6 +28,12 @@
         Some display options
     </div>
     <div class="tab-pane" id="settings">
-        Other very important settings
+        <fieldset>
+            <ol class="unstyled">
+                <li>
+                    Default value: @Html.Action("ShowValue", "PropertyDefaultValue", new { area = "Forms", formId = Model.Form.Id, propertyId = Model.Property.PropertyId })
+                </li>
+            </ol>
+        </fieldset>
     </div>
 </div>

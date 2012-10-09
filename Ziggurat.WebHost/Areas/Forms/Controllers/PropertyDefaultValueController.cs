@@ -19,12 +19,15 @@ namespace Ziggurat.Web.Areas.Forms.Controllers
             _commandSender = sender;
         }
 
+        public PropertyDefaultValueController()
+            : this(Client.ViewModelReader, Client.CommandSender) { }
+
         public ActionResult ShowValue(Guid formId, Guid propertyId)
         {
             var values = _viewModelReader.Load<Guid, FormDefaultValues>(formId);
             var defaultValue = values.Values[propertyId];
 
-            return View(defaultValue);
+            return PartialView(defaultValue.PropertyValue);
         }
     }
 }
